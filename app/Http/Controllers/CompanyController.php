@@ -27,7 +27,7 @@ class CompanyController extends Controller
             'nrc' => $request->nrc,
             'nit' => $request->nit,
             'business_line' => $request->business_line,
-            'agency' => $request->agency,
+            'agency' => 'Color Digital',
         ]);
 
         return redirect()->to('/companies');

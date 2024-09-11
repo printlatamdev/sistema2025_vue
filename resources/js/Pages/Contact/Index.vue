@@ -73,7 +73,7 @@ const headers = [
                                 <select v-model="store.form.country_id"
                                     class="block w-full border-gray-300 rounded-md">
                                     <option class="text-gray-500"> Seleccione una opción</option>
-                                    <option v-for="country in countries" :key="country.id">
+                                    <option v-for="country in countries" :key="country.id" :value="country.id">
                                         {{ country.name }}
                                     </option>
                                 </select>
@@ -83,7 +83,7 @@ const headers = [
                                 <select v-model="store.form.company_id"
                                     class="block w-full border-gray-300 rounded-md">
                                     <option class="text-gray-500"> Seleccione una opción</option>
-                                    <option v-for="company in companies" :key="company.id">
+                                    <option v-for="company in companies" :key="company.id" :value="company.id">
                                         {{ company.social_reason }}
                                     </option>
                                 </select>
