@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\Contact;
+use App\Models\Product;
 use App\Models\Quote;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ class QuoteController extends Controller
             'users' => User::orderBy('id', 'desc')->get(),
             'companies' => Company::orderBy('id', 'desc')->get(),
             'contacts' => Contact::orderBy('id', 'desc')->get(),
+            'products' => Product::orderBy('id', 'desc')->get(),
         ]);
     }
 

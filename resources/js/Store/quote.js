@@ -4,6 +4,7 @@ import { useForm } from "@inertiajs/vue3";
 export const useQuoteStore = defineStore("quote", {
     state: () => ({
         openModal: false,
+        quoteid: '',
         currentStep: 1,
         form: useForm({
             important_note: "",
@@ -20,6 +21,7 @@ export const useQuoteStore = defineStore("quote", {
             quote_id: "",
             product_id: "",
             quantity: "",
+            description: "",
             iva: "",
             price: "",
             subtotal: "",
@@ -35,6 +37,16 @@ export const useQuoteStore = defineStore("quote", {
             { text: "Moneda", value: "currency" },
             { text: "Estado", value: "status" },
             { text: "Término de comercio", value: "incoterm" },
+        ],
+        headersQD: [
+            { text: "Producto", value: "product_id" },
+            { text: "Descripción", value: "description" },
+            { text: "Cantidad", value: "quantity" },
+            { text: "Unitario", value: "price" },
+            { text: "Total", value: "total" },
+        ],
+        tempQuotedetails: [
+            { product_id: "", description: "", quantity: "", price: "", total: "" },
         ],
         payment_condition: [
             { name: "Anticipo", value: "Anticipo" },
@@ -73,6 +85,37 @@ export const useQuoteStore = defineStore("quote", {
                     this.closeModal();
                 },
             }); */
+        },
+        storeInLS(){
+            this.formQD.subtotal = this.formQD.price * this.formQD.quantity;
+            
+            let newQuote = {
+                product_id: this.formQD.product_id,
+                description: this.formQD.description,
+                quantity: this.formQD.quantity, 
+                price:this.formQD.price,
+                total:this.formQD.subtotal 
+            };
+            this.tempQuotedetails.push(newQuote);
+            this.clearInput();
+        },
+        clearInput(){
+            /**this.form.important_note = "";
+            this.form.payment_condition = "";
+            this.form.offer_validity = ""; 
+            this.form.currency = ""; 
+            this.form.status = "";
+            this.form.incoterm = "";
+            this.form.user_id =  "";
+            this.form.company_id =  "";
+            this.form.contact_id =  ""; */
+            this.formQD.quote_id = ""; 
+            this.formQD.product_id = ""; 
+            this.formQD.quantity = ""; 
+            this.formQD.iva = ""; 
+            this.formQD.price = ""; 
+            this.formQD.subtotal = ""; 
+            this.formQD.details = ""; 
         },
         showStoreModal() {
             this.openModal = true;

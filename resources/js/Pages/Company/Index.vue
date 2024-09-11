@@ -41,7 +41,7 @@ const headers = [
             </div>
             <EasyDataTable :headers="headers" :items="companies" class="mt-5" />
         </div>
-        <DialogModal :show="store.openModal">
+        <DialogModal :show="store.openModal" @close="store.closeModal">
             <template #title>Nuevo registro de Compañia</template>
             <template #content>
                 <div class="mt-5">
