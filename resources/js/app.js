@@ -5,7 +5,8 @@ import { createApp, h } from 'vue';
 import { createPinia } from 'pinia'
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import { ZiggyVue } from '../../vendor/tightenco/ziggy';
+import { ZiggyVue } from '../../vendor/tightenco/ziggy';import Vue3EasyDataTable from 'vue3-easy-data-table';
+import 'vue3-easy-data-table/dist/style.css';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 const pinia = createPinia()
@@ -18,6 +19,7 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue)
             .use(pinia)
+            .component('EasyDataTable', Vue3EasyDataTable)
             .mount(el);
     },
     progress: {
