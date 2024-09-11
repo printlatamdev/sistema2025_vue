@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('quotes', function (Blueprint $table) {
             $table->id();
+            $table->string('payment_condition')->nullable();
+            $table->string('offer_validity')->nullable();
+            $table->string('currency')->nullable();
+            $table->string('incoterm')->nullable();
+            $table->string('status')->default('review');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('company_id')->constrained();
+            $table->foreignId('contact_id')->constrained();
+            $table->text('important_note')->nullable();
+            //morph image
             $table->timestamps();
         });
     }
