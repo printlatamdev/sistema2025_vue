@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\QuoteStatusEnum;
 use App\Models\Company;
 use App\Models\Contact;
 use App\Models\Product;
@@ -26,12 +27,12 @@ class QuoteController extends Controller
     public function store(Request $request)
     {
         //$image = new ImageController;
-        $data = Quote::create([
+        Quote::create([
             'important_note' => $request->important_note,
             'payment_condition' => $request->payment_condition,
             'offer_validity' => $request->offer_validity,
             'currency' => $request->currency,
-            'status' => $request->status,
+            'status' => QuoteStatusEnum::Review,
             'incoterm' => $request->incoterm,
             'user_id' => $request->user_id,
             'company_id' => $request->company_id,
@@ -40,6 +41,6 @@ class QuoteController extends Controller
         //$image->store($request->image, Quote::class, $data->id);
         //$file->store($request->file, Quote::class, $data->id);
 
-        return redirect()->to('/quotes');
+        //return redirect()->to('/quotations');
     }
 }

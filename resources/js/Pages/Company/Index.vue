@@ -39,7 +39,7 @@ const headers = [
             <div class="flex justify-end">
                 <PrimaryButton @click="store.showStoreModal()">Nueva compañia</PrimaryButton>
             </div>
-            <EasyDataTable :headers="headers" :items="companies" class="mt-5" />
+            <EasyDataTable :headers="headers" :items="companies" border-cell buttons-pagination class="mt-5" />
         </div>
         <DialogModal :show="store.openModal" @close="store.closeModal">
             <template #title>Nuevo registro de Compañia</template>

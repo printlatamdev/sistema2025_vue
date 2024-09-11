@@ -27,6 +27,6 @@ export const useContactStore = defineStore('contact', {
     },
     closeModal(){
       this.openModal = false;
-    }
+    },
   },
 })

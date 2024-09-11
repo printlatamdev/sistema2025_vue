@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { useForm } from "@inertiajs/vue3";
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 export const useQuoteStore = defineStore("quote", {
     state: () => ({
@@ -21,33 +22,32 @@ export const useQuoteStore = defineStore("quote", {
             quote_id: "",
             product_id: "",
             quantity: "",
-            description: "",
+            details: "",
             iva: "",
             price: "",
             subtotal: "",
             details: "",
+            url: null
         }),
         headers: [
-            { text: "No. Orden", value: "id" },
+            { text: "No. Orden", value: "id", width: 50 },
             { text: "Vendedor", value: "user.name" },
             { text: "Cliente", value: "company.social_reason" },
             { text: "Contacto", value: "contact.name" },
-            { text: "Condición de pago", value: "payment_condition" },
-            { text: "Validez oferta", value: "offer_validity" },
-            { text: "Moneda", value: "currency" },
-            { text: "Estado", value: "status" },
-            { text: "Término de comercio", value: "incoterm" },
+            { text: "Condición de pago", value: "payment_condition", width: 75 },
+            { text: "Validez oferta", value: "offer_validity", width: 50 },
+            { text: "Moneda", value: "currency", width: 50 },
+            { text: "Estado", value: "status", width: 50 },
+            { text: "Término de comercio", value: "incoterm", width: 50 },
         ],
         headersQD: [
             { text: "Producto", value: "product_id" },
-            { text: "Descripción", value: "description" },
-            { text: "Cantidad", value: "quantity" },
-            { text: "Unitario", value: "price" },
-            { text: "Total", value: "total" },
+            { text: "Descripción", value: "details" },
+            { text: "Cantidad", value: "quantity", width: 50 },
+            { text: "Unitario", value: "price", width: 50 },
+            { text: "Total", value: "total", width: 50 },
         ],
-        tempQuotedetails: [
-            { product_id: "", description: "", quantity: "", price: "", total: "" },
-        ],
+        tempQuotedetails: [],
         payment_condition: [
             { name: "Anticipo", value: "Anticipo" },
             { name: "Pago total anticipado", value: "Pago total anticipado" },
@@ -78,20 +78,20 @@ export const useQuoteStore = defineStore("quote", {
     },
     actions: {
         storeQuote() {
-            this.currentStep = 2;
-            /**this.closeModal();
             this.form.post(route("store.quotations"), {
                 onSuccess: () => {
                     this.closeModal();
                 },
-            }); */
+            });
+            this.successAlert();
+            this.currentStep = 2;
         },
         storeInLS(){
             this.formQD.subtotal = this.formQD.price * this.formQD.quantity;
             
             let newQuote = {
                 product_id: this.formQD.product_id,
-                description: this.formQD.description,
+                details: this.formQD.details,
                 quantity: this.formQD.quantity, 
                 price:this.formQD.price,
                 total:this.formQD.subtotal 
@@ -122,6 +122,17 @@ export const useQuoteStore = defineStore("quote", {
         },
         closeModal() {
             this.openModal = false;
+        },
+        successAlert(){
+            Swal.fire({
+                toast: true,
+                icon: 'success',
+                title: 'Cotización agregada satisfactoriamente',
+                position: 'bottom-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+            });
         },
     },
 });

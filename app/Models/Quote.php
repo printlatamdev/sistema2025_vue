@@ -26,10 +26,10 @@ class Quote extends Model
     ];
 
     protected $casts = [
-        //'status' => QuoteStatusEnum::class,
-        //'incoterm' => IncotermEnum::class,
-        //'payment_condition' => PaymentConditionEnum::class,
-        //'offer_validity' => OfferValidityEnum::class,
+        'status' => QuoteStatusEnum::class,
+        'incoterm' => IncotermEnum::class,
+        'payment_condition' => PaymentConditionEnum::class,
+        'offer_validity' => OfferValidityEnum::class,
     ];
 
     public function user()

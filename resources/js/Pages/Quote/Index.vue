@@ -49,7 +49,7 @@ defineProps({
             <div class="flex justify-end">
                 <PrimaryButton @click="store.showStoreModal()">Nueva Cotización</PrimaryButton>
             </div>
-            <EasyDataTable :headers="store.headers" :items="quotes" class="mt-5" />
+            <EasyDataTable :headers="store.headers" :items="quotes" border-cell buttons-pagination class="mt-5" />
         </div>
         <DialogModal :show="store.openModal" :max-width="maxWidth" @close="store.closeModal">
             <template #title>Nuevo registro de Cotización</template>
@@ -64,7 +64,7 @@ defineProps({
                                 1
                             </span>
                             Información <span class="hidden sm:inline-flex sm:ms-2">general</span>
-                            <x-fas-angles-right width="10" class="ms-2" />
+                            <!--icon arrow here-->
                         </li>
                         <li class="flex items-center" :class="{ 'text-blue-600': store.currentStep == 2 }">
                             <span
@@ -167,14 +167,15 @@ defineProps({
                             </textarea>
                             </div>
                         </div>
-                        
+
                         <!--QUOTEDETAIL FORM-->
                         <div v-else>
                             <form action="">
                                 <div class="flex">
                                     <div class="w-1/2 mr-1">
                                         <InputLabel for="product_id" value="Producto" />
-                                        <select v-model="store.formQD.product_id" class="text-xs block  w-full border-gray-300 rounded-md">
+                                        <select v-model="store.formQD.product_id"
+                                            class="text-xs block  w-full border-gray-300 rounded-md">
                                             <option class="text-gray-500">Seleccione una opción</option>
                                             <option v-for="product in products" :key="product.id" :value="product.id">
                                                 {{ product.name }}
@@ -192,7 +193,8 @@ defineProps({
                                         </div>
                                         <div class="w-1/5 mr-1">
                                             <InputLabel for="subtotal" value="Total" />
-                                            <TextInput disabled v-model="store.formQD.subtotal" :placeholder="store.getSubtotal" class="w-full" type="text" />
+                                            <TextInput disabled v-model="store.formQD.subtotal"
+                                                :placeholder="store.getSubtotal" class="w-full" type="text" />
                                         </div>
                                         <div class="flex justify-end mt-3" @click="store.storeInLS()">
                                             <SecondaryButton>+</SecondaryButton>
@@ -201,15 +203,18 @@ defineProps({
                                 </div>
                                 <div class="w-full mt-3">
                                     <InputLabel for="url" value="Descripción" />
-                                    <textarea wire:model="details" rows="3" class="block text-xs w-full border-gray-300 rounded-md"></textarea>
+                                    <textarea v-model="store.formQD.details" rows="3"
+                                        class="block text-xs w-full border-gray-300 rounded-md"></textarea>
                                 </div>
                                 <div class="w-full mt-3 flex items-center">
                                     <div class="w-1/3">
                                         <InputLabel for="url" value="Subir imagen" />
-                                        <FilePond />
+                                        <Filepond v-model="store.formQD.url" @change="handleFile($event)"
+                                            allow-multiple="false" max-files="1" />
                                     </div>
                                     <div class="w-2/3 ml-2">
-                                        <EasyDataTable :headers="store.headersQD" :items="store.tempQuotedetails" class="mt-5" />
+                                        <EasyDataTable :headers="store.headersQD" :items="store.tempQuotedetails"
+                                            border-cell buttons-pagination class="mt-5" />
                                     </div>
                                 </div>
                             </form>

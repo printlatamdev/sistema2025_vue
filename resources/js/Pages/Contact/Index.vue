@@ -45,7 +45,7 @@ const headers = [
             <div class="flex justify-end">
                 <PrimaryButton @click="store.showStoreModal()">Nuevo contacto</PrimaryButton>
             </div>
-            <EasyDataTable :headers="headers" :items="contacts" class="mt-5" />
+            <EasyDataTable :headers="headers" :items="contacts" border-cell buttons-pagination class="mt-5" />
         </div>
 
         <DialogModal :show="store.openModal" @close="store.closeModal">
@@ -71,7 +71,7 @@ const headers = [
                             <div class="w-1/4 mr-1">
                                 <InputLabel for="country_id" value="País" />
                                 <select v-model="store.form.country_id"
-                                    class="block w-full border-gray-300 rounded-md">
+                                    class="block w-full border-gray-300 rounded-md text-xs">
                                     <option class="text-gray-500"> Seleccione una opción</option>
                                     <option v-for="country in countries" :key="country.id" :value="country.id">
                                         {{ country.name }}
@@ -81,7 +81,7 @@ const headers = [
                             <div class="w-1/4 mr-1">
                                 <InputLabel for="company_id" value="Cliente" />
                                 <select v-model="store.form.company_id"
-                                    class="block w-full border-gray-300 rounded-md">
+                                    class="block w-full border-gray-300 rounded-md text-xs">
                                     <option class="text-gray-500"> Seleccione una opción</option>
                                     <option v-for="company in companies" :key="company.id" :value="company.id">
                                         {{ company.social_reason }}
@@ -98,7 +98,7 @@ const headers = [
                             </div>
                         </div>
                         <div class="flex justify-end mt-3">
-                            <SecondaryButton >Guardar datos</SecondaryButton>
+                            <PrimaryButton >Guardar datos</PrimaryButton>
                         </div>
                     </form>
                 </div>
