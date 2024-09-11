@@ -1,8 +1,6 @@
 <script setup>
 import NavLink from '@/Components/NavLink.vue';
-defineProps({
-    on: Boolean,
-});
+
 </script>
 <template>
     <div class="m-5">
@@ -11,13 +9,13 @@ defineProps({
     <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
         Dashboard
     </NavLink>
-    <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
+    <NavLink :href="route('quotations')" :active="route().current('quotations')">
         Cotizaciones
     </NavLink>
-    <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
+    <NavLink :href="route('companies')" :active="route().current('companies')">
         Compañias
     </NavLink>
-    <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
+    <NavLink :href="route('contacts')" :active="route().current('contacts')">
         Contactos
     </NavLink>
 </template>
