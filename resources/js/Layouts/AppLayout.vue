@@ -7,6 +7,7 @@ import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+import Sidebar from '@/Components/Sidebar.vue';
 
 defineProps({
     title: String,
@@ -30,9 +31,7 @@ const logout = () => {
 <template>
     <div>
         <Head :title="title" />
-
         <Banner />
-
         <div class="min-h-screen bg-gray-100">
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
@@ -47,11 +46,11 @@ const logout = () => {
                             </div>
 
                             <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                           <!-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </NavLink>
-                            </div>
+                            </div>-->
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -282,7 +281,14 @@ const logout = () => {
 
             <!-- Page Content -->
             <main>
-                <slot />
+                <div class="w-full flex">
+                    <div class="bg-gray-900 w-1/6 text-sm h-screen">
+                        <Sidebar />
+                    </div>
+                    <div class="w-5/6 bg-white overflow-hidden">
+                        <slot />
+                    </div>
+                </div>
             </main>
         </div>
     </div>
