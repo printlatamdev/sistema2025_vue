@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { useForm } from "@inertiajs/vue3";
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 export const useCompanyStore = defineStore("company", {
     state: () => ({
@@ -22,6 +23,8 @@ export const useCompanyStore = defineStore("company", {
             this.form.post(route("store.companies"), {
                 onSuccess: () => {
                     this.closeModal();
+                    this.clearInput();
+                    this.successAlert();
                 },
             });
         },
@@ -30,6 +33,28 @@ export const useCompanyStore = defineStore("company", {
         },
         closeModal() {
             this.openModal = false;
+        },
+        clearInput(){
+          this.form.commercial_name = "";
+          this.form.social_reason = "";
+          this.form.cellphone = "";
+          this.form.telephone = "";
+          this.form.address = "";
+          this.form.nrc = "";
+          this.form.nit = "";
+          this.form.business_line = "";
+          this.form.agency = "";
+        },
+        successAlert(){
+            Swal.fire({
+                toast: true,
+                icon: 'success',
+                title: 'Compañia agregada satisfactoriamente',
+                position: 'bottom-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+            });
         },
     },
 });

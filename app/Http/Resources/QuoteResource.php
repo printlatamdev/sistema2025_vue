@@ -22,9 +22,9 @@ class QuoteResource extends JsonResource
             'currency' => $this->currency,
             'status' => $this->status,
             'incoterm' => $this->incoterm,
-            'user' => UserResource::collection($this->user),
-            'company' => CompanyResource::collection($this->company),
-            'contact' => ContactResource::collection($this->contact),
+            'user' => new UserResource($this->user),
+            'company' => new CompanyResource($this->company),
+            'contact' => new ContactResource($this->contact),
         ];
     }
 }
