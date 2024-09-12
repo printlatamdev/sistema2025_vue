@@ -43,6 +43,6 @@ class QuoteController extends Controller
         //$image->store($request->image, Quote::class, $data->id);
         //$file->store($request->file, Quote::class, $data->id);
 
-        //return redirect()->to('/quotations');
+        return redirect()->to('/quotations');
     }
 }

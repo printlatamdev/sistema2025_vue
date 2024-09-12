@@ -5,6 +5,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 export const useQuoteStore = defineStore("quote", {
     state: () => ({
         openModal: false,
+        openModalQD: false,
         quoteid: '',
         currentStep: 1,
         form: useForm({
