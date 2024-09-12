@@ -23,8 +23,7 @@ const items = [
 <template>
   <AppLayout title="Dashboard">
     <div class="w-full">
-      <h2>Datos de</h2>
-      <EasyDataTable :headers="headers" :items="items" border-cell buttons-pagination />
+      Main
     </div>
   </AppLayout>
 </template>

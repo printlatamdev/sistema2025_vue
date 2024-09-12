@@ -5,7 +5,7 @@ import DialogModal from '@/Components/DialogModal.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
-import FilePond from '@/Components/Filepond.vue';
+import Filepond from '@/Components/Filepond.vue';
 import { useQuoteStore } from '@/Store/quote';
 
 let store = useQuoteStore();
@@ -33,10 +33,6 @@ defineProps({
     products: {
         type: Object,
         default: ([]),
-    },
-    maxWidth: {
-        type: String,
-        default: '5xl',
     },
 });
 

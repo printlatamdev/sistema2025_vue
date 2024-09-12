@@ -37,7 +37,7 @@ export const useQuoteStore = defineStore("quote", {
             { text: "Condición de pago", value: "payment_condition", width: 75 },
             { text: "Validez oferta", value: "offer_validity", width: 50 },
             { text: "Moneda", value: "currency", width: 50 },
-            { text: "Estado", value: "status", width: 50 },
+            { text: "Estado", value: "status", width: 100 },
             { text: "Término de comercio", value: "incoterm", width: 50 },
         ],
         headersQD: [
