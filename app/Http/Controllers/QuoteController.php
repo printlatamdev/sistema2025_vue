@@ -43,6 +43,32 @@ class QuoteController extends Controller
         //$image->store($request->image, Quote::class, $data->id);
         //$file->store($request->file, Quote::class, $data->id);
 
-        return redirect()->to('/quotations');
+        return redirect()->route('quotations');
+    }
+
+    
+    public function update(Request $request, Quote $quote)
+    {
+        //$image = new ImageController;
+        $quote->update([
+            'important_note' => $request->important_note,
+            'payment_condition' => $request->payment_condition,
+            'offer_validity' => $request->offer_validity,
+            'currency' => $request->currency,
+            'status' => $request->status,
+            'incoterm' => $request->incoterm,
+            'user_id' => $request->user_id,
+            'company_id' => $request->company_id,
+            'contact_id' => $request->contact_id,
+        ]);
+        //$image->store($request->image, Quote::class, $data->id);
+        //$file->store($request->file, Quote::class, $data->id);
+
+        return redirect()->route('quotations');
+    }
+
+    public function destroy(Quote $quote){
+        $quote->delete();
+        return redirect()->route('quotations');
     }
 }

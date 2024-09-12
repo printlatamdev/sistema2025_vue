@@ -15,8 +15,9 @@ class QuoteResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        // . '-' . Carbon::now()->format('y')
         return [
-            'id' => $this->id . '-' . Carbon::now()->format('y'),
+            'id' => $this->id,
             'important_note' => $this->important_note,
             'payment_condition' => $this->payment_condition,
             'offer_validity' => $this->offer_validity,

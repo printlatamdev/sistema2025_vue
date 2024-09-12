@@ -12,7 +12,7 @@ const FilePond = vueFilePond(
 <template>
     <file-pond
         class-name="my-pond"
-        label-idle="Select your image"
+        label-idle="Seleccionar imagen"
         allow-multiple="false"
         class="cursor-pointer text-xs"
     />

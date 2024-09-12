@@ -35,7 +35,10 @@ defineProps({
 <template>
 
     <DialogModal :show="show" :max-width="maxWidth" @close="store.closeModal">
-        <template #title>Nuevo registro de Cotización</template>
+        <template #title>
+            <span v-if=" store.edit != ''" class="p-1 bg-sky-500 rounded-md">#{{ `${store.edit.id}-${store.getYear}` }}</span> 
+            {{ store.edit == '' ? 'Nuevo' : 'Actualizar' }} registro de Cotización
+        </template>
         <template #content>
             <div class="w-1/2 flex justify-center mx-auto ">
                 <ol
@@ -56,23 +59,23 @@ defineProps({
                 </ol>
             </div>
             <div class="mt-5">
-                <form @submit.prevent="store.storeQuote()">
+                <form @submit.prevent="store.storeQuote(store.edit.id)">
                     <!--QUOTE FORM-->
                         <div class="flex">
                             <div class="w-1/3 mr-1">
                                 <InputLabel for="company_id" value="Cliente" />
                                 <select v-model="store.form.company_id"
-                                    class="text-xs block  w-full border-gray-300 rounded-md">
+                                    class="text-xs block w-full border-gray-300 rounded-md">
                                     <option class="text-gray-500"> Seleccione una opción</option>
                                     <option v-for="company in companies" :key="company.id" :value="company.id">
                                         {{ company.social_reason }}
                                     </option>
                                 </select>
                             </div>
-                            <div class="w-1/3">
+                            <div class="w-1/3 mr-1">
                                 <InputLabel for="contact_id" value="Contacto" />
                                 <select v-model="store.form.contact_id"
-                                    class="text-xs block  w-full border-gray-300 rounded-md">
+                                    class="text-xs block w-full border-gray-300 rounded-md">
                                     <option class="text-gray-500"> Seleccione una opción</option>
                                     <option v-for="contact in contacts" :key="contact.id" :value="contact.id">
                                         {{ contact.name }}
@@ -144,7 +147,7 @@ defineProps({
                             </textarea>
                         </div>
                     <div class="flex justify-end mt-3">
-                        <PrimaryButton>Guardar datos</PrimaryButton>
+                        <PrimaryButton>{{ store.edit == '' ? 'Guardar' : 'Actualizar' }}</PrimaryButton>
                     </div>
                 </form>
             </div>

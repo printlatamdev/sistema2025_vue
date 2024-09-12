@@ -1,9 +1,6 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import DialogModal from '@/Components/DialogModal.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import TextInput from '@/Components/TextInput.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 import ModalStoreUpdate from './ModalStoreUpdate.vue';
@@ -31,8 +28,8 @@ defineProps({
             <div class="flex justify-end">
                 <PrimaryButton @click="store.showStoreModal()">Nueva compañia</PrimaryButton>
             </div>
-            <EasyDataTable :headers="store.headers" :items="companies" border-cell buttons-pagination class="mt-5">
-                <template #item-options="options">
+            <EasyDataTable :headers="store.headers" :rows-per-page="10" :items="companies" border-cell buttons-pagination class="mt-5">
+                <template #item-options="options" class="flex justify-center">
                     <SecondaryButton class="mr-1" @click="store.editData(options)"><font-awesome-icon :icon="['fas', 'pen-to-square']" /></SecondaryButton>
                     <DangerButton @click="store.showDeleteModal(options)"><font-awesome-icon :icon="['fas', 'trash-can']" /></DangerButton>
                 </template>

@@ -24,7 +24,7 @@ export const useContactStore = defineStore('contact', {
         { text: "Correo electrónico", value: "email" },
         { text: "Compañia", value: "company.social_reason" },
         { text: "País", value: "country.name" },
-        { text: "Acciones", value: "options" },
+        { text: "Acciones", value: "options", width: 100 },
     ],
  }),
   actions: {

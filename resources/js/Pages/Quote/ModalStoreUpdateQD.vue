@@ -31,7 +31,10 @@ defineProps({
 <template>
 
     <DialogModal :show="show" :max-width="maxWidth" @close="store.closeModal">
-        <template #title>Nuevo registro de Cotización</template>
+        <template #title>
+            <span v-if=" store.edit != ''" class="p-1 bg-sky-500 rounded-md">#{{ `${store.edit.id}-${store.getYear}` }}</span> 
+            Nuevo registro de Cotización
+        </template>
         <template #content>
             <div class="w-1/2 flex justify-center mx-auto ">
                 <ol
@@ -98,13 +101,16 @@ defineProps({
                                     max-files="1" />
                             </div>
                             <div class="w-2/3 ml-2">
-                                <EasyDataTable :headers="store.headersQD" :items="store.tempQuotedetails" border-cell
+                                <EasyDataTable :headers="store.headersQD" :rows-per-page="5" :items="store.tempQuotedetails" border-cell
                                     buttons-pagination class="mt-5" />
                             </div>
                         </div>
                     </form>
                     <div class="flex justify-end mt-3">
-                        <PrimaryButton>Guardar datos</PrimaryButton>
+                        <SecondaryButton class="mr-2" @click="store.editData()">
+                            <font-awesome-icon :icon="['fas', 'arrow-left']" />Anterior
+                        </SecondaryButton>
+                        <PrimaryButton>Guardar</PrimaryButton>
                     </div>
                 </form>
             </div>

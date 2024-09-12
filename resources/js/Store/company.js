@@ -28,7 +28,7 @@ export const useCompanyStore = defineStore("company", {
             { text: "Dirección", value: "address" },
             { text: "Giro", value: "business_line" },
             { text: "Agencia", value: "agency" },
-            { text: "Acciones", value: "options" },
+            { text: "Acciones", value: "options", width: 100 },
         ],
     }),
     actions: {
