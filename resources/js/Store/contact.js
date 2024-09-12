@@ -69,7 +69,6 @@ export const useContactStore = defineStore('contact', {
     },
     editData(data){
       this.showStoreModal();
-      console.log(data);
       this.edit = data;
       this.form.name = data.name;
       this.form.lastname = data.lastname;

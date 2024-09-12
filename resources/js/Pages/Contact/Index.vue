@@ -95,7 +95,7 @@ defineProps({
                             </div>
                         </div>
                         <div class="flex justify-end mt-3">
-                            <PrimaryButton >{{ store.edit == '' ? 'Guardar' : 'Actualizar' }}  datos</PrimaryButton>
+                            <PrimaryButton >{{ store.edit == '' ? 'Guardar' : 'Actualizar' }}</PrimaryButton>
                         </div>
                     </form>
                 </div>

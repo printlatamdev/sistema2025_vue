@@ -5,6 +5,7 @@ import DialogModal from '@/Components/DialogModal.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
+import DangerButton from '@/Components/DangerButton.vue';
 import { useCompanyStore } from '@/Store/company';
 
 let store = useCompanyStore();
@@ -15,20 +16,9 @@ defineProps({
     },
     maxWidth: {
         type: String,
-        default: '2xl',
+        default: 'md',
     },
 });
-const headers = [
-    { text: "Razón Social", value: "social_reason" },
-    { text: "Nombre comercial", value: "commercial_name" },
-    { text: "Celular", value: "cellphone" },
-    { text: "Teléfono", value: "telephone" },
-    { text: "NRC", value: "nrc" },
-    { text: "NIT", value: "nit" },
-    { text: "Dirección", value: "address" },
-    { text: "Giro", value: "business_line" },
-    { text: "Agencia", value: "agency" },
-];
 
 </script>
 
@@ -39,13 +29,18 @@ const headers = [
             <div class="flex justify-end">
                 <PrimaryButton @click="store.showStoreModal()">Nueva compañia</PrimaryButton>
             </div>
-            <EasyDataTable :headers="headers" :items="companies" border-cell buttons-pagination class="mt-5" />
+            <EasyDataTable :headers="store.headers" :items="companies" border-cell buttons-pagination class="mt-5">
+                <template #item-options="options">
+                    <SecondaryButton class="mr-1" @click="store.editData(options)"><font-awesome-icon :icon="['fas', 'pen-to-square']" /></SecondaryButton>
+                    <DangerButton @click="store.showDeleteModal(options)"><font-awesome-icon :icon="['fas', 'trash-can']" /></DangerButton>
+                </template>
+            </EasyDataTable>
         </div>
         <DialogModal :show="store.openModal" @close="store.closeModal">
-            <template #title>Nuevo registro de Compañia</template>
+            <template #title>{{ store.edit == '' ? 'Nuevo' : 'Actualizar' }} registro de Compañia</template>
             <template #content>
                 <div class="mt-5">
-                    <form @submit.prevent="store.storeCompany()">
+                    <form @submit.prevent="store.storeCompany(store.edit.id)">
                         <div class="flex">
                             <div class="w-1/2 mr-1">
                                 <InputLabel for="commercial_name" value="Nombre comercial" />
@@ -89,9 +84,24 @@ const headers = [
                             </div>
                         </div>
                         <div class="flex justify-end mt-3">
-                            <PrimaryButton>Guardar datos</PrimaryButton>
+                            <PrimaryButton>{{ store.edit == '' ? 'Guardar' : 'Actualizar' }}</PrimaryButton>
                         </div>
                     </form>
+                </div>
+            </template>
+        </DialogModal>
+
+        
+        <DialogModal :show="store.openDeleteModal" @close="store.closeModal" :max-width="maxWidth">
+            <template #content>
+                <div class="mt-5 text-center">
+                    <p>¿Seguro que desea eliminar la compañia <span class="font-semibold">{{ store.edit.social_reason }}</span> seleccionada?</p>
+                    <p>El registro no podrá recuperarse posteriormente</p>
+                    <div class="flex justify-end mt-3">
+                        <DangerButton @click="store.deleteCompany(store.edit.id)">
+                            <font-awesome-icon :icon="['fas', 'trash-can']" class="mr-1"/>Eliminar
+                        </DangerButton>
+                    </div>
                 </div>
             </template>
         </DialogModal>

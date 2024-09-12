@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CompanyResource;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -13,7 +14,7 @@ class CompanyController extends Controller
     {
         $data = Company::orderBy('id', 'desc')->get();
         return Inertia::render('Company/Index', [
-            'companies' => $data
+            'companies' => CompanyResource::collection($data)
         ]);
     }
     public function store(Request $request)
@@ -30,28 +31,29 @@ class CompanyController extends Controller
             'agency' => 'Color Digital',
         ]);
 
-        return redirect()->to('/companies');
+        return redirect()->route('companies');
     }
 
-    public function update(Request $request, Company $Company)
+    public function update(Request $request, Company $company)
     {
-        $Company->update([
-            'name' => $request->name,
+        $company->update([
+            'commercial_name' => $request->commercial_name,
+            'social_reason' => $request->social_reason,
             'address' => $request->address,
-            'phone' => $request->phone,
+            'cellphone' => $request->cellphone,
+            'telephone' => $request->telephone,
             'nrc' => $request->nrc,
             'nit' => $request->nit,
             'business_line' => $request->business_line,
-            'agency' => $request->agency,
+            'agency' => 'Color Digital',
         ]);
-
-        return redirect()->to('/companies');
+        return redirect()->route('companies');
     }
 
-    public function destroy(Company $Company)
+    public function destroy(Company $company)
     {
-        $Company->delete();
+        $company->delete();
 
-        return redirect()->to('/companies');
+        return redirect()->route('companies');
     }
 }
