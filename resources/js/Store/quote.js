@@ -26,17 +26,10 @@ export const useQuoteStore = defineStore("quote", {
             product_id: "",
             quantity: "",
             price: 0,
-            details: "",
-            total: 0,
+            subtotal: 0,
             details: "",
             url: null,
         }),
-        pivottable: {
-            quote_id: "",
-            iva: 0,
-            iva2: 0,
-            subtotal: 0,
-        },
         headers: [
             { text: "No. Orden", value: "id", width: 50 },
             { text: "Vendedor", value: "user.name" },

@@ -9,14 +9,15 @@ use Inertia\Inertia;
 
 class CompanyController extends Controller
 {
-
     public function index()
     {
         $data = Company::orderBy('id', 'desc')->get();
+
         return Inertia::render('Company/Index', [
-            'companies' => CompanyResource::collection($data)
+            'companies' => CompanyResource::collection($data),
         ]);
     }
+
     public function store(Request $request)
     {
         Company::create([
@@ -47,6 +48,7 @@ class CompanyController extends Controller
             'business_line' => $request->business_line,
             'agency' => 'Color Digital',
         ]);
+
         return redirect()->route('companies');
     }
 

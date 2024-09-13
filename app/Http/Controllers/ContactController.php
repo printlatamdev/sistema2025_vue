@@ -11,8 +11,10 @@ use Inertia\Inertia;
 
 class ContactController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $contacts = Contact::orderBy('id', 'desc')->get();
+
         return Inertia::render('Contact/Index', [
             'contacts' => ContactResource::collection($contacts),
             'countries' => Country::orderBy('id', 'desc')->get(),
@@ -31,6 +33,7 @@ class ContactController extends Controller
             'company_id' => $request->company_id,
             'country_id' => $request->country_id,
         ]);
+
         return redirect()->route('contacts');
     }
 
@@ -45,11 +48,14 @@ class ContactController extends Controller
             'company_id' => $request->company_id,
             'country_id' => $request->country_id,
         ]);
+
         return redirect()->route('contacts');
     }
 
-    public function destroy(Contact $contact){
+    public function destroy(Contact $contact)
+    {
         $contact->delete();
+
         return redirect()->route('contacts');
     }
 }

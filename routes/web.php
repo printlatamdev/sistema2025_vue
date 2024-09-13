@@ -21,7 +21,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
-    
+
     Route::resource('/companies', CompanyController::class)->except(['create', 'edit'])->names([
         'index' => 'companies', 'store' => 'store.companies', 'show' => 'show.companies', 'update' => 'update.companies', 'destroy' => 'delete.companies',
     ]);
@@ -35,7 +35,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::resource('/quote-details', QuotedetailController::class)->except(['create', 'edit'])->names([
         'index' => 'quotedetails', 'store' => 'store.quotedetails', 'show' => 'show.quotedetails', 'update' => 'update.quotedetails', 'destroy' => 'delete.quotedetails',
     ]);
-    
+
     //contact routes
     Route::resource('/contacts', ContactController::class)->except(['create', 'edit'])->names([
         'index' => 'contacts', 'store' => 'store.contacts', 'show' => 'show.contacts', 'update' => 'update.contacts', 'destroy' => 'delete.contacts',

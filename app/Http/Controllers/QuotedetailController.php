@@ -7,10 +7,9 @@ use Illuminate\Http\Request;
 
 class QuotedetailController extends Controller
 {
-    
     public function store(Request $request)
     {
-        $data = Quotedetail::insert([
+        $data = Quotedetail::create([
             'quote_id' => $request->quote_id,
             'iva' => $request->iva,
             'total' => $request->total,

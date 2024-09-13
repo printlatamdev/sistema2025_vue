@@ -16,11 +16,10 @@ class Country extends Model
         return $this->hasMany(User::class);
     }
 
-   /** public function image()
+    /** public function image()
     {
         return $this->morphMany(Image::class, 'imageable');
     } */
-
     public function contact()
     {
         return $this->hasMany(Contact::class);

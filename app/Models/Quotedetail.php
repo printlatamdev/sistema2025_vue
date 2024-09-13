@@ -14,7 +14,7 @@ class Quotedetail extends Model
         'iva',
         'total',
     ];
-    
+
     public function quote()
     {
         return $this->belongsTo(Quote::class);

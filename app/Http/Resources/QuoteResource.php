@@ -27,6 +27,7 @@ class QuoteResource extends JsonResource
             'user' => new UserResource($this->user),
             'company' => new CompanyResource($this->company),
             'contact' => new ContactResource($this->contact),
+            'products' => ProductResource::collection($this->products)
         ];
     }
 }

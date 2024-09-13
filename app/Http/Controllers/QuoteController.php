@@ -14,9 +14,10 @@ use Inertia\Inertia;
 
 class QuoteController extends Controller
 {
-    
-    public function index(){
+    public function index()
+    {
         $quotes = Quote::orderBy('id', 'desc')->get();
+
         return Inertia::render('Quote/Index', [
             'quotes' => QuoteResource::collection($quotes),
             'users' => User::orderBy('id', 'desc')->get(),
@@ -39,18 +40,12 @@ class QuoteController extends Controller
             'company_id' => $request->company_id,
             'contact_id' => $request->contact_id,
         ]);
-        $subtotal = $request->price * $request->quantity;
-        $data->products()->attach($request->product_id, [
-            'price' => $request->price, 'quantity' => $request->quantity, 'subtotal' => $subtotal, 'details' => $request->details
-        ]);
 
         return redirect()->route('quotations');
     }
 
-    
     public function update(Request $request, Quote $quote)
     {
-        //$image = new ImageController;
         $quote->update([
             'important_note' => $request->important_note,
             'payment_condition' => $request->payment_condition,
@@ -62,15 +57,17 @@ class QuoteController extends Controller
             'company_id' => $request->company_id,
             'contact_id' => $request->contact_id,
         ]);
-        
-        //$image->store($request->image, Quote::class, $data->id);
-        //$file->store($request->file, Quote::class, $data->id);
-
+        $subtotal = $request->price * $request->quantity;
+        $quote->products()->attach($request->product_id, [
+            'price' => $request->price, 'quantity' => $request->quantity, 'subtotal' => $subtotal, 'details' => $request->details,
+        ]);
         return redirect()->route('quotations');
     }
 
-    public function destroy(Quote $quote){
+    public function destroy(Quote $quote)
+    {
         $quote->delete();
+
         return redirect()->route('quotations');
     }
 }
