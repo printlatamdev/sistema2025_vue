@@ -45,9 +45,12 @@ defineProps({
             <div class="flex justify-end">
                 <PrimaryButton @click="store.showStoreModal()">Nueva Cotización</PrimaryButton>
             </div>
-            <EasyDataTable :headers="store.headers" :rows-per-page="10" :items="quotes" border-cell buttons-pagination class="mt-5" >
+            <EasyDataTable :headers="store.headers" :rows-per-page="10" :items="quotes" border-cell buttons-pagination class="mt-5 " >
                 <template #item-id="data">
                     {{ `${data.id}-${store.getYear}` }}
+                </template>
+                <template #item-report="data">
+                    <font-awesome-icon :icon="['fas', 'file-pdf']" class="text-xl cursor-pointer text-red-500" />
                 </template>
                 <template #item-status="data">
                     <span class="bg-green-500 p-1 rounded-md">{{ data.status }}</span>

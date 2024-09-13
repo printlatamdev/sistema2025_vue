@@ -5,6 +5,7 @@ import DialogModal from '@/Components/DialogModal.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
+import SuccessButton from '@/Components/SuccessButton.vue';
 import Filepond from '@/Components/Filepond.vue';
 import { useQuoteStore } from '@/Store/quote';
 
@@ -83,21 +84,39 @@ defineProps({
                                     <TextInput disabled v-model="store.formQD.subtotal" :placeholder="store.getSubtotal"
                                         class="w-full" type="text" />
                                 </div>
-                                <div class="flex justify-end mt-3" @click="store.storeInLS()">
-                                    <SecondaryButton>+</SecondaryButton>
-                                </div>
                             </div>
                         </div>
-                        <div class="w-full mt-3">
-                            <InputLabel for="url" value="Descripción" />
-                            <textarea v-model="store.formQD.details" rows="3"
-                                class="block text-xs w-full border-gray-300 rounded-md"></textarea>
+                        <div class="w-full mt-3 flex">
+                            <div class="w-2/3 mr-3">
+                                <InputLabel for="url" value="Descripción" />
+                                <textarea v-model="store.formQD.details" rows="4"
+                                    class="block text-xs w-full border-gray-300 rounded-md"></textarea>
+                            </div>
+                            <div class="w-1/3">
+                                <div>
+                                    <InputLabel for="iva" value="IVA" />
+                                    <select v-model="store.formQD.iva"
+                                        class="text-xs block  w-full border-gray-300 rounded-md">
+                                        <option class="text-gray-500">Seleccione una opción</option>
+                                        <option v-for="i in store.iva" :key="i.id" :value="i.value">
+                                            {{ i.name }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div v-if="store.formQD.iva == 'Other'" class="mt-3">
+                                    <InputLabel for="iva" value="Asignar IVA" />
+                                    <TextInput v-model="store.formQD.iva2" class="w-full" type="text" />
+                                </div>
+                            </div>
                         </div>
                         <div class="w-full mt-3 flex items-center">
                             <div class="w-1/3">
                                 <InputLabel for="url" value="Subir imagen" />
                                 <Filepond v-model="store.formQD.url" @change="handleFile($event)" allow-multiple="false"
                                     max-files="1" />
+                                <div class="flex justify-end mt-5" @click="store.storeInLS()">
+                                    <SuccessButton>Agregar ítem</SuccessButton>
+                                </div>
                             </div>
                             <div class="w-2/3 ml-2">
                                 <EasyDataTable :headers="store.headersQD" :rows-per-page="5" :items="store.tempQuotedetails" border-cell
@@ -109,7 +128,7 @@ defineProps({
                         <SecondaryButton class="mr-2" @click="store.editData()">
                             <font-awesome-icon :icon="['fas', 'arrow-left']" />Anterior
                         </SecondaryButton>
-                        <PrimaryButton>Guardar</PrimaryButton>
+                        <PrimaryButton>Finalizar cotización</PrimaryButton>
                     </div>
                 </form>
             </div>

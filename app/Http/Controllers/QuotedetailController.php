@@ -12,7 +12,7 @@ class QuotedetailController extends Controller
     {
         $image = new ImageController;
         $subtotal = $request->price * $request->quantity;
-        $data = Quotedetail::create([
+        $data = Quotedetail::insert([
             'quote_id' => $request->quote_id,
             'product_id' => $request->product_id,
             'quantity' => $request->quantity,
