@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('quotedetails', function (Blueprint $table) {
+        Schema::create('product_quote', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('quote_id')->nullable()->constrained();
-            $table->float('iva')->default(0);
-            $table->float('total')->default(0);
+            $table->foreignId('product_id')->constrained();
+            $table->foreignId('quote_id')->constrained();
+            $table->float('price', 8, 2);
+            $table->integer('quantity');
+            $table->float('subtotal', 8, 2);
+            $table->longText('details')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('quotedetails');
+        Schema::dropIfExists('product_quote');
     }
 };

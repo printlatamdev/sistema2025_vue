@@ -47,13 +47,12 @@ class Quote extends Model
         return $this->belongsTo(Contact::class);
     }
 
-   /** public function image()
-    {
-        return $this->morphMany(Image::class, 'imageable');
-    } */
+    public function quotedetails(){
+        return $this->hasOne(Quotedetail::class);
+    }
 
-    public function quotedetails()
+    public function products()
     {
-        return $this->belongsToMany(Quotedetail::class, '');
+        return $this->belongsToMany(Product::class)->withPivot('iva', 'quantity', 'subtotal', 'details');
     }
 }

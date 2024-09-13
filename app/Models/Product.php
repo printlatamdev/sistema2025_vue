@@ -13,13 +13,8 @@ class Product extends Model
         'name', 'description',
     ];
 
-   /** public function image()
+    public function quotes()
     {
-        return $this->morphMany(Image::class, 'imageable');
-    } */
-
-    public function quotedetail()
-    {
-        return $this->hasMany(Quotedetail::class);
+        return $this->belongsToMany(Quote::class)->withPivot('iva', 'quantity', 'subtotal', 'details');
     }
 }

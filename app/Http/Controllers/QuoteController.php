@@ -28,8 +28,7 @@ class QuoteController extends Controller
 
     public function store(Request $request)
     {
-        //$image = new ImageController;
-        Quote::create([
+        $data = Quote::create([
             'important_note' => $request->important_note,
             'payment_condition' => $request->payment_condition,
             'offer_validity' => $request->offer_validity,
@@ -40,8 +39,10 @@ class QuoteController extends Controller
             'company_id' => $request->company_id,
             'contact_id' => $request->contact_id,
         ]);
-        //$image->store($request->image, Quote::class, $data->id);
-        //$file->store($request->file, Quote::class, $data->id);
+        $subtotal = $request->price * $request->quantity;
+        $data->products()->attach($request->product_id, [
+            'price' => $request->price, 'quantity' => $request->quantity, 'subtotal' => $subtotal, 'details' => $request->details
+        ]);
 
         return redirect()->route('quotations');
     }
@@ -61,6 +62,7 @@ class QuoteController extends Controller
             'company_id' => $request->company_id,
             'contact_id' => $request->contact_id,
         ]);
+        
         //$image->store($request->image, Quote::class, $data->id);
         //$file->store($request->file, Quote::class, $data->id);
 

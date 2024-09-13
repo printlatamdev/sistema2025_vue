@@ -10,20 +10,12 @@ class QuotedetailController extends Controller
     
     public function store(Request $request)
     {
-        $image = new ImageController;
-        $subtotal = $request->price * $request->quantity;
         $data = Quotedetail::insert([
             'quote_id' => $request->quote_id,
-            'product_id' => $request->product_id,
-            'quantity' => $request->quantity,
             'iva' => $request->iva,
-            'price' => $request->price,
-            'subtotal' => $subtotal,
-            'details' => $request->details,
+            'total' => $request->total,
         ]);
-        $image->store($request->image, Quotedetail::class, $data->id);
-        //$file->store($request->file, Quote::class, $data->id);
 
-        return redirect()->to('/quotes');
+        return redirect()->route('quotations');
     }
 }

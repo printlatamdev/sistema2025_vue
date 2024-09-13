@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('quote_quotedetail', function (Blueprint $table) {
+        Schema::create('totalcosts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('quote_id')->constrained();
-            $table->foreignId('quote_id')->constrained();
-            $table->float('iva', 8, 2);
-            $table->float('subtotal', 8, 2);
+            $table->float('iva');
+            $table->float('total');
+            //get pivot id
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('quote_quotedetail');
+        Schema::dropIfExists('totalcosts');
     }
 };
