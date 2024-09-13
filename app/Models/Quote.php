@@ -14,15 +14,15 @@ class Quote extends Model
     use HasFactory;
 
     protected $fillable = [
-        'important_note',
+        'user_id',
+        'company_id',
+        'contact_id',
         'payment_condition',
         'offer_validity',
         'currency',
         'status',
         'incoterm',
-        'user_id',
-        'company_id',
-        'contact_id',
+        'important_note',
     ];
 
     protected $casts = [
@@ -52,8 +52,8 @@ class Quote extends Model
         return $this->morphMany(Image::class, 'imageable');
     } */
 
-    public function quotedetail()
+    public function quotedetails()
     {
-        return $this->hasOne(Quotedetail::class);
+        return $this->belongsToMany(Quotedetail::class, '');
     }
 }

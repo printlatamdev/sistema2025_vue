@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('quotes', function (Blueprint $table) {
             $table->id();
-            $table->string('payment_condition')->nullable();
-            $table->string('offer_validity')->nullable();
-            $table->string('currency')->nullable();
-            $table->string('incoterm')->nullable();
-            $table->string('status')->default('review');
+            $table->string('payment_condition')->nullable(); //enum
+            $table->string('offer_validity')->nullable(); //enum
+            $table->string('currency')->nullable(); //enum
+            $table->string('incoterm')->nullable(); //enum
+            $table->string('status'); //enum
             $table->foreignId('user_id')->constrained();
             $table->foreignId('company_id')->constrained();
             $table->foreignId('contact_id')->constrained();

@@ -6,6 +6,7 @@ export const useQuoteStore = defineStore("quote", {
     state: () => ({
         getYear: parseInt(new Date().getFullYear().toString().substr(2,2), 10),
         edit: [],
+        tempQuotedetails: [],
         openModal: false,
         openModalQD: false,
         openDeleteModal: false,
@@ -22,17 +23,20 @@ export const useQuoteStore = defineStore("quote", {
             contact_id: "",
         }),
         formQD: useForm({
-            quote_id: "",
             product_id: "",
             quantity: "",
+            price: 0,
             details: "",
-            iva: "",
-            iva2: 0,
-            price: "",
-            subtotal: "",
+            total: 0,
             details: "",
             url: null,
         }),
+        pivottable: {
+            quote_id: "",
+            iva: 0,
+            iva2: 0,
+            subtotal: 0,
+        },
         headers: [
             { text: "No. Orden", value: "id", width: 50 },
             { text: "Vendedor", value: "user.name" },
@@ -53,7 +57,6 @@ export const useQuoteStore = defineStore("quote", {
             { text: "Unitario", value: "price", width: 50 },
             { text: "Total", value: "total", width: 50 },
         ],
-        tempQuotedetails: [],
         payment_condition: [
             { name: "Anticipo", value: "Anticipo" },
             { name: "Pago total anticipado", value: "Pago total anticipado" },
@@ -84,14 +87,13 @@ export const useQuoteStore = defineStore("quote", {
         ],
     }),
     getters: {
-        getSubtotal(state) {
+        getTotal(state) {
             return state.formQD.quantity * state.formQD.price;
         },
     },
     actions: {
         storeQuote(id) {
             if(!id){
-            console.log('entra en store');
             this.form.post(route("store.quotations"), {
                 onSuccess: () => {
                     this.successAlert('guardada');
@@ -100,7 +102,6 @@ export const useQuoteStore = defineStore("quote", {
                 },
             });
             } else {
-                console.log('entra en update');
                 this.form.put(route("update.quotations", id), {
                     onSuccess: () => {
                         this.closeModal();
@@ -110,6 +111,14 @@ export const useQuoteStore = defineStore("quote", {
                 });
             }
         },
+        storeQuoteDetail(){
+            this.formQD.quote_id = this.edit.id;
+            this.formQD.post(route("store.quotedetails"), {
+                onSuccess: () => {
+                    this.closeModal();
+                },
+            });
+        },
         deleteQuote(){
             this.form.delete(route('delete.quotations', id), {
                 onSuccess: () => {
@@ -118,9 +127,17 @@ export const useQuoteStore = defineStore("quote", {
                 },
             });
         },
+        handleFile(e){
+            const image = e.target.files[0];
+            if(!image) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                this.formQD.url = image;
+            };
+            reader.readAsDataURL(image);
+        },
         storeInLS() {
             this.formQD.subtotal = this.formQD.price * this.formQD.quantity;
-
             let newQuote = {
                 product_id: this.formQD.product_id,
                 details: this.formQD.details,

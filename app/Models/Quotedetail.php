@@ -10,23 +10,21 @@ class Quotedetail extends Model
     use HasFactory;
 
     protected $fillable = [
-        'quote_id',
         'product_id',
         'quantity',
-        'iva',
         'price',
-        'subtotal',
+        'total',
         'details',
     ];
-
-    public function quote()
+    
+    public function product()
     {
         return $this->belongsTo(Quote::class);
     }
 
-    public function product()
+    public function quotes()
     {
-        return $this->belongsTo(Quote::class);
+        return $this->belongsToMany(Quote::class, 'quote_quotedetail')->withPivot('iva', 'subtotal');
     }
     
    /** public function image()

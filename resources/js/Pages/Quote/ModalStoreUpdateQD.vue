@@ -56,9 +56,8 @@ defineProps({
                 </ol>
             </div>
             <div class="mt-5">
-                <form @submit.prevent="store.storeQuote()">
+                <form @submit.prevent="store.storeQuoteDetail(store.formQD)" enctype="multipart/form-data">
                     <!--QUOTEDETAIL FORM-->
-                    <form action="">
                         <div class="flex">
                             <div class="w-1/2 mr-1">
                                 <InputLabel for="product_id" value="Producto" />
@@ -81,7 +80,7 @@ defineProps({
                                 </div>
                                 <div class="w-1/5 mr-1">
                                     <InputLabel for="subtotal" value="Total" />
-                                    <TextInput disabled v-model="store.formQD.subtotal" :placeholder="store.getSubtotal"
+                                    <TextInput disabled v-model="store.formQD.subtotal" :placeholder="store.getTotal"
                                         class="w-full" type="text" />
                                 </div>
                             </div>
@@ -93,7 +92,21 @@ defineProps({
                                     class="block text-xs w-full border-gray-300 rounded-md"></textarea>
                             </div>
                             <div class="w-1/3">
-                                <div>
+                                <InputLabel for="url" value="Subir imagen" />
+                                <Filepond v-model="store.formQD.url" @change="store.handleFile($event)" allow-multiple="false"
+                                    max-files="1" />
+                                    <img :src="store.formQD.url" alt="">
+                                <div class="flex justify-end mt-5" @click="store.storeInLS()">
+                                    <SuccessButton>Agregar ítem</SuccessButton>
+                                </div>
+                            </div>
+                        </div><hr class="mt-2">
+                        <div class="w-full flex">
+                            <div class="w-2/3 mr-3 mt-5">
+                                <EasyDataTable :headers="store.headersQD" :rows-per-page="5" :items="store.tempQuotedetails" border-cell
+                                    buttons-pagination class="" />
+                            </div>
+                            <div class="w-1/3 mt-5">
                                     <InputLabel for="iva" value="IVA" />
                                     <select v-model="store.formQD.iva"
                                         class="text-xs block  w-full border-gray-300 rounded-md">
@@ -102,28 +115,12 @@ defineProps({
                                             {{ i.name }}
                                         </option>
                                     </select>
-                                </div>
                                 <div v-if="store.formQD.iva == 'Other'" class="mt-3">
                                     <InputLabel for="iva" value="Asignar IVA" />
                                     <TextInput v-model="store.formQD.iva2" class="w-full" type="text" />
                                 </div>
                             </div>
                         </div>
-                        <div class="w-full mt-3 flex items-center">
-                            <div class="w-1/3">
-                                <InputLabel for="url" value="Subir imagen" />
-                                <Filepond v-model="store.formQD.url" @change="handleFile($event)" allow-multiple="false"
-                                    max-files="1" />
-                                <div class="flex justify-end mt-5" @click="store.storeInLS()">
-                                    <SuccessButton>Agregar ítem</SuccessButton>
-                                </div>
-                            </div>
-                            <div class="w-2/3 ml-2">
-                                <EasyDataTable :headers="store.headersQD" :rows-per-page="5" :items="store.tempQuotedetails" border-cell
-                                    buttons-pagination class="mt-5" />
-                            </div>
-                        </div>
-                    </form>
                     <div class="flex justify-end mt-3">
                         <SecondaryButton class="mr-2" @click="store.editData()">
                             <font-awesome-icon :icon="['fas', 'arrow-left']" />Anterior
