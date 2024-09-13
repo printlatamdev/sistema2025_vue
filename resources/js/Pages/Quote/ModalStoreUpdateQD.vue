@@ -56,7 +56,7 @@ defineProps({
                 </ol>
             </div>
             <div class="mt-5">
-                <form @submit.prevent="store.storeQuoteDetail(store.formQD)" enctype="multipart/form-data">
+                <form enctype="multipart/form-data">
                     <!--QUOTEDETAIL FORM-->
                         <div class="flex">
                             <div class="w-1/2 mr-1">
@@ -96,8 +96,8 @@ defineProps({
                                 <Filepond v-model="store.formQD.url" @change="store.handleFile($event)" allow-multiple="false"
                                     max-files="1" />
                                     <img :src="store.formQD.url" alt="">
-                                <div class="flex justify-end mt-5" @click="store.storeInLS()">
-                                    <SuccessButton>Agregar ítem</SuccessButton>
+                                <div class="flex justify-end mt-5">
+                                    <SuccessButton @click.prevent="store.storeQuoteDetail()">Agregar ítem</SuccessButton>
                                 </div>
                             </div>
                         </div><hr class="mt-2">

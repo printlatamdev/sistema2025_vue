@@ -23,8 +23,9 @@ export const useQuoteStore = defineStore("quote", {
             contact_id: "",
         }),
         formQD: useForm({
+            quote_id: "",
             product_id: "",
-            quantity: "",
+            quantity: 0,
             price: 0,
             subtotal: 0,
             details: "",
@@ -106,7 +107,7 @@ export const useQuoteStore = defineStore("quote", {
         },
         storeQuoteDetail(){
             this.formQD.quote_id = this.edit.id;
-            this.formQD.post(route("store.quotedetails"), {
+            this.formQD.post(route("store.productquote"), {
                 onSuccess: () => {
                     this.closeModal();
                 },

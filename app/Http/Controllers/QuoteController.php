@@ -29,7 +29,7 @@ class QuoteController extends Controller
 
     public function store(Request $request)
     {
-        $data = Quote::create([
+        Quote::create([
             'important_note' => $request->important_note,
             'payment_condition' => $request->payment_condition,
             'offer_validity' => $request->offer_validity,
@@ -57,9 +57,14 @@ class QuoteController extends Controller
             'company_id' => $request->company_id,
             'contact_id' => $request->contact_id,
         ]);
-        $subtotal = $request->price * $request->quantity;
+        return redirect()->route('quotations');
+    }
+
+    public function storeInPivot(Request $request){
+        $quote = Quote::find($request->quote_id);
+        $total = $request->price * $request->quantity;
         $quote->products()->attach($request->product_id, [
-            'price' => $request->price, 'quantity' => $request->quantity, 'subtotal' => $subtotal, 'details' => $request->details,
+            'price' => $request->price, 'quantity' => $request->quantity, 'total' => $total, 'details' => $request->details,
         ]);
         return redirect()->route('quotations');
     }
