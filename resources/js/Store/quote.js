@@ -88,7 +88,7 @@ export const useQuoteStore = defineStore("quote", {
             console.log('entra en store');
             this.form.post(route("store.quotations"), {
                 onSuccess: () => {
-                    this.successAlert('guardado');
+                    this.successAlert('guardada');
                     this.showModalQD();
                     this.closeModal();
                 },
@@ -99,7 +99,7 @@ export const useQuoteStore = defineStore("quote", {
                     onSuccess: () => {
                         this.closeModal();
                         this.showModalQD();
-                        this.successAlert('actualizado');
+                        this.successAlert('actualizada');
                     },
                 });
             }
@@ -108,7 +108,7 @@ export const useQuoteStore = defineStore("quote", {
             this.form.delete(route('delete.quotations', id), {
                 onSuccess: () => {
                   this.closeModal();
-                  this.successAlert('eliminado');
+                  this.successAlert('eliminada');
                 },
             });
         },
