@@ -54,6 +54,6 @@ class Quote extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class)->withPivot('price', 'quantity', 'total', 'details');
+        return $this->belongsToMany(Product::class, 'product_quote')->withPivot('price', 'quantity', 'total', 'details');
     }
 }

@@ -69,6 +69,10 @@ class QuoteController extends Controller
         return redirect()->route('quotations');
     }
 
+    public function getPivot(Quote $quote){
+        return $quote->products;
+    }
+
     public function destroy(Quote $quote)
     {
         $quote->delete();

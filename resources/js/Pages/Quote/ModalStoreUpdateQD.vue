@@ -103,7 +103,7 @@ defineProps({
                         </div><hr class="mt-2">
                         <div class="w-full flex">
                             <div class="w-2/3 mr-3 mt-5">
-                                <EasyDataTable :headers="store.headersQD" :rows-per-page="5" :items="store.tempQuotedetails" border-cell
+                                <EasyDataTable :headers="store.headersQD" :rows-per-page="5" :items="store.edit.products" border-cell
                                     buttons-pagination class="" />
                             </div>
                             <div class="w-1/3 mt-5">

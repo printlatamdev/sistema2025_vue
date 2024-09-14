@@ -45,7 +45,7 @@ export const useQuoteStore = defineStore("quote", {
             { text: "Acciones", value: "options", width: 100 },
         ],
         headersQD: [
-            { text: "Producto", value: "product_id" },
+            { text: "Producto", value: "name" },
             { text: "Descripción", value: "details" },
             { text: "Cantidad", value: "quantity", width: 50 },
             { text: "Unitario", value: "price", width: 50 },
