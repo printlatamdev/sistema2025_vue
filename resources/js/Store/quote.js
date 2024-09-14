@@ -31,6 +31,11 @@ export const useQuoteStore = defineStore("quote", {
             details: "",
             url: null,
         }),
+        formTotal: useForm({
+            quote_id: "",
+            iva: 0,
+            iva2: 0,
+        }),
         headers: [
             { text: "No. Orden", value: "id", width: 50 },
             { text: "Vendedor", value: "user.name" },
@@ -73,7 +78,7 @@ export const useQuoteStore = defineStore("quote", {
         ],
         iva: [
             { name: "No asignar", value: "0" },
-            { name: "7%", value: "0.13" },
+            { name: "7%", value: "0.07" },
             { name: "12%", value: "0.12" },
             { name: "13%", value: "0.13" },
             { name: "15%", value: "0.15" },
@@ -90,16 +95,16 @@ export const useQuoteStore = defineStore("quote", {
             if(!id){
             this.form.post(route("store.quotations"), {
                 onSuccess: () => {
-                    this.successAlert('guardada');
-                    this.showModalQD();
                     this.closeModal();
+                    this.successAlert('guardada');
+                    this.showModalQD(this.edit);
                 },
             });
             } else {
                 this.form.put(route("update.quotations", id), {
                     onSuccess: () => {
                         this.closeModal();
-                        this.showModalQD();
+                        this.showModalQD(this.edit);
                         this.successAlert('actualizada');
                     },
                 });
@@ -108,6 +113,14 @@ export const useQuoteStore = defineStore("quote", {
         storeQuoteDetail(){
             this.formQD.quote_id = this.edit.id;
             this.formQD.post(route("store.productquote"), {
+                onSuccess: () => {
+                    this.closeModal();
+                },
+            });
+        },
+        storeQuoteDetail(id){
+            this.formTotal.quote_id = this.edit.id;
+            this.formTotal.put(route("store.quotedetail", this.edit.id), {
                 onSuccess: () => {
                     this.closeModal();
                 },
@@ -130,20 +143,8 @@ export const useQuoteStore = defineStore("quote", {
             };
             reader.readAsDataURL(image);
         },
-        storeInLS() {
-            this.formQD.subtotal = this.formQD.price * this.formQD.quantity;
-            let newQuote = {
-                product_id: this.formQD.product_id,
-                details: this.formQD.details,
-                quantity: this.formQD.quantity,
-                price: this.formQD.price,
-                total: this.formQD.subtotal,
-            };
-            this.tempQuotedetails.push(newQuote);
-            this.clearInput();
-        },
         clearInput() {
-            this.edit = '';
+            /*this.edit = '';
             this.form.important_note = "";
             this.form.payment_condition = "";
             this.form.offer_validity = ""; 
@@ -152,7 +153,7 @@ export const useQuoteStore = defineStore("quote", {
             this.form.incoterm = "";
             this.form.user_id =  "";
             this.form.company_id =  "";
-            this.form.contact_id =  "";
+            this.form.contact_id =  "";*/
             this.formQD.quote_id = "";
             this.formQD.product_id = "";
             this.formQD.quantity = "";
@@ -199,5 +200,17 @@ export const useQuoteStore = defineStore("quote", {
                 timerProgressBar: true,
             });
         },
+        /**storeInLS() {
+            this.formQD.subtotal = this.formQD.price * this.formQD.quantity;
+            let newQuote = {
+                product_id: this.formQD.product_id,
+                details: this.formQD.details,
+                quantity: this.formQD.quantity,
+                price: this.formQD.price,
+                total: this.formQD.subtotal,
+            };
+            this.tempQuotedetails.push(newQuote);
+            this.clearInput();
+        }, */
     },
 });

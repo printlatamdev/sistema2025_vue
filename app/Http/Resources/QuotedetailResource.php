@@ -17,6 +17,7 @@ class QuotedetailResource extends JsonResource
         return [
             'id' => $this->id,
             'quote' => new QuoteResource($this->quote),
+            'total_products' => $this->total_products,
             'iva' => $this->iva,
             'total' => $this->total,
         ];

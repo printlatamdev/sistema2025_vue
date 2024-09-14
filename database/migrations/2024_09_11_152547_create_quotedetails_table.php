@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('quotedetails', function (Blueprint $table) {
             $table->id();
             $table->foreignId('quote_id')->nullable()->constrained();
+            $table->float('total_products')->default(0);
             $table->float('iva')->default(0);
-            $table->float('total')->default(0);
+            $table->float('total', 8, 2)->default(0);
             $table->timestamps();
         });
     }

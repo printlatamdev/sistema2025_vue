@@ -108,16 +108,16 @@ defineProps({
                             </div>
                             <div class="w-1/3 mt-5">
                                     <InputLabel for="iva" value="IVA" />
-                                    <select v-model="store.formQD.iva"
+                                    <select v-model="store.formTotal.iva"
                                         class="text-xs block  w-full border-gray-300 rounded-md">
                                         <option class="text-gray-500">Seleccione una opción</option>
                                         <option v-for="i in store.iva" :key="i.id" :value="i.value">
                                             {{ i.name }}
                                         </option>
                                     </select>
-                                <div v-if="store.formQD.iva == 'Other'" class="mt-3">
+                                <div v-if="store.formTotal.iva == 'Other'" class="mt-3">
                                     <InputLabel for="iva" value="Asignar IVA" />
-                                    <TextInput v-model="store.formQD.iva2" class="w-full" type="text" />
+                                    <TextInput v-model="store.formTotal.iva2" class="w-full" type="text" />
                                 </div>
                             </div>
                         </div>
@@ -125,7 +125,7 @@ defineProps({
                         <SecondaryButton class="mr-2" @click="store.editData()">
                             <font-awesome-icon :icon="['fas', 'arrow-left']" />Anterior
                         </SecondaryButton>
-                        <PrimaryButton>Finalizar cotización</PrimaryButton>
+                        <PrimaryButton @click.prevent="store.storeQuoteDetail()">Finalizar cotización</PrimaryButton>
                     </div>
                 </form>
             </div>

@@ -70,26 +70,25 @@ class QuoteController extends Controller
         $quote->products()->attach($request->product_id, [
             'price' => $request->price, 'quantity' => $request->quantity, 'total' => $total, 'details' => $request->details,
         ]);
+        Quotedetail::create(['quote_id'=>$request->quote_id, 'total_products'=>0, 'iva'=>0, 'total' => 0]); 
+        return redirect()->route('quotations');
+    }
+
+    public function storeInQuoteDetail(Request $request, Quote $quote)
+    {
         //Store in quotedetail table
         $getData = $quote->products->pluck('pivot');
         foreach ($getData as $data) {
             $total = $data->sum('total');
             $totaltotal = $total + ($total * $request->iva);
-            Quotedetail::updateOrCreate([
-                'quote_id' => $request->quote_id,
+            $qd = Quotedetail::where('quote_id', $quote->id)->first();
+            $qd->update([
+                'total_products' => $total,
+                'quote_id' => $quote->id,
                 'iva' => $request->iva,
                 'total' => $totaltotal,
             ]);
-        }
-
-        return redirect()->route('quotations');
-    }
-
-    public function getPivot(Quote $quote)
-    {
-        $getData = $quote->products->pluck('pivot');
-        foreach ($getData as $data) {
-            return $data->sum('total');
+            return redirect()->route('quotations');
         }
     }
 

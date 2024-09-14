@@ -11,6 +11,7 @@ class Quotedetail extends Model
 
     protected $fillable = [
         'quote_id',
+        'total_products',
         'iva',
         'total',
     ];
