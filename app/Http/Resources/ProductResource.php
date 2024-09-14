@@ -18,10 +18,18 @@ class ProductResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'price' => $this->whenPivotLoaded('product_quote', function(){ return  $this->pivot->price; }),
-            'quantity' => $this->whenPivotLoaded('product_quote', function(){ return  $this->pivot->quantity; }),
-            'total' => $this->whenPivotLoaded('product_quote', function(){ return  $this->pivot->total; }),
-            'details' => $this->whenPivotLoaded('product_quote', function(){ return  $this->pivot->details; }),
-        ]; 
+            'price' => $this->whenPivotLoaded('product_quote', function () {
+                return $this->pivot->price;
+            }),
+            'quantity' => $this->whenPivotLoaded('product_quote', function () {
+                return $this->pivot->quantity;
+            }),
+            'total' => $this->whenPivotLoaded('product_quote', function () {
+                return $this->pivot->total;
+            }),
+            'details' => $this->whenPivotLoaded('product_quote', function () {
+                return $this->pivot->details;
+            }),
+        ];
     }
 }

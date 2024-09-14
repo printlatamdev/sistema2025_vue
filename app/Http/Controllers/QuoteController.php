@@ -8,6 +8,7 @@ use App\Models\Company;
 use App\Models\Contact;
 use App\Models\Product;
 use App\Models\Quote;
+use App\Models\Quotedetail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -57,20 +58,39 @@ class QuoteController extends Controller
             'company_id' => $request->company_id,
             'contact_id' => $request->contact_id,
         ]);
+
         return redirect()->route('quotations');
     }
 
-    public function storeInPivot(Request $request){
+    public function storeInPivot(Request $request)
+    {
         $quote = Quote::find($request->quote_id);
         $total = $request->price * $request->quantity;
+        //store in pivot table
         $quote->products()->attach($request->product_id, [
             'price' => $request->price, 'quantity' => $request->quantity, 'total' => $total, 'details' => $request->details,
         ]);
+        //Store in quotedetail table
+        $getData = $quote->products->pluck('pivot');
+        foreach ($getData as $data) {
+            $total = $data->sum('total');
+            $totaltotal = $total + ($total * $request->iva);
+            Quotedetail::updateOrCreate([
+                'quote_id' => $request->quote_id,
+                'iva' => $request->iva,
+                'total' => $totaltotal,
+            ]);
+        }
+
         return redirect()->route('quotations');
     }
 
-    public function getPivot(Quote $quote){
-        return $quote->products;
+    public function getPivot(Quote $quote)
+    {
+        $getData = $quote->products->pluck('pivot');
+        foreach ($getData as $data) {
+            return $data->sum('total');
+        }
     }
 
     public function destroy(Quote $quote)

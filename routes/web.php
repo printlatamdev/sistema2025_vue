@@ -30,7 +30,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::resource('/quotations', QuoteController::class)->except(['create', 'edit'])->names([
         'index' => 'quotations', 'store' => 'store.quotations', 'show' => 'show.quotations', 'update' => 'update.quotations', 'destroy' => 'delete.quotations',
     ]);
-    Route::controller(QuoteController::class)->group(function(){
+    Route::controller(QuoteController::class)->group(function () {
         Route::post('/store-quoteproduct', 'storeInPivot')->name('store.productquote');
         Route::get('/products-quote/{quote}', 'getPivot')->name('product.quote');
     });
