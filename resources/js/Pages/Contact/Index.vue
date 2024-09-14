@@ -30,7 +30,9 @@ defineProps({
         <div class="w-full">
             <h2 class="text-2xl font-semibold">Datos de Contactos</h2>
             <div class="flex justify-end">
-                <PrimaryButton @click="store.showStoreModal()">Nuevo contacto</PrimaryButton>
+                <PrimaryButton @click="store.showStoreModal()">
+                    <font-awesome-icon :icon="['fas', 'plus']" /> Nuevo contacto
+                </PrimaryButton>
             </div>
             <EasyDataTable :headers="store.headers" :rows-per-page="10" :items="contacts" border-cell buttons-pagination class="mt-5" >
                 <template #item-options="options" class="flex justify-center">

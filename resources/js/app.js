@@ -13,8 +13,8 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faPenToSquare,faTrashCan,faAnglesRight,faAnglesLeft,faArrowLeft,faFilePdf } from '@fortawesome/free-solid-svg-icons'
-library.add(faPenToSquare,faTrashCan,faAnglesRight,faAnglesLeft,faArrowLeft,faFilePdf)
+import { faPenToSquare,faTrashCan,faAnglesRight,faAnglesLeft,faArrowLeft,faFilePdf,faPlus, } from '@fortawesome/free-solid-svg-icons'
+library.add(faPenToSquare,faTrashCan,faAnglesRight,faAnglesLeft,faArrowLeft,faFilePdf,faPlus,)
 
 
 

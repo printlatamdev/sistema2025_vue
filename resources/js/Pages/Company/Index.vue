@@ -26,7 +26,9 @@ defineProps({
         <div class="w-full">
             <h2 class="text-2xl font-semibold">Datos de Compañias</h2>
             <div class="flex justify-end">
-                <PrimaryButton @click="store.showStoreModal()">Nueva compañia</PrimaryButton>
+                <PrimaryButton @click="store.showStoreModal()">
+                    <font-awesome-icon :icon="['fas', 'plus']" class="mr-1"/>Nueva compañia
+                </PrimaryButton>
             </div>
             <EasyDataTable :headers="store.headers" :rows-per-page="10" :items="companies" border-cell buttons-pagination class="mt-5">
                 <template #item-options="options" class="flex justify-center">

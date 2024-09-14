@@ -139,15 +139,20 @@ const logout = () => {
                                         </div>
 
                                         <!-- Settings Dropdown -->
-                                        <div class="ms-3 relative">
+                                        <div class="ms-3 relative ">
                                             <Dropdown align="right" width="48">
                                                 <template #trigger>
-                                                    <button v-if="$page.props.jetstream.managesProfilePhotos"
-                                                        class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
-                                                        <img class="h-8 w-8 rounded-full object-cover"
-                                                            :src="$page.props.auth.user.profile_photo_url"
-                                                            :alt="$page.props.auth.user.name">
-                                                    </button>
+                                                    <div v-if="$page.props.jetstream.managesProfilePhotos" class="flex items-center border rounded-2xl mx-1">
+                                                        <button
+                                                            class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                                                            <img class="h-8 w-8 rounded-full object-cover"
+                                                                :src="$page.props.auth.user.profile_photo_url"
+                                                                :alt="$page.props.auth.user.name">
+                                                        </button>
+                                                        <div>
+                                                            <span class="text-xs mx-1">{{ $page.props.auth.user.name }}</span>
+                                                        </div>
+                                                    </div>
 
                                                     <span v-else class="inline-flex rounded-md">
                                                         <button type="button"
@@ -167,12 +172,12 @@ const logout = () => {
 
                                                 <template #content>
                                                     <!-- Account Management -->
-                                                    <div class="block px-4 py-2 text-xs text-gray-400">
-                                                        Manage Account
+                                                    <div class="block px-4 py-2 text-xs text-gray-500">
+                                                        Sobre mi cuenta
                                                     </div>
 
                                                     <DropdownLink :href="route('profile.show')">
-                                                        Profile
+                                                        Perfil
                                                     </DropdownLink>
 
                                                     <DropdownLink v-if="$page.props.jetstream.hasApiFeatures"
@@ -185,7 +190,7 @@ const logout = () => {
                                                     <!-- Authentication -->
                                                     <form @submit.prevent="logout">
                                                         <DropdownLink as="button">
-                                                            Log Out
+                                                            Cerrar sesión
                                                         </DropdownLink>
                                                     </form>
                                                 </template>

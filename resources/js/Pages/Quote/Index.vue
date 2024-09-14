@@ -43,7 +43,9 @@ defineProps({
         <div class="w-full">
             <h2 class="text-2xl font-semibold">Datos de Cotizaciones</h2>
             <div class="flex justify-end">
-                <PrimaryButton @click="store.showStoreModal()">Nueva Cotización</PrimaryButton>
+                <PrimaryButton @click="store.showStoreModal()">
+                    <font-awesome-icon :icon="['fas', 'plus']" class="mr-1"/>Nueva Cotización
+                </PrimaryButton>
             </div>
             <EasyDataTable :headers="store.headers" :rows-per-page="10" :items="quotes" border-cell buttons-pagination class="mt-5 " >
                 <template #item-id="data">
