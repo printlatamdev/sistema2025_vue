@@ -32,6 +32,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     ]);
     Route::controller(QuoteController::class)->group(function () {
         Route::post('/store-quoteproduct', 'storeInPivot')->name('store.productquote');
+        Route::post('/get-quotedetails', 'getQuotedetails')->name('get.quotedetails');
         Route::get('/products-quote/{quote}', 'getPivot')->name('product.quote');
         Route::put('/store-quotedetail/{quote}', 'storeInQuoteDetail')->name('store.quotedetail');
         Route::get('/get-report/{quotedetail}', 'getQuoteReport')->name('report.quote');

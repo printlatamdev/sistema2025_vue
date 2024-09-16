@@ -32,6 +32,7 @@ class QuoteResource extends JsonResource
             'quantity' => $this->whenPivotLoaded('product_quote', function(){ return  $this->pivot->quantity; }),
             'total' => $this->whenPivotLoaded('product_quote', function(){ return  $this->pivot->total; }),
             'details' => $this->whenPivotLoaded('product_quote', function(){ return  $this->pivot->details; }),
+            'register_date' => Carbon::parse($this->created_at)->format('Y-m-d'),
         ];
     }
 }

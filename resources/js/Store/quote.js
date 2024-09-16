@@ -36,6 +36,15 @@ export const useQuoteStore = defineStore("quote", {
             iva: 0,
             iva2: 0,
         }),
+        headerMain: [
+            { text: "No. Orden", value: "quote.id", width: 50 },
+            { text: "Cliente", value: "quote.company.social_reason",  },
+            { text: "Contacto", value: "quote.contact.name",  },
+            { text: "Vendedor", value: "quote.user.name",  },
+            { text: "Reporte", value: "report", width: 50 },
+            { text: "Fecha de registro", value: "register_date", width:100 },
+            { text: "Acciones", value: "options", width: 100 },
+        ],
         headers: [
             { text: "No. Orden", value: "id", width: 50 },
             { text: "Vendedor", value: "user.name" },
@@ -110,11 +119,12 @@ export const useQuoteStore = defineStore("quote", {
                 });
             }
         },
-        storeQuoteDetail(){
+        storePivot(){
             this.formQD.quote_id = this.edit.id;
             this.formQD.post(route("store.productquote"), {
                 onSuccess: () => {
                     this.closeModal();
+                    this.getShowQuote();
                 },
             });
         },
@@ -134,9 +144,15 @@ export const useQuoteStore = defineStore("quote", {
                 },
             });
         },
-        getReport(data){
-            console.log(data);
-            router.get(route('report.quote', data));
+        getReport(id){
+            axios.get(route('report.quote', id)).then(response => {
+                console.log(response);
+            });
+        },
+        getShowQuote(){
+            axios.get(route('show.quote')).then(response => {
+                console.log(response);
+            });
         },
         handleFile(e){
             const image = e.target.files[0];

@@ -21,8 +21,8 @@ class ContactResource extends JsonResource
             'cellphone' => $this->cellphone,
             'telephone' => $this->telephone,
             'email' => $this->email,
-            'company' => new CompanyResource($this->company),
-            'country' => new CountryResource($this->country),
+            'company' => new CompanyResource($this->whenLoaded('company')),
+            'country' => new CountryResource($this->whenLoaded('country')),
         ];
     }
 }

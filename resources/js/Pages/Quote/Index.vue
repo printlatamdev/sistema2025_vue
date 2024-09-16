@@ -47,15 +47,15 @@ defineProps({
                     <font-awesome-icon :icon="['fas', 'plus']" class="mr-1"/>Nueva Cotización
                 </PrimaryButton>
             </div>
-            <EasyDataTable :headers="store.headers" :rows-per-page="10" :items="quotes" border-cell buttons-pagination class="mt-5 " >
+            <EasyDataTable :headers="store.headerMain" :rows-per-page="10" :items="quotedetails" border-cell buttons-pagination class="mt-5 " >
                 <template #item-id="data">
-                    {{ `${data.id}-${store.getYear}` }}
+                    {{ `${data.quote.id}-${store.getYear}` }}
+                </template>
+                <template #item-quote.contact.name="data">
+                    {{ data.quote.contact.name }} {{ data.quote.contact.lastname }}
                 </template>
                 <template #item-report="data">
-                    <font-awesome-icon :icon="['fas', 'file-pdf']" class="text-xl cursor-pointer text-red-500" @click="store.getReport(data)" />
-                </template>
-                <template #item-status="data">
-                    <span class="bg-green-500 p-1 rounded-md">{{ data.status }}</span>
+                    <font-awesome-icon :icon="['fas', 'file-pdf']" class="text-xl cursor-pointer text-red-500" @click="store.getReport(data.id)" />
                 </template>
                 <template #item-options="options" class="flex justify-center">
                     <SecondaryButton class="mr-1" @click="store.editData(options)"><font-awesome-icon :icon="['fas', 'pen-to-square']" /></SecondaryButton>

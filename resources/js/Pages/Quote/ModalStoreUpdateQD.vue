@@ -97,7 +97,7 @@ defineProps({
                                     max-files="1" />
                                     <img :src="store.formQD.url" alt="">
                                 <div class="flex justify-end mt-5">
-                                    <SuccessButton @click.prevent="store.storeQuoteDetail()">Agregar ítem</SuccessButton>
+                                    <SuccessButton @click.prevent="store.storePivot()">Agregar ítem</SuccessButton>
                                 </div>
                             </div>
                         </div><hr class="mt-2">

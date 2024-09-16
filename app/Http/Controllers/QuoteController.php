@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\QuoteStatusEnum;
+use App\Http\Resources\QuotedetailResource;
 use App\Http\Resources\QuoteResource;
 use App\Models\Company;
 use App\Models\Contact;
@@ -19,6 +20,7 @@ class QuoteController extends Controller
     public function index()
     {
         $quotes = Quote::orderBy('id', 'desc')->get();
+        $qd = Quotedetail::orderBy('id', 'desc')->get();
 
         return Inertia::render('Quote/Index', [
             'quotes' => QuoteResource::collection($quotes),
@@ -26,6 +28,7 @@ class QuoteController extends Controller
             'companies' => Company::orderBy('id', 'desc')->get(),
             'contacts' => Contact::orderBy('id', 'desc')->get(),
             'products' => Product::orderBy('id', 'desc')->get(),
+            'quotedetails' => QuotedetailResource::collection($qd),
         ]);
     }
 
@@ -91,6 +94,10 @@ class QuoteController extends Controller
             ]);
             return redirect()->route('quotations');
         }
+    }
+
+    public function show(Quote $quote){
+        return QuoteResource::make($quote);
     }
 
     public function getQuoteReport(Quotedetail $quotedetail){
