@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { useForm } from "@inertiajs/vue3";
+import { useForm,router } from "@inertiajs/vue3";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 
 export const useQuoteStore = defineStore("quote", {
@@ -145,9 +145,7 @@ export const useQuoteStore = defineStore("quote", {
             });
         },
         getReport(id){
-            axios.get(route('report.quote', id)).then(response => {
-                console.log(response);
-            });
+            router.get(route('report.quote', id));
         },
         getShowQuote(){
             axios.get(route('show.quote')).then(response => {

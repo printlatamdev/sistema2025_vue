@@ -35,7 +35,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::post('/get-quotedetails', 'getQuotedetails')->name('get.quotedetails');
         Route::get('/products-quote/{quote}', 'getPivot')->name('product.quote');
         Route::put('/store-quotedetail/{quote}', 'storeInQuoteDetail')->name('store.quotedetail');
-        Route::get('/get-report/{quotedetail}', 'getQuoteReport')->name('report.quote');
+        Route::get('/quotations/get-report/{quotedetail}', 'getQuoteReport')->name('report.quote');
     });
 
     //quotedetail routes

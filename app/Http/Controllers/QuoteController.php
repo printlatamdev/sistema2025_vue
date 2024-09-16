@@ -12,6 +12,7 @@ use App\Models\Quote;
 use App\Models\Quotedetail;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -101,9 +102,14 @@ class QuoteController extends Controller
     }
 
     public function getQuoteReport(Quotedetail $quotedetail){
-        $data = ['quotedetail' => $quotedetail];
-        $pdf = Pdf::loadView('quoteReport', $data);
-        return $pdf->download('report');
+        $qd = $quotedetail->with('quote')->get();
+        $quote = Quote::where('id', $qd[0]->quote_id)->with(['contact', 'company', 'user'])->get();
+        
+        $data = [ 'quotedetail' => $qd, 'quote' => $quote];
+       
+        $pdf = Pdf::loadView('reports/quoteReport', compact('data'));   
+        return $pdf->stream('cotizacion.pdf', ['Attachment' => false]);
+        //$pdf->stream('cotizacion' . $quotedetail->id . Carbon::now() . '.pdf');  
     }
 
     public function destroy(Quote $quote)

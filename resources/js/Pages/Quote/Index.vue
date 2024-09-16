@@ -7,6 +7,7 @@ import ModalStoreUpdate from './ModalStoreUpdate.vue';
 import ModalStoreUpdateQD from './ModalStoreUpdateQD.vue';
 import { useQuoteStore } from '@/Store/quote';
 import ModalDelete from './ModalDelete.vue';
+import NavLink from '@/Components/NavLink.vue';
 
 let store = useQuoteStore();
 defineProps({
@@ -55,7 +56,9 @@ defineProps({
                     {{ data.quote.contact.name }} {{ data.quote.contact.lastname }}
                 </template>
                 <template #item-report="data">
-                    <font-awesome-icon :icon="['fas', 'file-pdf']" class="text-xl cursor-pointer text-red-500" @click="store.getReport(data.id)" />
+                    <NavLink :href="route('report.quote', data.quote.id)">
+                        <font-awesome-icon :icon="['fas', 'file-pdf']" class="text-xl cursor-pointer text-red-500" />
+                    </NavLink>
                 </template>
                 <template #item-options="options" class="flex justify-center">
                     <SecondaryButton class="mr-1" @click="store.editData(options)"><font-awesome-icon :icon="['fas', 'pen-to-square']" /></SecondaryButton>
