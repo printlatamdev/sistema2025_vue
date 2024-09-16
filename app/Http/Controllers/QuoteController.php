@@ -103,9 +103,8 @@ class QuoteController extends Controller
 
     public function getQuoteReport(Quotedetail $quotedetail){
         $qd = $quotedetail->with('quote')->get();
-        $quote = Quote::where('id', $qd[0]->quote_id)->with(['contact', 'company', 'user'])->get();
-        
-        $data = [ 'quotedetail' => $qd, 'quote' => $quote];
+        $quote = Quote::where('id', $qd[0]->quote_id)->with(['contact', 'company', 'user', 'products'])->get();        
+        $data = [ 'quotedetail'=>$qd, 'quote'=>$quote, 'date'=>Carbon::parse($qd[0]->created_at)->format('Y-m-d')];
        
         $pdf = Pdf::loadView('reports/quoteReport', compact('data'));   
         return $pdf->stream('cotizacion.pdf', ['Attachment' => false]);
