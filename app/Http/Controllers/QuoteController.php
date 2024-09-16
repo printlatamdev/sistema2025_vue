@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Quote;
 use App\Models\Quotedetail;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -90,6 +91,12 @@ class QuoteController extends Controller
             ]);
             return redirect()->route('quotations');
         }
+    }
+
+    public function getQuoteReport(Quotedetail $quotedetail){
+        $data = ['quotedetail' => $quotedetail];
+        $pdf = Pdf::loadView('quoteReport', $data);
+        return $pdf->download('report');
     }
 
     public function destroy(Quote $quote)

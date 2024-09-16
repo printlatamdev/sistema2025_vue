@@ -134,6 +134,10 @@ export const useQuoteStore = defineStore("quote", {
                 },
             });
         },
+        getReport(data){
+            console.log(data);
+            router.get(route('report.quote', data));
+        },
         handleFile(e){
             const image = e.target.files[0];
             if(!image) return;

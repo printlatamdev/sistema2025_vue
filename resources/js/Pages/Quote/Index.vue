@@ -52,7 +52,7 @@ defineProps({
                     {{ `${data.id}-${store.getYear}` }}
                 </template>
                 <template #item-report="data">
-                    <font-awesome-icon :icon="['fas', 'file-pdf']" class="text-xl cursor-pointer text-red-500" />
+                    <font-awesome-icon :icon="['fas', 'file-pdf']" class="text-xl cursor-pointer text-red-500" @click="store.getReport(data)" />
                 </template>
                 <template #item-status="data">
                     <span class="bg-green-500 p-1 rounded-md">{{ data.status }}</span>
