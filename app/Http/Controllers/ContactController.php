@@ -14,6 +14,8 @@ class ContactController extends Controller
     public function index()
     {
         $contacts = Contact::orderBy('id', 'desc')->get();
+        $contacts->load('company');
+        $contacts->load('country');
 
         return Inertia::render('Contact/Index', [
             'contacts' => ContactResource::collection($contacts),
@@ -24,7 +26,7 @@ class ContactController extends Controller
 
     public function store(Request $request)
     {
-        $data = Contact::create([
+        Contact::create([
             'name' => $request->name,
             'lastname' => $request->lastname,
             'cellphone' => $request->cellphone,

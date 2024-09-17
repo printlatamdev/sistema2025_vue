@@ -42,7 +42,7 @@ export const useQuoteStore = defineStore("quote", {
             { text: "Contacto", value: "quote.contact.name",  },
             { text: "Vendedor", value: "quote.user.name",  },
             { text: "Reporte", value: "report", width: 50 },
-            { text: "Fecha de registro", value: "register_date", width:100 },
+            { text: "Fecha de registro", value: "register_date", width:150 },
             { text: "Acciones", value: "options", width: 100 },
         ],
         headers: [
@@ -103,18 +103,19 @@ export const useQuoteStore = defineStore("quote", {
         storeQuote(id) {
             if(!id){
             this.form.post(route("store.quotations"), {
-                onSuccess: () => {
-                    this.closeModal();
+                onSuccess: (response) => {
+                    console.log(response);
                     this.successAlert('guardada');
+                    this.closeModal();
                     this.showModalQD(this.edit);
                 },
             });
             } else {
                 this.form.put(route("update.quotations", id), {
                     onSuccess: () => {
+                        this.successAlert('actualizada');
                         this.closeModal();
                         this.showModalQD(this.edit);
-                        this.successAlert('actualizada');
                     },
                 });
             }
@@ -149,6 +150,11 @@ export const useQuoteStore = defineStore("quote", {
         },
         getShowQuote(){
             axios.get(route('show.quote')).then(response => {
+                console.log(response);
+            });
+        },
+        getContactByCompany(id){
+            axios.get(route('contact.company', id)).then(response => {
                 console.log(response);
             });
         },

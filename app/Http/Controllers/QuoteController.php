@@ -97,8 +97,8 @@ class QuoteController extends Controller
         }
     }
 
-    public function show(Quote $quote){
-        return QuoteResource::make($quote);
+    public function getContactByCompany(Company $company){
+        return Contact::where('company_id', $company->id)->get();
     }
 
     public function getQuoteReport(Quotedetail $quotedetail){

@@ -49,20 +49,18 @@ defineProps({
                 </PrimaryButton>
             </div>
             <EasyDataTable :headers="store.headerMain" :rows-per-page="10" :items="quotedetails" border-cell buttons-pagination class="mt-5 " >
-                <template #item-id="data">
+                <template #item-quote.id="data">
                     {{ `${data.quote.id}-${store.getYear}` }}
                 </template>
                 <template #item-quote.contact.name="data">
                     {{ data.quote.contact.name }} {{ data.quote.contact.lastname }}
                 </template>
                 <template #item-report="data">
-                    <NavLink :href="route('report.quote', data.quote.id)">
-                        <font-awesome-icon :icon="['fas', 'file-pdf']" class="text-xl cursor-pointer text-red-500" />
-                    </NavLink>
+                    <font-awesome-icon :icon="['fas', 'file-pdf']" class="text-xl cursor-pointer text-red-500" @click.prevent="store.getReport(data.id)"/>
                 </template>
                 <template #item-options="options" class="flex justify-center">
-                    <SecondaryButton class="mr-1" @click="store.editData(options)"><font-awesome-icon :icon="['fas', 'pen-to-square']" /></SecondaryButton>
-                    <DangerButton @click="store.showDeleteModal(options)"><font-awesome-icon :icon="['fas', 'trash-can']" /></DangerButton>
+                    <SecondaryButton class="mr-1" @click="store.editData(options.quote)"><font-awesome-icon :icon="['fas', 'pen-to-square']" /></SecondaryButton>
+                    <DangerButton @click="store.showDeleteModal(options.quote)"><font-awesome-icon :icon="['fas', 'trash-can']" /></DangerButton>
                 </template>
             </EasyDataTable>
         </div>
