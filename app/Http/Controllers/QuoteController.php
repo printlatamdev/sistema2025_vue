@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\QuoteStatusEnum;
+use App\Http\Resources\ContactResource;
 use App\Http\Resources\QuotedetailResource;
 use App\Http\Resources\QuoteResource;
 use App\Models\Company;
@@ -75,7 +76,8 @@ class QuoteController extends Controller
         $quote->products()->attach($request->product_id, [
             'price' => $request->price, 'quantity' => $request->quantity, 'total' => $total, 'details' => $request->details,
         ]);
-        Quotedetail::create(['quote_id'=>$request->quote_id, 'total_products'=>0, 'iva'=>0, 'total' => 0]); 
+        Quotedetail::create(['quote_id' => $request->quote_id, 'total_products' => 0, 'iva' => 0, 'total' => 0]);
+
         return redirect()->route('quotations');
     }
 
@@ -93,22 +95,28 @@ class QuoteController extends Controller
                 'iva' => $request->iva,
                 'total' => $totaltotal,
             ]);
+
             return redirect()->route('quotations');
         }
     }
 
-    public function getContactByCompany(Company $company){
-        return Contact::where('company_id', $company->id)->get();
+    public function getContactByCompany(Company $company)
+    {
+        $data = Contact::where('company_id', $company->id)->get();
+
+        return ContactResource::collection($data);
     }
 
-    public function getQuoteReport(Quotedetail $quotedetail){
+    public function getQuoteReport(Quotedetail $quotedetail)
+    {
         $qd = $quotedetail->with('quote')->get();
-        $quote = Quote::where('id', $qd[0]->quote_id)->with(['contact', 'company', 'user', 'products'])->get();        
-        $data = [ 'quotedetail'=>$qd, 'quote'=>$quote, 'date'=>Carbon::parse($qd[0]->created_at)->format('Y-m-d')];
-       
-        $pdf = Pdf::loadView('reports/quoteReport', compact('data'));   
+        $quote = Quote::where('id', $qd[0]->quote_id)->with(['contact', 'company', 'user', 'products'])->get();
+        $data = ['quotedetail' => $qd, 'quote' => $quote, 'date' => Carbon::parse($qd[0]->created_at)->format('Y-m-d')];
+
+        $pdf = Pdf::loadView('reports/quoteReport', compact('data'));
+
         return $pdf->stream('cotizacion.pdf', ['Attachment' => false]);
-        //$pdf->stream('cotizacion' . $quotedetail->id . Carbon::now() . '.pdf');  
+        //$pdf->stream('cotizacion' . $quotedetail->id . Carbon::now() . '.pdf');
     }
 
     public function destroy(Quote $quote)

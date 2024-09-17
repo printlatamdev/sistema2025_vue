@@ -6,6 +6,7 @@ export const useQuoteStore = defineStore("quote", {
     state: () => ({
         getYear: parseInt(new Date().getFullYear().toString().substr(2,2), 10),
         edit: [],
+        contactsByCompany: [],
         tempQuotedetails: [],
         openModal: false,
         openModalQD: false,
@@ -156,6 +157,7 @@ export const useQuoteStore = defineStore("quote", {
         getContactByCompany(id){
             axios.get(route('contact.company', id)).then(response => {
                 console.log(response);
+                this.contactsByCompany = response.data;
             });
         },
         handleFile(e){

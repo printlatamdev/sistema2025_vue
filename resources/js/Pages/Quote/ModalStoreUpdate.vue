@@ -61,7 +61,7 @@ defineProps({
                         <div class="flex">
                             <div class="w-1/3 mr-1">
                                 <InputLabel for="company_id" value="Cliente" />
-                                <select v-model="store.form.company_id"
+                                <select v-model="store.form.company_id" @change="store.getContactByCompany(store.form.company_id)"
                                     class="text-xs block w-full border-gray-300 rounded-md">
                                     <option class="text-gray-500"> Seleccione una opción</option>
                                     <option v-for="company in companies" :key="company.id" :value="company.id">
@@ -74,8 +74,8 @@ defineProps({
                                 <select v-model="store.form.contact_id"
                                     class="text-xs block w-full border-gray-300 rounded-md">
                                     <option class="text-gray-500"> Seleccione una opción</option>
-                                    <option v-for="contact in contacts" :key="contact.id" :value="contact.id">
-                                        {{ contact.name }}
+                                    <option v-for="contact in store.contactsByCompany" :key="contact.id" :value="contact.id">
+                                        {{ contact.name }} {{ contact.lastname }}
                                     </option>
                                 </select>
                             </div>

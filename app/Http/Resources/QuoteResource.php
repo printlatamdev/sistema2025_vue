@@ -28,10 +28,18 @@ class QuoteResource extends JsonResource
             'company' => new CompanyResource($this->company),
             'contact' => new ContactResource($this->contact),
             'products' => ProductResource::collection($this->products),
-            'price' => $this->whenPivotLoaded('product_quote', function(){ return  $this->pivot->price; }),
-            'quantity' => $this->whenPivotLoaded('product_quote', function(){ return  $this->pivot->quantity; }),
-            'total' => $this->whenPivotLoaded('product_quote', function(){ return  $this->pivot->total; }),
-            'details' => $this->whenPivotLoaded('product_quote', function(){ return  $this->pivot->details; }),
+            'price' => $this->whenPivotLoaded('product_quote', function () {
+                return $this->pivot->price;
+            }),
+            'quantity' => $this->whenPivotLoaded('product_quote', function () {
+                return $this->pivot->quantity;
+            }),
+            'total' => $this->whenPivotLoaded('product_quote', function () {
+                return $this->pivot->total;
+            }),
+            'details' => $this->whenPivotLoaded('product_quote', function () {
+                return $this->pivot->details;
+            }),
             'register_date' => Carbon::parse($this->created_at)->format('Y-m-d'),
         ];
     }
