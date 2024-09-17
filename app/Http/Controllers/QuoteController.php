@@ -36,7 +36,7 @@ class QuoteController extends Controller
 
     public function store(Request $request)
     {
-        Quote::create([
+        $data = Quote::create([
             'important_note' => $request->important_note,
             'payment_condition' => $request->payment_condition,
             'offer_validity' => $request->offer_validity,
@@ -47,12 +47,13 @@ class QuoteController extends Controller
             'company_id' => $request->company_id,
             'contact_id' => $request->contact_id,
         ]);
-
-        return redirect()->route('quotations');
+        Quotedetail::create(['quote_id' => $data->id, 'total_products' => 0, 'iva' => 0, 'total' => 0]);
+        return new QuoteResource($data);
     }
 
-    public function update(Request $request, Quote $quote)
+    public function update(Request $request, $id)
     {
+        $quote = Quote::find($id);
         $quote->update([
             'important_note' => $request->important_note,
             'payment_condition' => $request->payment_condition,
@@ -76,7 +77,6 @@ class QuoteController extends Controller
         $quote->products()->attach($request->product_id, [
             'price' => $request->price, 'quantity' => $request->quantity, 'total' => $total, 'details' => $request->details,
         ]);
-        Quotedetail::create(['quote_id' => $request->quote_id, 'total_products' => 0, 'iva' => 0, 'total' => 0]);
 
         return redirect()->route('quotations');
     }
@@ -87,7 +87,7 @@ class QuoteController extends Controller
         $getData = $quote->products->pluck('pivot');
         foreach ($getData as $data) {
             $total = $data->sum('total');
-            $totaltotal = $total + ($total * $request->iva);
+            $request->iva == null ?  $totaltotal = $total : $totaltotal = $total + ($total * $request->iva);
             $qd = Quotedetail::where('quote_id', $quote->id)->first();
             $qd->update([
                 'total_products' => $total,
@@ -105,6 +105,13 @@ class QuoteController extends Controller
         $data = Contact::where('company_id', $company->id)->get();
 
         return ContactResource::collection($data);
+    }
+
+    public function getProductPivot(Quote $quote){
+        $data = Quote::where('id', $quote->id)
+                    ->orderBy('id', 'desc')
+                    ->get();
+        return QuoteResource::collection($data);
     }
 
     public function getQuoteReport(Quotedetail $quotedetail)

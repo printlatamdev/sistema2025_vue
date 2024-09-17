@@ -32,7 +32,7 @@ defineProps({
 <template>
     <DialogModal :show="show" :max-width="maxWidth" @close="store.closeModal">
         <template #title>
-            <span v-if=" store.edit != ''" class="p-1 bg-sky-500 rounded-md">#{{ `${store.edit.id}-${store.getYear}` }}</span> 
+           <span v-if=" store.edit != ''" class="p-1 bg-sky-500 rounded-md">#{{ `${store.edit.id}-${store.getYear}` }}</span>
             Nuevo registro de Cotización
         </template>
         <template #content>
@@ -96,8 +96,8 @@ defineProps({
                                 <Filepond v-model="store.formQD.url" @change="store.handleFile($event)" allow-multiple="false"
                                     max-files="1" />
                                     <img :src="store.formQD.url" alt="">
-                                <div class="flex justify-end mt-5">
-                                    <SuccessButton @click.prevent="store.storePivot()">Agregar ítem</SuccessButton>
+                                <div class="flex justify-end mt-1">
+                                    <SuccessButton @click.prevent="store.storePivot(store.edit.id)">Agregar ítem</SuccessButton>
                                 </div>
                             </div>
                         </div><hr class="mt-2">
@@ -118,6 +118,12 @@ defineProps({
                                 <div v-if="store.formTotal.iva == 'Other'" class="mt-3">
                                     <InputLabel for="iva" value="Asignar IVA" />
                                     <TextInput v-model="store.formTotal.iva2" class="w-full" type="text" />
+                                </div>
+                                <div class="border border-gray-300 text-xs bg-gray-50 mt-3 rounded-md p-2">
+                                    <span v-for="calc in store.edit.products" :key="calc.id">
+                                        <p>Total productos ${{ calc.total }}</p>
+                                    </span><hr>
+                                    ${{ store.getCalc.total_pr }}
                                 </div>
                             </div>
                         </div>

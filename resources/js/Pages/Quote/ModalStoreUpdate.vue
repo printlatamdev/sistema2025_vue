@@ -91,7 +91,7 @@ defineProps({
                             </div>
                         </div>
                         <!--second form-->
-                        <div class="flex mt-3">
+                        <div class="flex mt-4">
                             <div class="w-1/4 mr-1">
                                 <InputLabel for="payment_condition" value="Condiciones de pago" />
                                 <select v-model="store.form.payment_condition"
@@ -136,7 +136,7 @@ defineProps({
                                 </select>
                             </div>
                         </div>
-                        <div class="mt-3">
+                        <div class="mt-4">
                             <InputLabel for="address" value="Observaciones" />
                             <textarea rows="4" class="block w-full border-gray-300 text-gray-500 rounded-md text-xs"
                                 disabled>

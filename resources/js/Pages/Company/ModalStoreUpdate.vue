@@ -23,6 +23,7 @@ defineProps({
         <template #title>{{ store.edit == '' ? 'Nuevo' : 'Actualizar' }} registro de Compañia</template>
         <template #content>
             <div class="mt-5">
+                {{ store.edit }}
                 <form @submit.prevent="store.storeCompany(store.edit.id)">
                     <div class="flex">
                         <div class="w-1/2 mr-1">

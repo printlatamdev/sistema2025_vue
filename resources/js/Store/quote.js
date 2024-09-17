@@ -6,6 +6,7 @@ export const useQuoteStore = defineStore("quote", {
     state: () => ({
         getYear: parseInt(new Date().getFullYear().toString().substr(2,2), 10),
         edit: [],
+        newQuote: [],
         contactsByCompany: [],
         tempQuotedetails: [],
         openModal: false,
@@ -34,9 +35,13 @@ export const useQuoteStore = defineStore("quote", {
         }),
         formTotal: useForm({
             quote_id: "",
-            iva: 0,
-            iva2: 0,
+            iva: null,
+            iva2: null,
         }),
+        getCalc: {
+            total_pr: 0,
+            withIva: null
+        },
         headerMain: [
             { text: "No. Orden", value: "quote.id", width: 50 },
             { text: "Cliente", value: "quote.company.social_reason",  },
@@ -87,7 +92,7 @@ export const useQuoteStore = defineStore("quote", {
             { name: "DDP", value: "DDP" },
         ],
         iva: [
-            { name: "No asignar", value: "0" },
+            { name: "No asignar", value: "null" },
             { name: "7%", value: "0.07" },
             { name: "12%", value: "0.12" },
             { name: "13%", value: "0.13" },
@@ -99,34 +104,46 @@ export const useQuoteStore = defineStore("quote", {
         getTotal(state) {
             return state.formQD.quantity * state.formQD.price;
         },
+        getParcialSubtotal(state) {
+            console.log(state);
+        },
     },
     actions: {
         storeQuote(id) {
             if(!id){
-            this.form.post(route("store.quotations"), {
-                onSuccess: (response) => {
-                    console.log(response);
-                    this.successAlert('guardada');
-                    this.closeModal();
-                    this.showModalQD(this.edit);
-                },
-            });
+                axios.post(route('store.quotations'), {
+                    important_note: this.form.important_note,
+                    payment_condition: this.form.payment_condition,
+                    offer_validity: this.form.offer_validity,
+                    currency: this.form.currency,
+                    status: this.form.status,
+                    incoterm: this.form.incoterm,
+                    user_id: this.form.user_id,
+                    company_id: this.form.company_id,
+                    contact_id: this.form.contact_id,
+                }).then((response) => {
+                    this.edit = response.data;
+                    this.successAlert('Cotización creada');
+                    this.showModalQD();
+                    closeModal();
+                }).catch(error => { console.log(error); });
             } else {
                 this.form.put(route("update.quotations", id), {
                     onSuccess: () => {
-                        this.successAlert('actualizada');
+                        this.successAlert('Cotización actualizada');
                         this.closeModal();
-                        this.showModalQD(this.edit);
+                        this.showModalQD();
                     },
                 });
             }
         },
-        storePivot(){
+        storePivot(id){
             this.formQD.quote_id = this.edit.id;
             this.formQD.post(route("store.productquote"), {
                 onSuccess: () => {
                     this.closeModal();
-                    this.getShowQuote();
+                    this.refreshData(id);
+                    this.successAlert('Producto agregado');
                 },
             });
         },
@@ -142,21 +159,27 @@ export const useQuoteStore = defineStore("quote", {
             this.form.delete(route('delete.quotations', id), {
                 onSuccess: () => {
                   this.closeModal();
-                  this.successAlert('eliminada');
+                  this.successAlert('Cotización eliminada');
                 },
             });
         },
         getReport(id){
             router.get(route('report.quote', id));
         },
-        getShowQuote(){
-            axios.get(route('show.quote')).then(response => {
-                console.log(response);
+        refreshData(id){
+            axios.get(route('quoterefresh', id)).then(response => {
+                response.data.map((el) => {
+                    this.edit = el;
+
+                    el.products.map((element => {
+                        console.log(element);
+                        this.getCalc.total_pr = element.reduce((accumulator, current) => accumulator + current.total, 0);
+                    }))
+                });
             });
         },
         getContactByCompany(id){
             axios.get(route('contact.company', id)).then(response => {
-                console.log(response);
                 this.contactsByCompany = response.data;
             });
         },
@@ -183,7 +206,7 @@ export const useQuoteStore = defineStore("quote", {
             this.formQD.quote_id = "";
             this.formQD.product_id = "";
             this.formQD.quantity = "";
-            this.formQD.iva = "";
+            this.formQD.iva = null;
             this.formQD.price = "";
             this.formQD.subtotal = "";
             this.formQD.details = "";
@@ -219,24 +242,12 @@ export const useQuoteStore = defineStore("quote", {
             Swal.fire({
                 toast: true,
                 icon: "success",
-                title: "Cotización " + message + " satisfactoriamente",
+                title: " " + message + " satisfactoriamente",
                 position: "bottom-end",
                 showConfirmButton: false,
                 timer: 3000,
                 timerProgressBar: true,
             });
         },
-        /**storeInLS() {
-            this.formQD.subtotal = this.formQD.price * this.formQD.quantity;
-            let newQuote = {
-                product_id: this.formQD.product_id,
-                details: this.formQD.details,
-                quantity: this.formQD.quantity,
-                price: this.formQD.price,
-                total: this.formQD.subtotal,
-            };
-            this.tempQuotedetails.push(newQuote);
-            this.clearInput();
-        }, */
     },
 });

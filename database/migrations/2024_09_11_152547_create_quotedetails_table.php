@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('quote_id')->nullable()->constrained();
             $table->float('total_products')->default(0);
-            $table->float('iva')->default(0);
+            $table->float('iva')->nullable();
             $table->float('total', 8, 2)->default(0);
             $table->timestamps();
         });
