@@ -71,12 +71,14 @@ class QuoteController extends Controller
 
     public function storeInPivot(Request $request)
     {
+        $image = new ImageController;
         $quote = Quote::find($request->quote_id);
         $total = $request->price * $request->quantity;
         //store in pivot table
         $quote->products()->attach($request->product_id, [
             'price' => $request->price, 'quantity' => $request->quantity, 'total' => $total, 'details' => $request->details,
         ]);
+        $image->store($request->url, Product::class, $quote->id);
 
         return redirect()->route('quotations');
     }

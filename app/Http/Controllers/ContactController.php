@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactRequest;
 use App\Http\Resources\ContactResource;
 use App\Models\Company;
 use App\Models\Contact;
@@ -24,7 +25,7 @@ class ContactController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(ContactRequest $request)
     {
         Contact::create([
             'name' => $request->name,
@@ -39,7 +40,7 @@ class ContactController extends Controller
         return redirect()->route('contacts');
     }
 
-    public function update(Request $request, Contact $contact)
+    public function update(ContactRequest $request, Contact $contact)
     {
         $contact->update([
             'name' => $request->name,

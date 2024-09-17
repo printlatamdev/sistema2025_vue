@@ -73,7 +73,7 @@ defineProps({
                                 </select>
                             </div>
                             <div class="mr-2 self-end">
-                                <SecondaryButton v-tooltip="'Agregar nuevo producto'" @click="store_product.showStoreModal()">+</SecondaryButton>
+                                <SecondaryButton v-tooltip="'Agregar nuevo producto'" @click.prevent="store_product.showStoreModal()">+</SecondaryButton>
                             </div>
                             <div class="1/2 flex">
                                 <div class="w-2/5 mr-1">

@@ -27,9 +27,9 @@ export const useQuoteStore = defineStore("quote", {
         formQD: useForm({
             quote_id: "",
             product_id: "",
-            quantity: 0,
-            price: 0,
-            subtotal: 0,
+            quantity: "",
+            price: "",
+            subtotal: "",
             details: "",
             url: null,
         }),
