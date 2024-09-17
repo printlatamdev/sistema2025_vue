@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CompanyRequest;
 use App\Http\Resources\CompanyResource;
 use App\Models\Company;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class CompanyController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(CompanyRequest $request)
     {
         Company::create([
             'commercial_name' => $request->commercial_name,
@@ -35,7 +36,7 @@ class CompanyController extends Controller
         return redirect()->route('companies');
     }
 
-    public function update(Request $request, Company $company)
+    public function update(CompanyRequest $request, Company $company)
     {
         $company->update([
             'commercial_name' => $request->commercial_name,

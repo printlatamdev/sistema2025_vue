@@ -4,6 +4,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import DialogModal from '@/Components/DialogModal.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
+import InputError from '@/Components/InputError.vue';
 import { useContactStore } from '@/Store/contact';
 
 let store = useContactStore();
@@ -36,14 +37,17 @@ defineProps({
                         <div class="w-1/3 mr-1">
                             <InputLabel for="name" value="Nombre" />
                             <TextInput v-model="store.form.name" class="w-full" type="text" />
+                            <InputError class="" :message="store.form.errors.name" />
                         </div>
                         <div class="w-1/3">
                             <InputLabel for="lastname" value="Apellido" />
                             <TextInput v-model="store.form.lastname" class="w-full" type="text" />
+                            <InputError class="" :message="store.form.errors.lastname" />
                         </div>
                         <div class="w-1/3 ml-1">
                             <InputLabel for="email" value="Correo electrónico" />
                             <TextInput v-model="store.form.email" class="w-full" type="email" />
+                            <InputError class="" :message="store.form.errors.email" />
                         </div>
                     </div>
                     <div class="flex mt-4">
@@ -56,6 +60,7 @@ defineProps({
                                     {{ country.name }}
                                 </option>
                             </select>
+                            <InputError class="" :message="store.form.errors.country_id" />
                         </div>
                         <div class="w-1/4 mr-1">
                             <InputLabel for="company_id" value="Cliente" />
@@ -66,10 +71,12 @@ defineProps({
                                     {{ company.social_reason }}
                                 </option>
                             </select>
+                            <InputError class="" :message="store.form.errors.company_id" />
                         </div>
                         <div class="w-1/4 mr-1">
                             <InputLabel for="cellphone" value="Celular" />
                             <TextInput v-model="store.form.cellphone" class="w-full" type="text" />
+                            <InputError class="" :message="store.form.errors.cellphone" />
                         </div>
                         <div class="w-1/4">
                             <InputLabel for="telephone" value="Teléfono" />

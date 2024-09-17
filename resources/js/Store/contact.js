@@ -7,6 +7,7 @@ export const useContactStore = defineStore('contact', {
     openModal: false,
     openDeleteModal: false,
     edit: [],
+    errors: [],
     form: useForm({
       name: '',
       lastname: '',
@@ -15,6 +16,8 @@ export const useContactStore = defineStore('contact', {
       email: '',
       company_id: '',
       country_id: '',
+      error: '',
+      processing: false,
     }),
     headers: [
         { text: "Nombre", value: "name" },
@@ -36,6 +39,7 @@ export const useContactStore = defineStore('contact', {
             this.clearInput();
             this.successAlert('agregado');
           },
+          onError: (error) => { this.errors = error; },
         });
       } else{
         this.form.put(route("update.contacts", id), {

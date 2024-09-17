@@ -6,6 +6,7 @@ export const useQuoteStore = defineStore("quote", {
     state: () => ({
         getYear: parseInt(new Date().getFullYear().toString().substr(2,2), 10),
         edit: [],
+        myErrors: [],
         newQuote: [],
         contactsByCompany: [],
         tempQuotedetails: [],
@@ -23,6 +24,8 @@ export const useQuoteStore = defineStore("quote", {
             user_id: "",
             company_id: "",
             contact_id: "",
+            error: '',
+            processing: false,
         }),
         formQD: useForm({
             quote_id: "",
@@ -32,11 +35,15 @@ export const useQuoteStore = defineStore("quote", {
             subtotal: "",
             details: "",
             url: null,
+            error: '',
+            processing: false,
         }),
         formTotal: useForm({
             quote_id: "",
             iva: null,
             iva2: null,
+            error: '',
+            processing: false,
         }),
         getCalc: {
             total_pr: 0,
@@ -129,7 +136,7 @@ export const useQuoteStore = defineStore("quote", {
                     this.successAlert('Cotización creada');
                     this.showModalQD();
                     closeModal();
-                }).catch(error => { console.log(error); });
+                }).catch(error => { this.myErrors = error.response.data.errors });
             } else {
                 this.form.put(route("update.quotations", id), {
                     onSuccess: () => {

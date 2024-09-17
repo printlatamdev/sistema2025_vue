@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Enums\QuoteStatusEnum;
+use App\Http\Requests\QuoteRequest;
+use App\Http\Requests\PivotProductQuoteRequest;
 use App\Http\Resources\ContactResource;
 use App\Http\Resources\QuotedetailResource;
 use App\Http\Resources\QuoteResource;
@@ -34,7 +36,7 @@ class QuoteController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(QuoteRequest $request)
     {
         $data = Quote::create([
             'important_note' => $request->important_note,
@@ -51,7 +53,7 @@ class QuoteController extends Controller
         return new QuoteResource($data);
     }
 
-    public function update(Request $request, $id)
+    public function update(QuoteRequest $request, $id)
     {
         $quote = Quote::find($id);
         $quote->update([
@@ -69,7 +71,7 @@ class QuoteController extends Controller
         return redirect()->route('quotations');
     }
 
-    public function storeInPivot(Request $request)
+    public function storeInPivot(PivotProductQuoteRequest $request)
     {
         $image = new ImageController;
         $quote = Quote::find($request->quote_id);

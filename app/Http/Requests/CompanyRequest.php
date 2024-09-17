@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ContactRequest extends FormRequest
+class CompanyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,25 +22,20 @@ class ContactRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'lastname' => 'required',
+            'commercial_name' => 'required',
+            'social_reason' => 'required',
             'cellphone' => 'required',
-            'email' => 'required|email',
-            'company_id' => 'required',
-            'country_id' => 'required',
+            'nrc' => 'required',
+            '' => 'required',
         ];
     }
-
     public function messages() {
         return [
-            'name.required' => 'El nombre es requerido',
-            'lastname.required' => 'El apellido es requerido',
+            'commercial_name.required' => 'El nombre comercial es requerido',
+            'social_reason.required' => 'La razón social es requerida',
             'cellphone.required' => 'El número de celular es requerido',
-            'email.required' => 'El correo electrónico es requerido',
-            'email.email' => 'El correo electrónico no tiene un formato permitido',
-            'company_id.required' => 'La compañia es requerida',
-            'country_id.required' => 'El país es requerido',
+            'nrc.required' => 'El NRC es requerido',
+            'nit.required' => 'El NIT es requerido',
         ];
     }
-    
 }

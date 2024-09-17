@@ -4,6 +4,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import DialogModal from '@/Components/DialogModal.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
+import InputError from '@/Components/InputError.vue';
 import { useCompanyStore } from '@/Store/company';
 
 let store = useCompanyStore();
@@ -23,16 +24,17 @@ defineProps({
         <template #title>{{ store.edit == '' ? 'Nuevo' : 'Actualizar' }} registro de Compañia</template>
         <template #content>
             <div class="mt-5">
-                {{ store.edit }}
                 <form @submit.prevent="store.storeCompany(store.edit.id)">
                     <div class="flex">
                         <div class="w-1/2 mr-1">
                             <InputLabel for="commercial_name" value="Nombre comercial" />
                             <TextInput v-model="store.form.commercial_name" class="w-full" type="text" />
+                            <InputError class="" :message="store.form.errors.commercial_name" />
                         </div>
                         <div class="w-1/2">
                             <InputLabel for="social_reason" value="Razón social" />
                             <TextInput v-model="store.form.social_reason" class="w-full" type="text" />
+                            <InputError class="" :message="store.form.errors.social_reason" />
                         </div>
                     </div>
 
@@ -40,6 +42,7 @@ defineProps({
                         <div class="w-1/2 mr-1">
                             <InputLabel for="cellphone" value="Celular" />
                             <TextInput v-model="store.form.cellphone" class="w-full" type="text" />
+                            <InputError class="" :message="store.form.errors.cellphone" />
                         </div>
                         <div class="w-1/2">
                             <InputLabel for="telephone" value="Teléfono" />
@@ -51,10 +54,12 @@ defineProps({
                         <div class="w-1/3 mr-1">
                             <InputLabel for="nrc" value="NRC" />
                             <TextInput v-model="store.form.nrc" class="w-full" type="text" />
+                            <InputError class="" :message="store.form.errors.nrc" />
                         </div>
                         <div class="w-1/3 mr-1">
                             <InputLabel for="nit" value="NIT" />
                             <TextInput v-model="store.form.nit" class="w-full" type="text" />
+                            <InputError class="" :message="store.form.errors.nit" />
                         </div>
                         <div class="w-1/3">
                             <InputLabel for="business_line" value="Giro comercial" />

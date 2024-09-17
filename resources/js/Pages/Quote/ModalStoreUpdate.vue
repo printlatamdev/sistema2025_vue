@@ -3,6 +3,7 @@ import { defineProps } from 'vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import DialogModal from '@/Components/DialogModal.vue';
 import InputLabel from '@/Components/InputLabel.vue';
+import InputError from '@/Components/InputError.vue';
 import { useQuoteStore } from '@/Store/quote';
 
 let store = useQuoteStore();
@@ -68,6 +69,7 @@ defineProps({
                                         {{ company.social_reason }}
                                     </option>
                                 </select>
+                                <InputError class="" v-if="store.myErrors.company_id" :message="store.myErrors.company_id[0]" />
                             </div>
                             <div class="w-1/3 mr-1">
                                 <InputLabel for="contact_id" value="Contacto" />
@@ -78,6 +80,7 @@ defineProps({
                                         {{ contact.name }} {{ contact.lastname }}
                                     </option>
                                 </select>
+                                <InputError class="" v-if="store.myErrors.contact_id" :message="store.myErrors.contact_id[0]" />
                             </div>
                             <div class="w-1/3">
                                 <InputLabel for="user_id" value="Vendedor" />
@@ -88,6 +91,7 @@ defineProps({
                                         {{ user.name }}
                                     </option>
                                 </select>
+                                <InputError class="" v-if="store.myErrors.user_id" :message="store.myErrors.user_id[0]" />
                             </div>
                         </div>
                         <!--second form-->

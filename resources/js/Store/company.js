@@ -17,6 +17,8 @@ export const useCompanyStore = defineStore("company", {
             nit: "",
             business_line: "",
             agency: "",
+            error: '',
+            processing: false,
         }),
         headers: [
             { text: "Razón Social", value: "social_reason" },

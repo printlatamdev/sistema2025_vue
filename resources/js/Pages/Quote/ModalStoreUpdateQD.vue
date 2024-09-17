@@ -10,6 +10,7 @@ import Filepond from '@/Components/Filepond.vue';
 import { useQuoteStore } from '@/Store/quote';
 import { useProductStore } from '@/Store/product';
 import ModalStoreUpdate from '../Product/ModalStoreUpdate.vue';
+import InputError from '@/Components/InputError.vue';
 
 let store_product = useProductStore();
 let store = useQuoteStore();
@@ -71,6 +72,7 @@ defineProps({
                                         {{ product.name }}
                                     </option>
                                 </select>
+                                <InputError class="" :message="store.formQD.errors.product_id" />
                             </div>
                             <div class="mr-2 self-end">
                                 <SecondaryButton v-tooltip="'Agregar nuevo producto'" @click.prevent="store_product.showStoreModal()">+</SecondaryButton>
@@ -79,10 +81,12 @@ defineProps({
                                 <div class="w-2/5 mr-1">
                                     <InputLabel for="price" value="Precio" />
                                     <TextInput v-model="store.formQD.price" class="w-full" type="text" />
+                                    <InputError class="" :message="store.formQD.errors.price" />
                                 </div>
                                 <div class="w-2/5 mr-1">
                                     <InputLabel for="quantity" value="Cantidad" />
                                     <TextInput v-model="store.formQD.quantity" class="w-full" type="text" />
+                                    <InputError class="" :message="store.formQD.errors.quantity" />
                                 </div>
                                 <div class="w-1/5 mr-1">
                                     <InputLabel for="subtotal" value="Total" />
@@ -101,7 +105,7 @@ defineProps({
                                 <InputLabel for="url" value="Subir imagen" />
                                 <Filepond v-model="store.formQD.url" @change="store.handleFile($event)" allow-multiple="false"
                                     max-files="1" />
-                                    <img :src="store.formQD.url" alt="">
+                                <InputError class="" :message="store.formQD.errors.url" />
                                 <div class="flex justify-end mt-1">
                                     <SuccessButton @click.prevent="store.storePivot(store.edit.id)">Agregar ítem</SuccessButton>
                                 </div>
