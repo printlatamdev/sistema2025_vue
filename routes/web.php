@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\QuotedetailController;
 use Illuminate\Foundation\Application;
@@ -43,6 +44,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     //quotedetail routes
     Route::resource('/quote-details', QuotedetailController::class)->except(['create', 'edit'])->names([
         'index' => 'quotedetails', 'store' => 'store.quotedetails', 'show' => 'show.quotedetails', 'update' => 'update.quotedetails', 'destroy' => 'delete.quotedetails',
+    ]);
+
+    //products routes
+    Route::resource('/products', ProductController::class)->except(['create', 'edit'])->names([
+        'index' => 'products', 'store' => 'store.products', 'show' => 'show.products', 'update' => 'update.products', 'destroy' => 'delete.products',
     ]);
 
     //contact routes

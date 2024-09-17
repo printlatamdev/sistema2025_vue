@@ -8,7 +8,10 @@ import SecondaryButton from '@/Components/SecondaryButton.vue';
 import SuccessButton from '@/Components/SuccessButton.vue';
 import Filepond from '@/Components/Filepond.vue';
 import { useQuoteStore } from '@/Store/quote';
+import { useProductStore } from '@/Store/product';
+import ModalStoreUpdate from '../Product/ModalStoreUpdate.vue';
 
+let store_product = useProductStore();
 let store = useQuoteStore();
 defineProps({
     show: {
@@ -59,7 +62,7 @@ defineProps({
                 <form enctype="multipart/form-data">
                     <!--QUOTEDETAIL FORM-->
                         <div class="flex">
-                            <div class="w-1/2 mr-1">
+                            <div class="w-1/2">
                                 <InputLabel for="product_id" value="Producto" />
                                 <select v-model="store.formQD.product_id"
                                     class="text-xs block  w-full border-gray-300 rounded-md">
@@ -68,6 +71,9 @@ defineProps({
                                         {{ product.name }}
                                     </option>
                                 </select>
+                            </div>
+                            <div class="mr-2 self-end">
+                                <SecondaryButton v-tooltip="'Agregar nuevo producto'" @click="store_product.showStoreModal()">+</SecondaryButton>
                             </div>
                             <div class="1/2 flex">
                                 <div class="w-2/5 mr-1">
@@ -119,11 +125,11 @@ defineProps({
                                     <InputLabel for="iva" value="Asignar IVA" />
                                     <TextInput v-model="store.formTotal.iva2" class="w-full" type="text" />
                                 </div>
-                                <div class="border border-gray-300 text-xs bg-gray-50 mt-3 rounded-md p-2">
-                                    <span v-for="calc in store.edit.products" :key="calc.id">
-                                        <p>Total productos ${{ calc.total }}</p>
-                                    </span><hr>
-                                    ${{ store.getCalc.total_pr }}
+                                <div class="border border-gray-300 text-xs bg-gray-50 mt-3 rounded-md p-5">
+                                    <p><span class="font-semibold">Total parcial: </span>${{ store.getCalc.total_pr.toFixed(2) }}</p>
+                                    <p><span class="font-semibold">IVA:</span> ({{ store.formTotal.iva }}) ${{ store.getParcialSubtotal.toFixed(2) }}</p>
+                                    <hr>
+                                    <p class="mt-2"><span class="font-semibold">Total final: </span>${{ store.getTotalIva.toFixed(2) }}</p>
                                 </div>
                             </div>
                         </div>
@@ -137,4 +143,5 @@ defineProps({
             </div>
         </template>
     </DialogModal>
+    <ModalStoreUpdate :show="store_product.openModal"/>
 </template>

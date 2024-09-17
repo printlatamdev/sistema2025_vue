@@ -105,7 +105,10 @@ export const useQuoteStore = defineStore("quote", {
             return state.formQD.quantity * state.formQD.price;
         },
         getParcialSubtotal(state) {
-            console.log(state);
+            return state.getCalc.total_pr * state.formTotal.iva;
+        },
+        getTotalIva(state) {
+            return state.getCalc.total_pr + (state.getCalc.total_pr * state.formTotal.iva);
         },
     },
     actions: {
@@ -170,11 +173,7 @@ export const useQuoteStore = defineStore("quote", {
             axios.get(route('quoterefresh', id)).then(response => {
                 response.data.map((el) => {
                     this.edit = el;
-
-                    el.products.map((element => {
-                        console.log(element);
-                        this.getCalc.total_pr = element.reduce((accumulator, current) => accumulator + current.total, 0);
-                    }))
+                    this.getCalc.total_pr = el.products.reduce((accumulator, current) => accumulator + current.total, 0);
                 });
             });
         },
