@@ -7,15 +7,15 @@ import NavLink from '@/Components/NavLink.vue';
         <img class="w-24 h-14 rounded-md" src="/images/logo.jpg" style="display:block;margin:0 auto">
     </div>
     <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-        Dashboard
+        <font-awesome-icon :icon="['fas', 'chart-pie']" class="mr-2"/> Dashboard
     </NavLink>
     <NavLink :href="route('quotations')" :active="route().current('quotations')">
-        Cotizaciones
+        <font-awesome-icon :icon="['fas', 'paperclip']" class="mr-2" />Cotizaciones
     </NavLink>
     <NavLink :href="route('companies')" :active="route().current('companies')">
-        Clientes
+        <font-awesome-icon :icon="['fas', 'bolt']" class="mr-2" />Clientes
     </NavLink>
     <NavLink :href="route('contacts')" :active="route().current('contacts')">
-        Contactos
+        <font-awesome-icon :icon="['fas', 'address-book']" class="mr-2" /> Contactos
     </NavLink>
 </template>

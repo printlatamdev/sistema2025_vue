@@ -199,7 +199,7 @@ export const useQuoteStore = defineStore("quote", {
             reader.readAsDataURL(image);
         },
         clearInput() {
-            /*this.edit = '';
+            this.edit = '';
             this.form.important_note = "";
             this.form.payment_condition = "";
             this.form.offer_validity = ""; 
@@ -208,7 +208,7 @@ export const useQuoteStore = defineStore("quote", {
             this.form.incoterm = "";
             this.form.user_id =  "";
             this.form.company_id =  "";
-            this.form.contact_id =  "";*/
+            this.form.contact_id =  "";
             this.formQD.quote_id = "";
             this.formQD.product_id = "";
             this.formQD.quantity = "";

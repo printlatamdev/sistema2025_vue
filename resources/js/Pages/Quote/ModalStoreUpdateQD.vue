@@ -12,6 +12,7 @@ import { useQuoteStore } from '@/Store/quote';
 import { useProductStore } from '@/Store/product';
 import ModalStoreUpdate from '../Product/ModalStoreUpdate.vue';
 import InputError from '@/Components/InputError.vue';
+import ActionMessage from '@/Components/ActionMessage.vue';
 
 let store_product = useProductStore();
 let store = useQuoteStore();
@@ -37,6 +38,9 @@ defineProps({
 <template>
     <DialogModal :show="show" :max-width="maxWidth" @close="store.closeModal">
         <template #title>
+            <ActionMessage :on="store.formQD.recentlySuccessful || store.formTotal.recentlySuccessful" class="me-3">
+                Agregado satisfactoriamente.
+            </ActionMessage>
             <span v-if="store.edit != ''" class="p-1 bg-sky-500 rounded-md">#{{ `${store.edit.id}-${store.getYear}`
                 }}</span>
             Detalle de Cotización

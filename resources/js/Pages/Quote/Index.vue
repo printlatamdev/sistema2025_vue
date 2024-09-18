@@ -56,7 +56,8 @@ defineProps({
                     {{ data.quote.contact.name }} {{ data.quote.contact.lastname }}
                 </template>
                 <template #item-report="data">
-                    <font-awesome-icon v-tooltip="'Generar reporte de cotización'" :icon="['fas', 'file-pdf']" class="text-xl cursor-pointer text-red-500" @click.prevent="store.getReport(data.id)"/>
+                    {{data.quote.id}}
+                    <font-awesome-icon v-tooltip="'Generar reporte de cotización'" :icon="['fas', 'file-pdf']" class="text-xl cursor-pointer text-red-500" @click.prevent="store.getReport(data.quote.id)"/>
                 </template>
                 <template #item-options="options" class="flex justify-center">
                     <SecondaryButton class="mr-1" @click="store.editData(options.quote)" v-tooltip="'Editar cotización'">
