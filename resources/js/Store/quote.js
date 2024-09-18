@@ -162,6 +162,7 @@ export const useQuoteStore = defineStore("quote", {
             this.formTotal.put(route("store.quotedetail", this.edit.id), {
                 onSuccess: () => {
                     this.closeModal();
+                    this.successAlert('Detalle de cotización');
                 },
             });
         },
@@ -198,7 +199,7 @@ export const useQuoteStore = defineStore("quote", {
             };
             reader.readAsDataURL(image);
         },
-        clearInput() {
+        clearMainInput(){
             this.edit = '';
             this.form.important_note = "";
             this.form.payment_condition = "";
@@ -209,6 +210,8 @@ export const useQuoteStore = defineStore("quote", {
             this.form.user_id =  "";
             this.form.company_id =  "";
             this.form.contact_id =  "";
+        },
+        clearInput() {
             this.formQD.quote_id = "";
             this.formQD.product_id = "";
             this.formQD.quantity = "";

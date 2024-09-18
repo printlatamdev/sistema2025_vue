@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\QuoteStatusEnum;
 use App\Http\Requests\PivotProductQuoteRequest;
 use App\Http\Requests\QuoteRequest;
+use App\Http\Requests\StoreQuoteDetailRequest;
 use App\Http\Resources\ContactResource;
 use App\Http\Resources\QuotedetailResource;
 use App\Http\Resources\QuoteResource;
@@ -92,7 +93,7 @@ class QuoteController extends Controller
         return redirect()->route('quotations');
     }
 
-    public function storeInQuoteDetail(Request $request, Quote $quote)
+    public function storeInQuoteDetail(StoreQuoteDetailRequest $request, Quote $quote)
     {
         //Store in quotedetail table
         $getData = $quote->products->pluck('pivot');
@@ -129,16 +130,17 @@ class QuoteController extends Controller
 
     public function getQuoteReport(Quotedetail $quotedetail)
     {
-        $qd = $quotedetail->where('')->with('quote')->get();
-        $quote = Quote::where('id', $qd[0]->quote_id)->with(['contact', 'company', 'user', 'products'])->get();
+        $quote = Quote::where('id', $quotedetail->quote_id)->with(['contact', 'company', 'user', 'products'])->get();
         $data = [
-            'quotedetail' => $qd, 
+            'quotedetail' => $quotedetail, 
             'quote' => $quote, 
-            'date' => Carbon::parse($qd[0]->created_at)->format('Y-m-d')
+            'date' => Carbon::parse($quotedetail->created_at)->format('Y-m-d')
         ];
-
+        Pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+        
+        //$main_image = base64_encode(file_get_contents(public_path('storage/images/')));
         $pdf = Pdf::loadView('reports/quoteReport', compact('data'));
-        return $pdf->stream('cotizacion' . $quotedetail->id . Carbon::now() . '.pdf', ['Attachment' => false]);
+        return $pdf->stream('cotizacion-' . $quotedetail->id . Carbon::now() . '-'. '.pdf', ['Attachment' => false]);
     }
 
     public function destroy(Quote $quote)
