@@ -29,7 +29,9 @@ class CompanyRequest extends FormRequest
             '' => 'required',
         ];
     }
-    public function messages() {
+
+    public function messages()
+    {
         return [
             'commercial_name.required' => 'El nombre comercial es requerido',
             'social_reason.required' => 'La razón social es requerida',

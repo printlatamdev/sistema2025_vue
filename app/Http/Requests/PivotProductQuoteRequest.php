@@ -29,7 +29,9 @@ class PivotProductQuoteRequest extends FormRequest
             'quote_id' => 'required|integer',
         ];
     }
-    public function messages() {
+
+    public function messages()
+    {
         return [
             'price.required' => 'El precio es requerido',
             'quantity.required' => 'La cantidad es requerida',

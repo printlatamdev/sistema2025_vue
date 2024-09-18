@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Enums\QuoteStatusEnum;
-use App\Http\Requests\QuoteRequest;
 use App\Http\Requests\PivotProductQuoteRequest;
+use App\Http\Requests\QuoteRequest;
 use App\Http\Resources\ContactResource;
 use App\Http\Resources\QuotedetailResource;
 use App\Http\Resources\QuoteResource;
@@ -50,6 +50,7 @@ class QuoteController extends Controller
             'contact_id' => $request->contact_id,
         ]);
         Quotedetail::create(['quote_id' => $data->id, 'total_products' => 0, 'iva' => 0, 'total' => 0]);
+
         return new QuoteResource($data);
     }
 
@@ -91,7 +92,7 @@ class QuoteController extends Controller
         $getData = $quote->products->pluck('pivot');
         foreach ($getData as $data) {
             $total = $data->sum('total');
-            $request->iva == null ?  $totaltotal = $total : $totaltotal = $total + ($total * $request->iva);
+            $request->iva == null ? $totaltotal = $total : $totaltotal = $total + ($total * $request->iva);
             $qd = Quotedetail::where('quote_id', $quote->id)->first();
             $qd->update([
                 'total_products' => $total,
@@ -111,10 +112,12 @@ class QuoteController extends Controller
         return ContactResource::collection($data);
     }
 
-    public function getProductPivot(Quote $quote){
+    public function getProductPivot(Quote $quote)
+    {
         $data = Quote::where('id', $quote->id)
-                    ->orderBy('id', 'desc')
-                    ->get();
+            ->orderBy('id', 'desc')
+            ->get();
+
         return QuoteResource::collection($data);
     }
 

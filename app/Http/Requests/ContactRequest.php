@@ -31,7 +31,8 @@ class ContactRequest extends FormRequest
         ];
     }
 
-    public function messages() {
+    public function messages()
+    {
         return [
             'name.required' => 'El nombre es requerido',
             'lastname.required' => 'El apellido es requerido',
@@ -42,5 +43,4 @@ class ContactRequest extends FormRequest
             'country_id.required' => 'El país es requerido',
         ];
     }
-    
 }

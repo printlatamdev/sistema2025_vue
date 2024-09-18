@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('quote_id')->constrained();
             $table->float('price', 8, 2);
             $table->integer('quantity');
+            $table->string('image');
             $table->float('total', 8, 2);
             $table->longText('details')->nullable();
             $table->timestamps();

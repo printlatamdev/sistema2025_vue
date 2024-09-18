@@ -27,7 +27,9 @@ class QuoteRequest extends FormRequest
             'contact_id' => 'required|integer',
         ];
     }
-    public function messages() {
+
+    public function messages()
+    {
         return [
             'user_id.required' => 'El vendedor es requerido',
             'company_id.required' => 'El cliente es requerido',
