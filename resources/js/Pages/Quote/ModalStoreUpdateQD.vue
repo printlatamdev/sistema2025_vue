@@ -114,7 +114,12 @@ defineProps({
                         <div class="w-full flex">
                             <div class="w-2/3 mr-3 mt-5">
                                 <EasyDataTable :headers="store.headersQD" :rows-per-page="5" :items="store.edit.products" border-cell
-                                    buttons-pagination class="" />
+                                    buttons-pagination class="">
+                                    <template #item-name="data">
+                                        <img :src="data.image" class="w-10 h-10" />
+                                        {{ data.name }}
+                                    </template>
+                                </EasyDataTable>
                             </div>
                             <div class="w-1/3 mt-5">
                                     <InputLabel for="iva" value="IVA" />

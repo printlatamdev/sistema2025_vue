@@ -34,7 +34,7 @@ export const useQuoteStore = defineStore("quote", {
             price: "",
             subtotal: "",
             details: "",
-            url: null,
+            image: null,
             error: '',
             processing: false,
         }),
@@ -194,7 +194,7 @@ export const useQuoteStore = defineStore("quote", {
             if(!image) return;
             const reader = new FileReader();
             reader.onload = (e) => {
-                this.formQD.url = image;
+                this.formQD.image = image;
             };
             reader.readAsDataURL(image);
         },

@@ -17,6 +17,7 @@ use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 class QuoteController extends Controller
@@ -74,14 +75,19 @@ class QuoteController extends Controller
 
     public function storeInPivot(PivotProductQuoteRequest $request)
     {
-        $image = new ImageController;
+        $name = time().'.'.$request->image->extension();
+        $urlImage = $request->image->storeAs('images', $name);
+
         $quote = Quote::find($request->quote_id);
         $total = $request->price * $request->quantity;
         //store in pivot table
         $quote->products()->attach($request->product_id, [
-            'price' => $request->price, 'quantity' => $request->quantity, 'total' => $total, 'details' => $request->details,
+            'price' => $request->price, 
+            'quantity' => $request->quantity, 
+            'total' => $total, 
+            'details' => $request->details, 
+            'image' => Storage::url($urlImage),
         ]);
-        $image->store($request->url, Product::class, $quote->id);
 
         return redirect()->route('quotations');
     }

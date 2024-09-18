@@ -30,7 +30,7 @@ const submit = () => {
 </script>
 
 <template>
-    <Head title="Log in" />
+    <Head title="Inicio de sesión" />
 
     <AuthenticationCard>
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">

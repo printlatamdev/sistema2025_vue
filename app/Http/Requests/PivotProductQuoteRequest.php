@@ -22,9 +22,9 @@ class PivotProductQuoteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'price' => 'required|float',
+            'price' => 'required',
             'quantity' => 'required|integer',
-            'url' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'product_id' => 'required|integer',
             'quote_id' => 'required|integer',
         ];
@@ -35,9 +35,9 @@ class PivotProductQuoteRequest extends FormRequest
         return [
             'price.required' => 'El precio es requerido',
             'quantity.required' => 'La cantidad es requerida',
-            'url.required' => 'La imagen es requerida',
-            'url.image' => 'El archivo subido no es una imagen',
-            'url.mimes' => 'El formato de la imagen es requerida',
+            'image.required' => 'La imagen es requerida',
+            'image.image' => 'El archivo subido no es una imagen',
+            'image.mimes' => 'El formato de la imagen es requerida',
             'product_id.required' => 'El producto es requerido',
             'quote_id.required' => 'La cotización es requerida',
         ];

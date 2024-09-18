@@ -26,7 +26,8 @@ class CompanyRequest extends FormRequest
             'social_reason' => 'required',
             'cellphone' => 'required',
             'nrc' => 'required',
-            '' => 'required',
+            'nit' => 'required',
+            'address' => 'required',
         ];
     }
 
@@ -38,6 +39,7 @@ class CompanyRequest extends FormRequest
             'cellphone.required' => 'El número de celular es requerido',
             'nrc.required' => 'El NRC es requerido',
             'nit.required' => 'El NIT es requerido',
+            'address.required' => 'La dirección es requerida',
         ];
     }
 }

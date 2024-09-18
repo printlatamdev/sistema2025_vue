@@ -22,6 +22,9 @@ class ProductResource extends JsonResource
             'price' => $this->whenPivotLoaded('product_quote', function () {
                 return $this->pivot->price;
             }),
+            'image' => $this->whenPivotLoaded('product_quote', function () {
+                return $this->pivot->image;
+            }),
             'quantity' => $this->whenPivotLoaded('product_quote', function () {
                 return $this->pivot->quantity;
             }),

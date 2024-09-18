@@ -13,7 +13,7 @@ import NavLink from '@/Components/NavLink.vue';
         Cotizaciones
     </NavLink>
     <NavLink :href="route('companies')" :active="route().current('companies')">
-        Compañias
+        Clientes
     </NavLink>
     <NavLink :href="route('contacts')" :active="route().current('contacts')">
         Contactos
