@@ -36,8 +36,12 @@ defineProps({
             </div>
             <EasyDataTable :headers="store.headers" :rows-per-page="10" :items="contacts" border-cell buttons-pagination class="mt-5" >
                 <template #item-options="options" class="flex justify-center">
-                    <SecondaryButton class="mr-1" @click="store.editData(options)"><font-awesome-icon :icon="['fas', 'pen-to-square']" /></SecondaryButton>
-                    <DangerButton @click="store.showDeleteModal(options)"><font-awesome-icon :icon="['fas', 'trash-can']" /></DangerButton>
+                    <SecondaryButton class="mr-1" @click="store.editData(options)" v-tooltip="'Editar contacto'">
+                        <font-awesome-icon :icon="['fas', 'pen-to-square']" />
+                    </SecondaryButton>
+                    <DangerButton @click="store.showDeleteModal(options)" v-tooltip="'Eliminar cotización'">
+                        <font-awesome-icon :icon="['fas', 'trash-can']" />
+                    </DangerButton>
                 </template>
             </EasyDataTable>
         </div>

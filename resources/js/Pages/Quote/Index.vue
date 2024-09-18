@@ -59,8 +59,12 @@ defineProps({
                     <font-awesome-icon v-tooltip="'Generar reporte de cotización'" :icon="['fas', 'file-pdf']" class="text-xl cursor-pointer text-red-500" @click.prevent="store.getReport(data.id)"/>
                 </template>
                 <template #item-options="options" class="flex justify-center">
-                    <SecondaryButton class="mr-1" @click="store.editData(options.quote)"><font-awesome-icon :icon="['fas', 'pen-to-square']" /></SecondaryButton>
-                    <DangerButton @click="store.showDeleteModal(options.quote)"><font-awesome-icon :icon="['fas', 'trash-can']" /></DangerButton>
+                    <SecondaryButton class="mr-1" @click="store.editData(options.quote)" v-tooltip="'Editar cotización'">
+                        <font-awesome-icon :icon="['fas', 'pen-to-square']" />
+                    </SecondaryButton>
+                    <DangerButton @click="store.showDeleteModal(options.quote)" v-tooltip="'Eliminar cotización'">
+                        <font-awesome-icon :icon="['fas', 'trash-can']" />
+                    </DangerButton>
                 </template>
             </EasyDataTable>
         </div>

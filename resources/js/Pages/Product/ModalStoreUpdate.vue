@@ -36,7 +36,9 @@ defineProps({
                         <textarea v-model="store.form.description" rows="3" class="block text-xs w-full border-gray-300 rounded-md"></textarea>
                     </div>
                     <div class="flex justify-end mt-3">
-                        <PrimaryButton @click.prevent="store.storeProduct()">Guardar</PrimaryButton>
+                        <PrimaryButton @click.prevent="store.storeProduct()">
+                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar
+                        </PrimaryButton>
                     </div>
                 </form>
             </div>

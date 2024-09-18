@@ -5,6 +5,7 @@ import DialogModal from '@/Components/DialogModal.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
+import AddButton from '@/Components/AddButton.vue';
 import SuccessButton from '@/Components/SuccessButton.vue';
 import Filepond from '@/Components/Filepond.vue';
 import { useQuoteStore } from '@/Store/quote';
@@ -36,15 +37,17 @@ defineProps({
 <template>
     <DialogModal :show="show" :max-width="maxWidth" @close="store.closeModal">
         <template #title>
-           <span v-if=" store.edit != ''" class="p-1 bg-sky-500 rounded-md">#{{ `${store.edit.id}-${store.getYear}` }}</span>
-            Nuevo registro de Cotización
+            <span v-if="store.edit != ''" class="p-1 bg-sky-500 rounded-md">#{{ `${store.edit.id}-${store.getYear}`
+                }}</span>
+            Detalle de Cotización
         </template>
         <template #content>
             <div class="w-1/2 flex justify-center mx-auto ">
                 <ol
                     class="flex items-center justify-center w-full p-3 space-x-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg sm:text-base sm:p-4 sm:space-x-4 rtl:space-x-reverse">
                     <li class="flex items-center text-gray-600">
-                        <span class="flex items-center justify-center w-5 h-5 me-2 text-xs border rounded-full shrink-0 border-gray-600">
+                        <span
+                            class="flex items-center justify-center w-5 h-5 me-2 text-xs border rounded-full shrink-0 border-gray-600">
                             1
                         </span>
                         Información <span class="hidden sm:inline-flex sm:ms-2">general</span>
@@ -52,7 +55,8 @@ defineProps({
                     </li>
                     <font-awesome-icon :icon="['fas', 'angles-left']" />
                     <li class="flex items-center text-blue-600">
-                        <span class="flex items-center justify-center w-5 h-5 me-2 text-xs border rounded-full shrink-0 border-blue-600">
+                        <span
+                            class="flex items-center justify-center w-5 h-5 me-2 text-xs border rounded-full shrink-0 border-blue-600">
                             2
                         </span>
                         Detalle de cotización
@@ -62,95 +66,109 @@ defineProps({
             <div class="mt-5">
                 <form enctype="multipart/form-data">
                     <!--QUOTEDETAIL FORM-->
-                        <div class="flex">
-                            <div class="w-1/2">
-                                <InputLabel for="product_id" value="Producto" />
-                                <select v-model="store.formQD.product_id"
-                                    class="text-xs block  w-full border-gray-300 rounded-md">
-                                    <option class="text-gray-500">Seleccione una opción</option>
-                                    <option v-for="product in products" :key="product.id" :value="product.id">
-                                        {{ product.name }}
-                                    </option>
-                                </select>
-                                <InputError class="" :message="store.formQD.errors.product_id" />
+                    <div class="flex">
+                        <div class="w-1/2">
+                            <InputLabel for="product_id" value="Producto" />
+                            <select v-model="store.formQD.product_id"
+                                class="text-xs block  w-full border-gray-300 rounded-lmd">
+                                <option class="text-gray-500">Seleccione una opción</option>
+                                <option v-for="product in products" :key="product.id" :value="product.id">
+                                    {{ product.name }}
+                                </option>
+                            </select>
+                            <InputError class="" :message="store.formQD.errors.product_id" />
+                        </div>
+                        <div class="mr-2 self-end">
+                            <AddButton v-tooltip="'Agregar nuevo producto'" @click.prevent="store_product.showStoreModal()">
+                                <font-awesome-icon :icon="['fas', 'plus']"/>
+                            </AddButton>
+                        </div>
+                        <div class="1/2 flex">
+                            <div class="w-2/5 mr-1">
+                                <InputLabel for="price" value="Precio" />
+                                <TextInput v-model="store.formQD.price" class="w-full" type="text" />
+                                <InputError class="" :message="store.formQD.errors.price" />
                             </div>
-                            <div class="mr-2 self-end">
-                                <SecondaryButton v-tooltip="'Agregar nuevo producto'" @click.prevent="store_product.showStoreModal()">+</SecondaryButton>
+                            <div class="w-2/5 mr-1">
+                                <InputLabel for="quantity" value="Cantidad" />
+                                <TextInput v-model="store.formQD.quantity" class="w-full" type="text" />
+                                <InputError class="" :message="store.formQD.errors.quantity" />
                             </div>
-                            <div class="1/2 flex">
-                                <div class="w-2/5 mr-1">
-                                    <InputLabel for="price" value="Precio" />
-                                    <TextInput v-model="store.formQD.price" class="w-full" type="text" />
-                                    <InputError class="" :message="store.formQD.errors.price" />
-                                </div>
-                                <div class="w-2/5 mr-1">
-                                    <InputLabel for="quantity" value="Cantidad" />
-                                    <TextInput v-model="store.formQD.quantity" class="w-full" type="text" />
-                                    <InputError class="" :message="store.formQD.errors.quantity" />
-                                </div>
-                                <div class="w-1/5 mr-1">
-                                    <InputLabel for="subtotal" value="Total" />
-                                    <TextInput disabled v-model="store.formQD.subtotal" :placeholder="store.getTotal"
-                                        class="w-full" type="text" />
-                                </div>
+                            <div class="w-1/5 mr-1">
+                                <InputLabel for="subtotal" value="Total" />
+                                <TextInput disabled v-model="store.formQD.subtotal" :placeholder="store.getTotal"
+                                    class="w-full" type="text" />
                             </div>
                         </div>
-                        <div class="w-full mt-3 flex">
-                            <div class="w-2/3 mr-3">
-                                <InputLabel for="url" value="Descripción" />
-                                <textarea v-model="store.formQD.details" rows="4"
-                                    class="block text-xs w-full border-gray-300 rounded-md"></textarea>
-                            </div>
-                            <div class="w-1/3">
-                                <InputLabel for="url" value="Subir imagen" />
-                                <Filepond v-model="store.formQD.url" @change="store.handleFile($event)" allow-multiple="false"
-                                    max-files="1" />
-                                <InputError class="" :message="store.formQD.errors.url" />
-                                <div class="flex justify-end mt-1">
-                                    <SuccessButton @click.prevent="store.storePivot(store.edit.id)">Agregar ítem</SuccessButton>
-                                </div>
-                            </div>
-                        </div><hr class="mt-2">
-                        <div class="w-full flex">
-                            <div class="w-2/3 mr-3 mt-5">
-                                <EasyDataTable :headers="store.headersQD" :rows-per-page="5" :items="store.edit.products" border-cell
-                                    buttons-pagination class="">
-                                    <template #item-name="data">
-                                        <img :src="data.image" class="w-10 h-10" />
-                                        {{ data.name }}
-                                    </template>
-                                </EasyDataTable>
-                            </div>
-                            <div class="w-1/3 mt-5">
-                                    <InputLabel for="iva" value="IVA" />
-                                    <select v-model="store.formTotal.iva"
-                                        class="text-xs block  w-full border-gray-300 rounded-md">
-                                        <option class="text-gray-500">Seleccione una opción</option>
-                                        <option v-for="i in store.iva" :key="i.id" :value="i.value">
-                                            {{ i.name }}
-                                        </option>
-                                    </select>
-                                <div v-if="store.formTotal.iva == 'Other'" class="mt-3">
-                                    <InputLabel for="iva" value="Asignar IVA" />
-                                    <TextInput v-model="store.formTotal.iva2" class="w-full" type="text" />
-                                </div>
-                                <div class="border border-gray-300 text-xs bg-gray-50 mt-3 rounded-md p-5">
-                                    <p><span class="font-semibold">Total parcial: </span>${{ store.getCalc.total_pr.toFixed(2) }}</p>
-                                    <p><span class="font-semibold">IVA:</span> ({{ store.formTotal.iva }}) ${{ store.getParcialSubtotal.toFixed(2) }}</p>
-                                    <hr>
-                                    <p class="mt-2"><span class="font-semibold">Total final: </span>${{ store.getTotalIva.toFixed(2) }}</p>
-                                </div>
+                    </div>
+                    <div class="w-full mt-3 flex">
+                        <div class="w-2/3 mr-3">
+                            <InputLabel for="url" value="Descripción" />
+                            <textarea v-model="store.formQD.details" rows="4"
+                                class="block text-xs w-full border-gray-300 rounded-md"></textarea>
+                        </div>
+                        <div class="w-1/3">
+                            <InputLabel for="image" value="Subir imagen" />
+                            <Filepond v-model="store.formQD.image" @change="store.handleFile($event)"
+                                allow-multiple="false" max-files="1" />
+                            <InputError class="" :message="store.formQD.errors.image" />
+                            <div class="flex justify-end mt-1">
+                                <SuccessButton @click.prevent="store.storePivot(store.edit.id)">
+                                    <font-awesome-icon :icon="['fas', 'plus']" class="mr-1"/>Agregar ítem
+                                </SuccessButton>
                             </div>
                         </div>
-                    <div class="flex justify-end mt-3">
-                        <SecondaryButton class="mr-2" @click="store.editData()">
-                            <font-awesome-icon :icon="['fas', 'arrow-left']" />Anterior
-                        </SecondaryButton>
-                        <PrimaryButton @click.prevent="store.storeQuoteDetail()">Finalizar cotización</PrimaryButton>
                     </div>
                 </form>
+                <hr class="mt-2">
+                <div class="w-full flex">
+                    <div class="w-2/3 mr-3 mt-5">
+                        <EasyDataTable :headers="store.headersQD" :rows-per-page="5" :items="store.edit.products"
+                            border-cell buttons-pagination class="">
+                            <template #item-name="data">
+                                <img :src="data.image" class="w-12 h-10 rounded-md mt-1" />
+                                {{ data.name }}
+                            </template>
+                        </EasyDataTable>
+                    </div>
+                    <div class="w-1/3 mt-5">
+                    <form action="">
+                        <div class="w-full mt-5">
+                            <InputLabel for="iva" value="IVA" />
+                            <select v-model="store.formTotal.iva"
+                                class="text-xs block  w-full border-gray-300 rounded-md">
+                                <option class="text-gray-500">Seleccione una opción</option>
+                                <option v-for="i in store.iva" :key="i.id" :value="i.value">
+                                    {{ i.name }}
+                                </option>
+                            </select>
+                            <div v-if="store.formTotal.iva == 'Other'" class="mt-3">
+                                <InputLabel for="iva" value="Asignar IVA" />
+                                <TextInput v-model="store.formTotal.iva2" class="w-full" type="text" />
+                            </div>
+                            <div class="border border-gray-300 text-xs bg-gray-50 mt-3 rounded-md p-5">
+                                <p><span class="font-semibold">Total parcial: </span>${{
+                                    store.getCalc.total_pr.toFixed(2) }}</p>
+                                <p><span class="font-semibold">IVA:</span> ({{ store.formTotal.iva }}) ${{
+                                    store.getParcialSubtotal.toFixed(2) }}</p>
+                                <hr>
+                                <p class="mt-2"><span class="font-semibold">Total final: </span>${{
+                                    store.getTotalIva.toFixed(2) }}</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-end mt-3">
+                            <SecondaryButton class="mr-2" @click="store.editData(store.edit)">
+                                <font-awesome-icon :icon="['fas', 'arrow-left']" />Anterior
+                            </SecondaryButton>
+                            <PrimaryButton @click.prevent="store.storeQuoteDetail()">
+                                <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Finalizar cotización
+                            </PrimaryButton>
+                        </div>
+                    </form>
+                </div>
+                </div>
             </div>
         </template>
     </DialogModal>
-    <ModalStoreUpdate :show="store_product.openModal"/>
+    <ModalStoreUpdate :show="store_product.openModal" />
 </template>

@@ -78,16 +78,15 @@ const clearPhotoFileInput = () => {
 <template>
     <FormSection @submitted="updateProfileInformation">
         <template #title>
-            Profile Information
+            Información de mi perfil
         </template>
-
         <template #description>
-            Update your account's profile information and email address.
+            Actualice la información de perfil y la dirección de correo electrónico de su cuenta.
         </template>
 
         <template #form>
             <!-- Profile Photo -->
-            <div v-if="$page.props.jetstream.managesProfilePhotos" class="col-span-6 sm:col-span-4">
+            <div v-if="$page.props.jetstream.managesProfilePhotos" class="col-span-3 sm:col-span-2">
                 <!-- Profile Photo File Input -->
                 <input
                     id="photo"
@@ -96,8 +95,6 @@ const clearPhotoFileInput = () => {
                     class="hidden"
                     @change="updatePhotoPreview"
                 >
-
-                <InputLabel for="photo" value="Photo" />
 
                 <!-- Current Profile Photo -->
                 <div v-show="! photoPreview" class="mt-2">
@@ -113,7 +110,7 @@ const clearPhotoFileInput = () => {
                 </div>
 
                 <SecondaryButton class="mt-2 me-2" type="button" @click.prevent="selectNewPhoto">
-                    Select A New Photo
+                    Seleccionar nueva foto
                 </SecondaryButton>
 
                 <SecondaryButton
@@ -128,14 +125,15 @@ const clearPhotoFileInput = () => {
                 <InputError :message="form.errors.photo" class="mt-2" />
             </div>
 
-            <!-- Name -->
             <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="name" value="Name" />
+                <!-- Name -->
+            <div class="col-span-6 sm:col-span-4">
+                <InputLabel for="name" value="Nombre" />
                 <TextInput
                     id="name"
                     v-model="form.name"
                     type="text"
-                    class="mt-1 block w-full"
+                    class="block w-full"
                     required
                     autocomplete="name"
                 />
@@ -143,13 +141,13 @@ const clearPhotoFileInput = () => {
             </div>
 
             <!-- Email -->
-            <div class="col-span-6 sm:col-span-4">
-                <InputLabel for="email" value="Email" />
+            <div class="col-span-6 sm:col-span-4 mt-4">
+                <InputLabel for="email" value="Correo electrónico" />
                 <TextInput
                     id="email"
                     v-model="form.email"
                     type="email"
-                    class="mt-1 block w-full"
+                    class="block w-full"
                     required
                     autocomplete="username"
                 />
@@ -175,15 +173,16 @@ const clearPhotoFileInput = () => {
                     </div>
                 </div>
             </div>
+            </div>
         </template>
 
         <template #actions>
             <ActionMessage :on="form.recentlySuccessful" class="me-3">
-                Saved.
+                Guardado.
             </ActionMessage>
 
             <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                Save
+                Guardar
             </PrimaryButton>
         </template>
     </FormSection>

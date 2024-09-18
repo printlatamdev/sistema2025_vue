@@ -84,7 +84,9 @@ defineProps({
                         </div>
                     </div>
                     <div class="flex justify-end mt-3">
-                        <PrimaryButton>{{ store.edit == '' ? 'Guardar' : 'Actualizar' }}</PrimaryButton>
+                        <PrimaryButton>
+                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />{{ store.edit == '' ? 'Guardar' : 'Actualizar' }}
+                        </PrimaryButton>
                     </div>
                 </form>
             </div>
