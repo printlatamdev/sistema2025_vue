@@ -100,10 +100,10 @@ export const useQuoteStore = defineStore("quote", {
         ],
         iva: [
             { name: "No asignar", value: "null" },
-            { name: "7%", value: "0.07" },
-            { name: "12%", value: "0.12" },
-            { name: "13%", value: "0.13" },
-            { name: "15%", value: "0.15" },
+            { name: "7%", value: "7" },
+            { name: "12%", value: "12" },
+            { name: "13%", value: "13" },
+            { name: "15%", value: "15" },
             { name: "Otro porcentaje", value: "Other" },
         ],
     }),
@@ -115,7 +115,13 @@ export const useQuoteStore = defineStore("quote", {
             return state.getCalc.total_pr * state.formTotal.iva;
         },
         getTotalIva(state) {
-            return state.getCalc.total_pr + (state.getCalc.total_pr * state.formTotal.iva);
+            let newIva = '';
+            if(state.formTotal.iva2 != ''){
+                newIva = state.formTotal.iva2;
+            } else {
+                newIva = state.formTotal.iva;
+            }
+            return state.getCalc.total_pr + (state.getCalc.total_pr * newIva);
         },
     },
     actions: {
@@ -215,7 +221,8 @@ export const useQuoteStore = defineStore("quote", {
             this.formQD.quote_id = "";
             this.formQD.product_id = "";
             this.formQD.quantity = "";
-            this.formQD.iva = null;
+            this.formQD.iva = "";
+            this.formQD.iva2 = "";
             this.formQD.price = "";
             this.formQD.subtotal = "";
             this.formQD.details = "";

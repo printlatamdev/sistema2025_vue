@@ -17,7 +17,6 @@ use App\Models\Quotedetail;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -83,10 +82,10 @@ class QuoteController extends Controller
         $total = $request->price * $request->quantity;
         //store in pivot table
         $quote->products()->attach($request->product_id, [
-            'price' => $request->price, 
-            'quantity' => $request->quantity, 
-            'total' => $total, 
-            'details' => $request->details, 
+            'price' => $request->price,
+            'quantity' => $request->quantity,
+            'total' => $total,
+            'details' => $request->details,
             'image' => Storage::url($urlImage),
         ]);
 
@@ -96,10 +95,11 @@ class QuoteController extends Controller
     public function storeInQuoteDetail(StoreQuoteDetailRequest $request, Quote $quote)
     {
         //Store in quotedetail table
+        $iva = $request->iva / 100;
         $getData = $quote->products->pluck('pivot');
         foreach ($getData as $data) {
             $total = $data->sum('total');
-            $request->iva == null ? $totaltotal = $total : $totaltotal = $total + ($total * $request->iva);
+            $request->iva == null ? $totaltotal = $total : $totaltotal = $total + ($total * $iva);
             $qd = Quotedetail::where('quote_id', $quote->id)->first();
             $qd->update([
                 'total_products' => $total,
@@ -132,15 +132,16 @@ class QuoteController extends Controller
     {
         $quote = Quote::where('id', $quotedetail->quote_id)->with(['contact', 'company', 'user', 'products'])->get();
         $data = [
-            'quotedetail' => $quotedetail, 
-            'quote' => $quote, 
-            'date' => Carbon::parse($quotedetail->created_at)->format('Y-m-d')
+            'quotedetail' => $quotedetail,
+            'quote' => $quote,
+            'date' => Carbon::parse($quotedetail->created_at)->format('Y-m-d'),
         ];
         Pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
-        
+
         //$main_image = base64_encode(file_get_contents(public_path('storage/images/')));
         $pdf = Pdf::loadView('reports/quoteReport', compact('data'));
-        return $pdf->stream('cotizacion-' . $quotedetail->id . Carbon::now() . '-'. '.pdf', ['Attachment' => false]);
+
+        return $pdf->stream('cotizacion-'.$quotedetail->id.Carbon::now().'-'.'.pdf', ['Attachment' => false]);
     }
 
     public function destroy(Quote $quote)
