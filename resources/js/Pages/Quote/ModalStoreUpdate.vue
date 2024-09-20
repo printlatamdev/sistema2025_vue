@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, onMounted } from 'vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import DialogModal from '@/Components/DialogModal.vue';
 import InputLabel from '@/Components/InputLabel.vue';
@@ -29,6 +29,7 @@ defineProps({
         default: ([]),
     },
 });
+onMounted(() => { });
 </script>
 <template>
 
@@ -64,7 +65,7 @@ defineProps({
                                 <InputLabel for="company_id" value="Cliente" />
                                 <select v-model="store.form.company_id" @change="store.getContactByCompany(store.form.company_id)"
                                     class="text-xs block w-full border-gray-300 rounded-md">
-                                    <option class="text-gray-500"> Seleccione una opción</option>
+                                    <option class="text-gray-500" disabled> Seleccione una opción</option>
                                     <option v-for="company in companies" :key="company.id" :value="company.id">
                                         {{ company.social_reason }}
                                     </option>
@@ -75,7 +76,7 @@ defineProps({
                                 <InputLabel for="contact_id" value="Contacto" />
                                 <select v-model="store.form.contact_id"
                                     class="text-xs block w-full border-gray-300 rounded-md">
-                                    <option class="text-gray-500"> Seleccione una opción</option>
+                                    <option class="text-gray-500" disabled>Seleccione una opción</option>
                                     <option v-for="contact in store.contactsByCompany" :key="contact.id" :value="contact.id">
                                         {{ contact.name }} {{ contact.lastname }}
                                     </option>
@@ -86,7 +87,7 @@ defineProps({
                                 <InputLabel for="user_id" value="Vendedor" />
                                 <select v-model="store.form.user_id"
                                     class="text-xs block  w-full border-gray-300 rounded-md">
-                                    <option class="text-gray-500"> Seleccione una opción</option>
+                                    <option class="text-gray-500" disabled> Seleccione una opción</option>
                                     <option v-for="user in users" :key="user.id" :value="user.id">
                                         {{ user.name }}
                                     </option>
@@ -100,7 +101,7 @@ defineProps({
                                 <InputLabel for="payment_condition" value="Condiciones de pago" />
                                 <select v-model="store.form.payment_condition"
                                     class="text-xs block  w-full border-gray-300 rounded-md">
-                                    <option class="text-gray-500"> Seleccione una opción</option>
+                                    <option class="text-gray-500" disabled> Seleccione una opción</option>
                                     <option v-for="payment in store.payment_condition" :key="payment.id"
                                         :value="payment.value">
                                         {{ payment.name }}
@@ -111,7 +112,7 @@ defineProps({
                                 <InputLabel for="offer_validity" value="Validez de oferta" />
                                 <select v-model="store.form.offer_validity"
                                     class="text-xs block  w-full border-gray-300 rounded-md">
-                                    <option class="text-gray-500"> Seleccione una opción</option>
+                                    <option class="text-gray-500" disabled> Seleccione una opción</option>
                                     <option v-for="offer in store.offer_validity" :key="offer.id" :value="offer.value">
                                         {{ offer.name }}
                                     </option>
@@ -121,7 +122,7 @@ defineProps({
                                 <InputLabel for="currency" value="Moneda" />
                                 <select v-model="store.form.currency"
                                     class="text-xs block  w-full border-gray-300 rounded-md">
-                                    <option class="text-gray-500"> Seleccione una opción</option>
+                                    <option class="text-gray-500" disabled> Seleccione una opción</option>
                                     <option v-for="currency in store.currency" :key="currency.id"
                                         :value="currency.value">
                                         {{ currency.name }}
@@ -132,7 +133,7 @@ defineProps({
                                 <InputLabel for="incoterm" value="Términos de comercio" />
                                 <select v-model="store.form.incoterm"
                                     class="text-xs block  w-full border-gray-300 rounded-md">
-                                    <option class="text-gray-500"> Seleccione una opción</option>
+                                    <option class="text-gray-500" disabled> Seleccione una opción</option>
                                     <option v-for="incoterm in store.incoterm" :key="incoterm.id"
                                         :value="incoterm.value">
                                         {{ incoterm.name }}

@@ -55,7 +55,7 @@ defineProps({
                             <InputLabel for="country_id" value="País" />
                             <select v-model="store.form.country_id"
                                 class="block w-full border-gray-300 rounded-md text-xs">
-                                <option class="text-gray-500"> Seleccione una opción</option>
+                                <option class="text-gray-500" disabled> Seleccione una opción</option>
                                 <option v-for="country in countries" :key="country.id" :value="country.id">
                                     {{ country.name }}
                                 </option>
@@ -66,7 +66,7 @@ defineProps({
                             <InputLabel for="company_id" value="Cliente" />
                             <select v-model="store.form.company_id"
                                 class="block w-full border-gray-300 rounded-md text-xs">
-                                <option class="text-gray-500"> Seleccione una opción</option>
+                                <option class="text-gray-500" disabled> Seleccione una opción</option>
                                 <option v-for="company in companies" :key="company.id" :value="company.id">
                                     {{ company.social_reason }}
                                 </option>

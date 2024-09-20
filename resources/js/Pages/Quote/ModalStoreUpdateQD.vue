@@ -75,7 +75,7 @@ defineProps({
                             <InputLabel for="product_id" value="Producto" />
                             <select v-model="store.formQD.product_id"
                                 class="text-xs block  w-full border-gray-300 rounded-lmd">
-                                <option class="text-gray-500">Seleccione una opción</option>
+                                <option class="text-gray-500" disabledmount>Seleccione una opción</option>
                                 <option v-for="product in products" :key="product.id" :value="product.id">
                                     {{ product.name }}
                                 </option>
@@ -141,7 +141,7 @@ defineProps({
                             <InputLabel for="iva" value="IVA" />
                             <select v-model="store.formTotal.iva"
                                 class="text-xs block  w-full border-gray-300 rounded-md">
-                                <option class="text-gray-500">Seleccione una opción</option>
+                                <option class="text-gray-500" disabled>Seleccione una opción</option>
                                 <option v-for="i in store.iva" :key="i.id" :value="i.value">
                                     {{ i.name }}
                                 </option>

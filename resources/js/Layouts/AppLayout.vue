@@ -39,10 +39,10 @@ const logout = () => {
             <!-- Page Content -->
             <main>
                 <div class="w-full flex">
-                    <div class="bg-gray-900 w-1/6 text-sm h-screen">
+                    <div class="bg-gray-900 w-1/6 text-sm h-screen sticky top-0 hidden lg:block md:block">
                         <Sidebar />
                     </div>
-                    <div class="w-5/6 bg-white overflow-hidden">
+                    <div class="bg-white overflow-hidden w-full lg:w-5/6">
                         <nav class="bg-white border-b border-gray-100">
                             <!-- Primary Navigation Menu -->
                             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
