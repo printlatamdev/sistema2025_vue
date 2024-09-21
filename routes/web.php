@@ -5,6 +5,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\QuotedetailController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -54,5 +55,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     //contact routes
     Route::resource('/contacts', ContactController::class)->except(['create', 'edit'])->names([
         'index' => 'contacts', 'store' => 'store.contacts', 'show' => 'show.contacts', 'update' => 'update.contacts', 'destroy' => 'delete.contacts',
+    ]);
+
+    //contact routes
+    Route::resource('/users', UserController::class)->except(['create', 'edit'])->names([
+        'index' => 'users', 'store' => 'store.users', 'show' => 'show.users', 'update' => 'update.users', 'destroy' => 'delete.users',
     ]);
 });
