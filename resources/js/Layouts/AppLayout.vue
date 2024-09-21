@@ -6,6 +6,7 @@ import Banner from '@/Components/Banner.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
+import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import Sidebar from '@/Components/Sidebar.vue';
 
@@ -39,16 +40,14 @@ const logout = () => {
             <!-- Page Content -->
             <main>
                 <div class="w-full flex">
-                    <div class="bg-gray-900 w-1/6 text-sm h-screen sticky top-0 hidden lg:block md:block">
+                    <div class="bg-gray-900 w-1/6 text-sm h-screen sticky top-0 hidden lg:block md:block transition-transform -translate-x-full sm:translate-x-0">
                         <Sidebar />
                     </div>
                     <div class="bg-white overflow-hidden w-full lg:w-5/6">
                         <nav class="bg-white border-b border-gray-100">
                             <!-- Primary Navigation Menu -->
-                            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div class="max-w-7xl mx-auto px-4 sm:px-2 lg:px-8">
                                 <div class="flex justify-end h-auto p-2">
-                                    
-
                                     <div class="hidden sm:flex sm:items-center sm:ms-6">
                                         <div class="ms-3 relative">
                                             <!-- Teams Dropdown -->
@@ -185,9 +184,13 @@ const logout = () => {
                                     </div>
 
                                     <!-- Hamburger -->
-                                    <div class="-me-2 flex items-center sm:hidden">
+                                    <div class="flex justify-between  items-center w-full sm:hidden">
+                                        <div class="">
+                                            <ApplicationLogo />
+                                        </div>
+                                       <div class="">
                                         <button
-                                            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
+                                            class="justify-center rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
                                             @click="showingNavigationDropdown = !showingNavigationDropdown">
                                             <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                                 <path
@@ -200,23 +203,17 @@ const logout = () => {
                                                     d="M6 18L18 6M6 6l12 12" />
                                             </svg>
                                         </button>
+                                       </div>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Responsive Navigation Menu -->
                             <div :class="{ 'block': showingNavigationDropdown, 'hidden': !showingNavigationDropdown }"
-                                class="sm:hidden">
-                                <div class="pt-2 pb-3 space-y-1">
-                                    <ResponsiveNavLink :href="route('dashboard')"
-                                        :active="route().current('dashboard')">
-                                        Dashboard
-                                    </ResponsiveNavLink>
-                                </div>
-
+                                class="sm:hidden bg-gray-900 ">
                                 <!-- Responsive Settings Options -->
-                                <div class="pt-4 pb-1 border-t border-gray-200">
-                                    <div class="flex items-center px-4">
+                                <div class="border-t p-2 border-gray-200">
+                                    <div class="flex items-center p-1">
                                         <div v-if="$page.props.jetstream.managesProfilePhotos" class="shrink-0 me-3">
                                             <img class="h-10 w-10 rounded-full object-cover"
                                                 :src="$page.props.auth.user.profile_photo_url"
@@ -224,19 +221,31 @@ const logout = () => {
                                         </div>
 
                                         <div>
-                                            <div class="font-medium text-base text-gray-800">
+                                            <div class="font-medium text-base text-white">
                                                 {{ $page.props.auth.user.name }}
                                             </div>
-                                            <div class="font-medium text-sm text-gray-500">
+                                            <div class="font-medium text-xs text-white">
                                                 {{ $page.props.auth.user.email }}
                                             </div>
                                         </div>
-                                    </div>
+                                    </div><hr>
 
                                     <div class="mt-3 space-y-1">
                                         <ResponsiveNavLink :href="route('profile.show')"
                                             :active="route().current('profile.show')">
-                                            Profile
+                                            Mi perfil
+                                        </ResponsiveNavLink>
+                                        <ResponsiveNavLink :href="route('quotations')"
+                                            :active="route().current('quotations')">
+                                            Cotizaciones
+                                        </ResponsiveNavLink>
+                                        <ResponsiveNavLink :href="route('companies')"
+                                            :active="route().current('companies')">
+                                            Clientes
+                                        </ResponsiveNavLink>
+                                        <ResponsiveNavLink :href="route('contacts')"
+                                            :active="route().current('contacts')">
+                                            Contactos
                                         </ResponsiveNavLink>
 
                                         <ResponsiveNavLink v-if="$page.props.jetstream.hasApiFeatures"
@@ -248,7 +257,7 @@ const logout = () => {
                                         <!-- Authentication -->
                                         <form method="POST" @submit.prevent="logout">
                                             <ResponsiveNavLink as="button">
-                                                Log Out
+                                                Cerrar sesión
                                             </ResponsiveNavLink>
                                         </form>
 
