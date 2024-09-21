@@ -7,7 +7,6 @@ import ModalStoreUpdate from './ModalStoreUpdate.vue';
 import ModalStoreUpdateQD from './ModalStoreUpdateQD.vue';
 import { useQuoteStore } from '@/Store/quote';
 import ModalDelete from './ModalDelete.vue';
-import NavLink from '@/Components/NavLink.vue';
 
 let store = useQuoteStore();
 defineProps({
@@ -56,7 +55,9 @@ defineProps({
                     {{ data.quote.contact.name }} {{ data.quote.contact.lastname }}
                 </template>
                 <template #item-report="data">
-                    <font-awesome-icon v-tooltip="'Generar reporte de cotización'" :icon="['fas', 'file-pdf']" class="text-xl cursor-pointer text-red-500" @click.prevent="store.getReport(data.id)"/>
+                    <a target="_blank" :href="route('report.quote', data.id)" >
+                        <font-awesome-icon v-tooltip="'Generar reporte de cotización'" :icon="['fas', 'file-pdf']" class="text-xl cursor-pointer text-red-500" />
+                    </a>
                 </template>
                 <template #item-options="options" class="flex justify-center">
                     <SecondaryButton class="mr-1" @click="store.editData(options.quote)" v-tooltip="'Editar cotización'">

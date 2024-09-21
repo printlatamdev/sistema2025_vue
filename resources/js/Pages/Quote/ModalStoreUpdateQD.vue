@@ -74,7 +74,7 @@ defineProps({
                         <div class="w-1/2">
                             <InputLabel for="product_id" value="Producto" />
                             <select v-model="store.formQD.product_id"
-                                class="text-xs block  w-full border-gray-300 rounded-lmd">
+                                class="text-xs block  w-full border-gray-300 rounded-l-md">
                                 <option class="text-gray-500" disabledmount>Seleccione una opción</option>
                                 <option v-for="product in products" :key="product.id" :value="product.id">
                                     {{ product.name }}
@@ -153,7 +153,7 @@ defineProps({
                             <div class="border border-gray-300 text-xs bg-gray-50 mt-3 rounded-md p-5">
                                 <p><span class="font-semibold">Total parcial: </span>${{
                                     store.getCalc.total_pr.toFixed(2) }}</p>
-                                <p><span class="font-semibold">IVA:</span> ({{ store.formTotal.iva }}) ${{
+                                <p><span class="font-semibold">IVA:</span> ({{ store.formTotal.iva }}%) ${{
                                     store.getParcialSubtotal.toFixed(2) }}</p>
                                 <hr>
                                 <p class="mt-2"><span class="font-semibold">Total final: </span>${{

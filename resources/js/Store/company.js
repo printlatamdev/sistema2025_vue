@@ -1,9 +1,11 @@
 import { defineStore } from "pinia";
 import { useForm } from "@inertiajs/vue3";
-import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { useAlertStore } from './alert';
 
 export const useCompanyStore = defineStore("company", {
-    state: () => ({
+    state: () => ({ 
+        alert: useAlertStore(),
+        isMessage: 'Cliente',
         openModal: false,
         openDeleteModal: false,
         edit: [],
@@ -40,7 +42,11 @@ export const useCompanyStore = defineStore("company", {
                     onSuccess: () => {
                         this.closeModal();
                         this.clearInput();
-                        this.successAlert('agregado');
+                        this.alert.successAlert(this.isMessage + ' agregado');
+                    },
+                    onError: (error) => { 
+                      this.errors = error;
+                      this.alert.errorAlert();
                     },
                 });
             } else{
@@ -48,7 +54,11 @@ export const useCompanyStore = defineStore("company", {
                     onSuccess: () => {
                         this.closeModal();
                         this.clearInput();
-                        this.successAlert('actualizado');
+                        this.alert.successAlert(this.isMessage + ' actualizado');
+                    },
+                    onError: (error) => { 
+                      this.errors = error;
+                      this.alert.errorAlert();
                     },
                 });
             }
@@ -57,7 +67,11 @@ export const useCompanyStore = defineStore("company", {
           this.form.delete(route('delete.companies', id), {
             onSuccess: () => {
               this.closeModal();
-              this.successAlert('eliminado');
+              this.alert.successAlert(this.isMessage + ' eliminado');
+            },
+            onError: (error) => { 
+              this.errors = error;
+              this.alert.errorAlert();
             },
           });
         },
@@ -96,17 +110,6 @@ export const useCompanyStore = defineStore("company", {
           this.form.nit = data.nit;
           this.form.business_line = data.business_line;
           this.form.agency = data.agency;
-        },
-        successAlert(message){
-            Swal.fire({
-                toast: true,
-                icon: 'success',
-                title: 'Compañia ' + message + ' satisfactoriamente',
-                position: 'bottom-end',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-            });
         },
     },
 });

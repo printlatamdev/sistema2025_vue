@@ -1,9 +1,11 @@
 import { defineStore } from 'pinia'
 import { useForm } from '@inertiajs/vue3';
-import Swal from 'sweetalert2/dist/sweetalert2.js'
+import { useAlertStore } from './alert';
 
 export const useContactStore = defineStore('contact', {
   state: () => ({ 
+    alert: useAlertStore(),
+    isMessage: 'Contacto',
     openModal: false,
     openDeleteModal: false,
     edit: [],
@@ -37,16 +39,23 @@ export const useContactStore = defineStore('contact', {
           onSuccess: () => {
             this.closeModal();
             this.clearInput();
-            this.successAlert('agregado');
+            this.alert.successAlert(this.isMessage + ' agregado');
           },
-          onError: (error) => { this.errors = error; },
+          onError: (error) => { 
+            this.errors = error;
+            this.alert.errorAlert();
+          },
         });
       } else{
         this.form.put(route("update.contacts", id), {
           onSuccess: () => {
             this.closeModal();
             this.clearInput();
-            this.successAlert('actualizado');
+            this.alert.successAlert(this.isMessage + ' actualizado');
+          },
+          onError: (error) => { 
+            this.errors = error;
+            this.alert.errorAlert();
           },
         });
       }
@@ -56,6 +65,11 @@ export const useContactStore = defineStore('contact', {
         onSuccess: () => {
           this.closeModal();
           this.successAlert('eliminado');
+          this.alert.successAlert(this.isMessage + ' eliminado');
+        },
+        onError: (error) => { 
+          this.errors = error;
+          this.alert.errorAlert();
         },
       });
     },
@@ -91,17 +105,6 @@ export const useContactStore = defineStore('contact', {
       this.form.email = "";
       this.form.company_id = "";
       this.form.country_id = "";
-    },
-    successAlert(message){
-        Swal.fire({
-            toast: true,
-            icon: 'success',
-            title: 'Contacto ' + message + ' satisfactoriamente',
-            position: 'bottom-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-        });
     },
   },
 })

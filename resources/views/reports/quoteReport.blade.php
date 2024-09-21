@@ -9,10 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
-        :root{
-            --blue: #0F547F;
-            --gray: #526D82;
-        }
         body{
             color: #161A30;
         }
@@ -27,18 +23,15 @@
             padding: 10px;
             text-align: center;
         }
-        .bluecolor: {
-
-        }
         .sect3 {
-            background: --var(--blue);
+            background: #0F547F;
             border-radius: 5px;
             color: white;
             text-align: center;
             padding: 10px;
         }
         .p1{
-            color: --var(--blue);
+            color: #0F547F;
         }
         .producttable{
             width: 100%;
@@ -48,8 +41,9 @@
         }
         .widthproduct{
             width: 10%;
-            background: --var(--blue) !important;
-            padding: 5px;
+            background: #0F547F !important;
+            padding: 2px;
+            color: white;
         }
         .producttable  .widthproduct{
             border: 1px solid black;
@@ -108,10 +102,10 @@
         <table class="producttable">
             <tr class="">
                 <th class="widthproduct">PRODUCTO</th>
-                <th style="border: 1px solid black">DESCRIPCIÓN</th>
+                <th style="widthproduct">DESCRIPCIÓN</th>
                 <th class="widthproduct">CANTIDAD</th>
                 <th class="widthproduct">UNITARIO</th>
-                    <th class="widthproduct">TOTAL</th>
+                <th class="widthproduct">TOTAL</th>
             </tr>
             @foreach ($item->products as $pr)
             <tr>

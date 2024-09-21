@@ -136,12 +136,11 @@ class QuoteController extends Controller
             'quote' => $quote,
             'date' => Carbon::parse($quotedetail->created_at)->format('Y-m-d'),
         ];
-        Pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
-
+        //Pdf::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
         //$main_image = base64_encode(file_get_contents(public_path('storage/images/')));
         $pdf = Pdf::loadView('reports/quoteReport', compact('data'));
 
-        return $pdf->stream('cotizacion-'.$quotedetail->id.Carbon::now().'-'.'.pdf', ['Attachment' => false]);
+        return $pdf->download('cotizacion-'.$quotedetail->id.Carbon::now().'-'.'.pdf'); //['Attachment' => false]
     }
 
     public function destroy(Quote $quote)

@@ -1,9 +1,12 @@
 import { defineStore } from "pinia";
 import { useForm,router } from "@inertiajs/vue3";
-import Swal from "sweetalert2/dist/sweetalert2.js";
+import { useAlertStore } from './alert';
 
 export const useQuoteStore = defineStore("quote", {
     state: () => ({
+        alert: useAlertStore(),
+        isMessage: 'Cotización',
+        isSecondMessage: 'Detalle de cotización',
         getYear: parseInt(new Date().getFullYear().toString().substr(2,2), 10),
         edit: [],
         myErrors: [],
@@ -139,16 +142,21 @@ export const useQuoteStore = defineStore("quote", {
                     contact_id: this.form.contact_id,
                 }).then((response) => {
                     this.edit = response.data;
-                    this.successAlert('Cotización creada');
+                    this.alert.successAlert(this.isMessage + ' agregado');
                     this.showModalQD();
-                    closeModal();
+                    this.closeModal();
+                    this.clearMainInput();
                 }).catch(error => { this.myErrors = error.response.data.errors });
             } else {
                 this.form.put(route("update.quotations", id), {
                     onSuccess: () => {
-                        this.successAlert('Cotización actualizada');
+                        this.alert.successAlert(this.isMessage + ' actualizada');
                         this.closeModal();
                         this.showModalQD();
+                    },
+                    onError: (error) => { 
+                      this.errors = error;
+                      this.alert.errorAlert();
                     },
                 });
             }
@@ -159,7 +167,11 @@ export const useQuoteStore = defineStore("quote", {
                 onSuccess: () => {
                     this.closeModal();
                     this.refreshData(id);
-                    this.successAlert('Producto agregado');
+                    this.alert.successAlert(this.isMessage + ' agregado');
+                },
+                onError: (error) => { 
+                  this.errors = error;
+                  this.alert.errorAlert();
                 },
             });
         },
@@ -168,7 +180,11 @@ export const useQuoteStore = defineStore("quote", {
             this.formTotal.put(route("store.quotedetail", this.edit.id), {
                 onSuccess: () => {
                     this.closeModal();
-                    this.successAlert('Detalle de cotización');
+                    this.alert.successAlert(this.isSecondMessage + ' agregado');
+                },
+                onError: (error) => { 
+                  this.errors = error;
+                  this.alert.errorAlert();
                 },
             });
         },
@@ -176,7 +192,11 @@ export const useQuoteStore = defineStore("quote", {
             this.form.delete(route('delete.quotations', id), {
                 onSuccess: () => {
                   this.closeModal();
-                  this.successAlert('Cotización eliminada');
+                  this.alert.successAlert(this.isMessage + ' eliminada');
+                },
+                onError: (error) => { 
+                  this.errors = error;
+                  this.alert.errorAlert();
                 },
             });
         },
@@ -253,17 +273,6 @@ export const useQuoteStore = defineStore("quote", {
             this.openModal = false;
             this.openDeleteModal = false;
             this.clearInput();
-        },
-        successAlert(message) {
-            Swal.fire({
-                toast: true,
-                icon: "success",
-                title: " " + message + " satisfactoriamente",
-                position: "bottom-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-            });
         },
     },
 });
