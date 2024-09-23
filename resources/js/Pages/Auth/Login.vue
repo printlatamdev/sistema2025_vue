@@ -37,6 +37,7 @@ const submit = () => {
             {{ status }}
         </div>
 
+        <div class="border rounded-lg p-5">
         <AuthenticationCardLogo />
         <form @submit.prevent="submit" class="mt-5">
             <div>
@@ -83,5 +84,6 @@ const submit = () => {
                 </PrimaryButton>
             </div>
         </form>
+        </div>
     </AuthenticationCard>
 </template>

@@ -7,7 +7,7 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 <template>
   <AppLayout title="Dashboard">
     <div class="w-full">
-      <div class="grid grid-cols-5 gap-4">
+      <div class="grid sm:grid-cols-4 gap-4 grid-cols-2">
         <Card>
           <template #title>25</template>
           <template #description>

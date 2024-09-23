@@ -165,7 +165,7 @@ export const useQuoteStore = defineStore("quote", {
             this.formQD.quote_id = this.edit.id;
             this.formQD.post(route("store.productquote"), {
                 onSuccess: () => {
-                    this.closeModal();
+                    //this.closeModal();
                     this.refreshData(id);
                     this.alert.successAlert(this.isMessage + ' agregado');
                 },
@@ -181,6 +181,7 @@ export const useQuoteStore = defineStore("quote", {
                 onSuccess: () => {
                     this.closeModal();
                     this.alert.successAlert(this.isSecondMessage + ' agregado');
+                    this.edit = '';
                 },
                 onError: (error) => { 
                   this.errors = error;
@@ -271,6 +272,7 @@ export const useQuoteStore = defineStore("quote", {
         },
         closeModal() {
             this.openModal = false;
+            this.openModalQD = false;
             this.openDeleteModal = false;
             this.clearInput();
         },

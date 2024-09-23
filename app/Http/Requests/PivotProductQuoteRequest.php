@@ -35,6 +35,7 @@ class PivotProductQuoteRequest extends FormRequest
         return [
             'price.required' => 'El precio es requerido',
             'quantity.required' => 'La cantidad es requerida',
+            'quantity.integer' => 'La cantidad debe ser un número entero',
             'image.required' => 'La imagen es requerida',
             'image.image' => 'El archivo subido no es una imagen',
             'image.mimes' => 'El formato de la imagen es requerida',
