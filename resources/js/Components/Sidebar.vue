@@ -12,6 +12,9 @@ import NavLink from '@/Components/NavLink.vue';
     <NavLink :href="route('quotations')" :active="route().current('quotations')">
         <font-awesome-icon :icon="['fas', 'paperclip']" class="mr-2" />Cotizaciones
     </NavLink>
+    <NavLink :href="route('orders')" :active="route().current('orders')">
+        <font-awesome-icon :icon="['fas', 'bag-shopping']" class="mr-2" /> Ordenes de compra
+    </NavLink>
     <NavLink :href="route('companies')" :active="route().current('companies')">
         <font-awesome-icon :icon="['fas', 'bolt']" class="mr-2" />Clientes
     </NavLink>

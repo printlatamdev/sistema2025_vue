@@ -1,14 +1,13 @@
 <script setup>
 import { ref } from 'vue';
-import { Head, Link, router } from '@inertiajs/vue3';
-import ApplicationMark from '@/Components/ApplicationMark.vue';
+import { Head, router } from '@inertiajs/vue3';
 import Banner from '@/Components/Banner.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import Sidebar from '@/Components/Sidebar.vue';
+import MobileItems from '@/Components/MobileItems.vue';
 
 defineProps({
     title: String,
@@ -123,7 +122,7 @@ const logout = () => {
                                             </Dropdown>
                                         </div>
                                         <div v-tooltip="'No hay notificaciones'" class="cursor-pointer">
-                                            <font-awesome-icon :icon="['fas', 'bell']" class="text-gray-500" />
+                                            <font-awesome-icon :icon="['fas', 'bell']" class="text-gray-500 text-xl hover:text-gray-600" />
                                         </div>
                                         <!-- Settings Dropdown -->
                                         <div class="ms-3 relative ">
@@ -137,7 +136,7 @@ const logout = () => {
                                                                 :alt="$page.props.auth.user.name">
                                                         </button>
                                                         <div>
-                                                            <span class="text-xs mx-1">{{ $page.props.auth.user.name }}</span>
+                                                            <span class="text-sm mx-1">{{ $page.props.auth.user.name }}</span>
                                                         </div>
                                                     </div>
 
@@ -231,31 +230,8 @@ const logout = () => {
                                             </div>
                                         </div>
                                     </div><hr>
-
                                     <div class="mt-3 space-y-1">
-                                        <ResponsiveNavLink :href="route('profile.show')"
-                                            :active="route().current('profile.show')">
-                                            Mi perfil
-                                        </ResponsiveNavLink>
-                                        <ResponsiveNavLink :href="route('quotations')"
-                                            :active="route().current('quotations')">
-                                            Cotizaciones
-                                        </ResponsiveNavLink>
-                                        <ResponsiveNavLink :href="route('companies')"
-                                            :active="route().current('companies')">
-                                            Clientes
-                                        </ResponsiveNavLink>
-                                        <ResponsiveNavLink :href="route('contacts')"
-                                            :active="route().current('contacts')">
-                                            Contactos
-                                        </ResponsiveNavLink>
-
-                                        <ResponsiveNavLink v-if="$page.props.jetstream.hasApiFeatures"
-                                            :href="route('api-tokens.index')"
-                                            :active="route().current('api-tokens.index')">
-                                            API Tokens
-                                        </ResponsiveNavLink>
-
+                                        <MobileItems />
                                         <!-- Authentication -->
                                         <form method="POST" @submit.prevent="logout">
                                             <ResponsiveNavLink as="button">
