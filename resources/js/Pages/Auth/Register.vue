@@ -68,9 +68,9 @@ const submit = () => {
 
                             <div class="ms-2">
                                 I agree to the <a target="_blank" :href="route('terms.show')"
-                                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Terms
+                                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Terms
                                     of Service</a> and <a target="_blank" :href="route('policy.show')"
-                                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Privacy
+                                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Privacy
                                     Policy</a>
                             </div>
                         </div>
@@ -80,7 +80,7 @@ const submit = () => {
 
                 <div class="flex items-center justify-end mt-4">
                     <Link :href="route('login')"
-                        class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                     ¿Ya posees cuenta?
                     </Link>
 

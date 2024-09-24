@@ -45,7 +45,7 @@ const logout = () => {
                     <div class="bg-white overflow-hidden w-full lg:w-5/6">
                         <nav class="bg-white border-b border-gray-100">
                             <!-- Primary Navigation Menu -->
-                            <div class="max-w-7xl mx-auto px-4 sm:px-2 lg:px-8">
+                            <div class="w-full mx-auto px-4 sm:px-2 lg:px-8">
                                 <div class="flex justify-end h-auto p-2">
                                     <div class="hidden sm:flex sm:items-center sm:ms-6">
                                         <div class="ms-3 relative">
