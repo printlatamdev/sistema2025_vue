@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QuoteController;
@@ -62,9 +63,14 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::resource('/users', UserController::class)->except(['create', 'edit'])->names([
         'index' => 'users', 'store' => 'store.users', 'show' => 'show.users', 'update' => 'update.users', 'destroy' => 'delete.users',
     ]);
-
+    
     //orders routes
     Route::resource('/orders', OrderController::class)->except(['create', 'edit'])->names([
         'index' => 'orders', 'store' => 'store.orders', 'show' => 'show.orders', 'update' => 'update.orders', 'destroy' => 'delete.orders',
+    ]);
+
+    //materials routes
+    Route::resource('/materials', MaterialController::class)->except(['create', 'edit'])->names([
+        'index' => 'materials', 'store' => 'store.materials', 'show' => 'show.materials', 'update' => 'update.materials', 'destroy' => 'delete.materials',
     ]);
 });

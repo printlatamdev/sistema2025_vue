@@ -21,10 +21,13 @@ const store = useAlertStore();
             </span>  
         </div>
     </NavLink>
+        <NavLink :href="route('orders')" :active="route().current('orders')">
+            <font-awesome-icon :icon="['fas', 'bag-shopping']" class="mr-2" /> Ordenes de compra
+        </NavLink>
     <div class="submenu transition duration-150 ease-in-out " v-if="store.showItemMenu">
-    <NavLink :href="route('quotations')" :active="route().current('quotations')">
-        <span><font-awesome-icon :icon="['fas', 'paperclip']" class="mr-2" />Datos de Cotizaciones</span>
-    </NavLink>
+        <NavLink :href="route('quotations')" :active="route().current('quotations')">
+            <span><font-awesome-icon :icon="['fas', 'paperclip']" class="mr-2" />Datos de Cotizaciones</span>
+        </NavLink>
         <NavLink :href="route('companies')" :active="route().current('companies')">
             <font-awesome-icon :icon="['fas', 'bolt']" class="mr-2" />Clientes
         </NavLink>
@@ -32,9 +35,20 @@ const store = useAlertStore();
             <font-awesome-icon :icon="['fas', 'address-book']" class="mr-2" /> Contactos
         </NavLink>
     </div>
-    <NavLink :href="route('orders')" :active="route().current('orders')">
-        <font-awesome-icon :icon="['fas', 'bag-shopping']" class="mr-2" /> Ordenes de compra
+    <NavLink @click.prevent="store.showSubmenu2(store.showItemMenu2)">
+        <div class="flex justify-between">
+            <span><font-awesome-icon :icon="['fas', 'paperclip']" class="mr-2" />Suministros</span>
+            <span class="mr-5 px-1 rounded-sm">
+                <font-awesome-icon :icon="['fas', 'chevron-down']" class="transition duration-150 ease-in-out " v-if="store.showItemMenu2==false" />
+                <font-awesome-icon :icon="['fas', 'chevron-up']" class="ml-1 transition duration-150 ease-in-out " v-else />
+            </span>  
+        </div>
     </NavLink>
+    <div class="submenu transition duration-150 ease-in-out " v-if="store.showItemMenu2">
+        <NavLink :href="route('materials')" :active="route().current('materials')">
+            <font-awesome-icon :icon="['fas', 'hammer']" class="mr-2" /> Materiales
+        </NavLink>
+    </div>
 </template>
 <style scoped>
     .submenu{

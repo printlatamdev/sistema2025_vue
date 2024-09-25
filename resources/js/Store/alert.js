@@ -5,6 +5,7 @@ export const useAlertStore = defineStore("alert", {
     state: () => ({
         message: "",
         showItemMenu: false,
+        showItemMenu2: false,
     }),
     actions: {
         successAlert(message) {
@@ -52,7 +53,6 @@ export const useAlertStore = defineStore("alert", {
             });
         },
         showSubmenu(status){
-            console.log(status);
             this.showItemMenu = true;
             if(status == true){
                 this.hideSubmenu();
@@ -60,6 +60,15 @@ export const useAlertStore = defineStore("alert", {
         },
         hideSubmenu(){
             this.showItemMenu = false;
+        },
+        showSubmenu2(status){
+            this.showItemMenu2 = true;
+            if(status == true){
+                this.hideSubmenu2();
+            }
+        },
+        hideSubmenu2(){
+            this.showItemMenu2 = false;
         }
 
     },
