@@ -41,7 +41,7 @@ defineProps({
 <template>
     <AppLayout title="Cotizaciones">
         <div class="w-full">
-            <h2 class="text-2xl font-semibold">Datos de Cotizaciones</h2>
+            <h2 class="text-3xl font-bold">Datos de Cotizaciones</h2>
             <div class="flex justify-end">
                 <PrimaryButton @click="store.showStoreModal()">
                     <font-awesome-icon :icon="['fas', 'plus']" class="mr-1"/>Nueva Cotización

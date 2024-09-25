@@ -8,7 +8,6 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import Sidebar from '@/Components/Sidebar.vue';
 import MobileItems from '@/Components/MobileItems.vue';
-
 defineProps({
     title: String,
 });

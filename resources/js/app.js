@@ -15,8 +15,8 @@ import 'floating-vue/dist/style.css'
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faPenToSquare,faTrashCan,faAnglesRight,faAnglesLeft,faArrowLeft,faFilePdf,faPlus,faFloppyDisk,faCircleUser,faPowerOff,faChartPie,faPaperclip,faBolt,faAddressBook,faBell,faBagShopping} from '@fortawesome/free-solid-svg-icons'
-library.add(faPenToSquare,faTrashCan,faAnglesRight,faAnglesLeft,faArrowLeft,faFilePdf,faPlus,faFloppyDisk,faCircleUser,faPowerOff,faChartPie,faPaperclip,faBolt,faAddressBook,faBell,faBagShopping)
+import { faPenToSquare,faTrashCan,faAnglesRight,faAnglesLeft,faArrowLeft,faFilePdf,faPlus,faFloppyDisk,faCircleUser,faPowerOff,faChartPie,faPaperclip,faBolt,faAddressBook,faBell,faBagShopping,faChevronDown,faChevronUp} from '@fortawesome/free-solid-svg-icons'
+library.add(faPenToSquare,faTrashCan,faAnglesRight,faAnglesLeft,faArrowLeft,faFilePdf,faPlus,faFloppyDisk,faCircleUser,faPowerOff,faChartPie,faPaperclip,faBolt,faAddressBook,faBell,faBagShopping,faChevronDown,faChevronUp)
 
 
 

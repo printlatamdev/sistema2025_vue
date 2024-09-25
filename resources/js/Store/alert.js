@@ -4,6 +4,7 @@ import Swal from "sweetalert2/dist/sweetalert2.js";
 export const useAlertStore = defineStore("alert", {
     state: () => ({
         message: "",
+        showItemMenu: false,
     }),
     actions: {
         successAlert(message) {
@@ -50,5 +51,16 @@ export const useAlertStore = defineStore("alert", {
                 timerProgressBar: true,
             });
         },
+        showSubmenu(status){
+            console.log(status);
+            this.showItemMenu = true;
+            if(status == true){
+                this.hideSubmenu();
+            }
+        },
+        hideSubmenu(){
+            this.showItemMenu = false;
+        }
+
     },
 });
