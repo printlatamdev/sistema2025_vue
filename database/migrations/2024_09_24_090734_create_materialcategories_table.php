@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(!Schema::hasTable('materialcategories')){
-        Schema::create('materialcategories', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('type');
-            $table->integer('status')->default(1);
-            $table->timestamps();
-        });
+        if (! Schema::hasTable('materialcategories')) {
+            Schema::create('materialcategories', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+                $table->string('type');
+                $table->integer('status')->default(1);
+                $table->timestamps();
+            });
+        }
     }
-}
 
     /**
      * Reverse the migrations.

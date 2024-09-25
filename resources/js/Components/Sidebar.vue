@@ -1,19 +1,20 @@
 <script setup>
 import NavLink from '@/Components/NavLink.vue';
 import { useAlertStore } from '@/Store/alert';
+import AuthenticationCardLogo from './AuthenticationCardLogo.vue';
 
 const store = useAlertStore();
 
 </script>
 <template>
     <div class="m-5">
-        <img class="w-24 h-14 rounded-md" src="/images/logo.jpg" style="display:block;margin:0 auto">
+        <AuthenticationCardLogo />
     </div>
     <!--Dashboard-->
     <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
         <font-awesome-icon :icon="['fas', 'chart-pie']" class="mx-2" /> Dashboard
     </NavLink>
-    <!--Cotizaciones-->
+    <!--Quotes-->
     <div>
         <NavLink @click.prevent="store.showSubmenu(store.showItemMenu)">
             <div class="flex justify-between">
@@ -38,7 +39,7 @@ const store = useAlertStore();
             </NavLink>
         </div>
     </div>
-    <!--Ordenes-->
+    <!--Orders-->
     <NavLink :href="route('orders')" :active="route().current('orders')">
         <font-awesome-icon :icon="['fas', 'bag-shopping']" class="mx-2" /> Ordenes de compra
     </NavLink>
@@ -61,6 +62,10 @@ const store = useAlertStore();
             </NavLink>
         </div>
     </div>
+    <!--Logout-->
+    <NavLink :href="route('dashboard')" :active="route().current('dashboard')" class="absolute inset-x-0 bottom-12 border-t">
+        <font-awesome-icon :icon="['fas', 'power-off']" class="mx-2" /> Cerrar sesión
+    </NavLink>
 </template>
 <style scoped>
 .submenu {

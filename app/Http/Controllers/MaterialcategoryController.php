@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class MaterialcategoryController extends Controller
 {
-    
     public function index()
     {
         $data = Materialcategory::orderBy('id', 'desc')->get();

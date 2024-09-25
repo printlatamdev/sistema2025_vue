@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class MaterialtypeController extends Controller
 {
-    
     public function index()
     {
         $data = Materialtype::orderBy('id', 'desc')->get();

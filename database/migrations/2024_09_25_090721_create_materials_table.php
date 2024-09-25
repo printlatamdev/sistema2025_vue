@@ -11,27 +11,33 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(!Schema::hasTable('materials')){
-        Schema::create('materials', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('serie')->nullable();
-            $table->string('ounce')->nullable();
-            $table->string('thickness')->nullable();
-            $table->float('width')->nullable();
-            $table->float('lenght')->nullable();
-            $table->string('color')->nullable();
-            $table->string('finish')->nullable();
-            $table->float('density')->nullable();
-            $table->string('size')->nullable();
-            $table->string('gum')->nullable();
-            $table->string('print')->nullable();
-            $table->foreignId('brand_id')->constrained();
-            $table->foreignId('category_id')->constrained();
-            $table->foreignId('type_id')->constrained();
-            $table->timestamps();
-        });
-    }
+        if (! Schema::hasTable('materials')) {
+            Schema::create('materials', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+                $table->string('serie')->nullable();
+                $table->string('ounce')->nullable();
+                $table->string('thickness')->nullable();
+                $table->float('width')->nullable();
+                $table->float('lenght')->nullable();
+                $table->string('color')->nullable();
+                $table->string('finish')->nullable();
+                $table->float('density')->nullable();
+                $table->string('size')->nullable();
+                $table->string('gum')->nullable();
+                $table->string('print')->nullable();
+                $table->string('status')->nullable();
+                $table->string('code')->nullable();
+                $table->date('entry_date')->nullable();
+                $table->date('departure_date')->nullable();
+                $table->date('use_date')->nullable();
+                $table->date('expiration_date')->nullable();
+                $table->foreignId('brand_id')->constrained();
+                $table->foreignId('category_id')->constrained();
+                $table->foreignId('type_id')->constrained();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

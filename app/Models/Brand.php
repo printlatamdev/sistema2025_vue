@@ -11,14 +11,15 @@ class Brand extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'category', 'description'
+        'name', 'category', 'description',
     ];
 
     protected $casts = [
         'category' => BrandCategoryEnum::class,
     ];
 
-    public function material(){
+    public function material()
+    {
         return $this->hasMany(Material::class);
     }
 }

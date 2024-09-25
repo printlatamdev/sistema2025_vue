@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(!Schema::hasTable('materialtypes')){
-        Schema::create('materialtypes', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->integer('status')->default(1);
-            $table->timestamps();
-        });
+        if (! Schema::hasTable('materialtypes')) {
+            Schema::create('materialtypes', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+                $table->integer('status')->default(1);
+                $table->timestamps();
+            });
+        }
     }
-}
 
     /**
      * Reverse the migrations.

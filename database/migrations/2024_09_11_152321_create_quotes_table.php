@@ -11,23 +11,23 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(!Schema::hasTable('quotes')){
-        Schema::create('quotes', function (Blueprint $table) {
-            $table->id();
-            $table->string('payment_condition')->nullable(); //enum
-            $table->string('offer_validity')->nullable(); //enum
-            $table->string('currency')->nullable(); //enum
-            $table->string('incoterm')->nullable(); //enum
-            $table->string('status'); //enum
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('company_id')->constrained();
-            $table->foreignId('contact_id')->constrained();
-            $table->text('important_note')->nullable();
-            //morph image
-            $table->timestamps();
-        });
+        if (! Schema::hasTable('quotes')) {
+            Schema::create('quotes', function (Blueprint $table) {
+                $table->id();
+                $table->string('payment_condition')->nullable(); //enum
+                $table->string('offer_validity')->nullable(); //enum
+                $table->string('currency')->nullable(); //enum
+                $table->string('incoterm')->nullable(); //enum
+                $table->string('status'); //enum
+                $table->foreignId('user_id')->constrained();
+                $table->foreignId('company_id')->constrained();
+                $table->foreignId('contact_id')->constrained();
+                $table->text('important_note')->nullable();
+                //morph image
+                $table->timestamps();
+            });
+        }
     }
-}
 
     /**
      * Reverse the migrations.

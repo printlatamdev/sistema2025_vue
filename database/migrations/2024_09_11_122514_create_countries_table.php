@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(!Schema::hasTable('countries')){
-        Schema::create('countries', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('acronym', 3);
-            $table->timestamps();
-        });
+        if (! Schema::hasTable('countries')) {
+            Schema::create('countries', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+                $table->string('acronym', 3);
+                $table->timestamps();
+            });
+        }
     }
-}
 
     /**
      * Reverse the migrations.

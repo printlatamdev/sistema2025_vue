@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(!Schema::hasTable('quotedetails')){
-        Schema::create('quotedetails', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('quote_id')->nullable()->constrained();
-            $table->float('total_products')->default(0);
-            $table->float('iva')->nullable();
-            $table->float('total', 8, 2)->default(0);
-            $table->timestamps();
-        });
+        if (! Schema::hasTable('quotedetails')) {
+            Schema::create('quotedetails', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('quote_id')->nullable()->constrained();
+                $table->float('total_products')->default(0);
+                $table->float('iva')->nullable();
+                $table->float('total', 8, 2)->default(0);
+                $table->timestamps();
+            });
+        }
     }
-}
 
     /**
      * Reverse the migrations.

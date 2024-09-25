@@ -28,7 +28,8 @@ class StoreMaterialRequest extends FormRequest
         ];
     }
 
-    public function messages(){
+    public function messages()
+    {
         return [
             'name.required' => 'El nombre del material es requerido',
             'category_id.required' => 'La categoria del material es requerida',

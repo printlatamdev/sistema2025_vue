@@ -11,6 +11,7 @@ class Material extends Model
 
     protected $fillable = [
         'name',
+        'quantity',
         'serie',
         'ounce',
         'thickness',
@@ -22,6 +23,13 @@ class Material extends Model
         'size',
         'gum',
         'print',
+        //Tintas
+        'status',
+        'code',
+        'entry_date',
+        'departure_date',
+        'use_date',
+        'expiration_date',
         'brand_id',
         'category_id',
         'type_id',
@@ -37,7 +45,8 @@ class Material extends Model
         return $this->belongsTo(Materialtype::class);
     }
 
-    public function brand(){
+    public function brand()
+    {
         return $this->belongsTo(Brand::class);
     }
 }

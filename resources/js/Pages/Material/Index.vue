@@ -3,8 +3,6 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import DangerButton from '@/Components/DangerButton.vue';
-import ModalStoreUpdate from './ModalStoreUpdate.vue';
-import ModalDelete from './ModalDelete.vue';
 import { useMaterialStore } from '@/Store/material';
 
 let store = useMaterialStore();

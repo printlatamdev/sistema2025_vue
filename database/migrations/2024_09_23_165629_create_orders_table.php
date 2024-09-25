@@ -10,8 +10,8 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {  
-        if(!Schema::hasTable('orders')){
+    {
+        if (! Schema::hasTable('orders')) {
             Schema::create('orders', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('company_id')->constrained();

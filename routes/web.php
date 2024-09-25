@@ -63,7 +63,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::resource('/users', UserController::class)->except(['create', 'edit'])->names([
         'index' => 'users', 'store' => 'store.users', 'show' => 'show.users', 'update' => 'update.users', 'destroy' => 'delete.users',
     ]);
-    
+
     //orders routes
     Route::resource('/orders', OrderController::class)->except(['create', 'edit'])->names([
         'index' => 'orders', 'store' => 'store.orders', 'show' => 'show.orders', 'update' => 'update.orders', 'destroy' => 'delete.orders',

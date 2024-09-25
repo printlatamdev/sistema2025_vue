@@ -9,14 +9,17 @@ use Inertia\Inertia;
 
 class MaterialController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $data = Material::orderBy('id', 'desc')->get();
+
         return Inertia::render('Material/Index', [
-            'materials' => MaterialResource::collection($data)
+            'materials' => MaterialResource::collection($data),
         ]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         Material::create([
             'name' => $request->name,
             'brand' => $request->brand,
@@ -34,10 +37,12 @@ class MaterialController extends Controller
             'category_id' => $request->category_id,
             'type_id' => $request->type_id,
         ]);
+
         return redirect()->route('materials');
     }
-    
-    public function update(Request $request, Material $material){
+
+    public function update(Request $request, Material $material)
+    {
         $material->update([
             'name' => $request->name,
             'brand' => $request->brand,
@@ -55,11 +60,14 @@ class MaterialController extends Controller
             'category_id' => $request->category_id,
             'type_id' => $request->type_id,
         ]);
+
         return redirect()->route('materials');
     }
 
-    public function destroy(Material $material){
+    public function destroy(Material $material)
+    {
         $material->delete();
+
         return redirect()->route('materials');
     }
 }
