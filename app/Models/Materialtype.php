@@ -10,12 +10,16 @@ class Materialtype extends Model
     use HasFactory; 
     
     protected $fillable = [
-        'name', 'quantity', 'measures'
+        'name', 'status'
     ];
 
     
     public function image()
     {
         return $this->morphMany(Image::class, 'imageable');
-    } 
+    }
+    
+    public function material(){
+        return $this->hasMany(Material::class);
+    }
 }

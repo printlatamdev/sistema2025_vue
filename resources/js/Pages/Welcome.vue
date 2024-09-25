@@ -31,8 +31,8 @@ function handleImageError() {
 
     <Head title="Color Digital | Seleccionar país" />
     <div class="w-1/2 mx-auto align-center p-10 m-10 text-center">
-        <h2 class="font-bold text-xl">Selecciona país</h2>
-        <p>
+        <h2 class="font-bold text-2xl">Seleccionar país</h2>
+        <p class="text-md">
             Selecciona el país donde te encuentras para gestionar los datos dentro de este.
         </p>
         <div class="grid grid-cols-2 gap-2 mt-7">

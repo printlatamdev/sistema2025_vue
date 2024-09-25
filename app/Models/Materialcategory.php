@@ -12,4 +12,9 @@ class Materialcategory extends Model
     protected $fillable = [
         'name', 'type', 'status'
     ];
+
+    
+    public function material(){
+        return $this->hasMany(Material::class);
+    }
 }
