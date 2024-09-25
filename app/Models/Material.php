@@ -11,7 +11,6 @@ class Material extends Model
 
     protected $fillable = [
         'name',
-        'brand',
         'serie',
         'ounce',
         'thickness',
@@ -23,6 +22,7 @@ class Material extends Model
         'size',
         'gum',
         'print',
+        'brand_id',
         'category_id',
         'type_id',
     ];
@@ -35,5 +35,9 @@ class Material extends Model
     public function materialtype()
     {
         return $this->belongsTo(Materialtype::class);
+    }
+
+    public function brand(){
+        return $this->belongsTo(Brand::class);
     }
 }
