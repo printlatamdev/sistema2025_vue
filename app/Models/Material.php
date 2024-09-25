@@ -10,14 +10,14 @@ class Material extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 
+        'name',
         'brand',
         'serie',
         'ounce',
         'thickness',
         'width',
-        'color',
         'lenght',
+        'color',
         'finish',
         'density',
         'size',
@@ -27,11 +27,13 @@ class Material extends Model
         'type_id',
     ];
 
-    public function materialcategory(){
+    public function materialcategory()
+    {
         return $this->belongsTo(Materialcategory::class);
     }
 
-    public function materialtype(){
+    public function materialtype()
+    {
         return $this->belongsTo(Materialtype::class);
     }
 }

@@ -7,19 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Materialtype extends Model
 {
-    use HasFactory; 
-    
+    use HasFactory;
+
     protected $fillable = [
-        'name', 'status'
+        'name', 'status',
     ];
 
-    
     public function image()
     {
         return $this->morphMany(Image::class, 'imageable');
     }
-    
-    public function material(){
+
+    public function material()
+    {
         return $this->hasMany(Material::class);
     }
 }

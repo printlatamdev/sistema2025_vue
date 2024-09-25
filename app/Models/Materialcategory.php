@@ -10,11 +10,11 @@ class Materialcategory extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'type', 'status'
+        'name', 'type', 'status',
     ];
 
-    
-    public function material(){
+    public function material()
+    {
         return $this->hasMany(Material::class);
     }
 }
