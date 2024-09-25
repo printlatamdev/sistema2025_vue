@@ -57,7 +57,7 @@ const store = useAlertStore();
             </div>
         </NavLink>
         <div class="submenu transition duration-150 ease-in-out " v-if="store.showItemMenu2">
-            <NavLink :href="route('materials')" :active="route().current('materials')">
+            <NavLink :href="route('categories')" :active="route().current('categories')">
                 <font-awesome-icon :icon="['fas', 'hammer']" class="mx-2" /> Materiales
             </NavLink>
         </div>

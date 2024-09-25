@@ -17,10 +17,10 @@ class MaterialcategoryController extends Controller
 
     public function store(Request $request)
     {
-        $data = Materialcategory::create([
+       Materialcategory::create([
             'name' => $request->name,
-            'type' => $request->type,
             'status' => $request->status,
+            'description' => $request->description,
         ]);
 
         return redirect()->route('materials');

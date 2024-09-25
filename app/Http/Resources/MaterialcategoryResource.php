@@ -17,8 +17,8 @@ class MaterialcategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'type' => $this->type,
             'status' => $this->status,
+            'description' => $this->description,
         ];
     }
 }

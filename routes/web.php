@@ -73,4 +73,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::resource('/materials', MaterialController::class)->except(['create', 'edit'])->names([
         'index' => 'materials', 'store' => 'store.materials', 'show' => 'show.materials', 'update' => 'update.materials', 'destroy' => 'delete.materials',
     ]);
+    Route::controller(MaterialController::class)->group(function () {
+        Route::get('/categories', 'getCategories')->name('categories');
+    });
 });

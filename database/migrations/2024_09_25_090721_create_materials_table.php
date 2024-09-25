@@ -15,6 +15,7 @@ return new class extends Migration
             Schema::create('materials', function (Blueprint $table) {
                 $table->id();
                 $table->string('name');
+                $table->integer('quantity');
                 $table->string('serie')->nullable();
                 $table->string('ounce')->nullable();
                 $table->string('thickness')->nullable();
@@ -33,8 +34,8 @@ return new class extends Migration
                 $table->date('use_date')->nullable();
                 $table->date('expiration_date')->nullable();
                 $table->foreignId('brand_id')->constrained();
-                $table->foreignId('category_id')->constrained();
-                $table->foreignId('type_id')->constrained();
+                $table->foreignId('materialcategory_id')->constrained();
+                $table->foreignId('materialtype_id')->constrained();
                 $table->timestamps();
             });
         }

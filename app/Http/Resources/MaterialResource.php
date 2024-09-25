@@ -17,6 +17,7 @@ class MaterialResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'quantity' => $this->quantity,
             'serie' => $this->serie,
             'ounce' => $this->ounce,
             'thickness' => $this->thickness,
@@ -29,9 +30,9 @@ class MaterialResource extends JsonResource
             'gum' => $this->gum,
             'print' => $this->print,
             //Tintas
-            'status' => $this->status,
-            'code' => $this->code,
-            'dates' => [
+            'inks' => [
+                'status' => $this->status,
+                'code' => $this->code,
                 'entry_date' => $this->entry_date,
                 'departure_date' => $this->departure_date,
                 'use_date' => $this->use_date,

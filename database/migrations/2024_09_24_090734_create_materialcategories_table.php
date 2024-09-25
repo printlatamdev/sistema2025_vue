@@ -15,8 +15,8 @@ return new class extends Migration
             Schema::create('materialcategories', function (Blueprint $table) {
                 $table->id();
                 $table->string('name');
-                $table->string('type');
                 $table->integer('status')->default(1);
+                $table->text('description')->nullable();
                 $table->timestamps();
             });
         }

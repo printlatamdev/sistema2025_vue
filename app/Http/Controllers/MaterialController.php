@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MaterialcategoryResource;
 use App\Http\Resources\MaterialResource;
 use App\Models\Material;
+use App\Models\Materialcategory;
+use App\Models\Materialtype;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -69,5 +72,23 @@ class MaterialController extends Controller
         $material->delete();
 
         return redirect()->route('materials');
+    }
+
+    public function getCategories()
+    {
+        $data = Materialcategory::orderBy('id', 'desc')->get();
+
+        return Inertia::render('Material/Category', [
+            'categories' => MaterialcategoryResource::collection($data),
+        ]);
+    }
+
+    public function getTypeFromCategories(Materialcategory $category)
+    {
+        $data = Materialtype::where('category_id', $category->id)->orderBy('id', 'desc')->get();
+
+        return Inertia::render('Material/Category', [
+            'categories' => MaterialcategoryResource::collection($data),
+        ]);
     }
 }

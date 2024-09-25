@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Materialcategory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,6 +19,8 @@ class MaterialtypeResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'status' => $this->status,
+            'category' => Materialcategory::collection($this->materialcategory),
+            'description' => $this->description
         ];
     }
 }

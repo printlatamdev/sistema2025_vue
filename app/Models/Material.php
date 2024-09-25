@@ -31,14 +31,10 @@ class Material extends Model
         'use_date',
         'expiration_date',
         'brand_id',
-        'category_id',
-        'type_id',
+        //'materialcategory_id',
+        'materialtype_id',
     ];
 
-    public function materialcategory()
-    {
-        return $this->belongsTo(Materialcategory::class);
-    }
 
     public function materialtype()
     {
