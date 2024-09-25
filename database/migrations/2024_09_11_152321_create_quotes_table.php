@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if(!Schema::hasTable('quotes')){
         Schema::create('quotes', function (Blueprint $table) {
             $table->id();
             $table->string('payment_condition')->nullable(); //enum
@@ -26,6 +27,7 @@ return new class extends Migration
             $table->timestamps();
         });
     }
+}
 
     /**
      * Reverse the migrations.

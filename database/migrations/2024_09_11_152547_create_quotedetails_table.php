@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if(!Schema::hasTable('quotedetails')){
         Schema::create('quotedetails', function (Blueprint $table) {
             $table->id();
             $table->foreignId('quote_id')->nullable()->constrained();
@@ -20,6 +21,7 @@ return new class extends Migration
             $table->timestamps();
         });
     }
+}
 
     /**
      * Reverse the migrations.

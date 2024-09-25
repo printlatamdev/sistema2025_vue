@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if(!Schema::hasTable('materials')){
         Schema::create('materials', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -30,6 +31,7 @@ return new class extends Migration
             $table->foreignId('type_id')->constrained();
             $table->timestamps();
         });
+    }
     }
 
     /**

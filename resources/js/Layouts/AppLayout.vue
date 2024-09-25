@@ -38,7 +38,7 @@ const logout = () => {
             <!-- Page Content -->
             <main>
                 <div class="w-full flex">
-                    <div class="bg-gray-900 w-1/6 text-sm h-screen sticky top-0 hidden lg:block md:block transition-transform -translate-x-full sm:translate-x-0">
+                    <div class="bg-gray-900 w-1/6 px-1 text-sm h-screen sticky top-0 hidden lg:block md:block transition-transform -translate-x-full sm:translate-x-0">
                         <Sidebar />
                     </div>
                     <div class="bg-white overflow-hidden w-full lg:w-5/6">

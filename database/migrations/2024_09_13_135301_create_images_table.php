@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if(!Schema::hasTable('images')){
         Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->string('url');
@@ -18,6 +19,7 @@ return new class extends Migration
             $table->timestamps();
         });
     }
+}
 
     /**
      * Reverse the migrations.

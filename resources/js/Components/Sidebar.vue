@@ -11,53 +11,53 @@ const store = useAlertStore();
     </div>
     <!--Dashboard-->
     <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-        <font-awesome-icon :icon="['fas', 'chart-pie']" class="mr-2" /> Dashboard
+        <font-awesome-icon :icon="['fas', 'chart-pie']" class="mx-2" /> Dashboard
     </NavLink>
     <!--Cotizaciones-->
     <div>
         <NavLink @click.prevent="store.showSubmenu(store.showItemMenu)">
             <div class="flex justify-between">
-                <span><font-awesome-icon :icon="['fas', 'paperclip']" class="mr-2" />Cotizaciones</span>
+                <span><font-awesome-icon :icon="['fas', 'paperclip']" class="mx-2" />Cotizaciones</span>
                 <span class="mr-5 px-1 rounded-sm">
-                    <font-awesome-icon :icon="['fas', 'chevron-down']" class="transition duration-150 ease-in-out "
+                    <font-awesome-icon :icon="['fas', 'chevron-down']" class=""
                         v-if="store.showItemMenu == false" />
-                    <font-awesome-icon :icon="['fas', 'chevron-up']" class="ml-1 transition duration-150 ease-in-out "
+                    <font-awesome-icon :icon="['fas', 'chevron-up']" class=""
                         v-else />
                 </span>
             </div>
         </NavLink>
         <div class="submenu transition duration-150 ease-in-out " v-if="store.showItemMenu">
             <NavLink :href="route('quotations')" :active="route().current('quotations')">
-                <span><font-awesome-icon :icon="['fas', 'paperclip']" class="mr-2" />Datos de Cotizaciones</span>
+                <span><font-awesome-icon :icon="['fas', 'paperclip']" class="mx-2" />Datos de Cotizaciones</span>
             </NavLink>
             <NavLink :href="route('companies')" :active="route().current('companies')">
-                <font-awesome-icon :icon="['fas', 'bolt']" class="mr-2" />Clientes
+                <font-awesome-icon :icon="['fas', 'bolt']" class="mx-2" />Clientes
             </NavLink>
             <NavLink :href="route('contacts')" :active="route().current('contacts')">
-                <font-awesome-icon :icon="['fas', 'address-book']" class="mr-2" /> Contactos
+                <font-awesome-icon :icon="['fas', 'address-book']" class="mx-2" /> Contactos
             </NavLink>
         </div>
     </div>
     <!--Ordenes-->
     <NavLink :href="route('orders')" :active="route().current('orders')">
-        <font-awesome-icon :icon="['fas', 'bag-shopping']" class="mr-2" /> Ordenes de compra
+        <font-awesome-icon :icon="['fas', 'bag-shopping']" class="mx-2" /> Ordenes de compra
     </NavLink>
     <!--Suministros-->
     <div>
         <NavLink @click.prevent="store.showSubmenu2(store.showItemMenu2)">
             <div class="flex justify-between">
-                <span><font-awesome-icon :icon="['fas', 'hammer']" class="mr-2" />Suministros</span>
+                <span><font-awesome-icon :icon="['fas', 'hammer']" class="mx-2" />Suministros</span>
                 <span class="mr-5 px-1 rounded-sm">
-                    <font-awesome-icon :icon="['fas', 'chevron-down']" class="transition duration-150 ease-in-out "
+                    <font-awesome-icon :icon="['fas', 'chevron-down']" class=""
                         v-if="store.showItemMenu2 == false" />
-                    <font-awesome-icon :icon="['fas', 'chevron-up']" class="ml-1 transition duration-150 ease-in-out "
+                    <font-awesome-icon :icon="['fas', 'chevron-up']" class=""
                         v-else />
                 </span>
             </div>
         </NavLink>
         <div class="submenu transition duration-150 ease-in-out " v-if="store.showItemMenu2">
             <NavLink :href="route('materials')" :active="route().current('materials')">
-                <font-awesome-icon :icon="['fas', 'hammer']" class="mr-2" /> Materiales
+                <font-awesome-icon :icon="['fas', 'hammer']" class="mx-2" /> Materiales
             </NavLink>
         </div>
     </div>
