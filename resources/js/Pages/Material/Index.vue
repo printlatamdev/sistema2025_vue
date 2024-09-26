@@ -1,7 +1,10 @@
 <script setup>
-import { computed } from 'vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import TextInput from '@/Components/TextInput.vue';
 import { useMaterialStore } from '@/Store/material';
+import ModalStoreUpdateMaterial from './ModalStoreUpdateMaterial.vue';
 
 let store = useMaterialStore();
 defineProps({
@@ -10,6 +13,10 @@ defineProps({
         default: ([]),
     },
     types: {
+        type: Object,
+        default: ([]),
+    },
+    brands: {
         type: Object,
         default: ([]),
     },
@@ -40,12 +47,33 @@ defineProps({
                     </span>
                 </ul>
             </div>
-            <!--table-->
-            <div v-if="store.activeTab == 0">
-                tab0
+            <!--form-->
+            <div v-if="store.activeTab == 0" class="w-1/3">
+                <form action="" class="border p-5 mt-10 rounded-md">
+                    <h2 class="text-2xl font-semibold">Nuevo tipo de material</h2>
+                    <div class="w-full mt-3">
+                        <InputLabel for="name" value="Nombre" />
+                        <TextInput v-model="store.formCat.name" class="w-full" type="text" />
+                    </div>
+                    <div class="mt-3">
+                        <InputLabel for="name" value="Descripción" />
+                        <textarea v-model="store.formCat.description" rows="3" class="block text-xs w-full border-gray-300 rounded-md"></textarea>
+                    </div>
+                    <div class="flex justify-end mt-3">
+                        <PrimaryButton @click.prevent="store.storeCategory()">
+                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar
+                        </PrimaryButton>
+                    </div>
+                </form>
             </div>
+            <!--table-->
             <div v-else>
-                <h3 class="mt-5 text-lg p-1 bg-green-200">Existencias {{ types[0].category.name }}</h3>
+                <div class="mt-5 p-2 bg-green-200 flex justify-between">
+                    <h3 class="text-lg">Existencias {{ types[0].category.name }}</h3>
+                    <PrimaryButton @click.prevent="store.showStoreModal()">
+                        <font-awesome-icon :icon="['fas', 'plus']" class="mr-1" />Nuevo material
+                    </PrimaryButton>
+                </div>
                 <EasyDataTable :headers="store.headers" :rows-per-page="10" :items="store.materials" border-cell
                     buttons-pagination>
                     <template #item-measures="data">
@@ -54,5 +82,6 @@ defineProps({
                 </EasyDataTable>
             </div>
         </div>
+        <ModalStoreUpdateMaterial :show="store.openModal" :brands="brands" />
     </AppLayout>
 </template>

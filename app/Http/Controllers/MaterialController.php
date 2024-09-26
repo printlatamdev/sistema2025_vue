@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BrandResource;
 use App\Http\Resources\MaterialcategoryResource;
 use App\Http\Resources\MaterialResource;
 use App\Http\Resources\MaterialtypeResource;
+use App\Models\Brand;
 use App\Models\Material;
 use App\Models\Materialcategory;
 use App\Models\Materialtype;
@@ -91,6 +93,7 @@ class MaterialController extends Controller
 
         return Inertia::render('Material/Index', [
             'types' => MaterialtypeResource::collection($data),
+            'brands' => BrandResource::collection(Brand::get()),
         ]);
     }
 
