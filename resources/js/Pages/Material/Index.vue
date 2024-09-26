@@ -1,6 +1,6 @@
 <script setup>
+import { computed } from 'vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { useMaterialStore } from '@/Store/material';
 
 let store = useMaterialStore();
@@ -20,27 +20,39 @@ defineProps({
 });
 
 </script>
-
 <template>
     <AppLayout title="Materiales">
         <div class="w-full">
-            <h2 class="text-3xl font-bold">Datos de materiales {{ types[0].category.name }}</h2>
-            <div class="border-b-2 mt-5">
-                <ul class='flex cursor-pointer'>
+            <h2 class="text-3xl font-bold">Datos de materiales <span class="border-b-2 border-green-200">{{ store.title }}</span></h2>
+            <!--tabs-->
+            <div class=" mt-5">
+                <ul class='flex justify-start cursor-pointer'>
+                    <li class='py-2 px-6 rounded-t-lg text-gray-700 bg-gray-100 border'
+                        :class="{ 'bg-gray-700 text-white': store.activeTab == 0 }" @click="store.resetToZero()">
+                        Opciones
+                    </li>
                     <span v-for="item in types" :key="item.id">
-                        <li class='py-2 px-6 rounded-t-lg text-gray-700 bg-gray-100'
-                            :class="{ 'bg-gray-500 text-white': store.activeTab == true }"
+                        <li class='py-2 px-6 rounded-t-lg text-gray-700 bg-gray-100 border'
+                            :class="{ 'bg-gray-700 text-white': store.activeTab == item.id }"
                             @click="store.getMaterialByTypes(item.id)">
                             {{ item.name }}
                         </li>
                     </span>
                 </ul>
             </div>
-            {{ store.materials }}
             <!--table-->
-            <EasyDataTable :headers="store.headers" :rows-per-page="10" :items="store.materials" border-cell buttons-pagination class="mt-5">
-                
-            </EasyDataTable>
+            <div v-if="store.activeTab == 0">
+                tab0
+            </div>
+            <div v-else>
+                <h3 class="mt-5 text-lg p-1 bg-green-200">Existencias {{ types[0].category.name }}</h3>
+                <EasyDataTable :headers="store.headers" :rows-per-page="10" :items="store.materials" border-cell
+                    buttons-pagination>
+                    <template #item-measures="data">
+                        {{ `${data.measures.width} ancho x ${data.measures.lenght} largo` }}
+                    </template>
+                </EasyDataTable>
+            </div>
         </div>
     </AppLayout>
 </template>

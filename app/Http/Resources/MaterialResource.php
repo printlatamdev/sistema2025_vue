@@ -31,7 +31,6 @@ class MaterialResource extends JsonResource
             'size' => $this->size,
             'gum' => $this->gum,
             'print' => $this->print,
-            //Tintas
             'inks' => [
                 'status' => $this->status,
                 'code' => $this->code,

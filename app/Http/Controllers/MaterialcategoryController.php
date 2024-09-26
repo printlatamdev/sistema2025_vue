@@ -19,10 +19,10 @@ class MaterialcategoryController extends Controller
     {
         Materialcategory::create([
             'name' => $request->name,
-            'status' => $request->status,
+            'status' => 1,
             'description' => $request->description,
         ]);
 
-        return redirect()->route('materials');
+        return redirect()->route('categories');
     }
 }

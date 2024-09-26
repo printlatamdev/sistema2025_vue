@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\MaterialcategoryController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -78,4 +79,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::get('/categories/types/{materialcategory}', 'getTypeFromCategories')->name('categories.types');
         Route::get('/categories/types/materials/{type}', 'getMaterialFromType')->name('materials.types');
     });
+    
+    //material category routes
+    Route::resource('/categories', MaterialcategoryController::class)->except(['index', 'create', 'edit'])->names([
+        'store' => 'store.categories', 'show' => 'show.categories', 'update' => 'update.categories', 'destroy' => 'categories.categories',
+    ]);
 });

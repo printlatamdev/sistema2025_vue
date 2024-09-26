@@ -6,9 +6,12 @@ export const useMaterialStore = defineStore('material', {
   state: () => ({ 
     alert: useAlertStore(),
     isMessage: 'Material',
+    isCatMessage: 'Categoría',
+    title: '',
     materials: [],
-    activeTab: false,
+    activeTab: 0,
     openModal: false,
+    openCatModal: false,
     openDeleteModal: false,
     edit: [],
     errors: [],
@@ -17,10 +20,16 @@ export const useMaterialStore = defineStore('material', {
       error: '',
       processing: false,
     }),
+    formCat: useForm({
+      name: '',
+      description: '',
+      error: '',
+      processing: false,
+    }),
     headers: [
-        { text: "Nombre", value: "name" },
-        { text: "Cantidad", value: "quantity" },
-        { text: "medidas", value: "measures" },
+      { text: "Nombre", value: "name" },
+      { text: "Cantidad", value: "quantity" },
+      { text: "Medidas", value: "measures" },
     ],
  }),
   actions: {
@@ -66,14 +75,26 @@ export const useMaterialStore = defineStore('material', {
     },
     getMaterialByTypes(id){
       axios.get(route('materials.types', id)).then(response => {
-        this.activeTab = true;
-        response.data.map((el) => {
-            this.materials = el;
-        });
+        this.activeTab = id;
+        this.materials = response.data;
+    });
+    },
+    resetToZero(){
+      this.activeTab = 0;
+    },
+    storeCategory(){
+      this.formCat.post(route("store.categories"), {
+        onSuccess: () => {
+            this.closeModal();
+            this.alert.successAlert(this.isCatMessage + ' agregado');
+        },
     });
     },
     showStoreModal(){
       this.openModal = true;
+    },
+    showCatModal(){
+      this.openCatModal = true;
     },
     showDeleteModal(data){
       this.edit = data;
@@ -82,6 +103,7 @@ export const useMaterialStore = defineStore('material', {
     closeModal(){
       this.openModal = false;
       this.openDeleteModal = false;
+      this.openCatModal = false;
       this.clearInput();
     },
     editData(data){

@@ -62,10 +62,19 @@ const store = useAlertStore();
             </NavLink>
         </div>
     </div>
-    <!--Logout-->
-    <NavLink :href="route('dashboard')" :active="route().current('dashboard')" class="absolute inset-x-0 bottom-12 border-t">
+    <!--support-->
+    <!--<div class="mt-10">
+        <NavLink :href="route('dashboard')" :active="route().current('dashboard')" class="border-t border-gray-700">
+            <font-awesome-icon :icon="['fas', 'power-off']" class="mx-2" /> Configuración
+        </NavLink>
+        <NavLink :href="route('dashboard')" :active="route().current('dashboard')" class="">
+            <font-awesome-icon :icon="['fas', 'power-off']" class="mx-2" /> Soporte técnico
+        </NavLink>
+    <!--Logout
+    <NavLink :href="route('dashboard')" :active="route().current('dashboard')" class="">
         <font-awesome-icon :icon="['fas', 'power-off']" class="mx-2" /> Cerrar sesión
     </NavLink>
+    </div>-->
 </template>
 <style scoped>
 .submenu {
