@@ -1,6 +1,7 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Card from '@/Components/Card.vue';
+import { Link } from '@inertiajs/vue3';
 import { useMaterialStore } from '@/Store/material';
 
 let store = useMaterialStore();
@@ -29,16 +30,19 @@ defineProps({
                     <p>Nueva categoría</p>
                 </div>
                 <div v-for="item in categories" :key="item.id">
-                    <Card v-tooltip="'Acceder a los tipos de material ' + `${item.name}`">
-                        <template #description>
-                            <p class="text-lg font-semibold">{{ item.name }}</p>
-                        </template>
-                        <template #icon>
-                            <div class="bg-gray-200 px-2 py-1 rounded-md">
-                                <font-awesome-icon :icon="['fas', 'bolt']" class="text-2xl" />
-                            </div>
-                        </template>
-                    </Card>
+                    
+                    <Link :href="route('categories.types', item.id)" >
+                        <Card v-tooltip="'Acceder a los tipos de material ' + `${item.name}`" @click="store.getTypesByCat(item.id)">
+                            <template #description>
+                                <p class="text-lg font-semibold">{{ item.name }}</p>
+                            </template>
+                            <template #icon>
+                                <div class="bg-gray-200 px-2 py-1 rounded-md">
+                                    <font-awesome-icon :icon="['fas', 'bolt']" class="text-2xl" />
+                                </div>
+                            </template>
+                        </Card>
+                    </Link>
                 </div>
             </div>
         </div>

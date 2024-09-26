@@ -25,7 +25,7 @@ return new class extends Migration
                 $table->foreignId('country_id')->constrained();
                 $table->float('payment', 8, 2);
                 $table->float('mod', 8, 2);
-                $table->foreignId('project_id')->constrained();
+                //$table->foreignId('project_id')->constrained();
                 $table->string('application_number')->default(0);
                 $table->timestamps();
             });

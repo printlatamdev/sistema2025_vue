@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\MaterialcategoryResource;
 use App\Http\Resources\MaterialResource;
+use App\Http\Resources\MaterialtypeResource;
 use App\Models\Material;
 use App\Models\Materialcategory;
 use App\Models\Materialtype;
@@ -83,12 +84,13 @@ class MaterialController extends Controller
         ]);
     }
 
-    public function getTypeFromCategories(Materialcategory $category)
+    public function getTypeFromCategories($id)
     {
-        $data = Materialtype::where('category_id', $category->id)->orderBy('id', 'desc')->get();
+        $cat = Materialcategory::find($id);
+        $data = Materialtype::where('materialcategory_id', $cat->id)->orderBy('id', 'desc')->get();
 
-        return Inertia::render('Material/Category', [
-            'categories' => MaterialcategoryResource::collection($data),
+        return Inertia::render('Material/Index', [
+            'types' => MaterialtypeResource::collection($data),
         ]);
     }
 }

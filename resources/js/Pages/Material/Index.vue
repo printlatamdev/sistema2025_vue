@@ -3,11 +3,13 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import DangerButton from '@/Components/DangerButton.vue';
-import { useMaterialStore } from '@/Store/material';
+import ModalStoreUpdate from './ModalStoreUpdate.vue';
+import ModalDelete from './ModalDelete.vue';
+import { useOrderStore } from '@/Store/order';
 
-let store = useMaterialStore();
+let store = useOrderStore();
 defineProps({
-    orders: {
+    materials: {
         type: Object,
         default: ([]),
     },
@@ -20,9 +22,9 @@ defineProps({
 </script>
 
 <template>
-    <AppLayout title="Materiales">
+    <AppLayout title="Ordenes de compra">
         <div class="w-full">
-            <h2 class="text-3xl font-bold">Datos de materiales</h2>
+            <h2 class="text-3xl font-bold">Datos de Ordenes de compra</h2>
             <div class="flex justify-end">
                 <PrimaryButton @click="store.showStoreModal()">
                     <font-awesome-icon :icon="['fas', 'plus']" class="mr-1"/>Nueva orden de compra

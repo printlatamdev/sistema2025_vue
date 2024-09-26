@@ -60,6 +60,9 @@ export const useMaterialStore = defineStore('material', {
         },
       });
     },
+    getTypesByCat(id){
+
+    },
     showStoreModal(){
       this.openModal = true;
     },

@@ -21,7 +21,7 @@ class Order extends Model
         'country_id',
         'payment',
         'mod',
-        'project_id',
+        //'project_id',
         'application_number',
     ];
 }
