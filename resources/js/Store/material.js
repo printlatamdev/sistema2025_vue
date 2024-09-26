@@ -6,6 +6,8 @@ export const useMaterialStore = defineStore('material', {
   state: () => ({ 
     alert: useAlertStore(),
     isMessage: 'Material',
+    materials: [],
+    activeTab: false,
     openModal: false,
     openDeleteModal: false,
     edit: [],
@@ -17,6 +19,8 @@ export const useMaterialStore = defineStore('material', {
     }),
     headers: [
         { text: "Nombre", value: "name" },
+        { text: "Cantidad", value: "quantity" },
+        { text: "medidas", value: "measures" },
     ],
  }),
   actions: {
@@ -60,8 +64,13 @@ export const useMaterialStore = defineStore('material', {
         },
       });
     },
-    getTypesByCat(id){
-
+    getMaterialByTypes(id){
+      axios.get(route('materials.types', id)).then(response => {
+        this.activeTab = true;
+        response.data.map((el) => {
+            this.materials = el;
+        });
+    });
     },
     showStoreModal(){
       this.openModal = true;

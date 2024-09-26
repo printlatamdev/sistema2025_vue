@@ -76,5 +76,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::controller(MaterialController::class)->group(function () {
         Route::get('/categories', 'getCategories')->name('categories');
         Route::get('/categories/types/{materialcategory}', 'getTypeFromCategories')->name('categories.types');
+        Route::get('/categories/types/materials/{type}', 'getMaterialFromType')->name('materials.types');
     });
 });

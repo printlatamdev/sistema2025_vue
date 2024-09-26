@@ -10,10 +10,8 @@ class Materialcategory extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'status', 'description', 
+        'name', 'status', 'description',
     ];
-
-    
 
     public function materialtype()
     {

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\QuoteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;

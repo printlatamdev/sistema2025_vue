@@ -19,7 +19,7 @@ class MaterialtypeResource extends JsonResource
             'name' => $this->name,
             'status' => $this->status,
             'category' => new MaterialcategoryResource($this->materialcategory),
-            'description' => $this->description
+            'description' => $this->description,
         ];
     }
 }

@@ -93,4 +93,12 @@ class MaterialController extends Controller
             'types' => MaterialtypeResource::collection($data),
         ]);
     }
+
+    public function getMaterialFromType($id)
+    {
+        $type = Materialtype::find($id);
+        $data = Material::where('materialtype_id', $type->id)->orderBy('id', 'desc')->get();
+
+        return MaterialResource::collection($data);
+    }
 }

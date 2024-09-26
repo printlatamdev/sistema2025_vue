@@ -17,7 +17,7 @@ class MaterialcategoryController extends Controller
 
     public function store(Request $request)
     {
-       Materialcategory::create([
+        Materialcategory::create([
             'name' => $request->name,
             'status' => $request->status,
             'description' => $request->description,

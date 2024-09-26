@@ -35,7 +35,6 @@ class Material extends Model
         'materialtype_id',
     ];
 
-
     public function materialtype()
     {
         return $this->belongsTo(Materialtype::class);

@@ -17,7 +17,7 @@ class MaterialtypeController extends Controller
 
     public function store(Request $request)
     {
-       Materialtype::create([
+        Materialtype::create([
             'name' => $request->name,
             'status' => $request->status,
             'materialcategory_id' => $request->materialcategory_id,

@@ -21,8 +21,10 @@ class MaterialResource extends JsonResource
             'serie' => $this->serie,
             'ounce' => $this->ounce,
             'thickness' => $this->thickness,
-            'width' => $this->width,
-            'lenght' => $this->lenght,
+            'measures' => [
+                'width' => $this->width,
+                'lenght' => $this->lenght,
+            ],
             'color' => $this->color,
             'finish' => $this->finish,
             'density' => $this->density,
@@ -38,9 +40,9 @@ class MaterialResource extends JsonResource
                 'use_date' => $this->use_date,
                 'expiration_date' => $this->expiration_date,
             ],
-            'brand_id' => BrandResource::collection($this->$this->brand),
-            'category_id' => MaterialcategoryResource::collection($this->materialcategory),
-            'type_id' => MaterialtypeResource::collection($this->materialtype),
+            'brand' => new BrandResource($this->brand),
+            'category_id' => new MaterialcategoryResource($this->materialcategory),
+            'type' => new MaterialtypeResource($this->materialtype),
         ];
     }
 }

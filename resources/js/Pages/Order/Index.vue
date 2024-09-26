@@ -3,9 +3,9 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import DangerButton from '@/Components/DangerButton.vue';
-import { useMaterialStore } from '@/Store/material';
+import { useOrderStore } from '@/Store/order';
 
-let store = useMaterialStore();
+let store = useOrderStore();
 defineProps({
     orders: {
         type: Object,

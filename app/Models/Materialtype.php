@@ -10,7 +10,7 @@ class Materialtype extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'status', 'materialcategory_id', 'description'
+        'name', 'status', 'materialcategory_id', 'description',
     ];
 
     public function image()
@@ -22,7 +22,7 @@ class Materialtype extends Model
     {
         return $this->hasMany(Material::class);
     }
-    
+
     public function materialcategory()
     {
         return $this->belongsTo(Materialcategory::class);
