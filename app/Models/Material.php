@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ColorsEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -33,6 +34,10 @@ class Material extends Model
         'brand_id',
         //'materialcategory_id',
         'materialtype_id',
+    ];
+
+    protected $cast = [
+        'color' => ColorsEnum::class,
     ];
 
     public function materialtype()

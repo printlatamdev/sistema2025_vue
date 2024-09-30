@@ -49,57 +49,79 @@ defineProps({
                             <TextInput v-model="store.form.lenght" class="w-full" type="text" />
                         </div>
                     </div>
-                    <p class="border-b-2 my-5 text-md font-semibold">Detalles de material</p>
-                    <div class="w-full flex">
-                        <div class="w-1/5 mr-1">
+                    <div class="flex mt-5">
+                        <div class="w-2/4 mr-2">
                             <InputLabel for="brand" value="Marca" />
-                            <select v-model="store.form.brand_id" class="block w-full border-gray-300 rounded-md ">
+                            <select v-model="store.form.brand_id" class="block w-full border-gray-300 rounded-md">
                                 <option class="text-gray-500" disabled> Seleccione una opción</option>
                                 <option v-for="item in brands" :key="item.id" :value="item.id">
                                     {{ item.name }}
                                 </option>
                             </select>
                         </div>
-                        <div class="w-1/5 mr-1">
+                        <div class="w-1/4 mr-2">
                             <InputLabel for="color" value="Color" />
-                            <TextInput v-model="store.form.color" class="w-full" type="text" />
-                        </div>
-                        <div class="w-1/5 mr-1">
-                            <InputLabel for="ounce" value="Onzas" />
-                            <TextInput v-model="store.form.ounce" class="w-full" type="text" />
-                        </div>
-                        <div class="w-1/5 mr-1">
-                            <InputLabel for="thickness" value="Grosor" />
-                            <TextInput v-model="store.form.thickness" class="w-full" type="text" />
-                        </div>
-                        <div class="w-1/5 mr-1">
-                            <InputLabel for="finish" value="Acabado" />
-                            <TextInput v-model="store.form.finish" class="w-full" type="text" />
+                            <select v-model="store.form.color" class="block w-full border-gray-300 rounded-md">
+                                <option class="text-gray-500" disabled> Seleccione una opción</option>
+                                <option v-for="item in brands" :key="item.id" :value="item.id">
+                                    {{ item.name }}
+                                </option>
+                            </select>
                         </div>
                     </div>
-                    <div class="w-full flex mt-3">
-                        <div class="w-1/4 mr-2">
-                            <InputLabel for="density" value="Densidad" />
-                            <TextInput v-model="store.form.density" class="w-full" type="text" />
+                    <ul class="flex mt-10 text-sm font-medium text-center rounded-lg border">
+                        <li class="w-full inline-block p-3 text-gray-900 border-r border-gray-200 cursor-pointer"
+                            :class="{ 'bg-sky-200 text-gray-900': store.isForm == 1 }" @click="store.isForm = 1">
+                            Registro para materiales
+                        </li>
+                        <li class="inline-block w-full p-3 bg-white border-r border-gray-200 cursor-pointer"
+                            @click="store.isForm = 2" :class="{ 'bg-sky-200 text-gray-900': store.isForm == 2 }">
+                            Registro para tintas
+                        </li>
+                    </ul>
+                    <!--materials-->
+                    <div class="mt-5" v-if="store.isForm == 1">
+                        <div class="w-full flex">
+                            <div class="w-1/5 mr-1">
+                                <InputLabel for="ounce" value="Onzas" />
+                                <TextInput v-model="store.form.ounce" class="w-full" type="text" />
+                            </div>
+                            <div class="w-1/5 mr-1">
+                                <InputLabel for="thickness" value="Grosor" />
+                                <TextInput v-model="store.form.thickness" class="w-full" type="text" />
+                            </div>
+                            <div class="w-1/5 mr-1">
+                                <InputLabel for="finish" value="Acabado" />
+                                <TextInput v-model="store.form.finish" class="w-full" type="text" />
+                            </div>
                         </div>
-                        <div class="w-1/4 mr-2">
-                            <InputLabel for="size" value="Medida" />
-                            <TextInput v-model="store.form.size" class="w-full" type="text" />
+                        <div class="w-full flex mt-3">
+                            <div class="w-1/4 mr-2">
+                                <InputLabel for="density" value="Densidad" />
+                                <TextInput v-model="store.form.density" class="w-full" type="text" />
+                            </div>
+                            <div class="w-1/4 mr-2">
+                                <InputLabel for="size" value="Medida" />
+                                <TextInput v-model="store.form.size" class="w-full" type="text" />
+                            </div>
+                            <div class="w-1/4 mr-2">
+                                <InputLabel for="gum" value="Goma" />
+                                <TextInput v-model="store.form.gum" class="w-full" type="text" />
+                            </div>
+                            <div class="w-1/4 mr-2">
+                                <InputLabel for="print" value="Impresión" />
+                                <TextInput v-model="store.form.print" class="w-full" type="text" />
+                            </div>
                         </div>
-                        <div class="w-1/4 mr-2">
-                            <InputLabel for="gum" value="Goma" />
-                            <TextInput v-model="store.form.gum" class="w-full" type="text" />
-                        </div>
-                        <div class="w-1/4 mr-2">
-                            <InputLabel for="print" value="Impresión" />
-                            <TextInput v-model="store.form.print" class="w-full" type="text" />
-                        </div>
+
                     </div>
-                    <p class="border-b-2 my-5 text-md font-semibold">Detalles de tintas</p>
-                    <div class="w-full flex mt-3">
-                        <div class="w-1/4 mr-2">
-                            <InputLabel for="code" value="Código" />
-                            <TextInput v-model="store.form.code" class="w-full" type="text" />
+                    <!--inks-->
+                    <div v-else>
+                        <div class="w-full flex mt-3">
+                            <div class="w-1/4 mr-2">
+                                <InputLabel for="code" value="Código" />
+                                <TextInput v-model="store.form.code" class="w-full" type="text" />
+                            </div>
                         </div>
                     </div>
                     <div class="flex justify-end mt-3">

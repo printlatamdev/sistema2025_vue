@@ -8,6 +8,7 @@ export const useMaterialStore = defineStore('material', {
     isMessage: 'Material',
     isCatMessage: 'Categoría',
     title: '',
+    isForm: 1,
     materials: [],
     activeTab: 0,
     openModal: false,

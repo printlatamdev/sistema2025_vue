@@ -30,7 +30,8 @@ defineProps({
 <template>
     <AppLayout title="Materiales">
         <div class="w-full">
-            <h2 class="text-3xl font-bold">Datos de materiales <span class="border-b-2 border-green-200">{{ store.title }}</span></h2>
+            <h2 class="text-3xl font-bold">Datos de materiales <span class="border-b-2 border-green-200">{{ store.title
+                    }}</span></h2>
             <!--tabs-->
             <div class=" mt-5">
                 <ul class='flex justify-start cursor-pointer'>
@@ -49,22 +50,7 @@ defineProps({
             </div>
             <!--form-->
             <div v-if="store.activeTab == 0" class="w-1/3">
-                <form action="" class="border p-5 mt-10 rounded-md">
-                    <h2 class="text-2xl font-semibold">Nuevo tipo de material</h2>
-                    <div class="w-full mt-3">
-                        <InputLabel for="name" value="Nombre" />
-                        <TextInput v-model="store.formCat.name" class="w-full" type="text" />
-                    </div>
-                    <div class="mt-3">
-                        <InputLabel for="name" value="Descripción" />
-                        <textarea v-model="store.formCat.description" rows="3" class="block text-xs w-full border-gray-300 rounded-md"></textarea>
-                    </div>
-                    <div class="flex justify-end mt-3">
-                        <PrimaryButton @click.prevent="store.storeCategory()">
-                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar
-                        </PrimaryButton>
-                    </div>
-                </form>
+                lorem i
             </div>
             <!--table-->
             <div v-else>
