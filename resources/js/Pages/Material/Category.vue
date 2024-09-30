@@ -38,7 +38,9 @@ defineProps({
                             </template>
                             <template #icon>
                                 <div class="bg-gray-200 px-2 py-1 rounded-md">
-                                    <font-awesome-icon :icon="['fas', 'bolt']" class="text-2xl" />
+                                    <span v-for="img in item.image" :key="img.id">
+                                        <img :src="img.url" alt="" class="w-10">
+                                    </span>
                                 </div>
                             </template>
                         </Card>

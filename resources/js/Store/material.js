@@ -42,6 +42,7 @@ export const useMaterialStore = defineStore('material', {
     }),
     formCat: useForm({
       name: '',
+      image: '',
       description: '',
       error: '',
       processing: false,
@@ -109,6 +110,15 @@ export const useMaterialStore = defineStore('material', {
             this.alert.successAlert(this.isCatMessage + ' agregado');
         },
     });
+    },
+    handleFile(e){
+        const image = e.target.files[0];
+        if(!image) return;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            this.formCat.image = image;
+        };
+        reader.readAsDataURL(image);
     },
     showStoreModal(){
       this.openModal = true;

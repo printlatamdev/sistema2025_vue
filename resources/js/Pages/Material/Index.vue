@@ -49,13 +49,33 @@ defineProps({
                 </ul>
             </div>
             <!--form-->
-            <div v-if="store.activeTab == 0" class="w-1/3">
-                lorem i
+            <div v-if="store.activeTab == 0" class="w-full mt-7">
+
+                <div class="grid grid-cols-8 gap-2 mt-14">
+                    <div class="border rounded-lg text-center p-3 bg-blue-50 cursor-pointer">
+                        <span class="bg-gray-200 py-1 px-2 rounded-full">
+                            <font-awesome-icon :icon="['fas', 'plus']" />
+                        </span>
+                        <p>Ingreso de material</p>
+                    </div>
+                    <div class="border rounded-lg text-center p-3 bg-sky-50 cursor-pointer">
+                        <span class="bg-gray-200 py-1 px-2 rounded-full">
+                            <font-awesome-icon :icon="['fas', 'plus']" />
+                        </span>
+                        <p>Descarga de material</p>
+                    </div>
+                    <div class="border rounded-lg text-center p-3 bg-purple-50 cursor-pointer">
+                        <span class="bg-gray-200 py-1 px-2 rounded-full">
+                            <font-awesome-icon :icon="['fas', 'plus']" />
+                        </span>
+                        <p>Finalizar material</p>
+                    </div>
+                </div>
             </div>
             <!--table-->
             <div v-else>
                 <div class="mt-5 p-2 bg-green-200 flex justify-between">
-                    <h3 class="text-lg">Existencias {{ types[0].category.name }}</h3>
+                    <h3 class="text-lg">Existencias</h3>
                     <PrimaryButton @click.prevent="store.showStoreModal()">
                         <font-awesome-icon :icon="['fas', 'plus']" class="mr-1" />Nuevo material
                     </PrimaryButton>
