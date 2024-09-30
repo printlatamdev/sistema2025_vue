@@ -33,7 +33,8 @@ defineProps({
 <template>
     <AppLayout title="Materiales">
         <div class="w-full">
-            <h2 class="text-3xl font-bold">Datos de materiales <span class="border-b-2 border-green-200">{{ categories.name }}</span></h2>
+            <h2 class="text-3xl font-bold">Datos de materiales <span class="border-b-2 border-green-200">{{
+                    categories.name }}</span></h2>
             <!--tabs-->
             <div class=" mt-5">
                 <ul class='flex justify-start cursor-pointer'>
@@ -52,9 +53,9 @@ defineProps({
             </div>
             <!--form-->
             <div v-if="store.activeTab == 0" class="w-full mt-7">
-
-                <div class="grid grid-cols-8 gap-2 mt-14">
-                    <div class="border rounded-lg text-center p-3 bg-blue-50 cursor-pointer" @click.prevent="store.showTypeModal()">
+                <div class="grid grid-cols-6 gap-3 mt-12">
+                    <div class="border rounded-lg text-center p-3 bg-blue-50 cursor-pointer"
+                        @click.prevent="store.showTypeModal()">
                         <span class="py-1 px-2 rounded-full">
                             <font-awesome-icon :icon="['fas', 'plus']" class="text-2xl text-gray-700" />
                         </span>
@@ -62,13 +63,13 @@ defineProps({
                     </div>
                     <div class="border rounded-lg text-center p-3 bg-blue-50 cursor-pointer">
                         <span class="py-1 px-2 rounded-full">
-                            <font-awesome-icon :icon="['fas', 'folder-plus']" class="text-2xl text-gray-700"/>
+                            <font-awesome-icon :icon="['fas', 'folder-plus']" class="text-2xl text-gray-700" />
                         </span>
                         <p class="mt-1">Ingreso de material</p>
                     </div>
                     <div class="border rounded-lg text-center p-3 bg-sky-50 cursor-pointer">
                         <span class="py-1 px-2 rounded-full">
-                            <font-awesome-icon :icon="['fas', 'arrow-down']"  class="text-2xl text-gray-700"/>
+                            <font-awesome-icon :icon="['fas', 'arrow-down']" class="text-2xl text-gray-700" />
                         </span>
                         <p class="mt-1">Descarga de material</p>
                     </div>
@@ -83,7 +84,9 @@ defineProps({
             <!--table-->
             <div v-else>
                 <div class="mt-5 p-2 bg-green-200 flex justify-between">
-                    <h3 class="text-lg">Existencias</h3>
+                    <span v-for="img in categories.image" :key="img.id" class="flex">
+                        <img :src="img.url" alt="" class="w-6 mx-2"><h3 class="text-lg">Existencias</h3>
+                    </span>
                     <PrimaryButton @click.prevent="store.showStoreModal()">
                         <font-awesome-icon :icon="['fas', 'plus']" class="mr-1" />Nuevo material
                     </PrimaryButton>

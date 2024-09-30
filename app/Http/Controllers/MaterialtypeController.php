@@ -24,6 +24,6 @@ class MaterialtypeController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('categories.types', $request->materialcategory_id, );
+        return redirect()->route('categories.types', $request->materialcategory_id);
     }
 }

@@ -43,14 +43,14 @@ onMounted(() => { });
                 <ol
                     class="flex items-center justify-center w-full p-3 space-x-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg sm:text-base sm:p-4 sm:space-x-4 rtl:space-x-reverse">
                     <li class="flex items-center text-blue-600">
-                        <span class="flex items-center justify-center w-5 h-5 me-2 text-xs border rounded-full shrink-0 border-blue-600">
+                        <span class="flex items-center justify-center w-5 h-5 me-2 border rounded-full shrink-0 border-blue-600">
                             1
                         </span>
                         Información <span class="hidden sm:inline-flex sm:ms-2">general</span>
                     </li>
                     <font-awesome-icon :icon="['fas', 'angles-right']" />
                     <li class="flex items-center text-gray-600">
-                        <span class="flex items-center justify-center w-5 h-5 me-2 text-xs border rounded-full shrink-0 border-gray-600">
+                        <span class="flex items-center justify-center w-5 h-5 me-2 border rounded-full shrink-0 border-gray-600">
                             2
                         </span>
                         Detalle de cotización
@@ -64,7 +64,7 @@ onMounted(() => { });
                             <div class="w-1/3 mr-1">
                                 <InputLabel for="company_id" value="Cliente" />
                                 <select v-model="store.form.company_id" @change="store.getContactByCompany(store.form.company_id)"
-                                    class="text-xs block w-full border-gray-300 rounded-md">
+                                    class="block w-full border-gray-300 rounded-md">
                                     <option class="text-gray-500" disabled> Seleccione una opción</option>
                                     <option v-for="company in companies" :key="company.id" :value="company.id">
                                         {{ company.social_reason }}
@@ -75,7 +75,7 @@ onMounted(() => { });
                             <div class="w-1/3 mr-1">
                                 <InputLabel for="contact_id" value="Contacto" />
                                 <select v-model="store.form.contact_id"
-                                    class="text-xs block w-full border-gray-300 rounded-md">
+                                    class="block w-full border-gray-300 rounded-md">
                                     <option class="text-gray-500" disabled>Seleccione una opción</option>
                                     <option v-for="contact in store.contactsByCompany" :key="contact.id" :value="contact.id">
                                         {{ contact.name }} {{ contact.lastname }}
@@ -86,7 +86,7 @@ onMounted(() => { });
                             <div class="w-1/3">
                                 <InputLabel for="user_id" value="Vendedor" />
                                 <select v-model="store.form.user_id"
-                                    class="text-xs block  w-full border-gray-300 rounded-md">
+                                    class="block  w-full border-gray-300 rounded-md">
                                     <option class="text-gray-500" disabled> Seleccione una opción</option>
                                     <option v-for="user in users" :key="user.id" :value="user.id">
                                         {{ user.name }}
@@ -100,7 +100,7 @@ onMounted(() => { });
                             <div class="w-1/4 mr-1">
                                 <InputLabel for="payment_condition" value="Condiciones de pago" />
                                 <select v-model="store.form.payment_condition"
-                                    class="text-xs block  w-full border-gray-300 rounded-md">
+                                    class="block  w-full border-gray-300 rounded-md">
                                     <option class="text-gray-500" disabled> Seleccione una opción</option>
                                     <option v-for="payment in store.payment_condition" :key="payment.id"
                                         :value="payment.value">
@@ -111,7 +111,7 @@ onMounted(() => { });
                             <div class="w-1/4 mr-1">
                                 <InputLabel for="offer_validity" value="Validez de oferta" />
                                 <select v-model="store.form.offer_validity"
-                                    class="text-xs block  w-full border-gray-300 rounded-md">
+                                    class="block  w-full border-gray-300 rounded-md">
                                     <option class="text-gray-500" disabled> Seleccione una opción</option>
                                     <option v-for="offer in store.offer_validity" :key="offer.id" :value="offer.value">
                                         {{ offer.name }}
@@ -121,7 +121,7 @@ onMounted(() => { });
                             <div class="w-1/4 mr-1">
                                 <InputLabel for="currency" value="Moneda" />
                                 <select v-model="store.form.currency"
-                                    class="text-xs block  w-full border-gray-300 rounded-md">
+                                    class="block  w-full border-gray-300 rounded-md">
                                     <option class="text-gray-500" disabled> Seleccione una opción</option>
                                     <option v-for="currency in store.currency" :key="currency.id"
                                         :value="currency.value">
@@ -132,7 +132,7 @@ onMounted(() => { });
                             <div class="w-1/4 mr-1">
                                 <InputLabel for="incoterm" value="Términos de comercio" />
                                 <select v-model="store.form.incoterm"
-                                    class="text-xs block  w-full border-gray-300 rounded-md">
+                                    class="block  w-full border-gray-300 rounded-md">
                                     <option class="text-gray-500" disabled> Seleccione una opción</option>
                                     <option v-for="incoterm in store.incoterm" :key="incoterm.id"
                                         :value="incoterm.value">

@@ -2,22 +2,27 @@ import { defineStore } from "pinia";
 import { useForm } from "@inertiajs/vue3";
 import { useAlertStore } from './alert';
 
-export const useProductStore = defineStore("product", {
+export const useBrandStore = defineStore("brand", {
     state: () => ({
         openModal: false,
         alert: useAlertStore(),
-        isMessage: 'Producto',
+        isMessage: 'Marca',
         form: useForm({
             name: "",
+            category: "",
             description: "",
         }),
+        categories: [
+            { name: "Cliente", value: "Cliente" },
+            { name: "Material", value: "Material" },
+        ],
     }),
     actions: {
-        storeProduct() {
-            this.form.post(route("store.products"), {
+        storeBrand() {
+            this.form.post(route("store.brands"), {
                 onSuccess: () => {
                     this.closeModal();
-                    this.alert.successAlert(this.isMessage + ' agregado');
+                    this.alert.successAlert(this.isMessage + ' agregada');
                 },
             });
         },

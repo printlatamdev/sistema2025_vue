@@ -8,11 +8,11 @@ import SecondaryButton from '@/Components/SecondaryButton.vue';
 import AddButton from '@/Components/AddButton.vue';
 import SuccessButton from '@/Components/SuccessButton.vue';
 import Filepond from '@/Components/Filepond.vue';
-import { useQuoteStore } from '@/Store/quote';
-import { useProductStore } from '@/Store/product';
 import ModalStoreUpdate from '../Product/ModalStoreUpdate.vue';
 import InputError from '@/Components/InputError.vue';
 import ActionMessage from '@/Components/ActionMessage.vue';
+import { useQuoteStore } from '@/Store/quote';
+import { useProductStore } from '@/Store/product';
 
 let store_product = useProductStore();
 let store = useQuoteStore();
@@ -51,7 +51,7 @@ defineProps({
                     class="flex items-center justify-center w-full p-3 space-x-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg sm:text-base sm:p-4 sm:space-x-4 rtl:space-x-reverse">
                     <li class="flex items-center text-gray-600">
                         <span
-                            class="flex items-center justify-center w-5 h-5 me-2 text-xs border rounded-full shrink-0 border-gray-600">
+                            class="flex items-center justify-center w-5 h-5 me-2 border rounded-full shrink-0 border-gray-600">
                             1
                         </span>
                         Información <span class="hidden sm:inline-flex sm:ms-2">general</span>
@@ -60,7 +60,7 @@ defineProps({
                     <font-awesome-icon :icon="['fas', 'angles-left']" />
                     <li class="flex items-center text-blue-600">
                         <span
-                            class="flex items-center justify-center w-5 h-5 me-2 text-xs border rounded-full shrink-0 border-blue-600">
+                            class="flex items-center justify-center w-5 h-5 me-2 border rounded-full shrink-0 border-blue-600">
                             2
                         </span>
                         Detalle de cotización
@@ -74,7 +74,7 @@ defineProps({
                         <div class="w-1/2">
                             <InputLabel for="product_id" value="Producto" />
                             <select v-model="store.formQD.product_id"
-                                class="text-xs block  w-full border-gray-300 rounded-l-md">
+                                class="block  w-full border-gray-300 rounded-l-md">
                                 <option class="text-gray-500" disabledmount>Seleccione una opción</option>
                                 <option v-for="product in products" :key="product.id" :value="product.id">
                                     {{ product.name }}
@@ -109,7 +109,7 @@ defineProps({
                         <div class="w-2/3 mr-3">
                             <InputLabel for="url" value="Descripción" />
                             <textarea v-model="store.formQD.details" rows="4"
-                                class="block text-xs w-full border-gray-300 rounded-md"></textarea>
+                                class="block w-full border-gray-300 rounded-md"></textarea>
                         </div>
                         <div class="w-1/3">
                             <InputLabel for="image" value="Subir imagen" />
@@ -140,7 +140,7 @@ defineProps({
                         <div class="w-full mt-5">
                             <InputLabel for="iva" value="IVA" />
                             <select v-model="store.formTotal.iva"
-                                class="text-xs block  w-full border-gray-300 rounded-md">
+                                class="block w-full border-gray-300 rounded-md">
                                 <option class="text-gray-500" disabled>Seleccione una opción</option>
                                 <option v-for="i in store.iva" :key="i.id" :value="i.value">
                                     {{ i.name }}
@@ -150,7 +150,7 @@ defineProps({
                                 <InputLabel for="iva" value="Asignar IVA" />
                                 <TextInput v-model="store.formTotal.iva2" class="w-full" type="text" />
                             </div>
-                            <div class="border border-gray-300 text-xs bg-gray-50 mt-3 rounded-md p-5">
+                            <div class="border border-gray-300 bg-gray-50 mt-3 rounded-md p-5">
                                 <p><span class="font-semibold">Total parcial: </span>${{
                                     store.getCalc.total_pr.toFixed(2) }}</p>
                                 <p><span class="font-semibold">IVA:</span> ({{ store.formTotal.iva }}%) ${{

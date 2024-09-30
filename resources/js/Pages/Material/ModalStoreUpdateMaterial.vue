@@ -4,9 +4,14 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import DialogModal from '@/Components/DialogModal.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
+import AddButton from '@/Components/AddButton.vue';
+import ModalStoreBrand from '../Brand/ModalStoreBrand.vue';
 import { useMaterialStore } from '@/Store/material';
+import { useBrandStore } from '@/Store/brand';
 
+let store_brand = useBrandStore();
 let store = useMaterialStore();
+
 defineProps({
     show: {
         type: Boolean,
@@ -52,12 +57,17 @@ defineProps({
                     <div class="flex mt-5">
                         <div class="w-2/4 mr-2">
                             <InputLabel for="brand" value="Marca" />
-                            <select v-model="store.form.brand_id" class="block w-full border-gray-300 rounded-md">
+                            <div class="flex">
+                                <select v-model="store.form.brand_id" class="block w-full border-gray-300 rounded-l-md">
                                 <option class="text-gray-500" disabled> Seleccione una opción</option>
                                 <option v-for="item in brands" :key="item.id" :value="item.id">
                                     {{ item.name }}
                                 </option>
                             </select>
+                            <AddButton v-tooltip="'Agregar nueva marca'" class="" @click.prevent="store_brand.showStoreModal()">
+                                <font-awesome-icon :icon="['fas', 'plus']" />
+                            </AddButton>
+                            </div>
                         </div>
                         <div class="w-1/4 mr-2">
                             <InputLabel for="color" value="Color" />
@@ -133,4 +143,5 @@ defineProps({
             </div>
         </template>
     </DialogModal>
+    <ModalStoreBrand :show="store_brand.openModal" />
 </template>
