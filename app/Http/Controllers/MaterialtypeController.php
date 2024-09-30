@@ -26,4 +26,9 @@ class MaterialtypeController extends Controller
 
         return redirect()->route('categories.types', $request->materialcategory_id);
     }
+
+    public function show($id){
+        $data = Materialtype::find($id);
+        return MaterialtypeResource::make($data);
+    }
 }

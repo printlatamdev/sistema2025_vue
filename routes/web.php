@@ -106,12 +106,15 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::get('/categories/types/materials/{type}', 'getMaterialFromType')->name('materials.types');
     });
     Route::resource('/categories', MaterialcategoryController::class)->except(['index', 'create', 'edit'])->names([
+        'index' => 'categories',
         'store' => 'store.categories',
         'update' => 'update.categories',
         'destroy' => 'destroy.categories',
     ]);
     Route::resource('/types', MaterialtypeController::class)->except(['index', 'create', 'edit'])->names([
+        'index' => 'types',
         'store' => 'store.types',
+        'show' => 'show.types',
         'update' => 'update.types',
         'destroy' => 'destroy.types',
     ]);

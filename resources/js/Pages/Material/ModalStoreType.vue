@@ -29,7 +29,7 @@ defineProps({
             Nuevo registro de tipo de material
         </template>
         <template #content>
-            <div class="mt-5">
+            <div class="mt-3">
                 <form action="">
                     <div class="w-full">
                         <InputLabel for="name" value="Nombre" />

@@ -9,8 +9,9 @@ export const useMaterialStore = defineStore("material", {
         isCatMessage: "Categoría",
         isTypeMessage: "Tipo",
         title: "",
-        isForm: 1,
+        isForm: false,
         materials: [],
+        type_id: null,
         activeTab: 0,
         openModal: false,
         openCatModal: false,
@@ -63,34 +64,18 @@ export const useMaterialStore = defineStore("material", {
         ],
     }),
     actions: {
-        storeMaterial(id) {
-            if (!id) {
-                this.form.post(route("store.materials"), {
-                    onSuccess: () => {
-                        this.closeModal();
-                        this.clearInput();
-                        this.alert.successAlert(this.isMessage + " agregado");
-                    },
-                    onError: (error) => {
-                        this.errors = error;
-                        this.alert.errorAlert();
-                    },
-                });
-            } else {
-                this.form.put(route("update.materials", id), {
-                    onSuccess: () => {
-                        this.closeModal();
-                        this.clearInput();
-                        this.alert.successAlert(
-                            this.isMessage + " actualizado"
-                        );
-                    },
-                    onError: (error) => {
-                        this.errors = error;
-                        this.alert.errorAlert();
-                    },
-                });
-            }
+        storeMaterial() {
+            this.form.post(route("store.materials"), {
+                onSuccess: () => {
+                    this.closeModal();
+                    this.clearInput();
+                    this.alert.successAlert(this.isMessage + " agregado");
+                },
+                onError: (error) => {
+                    this.errors = error;
+                    this.alert.errorAlert();
+                },
+            });
         },
         deleteMaterial(id) {
             this.form.delete(route("delete.materials", id), {
@@ -106,10 +91,28 @@ export const useMaterialStore = defineStore("material", {
             });
         },
         getMaterialByTypes(id) {
+            this.type_id = id;
             axios.get(route("materials.types", id)).then((response) => {
                 this.activeTab = id;
                 this.materials = response.data;
             });
+        },
+        showType(id){
+            axios.get(route("show.types", id)).then((response) => {
+                this.activeTab = id;
+                this.type = response.data;
+                console.log(this.type);
+                this.showStoreModal();
+            });
+        },
+        showForm(status){
+            this.isForm = true;
+            if(status == true){
+                this.hideForm();
+            }
+        },
+        hideForm(){
+            this.isForm = false;
         },
         resetToZero() {
             this.activeTab = 0;

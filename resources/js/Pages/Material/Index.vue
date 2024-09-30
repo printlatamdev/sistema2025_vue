@@ -51,7 +51,7 @@ defineProps({
                     </span>
                 </ul>
             </div>
-            <!--form-->
+            <!--cards-->
             <div v-if="store.activeTab == 0" class="w-full mt-7">
                 <div class="grid grid-cols-6 gap-3 mt-12">
                     <div class="border rounded-lg text-center p-3 bg-blue-50 cursor-pointer"
@@ -87,7 +87,7 @@ defineProps({
                     <span v-for="img in categories.image" :key="img.id" class="flex">
                         <img :src="img.url" alt="" class="w-6 mx-2"><h3 class="text-lg">Existencias</h3>
                     </span>
-                    <PrimaryButton @click.prevent="store.showStoreModal()">
+                    <PrimaryButton @click.prevent="store.showType(store.type_id)">
                         <font-awesome-icon :icon="['fas', 'plus']" class="mr-1" />Nuevo material
                     </PrimaryButton>
                 </div>
@@ -99,7 +99,7 @@ defineProps({
                 </EasyDataTable>
             </div>
         </div>
-        <ModalStoreUpdateMaterial :show="store.openModal" :brands="brands" />
+        <ModalStoreUpdateMaterial :show="store.openModal" :type="store.type" :brands="brands" :categories="categories" />
         <ModalStoreType :show="store.openTypeModal" :categories="categories" />
     </AppLayout>
 </template>

@@ -17,9 +17,17 @@ defineProps({
         type: Boolean,
         default: false,
     },
+    type: {
+        type: Object,
+        default: ([]),
+    },
     brands: {
-        type: Boolean,
-        default: false,
+        type: Object,
+        default: ([]),
+    },
+    categories: {
+        type: Object,
+        default: ([]),
     },
     maxWidth: {
         type: String,
@@ -31,7 +39,7 @@ defineProps({
 <template>
     <DialogModal :show="show" @close="store.closeModal" :max-width="maxWidth">
         <template #title>
-            Nuevo registro de material
+            Nuevo registro de material <span class="bg-blue-200 p-1 rounded-md">{{ type.name }}</span>
         </template>
         <template #content>
             <div class="mt-5">
@@ -54,19 +62,20 @@ defineProps({
                             <TextInput v-model="store.form.lenght" class="w-full" type="text" />
                         </div>
                     </div>
-                    <div class="flex mt-5">
+                    <div class="flex mt-3">
                         <div class="w-2/4 mr-2">
                             <InputLabel for="brand" value="Marca" />
                             <div class="flex">
                                 <select v-model="store.form.brand_id" class="block w-full border-gray-300 rounded-l-md">
-                                <option class="text-gray-500" disabled> Seleccione una opción</option>
-                                <option v-for="item in brands" :key="item.id" :value="item.id">
-                                    {{ item.name }}
-                                </option>
-                            </select>
-                            <AddButton v-tooltip="'Agregar nueva marca'" class="" @click.prevent="store_brand.showStoreModal()">
-                                <font-awesome-icon :icon="['fas', 'plus']" />
-                            </AddButton>
+                                    <option class="text-gray-500" disabled> Seleccione una opción</option>
+                                    <option v-for="item in brands" :key="item.id" :value="item.id">
+                                        {{ item.name }}
+                                    </option>
+                                </select>
+                                <AddButton v-tooltip="'Agregar nueva marca'" class=""
+                                    @click.prevent="store_brand.showStoreModal()">
+                                    <font-awesome-icon :icon="['fas', 'plus']" />
+                                </AddButton>
                             </div>
                         </div>
                         <div class="w-1/4 mr-2">
@@ -79,7 +88,7 @@ defineProps({
                             </select>
                         </div>
                     </div>
-                    <ul class="flex mt-10 text-sm font-medium text-center rounded-lg border">
+                    <!-- <ul class="flex mt-10 text-sm font-medium text-center rounded-lg border">
                         <li class="w-full inline-block p-3 text-gray-900 border-r border-gray-200 cursor-pointer"
                             :class="{ 'bg-sky-200 text-gray-900': store.isForm == 1 }" @click="store.isForm = 1">
                             Registro para materiales
@@ -88,52 +97,62 @@ defineProps({
                             @click="store.isForm = 2" :class="{ 'bg-sky-200 text-gray-900': store.isForm == 2 }">
                             Registro para tintas
                         </li>
-                    </ul>
+                    </ul>-->
                     <!--materials-->
-                    <div class="mt-5" v-if="store.isForm == 1">
-                        <div class="w-full flex">
-                            <div class="w-1/5 mr-1">
-                                <InputLabel for="ounce" value="Onzas" />
-                                <TextInput v-model="store.form.ounce" class="w-full" type="text" />
-                            </div>
-                            <div class="w-1/5 mr-1">
-                                <InputLabel for="thickness" value="Grosor" />
-                                <TextInput v-model="store.form.thickness" class="w-full" type="text" />
-                            </div>
-                            <div class="w-1/5 mr-1">
-                                <InputLabel for="finish" value="Acabado" />
-                                <TextInput v-model="store.form.finish" class="w-full" type="text" />
-                            </div>
-                        </div>
-                        <div class="w-full flex mt-3">
-                            <div class="w-1/4 mr-2">
-                                <InputLabel for="density" value="Densidad" />
-                                <TextInput v-model="store.form.density" class="w-full" type="text" />
-                            </div>
-                            <div class="w-1/4 mr-2">
-                                <InputLabel for="size" value="Medida" />
-                                <TextInput v-model="store.form.size" class="w-full" type="text" />
-                            </div>
-                            <div class="w-1/4 mr-2">
-                                <InputLabel for="gum" value="Goma" />
-                                <TextInput v-model="store.form.gum" class="w-full" type="text" />
-                            </div>
-                            <div class="w-1/4 mr-2">
-                                <InputLabel for="print" value="Impresión" />
-                                <TextInput v-model="store.form.print" class="w-full" type="text" />
-                            </div>
-                        </div>
 
+                    <div class="mt-7 bg-gray-100 border rounded-t-xl">
+                        <div
+                            class="flex items-center cursor-pointer justify-between w-full p-3 font-medium text-gray-700  hover:bg-gray-100"
+                            @click="store.showForm()">
+                            <span>Detalles de material</span>
+                            <!--icon-->
+                            <font-awesome-icon :icon="['fas', 'chevron-down']" class=""  v-if="store.isForm == false" />
+                            <font-awesome-icon :icon="['fas', 'chevron-up']" class="" v-else />
+                        </div>
+                        <div class="p-3 bg-gray-50" :class="{ 'hidden' : store.isForm==false }">
+                            <div class="w-full flex">
+                                <div class="w-1/5 mr-1">
+                                    <InputLabel for="ounce" value="Onzas" />
+                                    <TextInput v-model="store.form.ounce" class="w-full" type="text" />
+                                </div>
+                                <div class="w-1/5 mr-1">
+                                    <InputLabel for="thickness" value="Grosor" />
+                                    <TextInput v-model="store.form.thickness" class="w-full" type="text" />
+                                </div>
+                                <div class="w-1/5 mr-1">
+                                    <InputLabel for="finish" value="Acabado" />
+                                    <TextInput v-model="store.form.finish" class="w-full" type="text" />
+                                </div>
+                            </div>
+                            <div class="w-full flex mt-3">
+                                <div class="w-1/4 mr-2">
+                                    <InputLabel for="density" value="Densidad" />
+                                    <TextInput v-model="store.form.density" class="w-full" type="text" />
+                                </div>
+                                <div class="w-1/4 mr-2">
+                                    <InputLabel for="size" value="Medida" />
+                                    <TextInput v-model="store.form.size" class="w-full" type="text" />
+                                </div>
+                                <div class="w-1/4 mr-2">
+                                    <InputLabel for="gum" value="Goma" />
+                                    <TextInput v-model="store.form.gum" class="w-full" type="text" />
+                                </div>
+                                <div class="w-1/4 mr-2">
+                                    <InputLabel for="print" value="Impresión" />
+                                    <TextInput v-model="store.form.print" class="w-full" type="text" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!--inks-->
-                    <div v-else>
+                    <!--inks
+                    <div>
                         <div class="w-full flex mt-3">
                             <div class="w-1/4 mr-2">
                                 <InputLabel for="code" value="Código" />
                                 <TextInput v-model="store.form.code" class="w-full" type="text" />
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="flex justify-end mt-3">
                         <PrimaryButton @click.prevent="store.storeCategory()">
                             <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar
