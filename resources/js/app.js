@@ -15,8 +15,8 @@ import 'floating-vue/dist/style.css'
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faPenToSquare,faTrashCan,faAnglesRight,faAnglesLeft,faArrowLeft,faFilePdf,faPlus,faFloppyDisk,faHammer,faCircleUser,faPowerOff,faChartPie,faPaperclip,faBolt,faAddressBook,faBell,faBagShopping,faChevronDown,faChevronUp} from '@fortawesome/free-solid-svg-icons'
-library.add(faPenToSquare,faTrashCan,faAnglesRight,faAnglesLeft,faArrowLeft,faFilePdf,faPlus,faFloppyDisk,faHammer,faCircleUser,faPowerOff,faChartPie,faPaperclip,faBolt,faAddressBook,faBell,faBagShopping,faChevronDown,faChevronUp)
+import { faPenToSquare,faTrashCan,faAnglesRight,faAnglesLeft,faArrowLeft,faFilePdf,faPlus,faFloppyDisk,faHammer,faCircleUser,faPowerOff,faChartPie,faPaperclip,faBolt,faAddressBook,faBell,faBagShopping,faChevronDown,faChevronUp,faArrowDown,faHourglassEnd,faFolderPlus} from '@fortawesome/free-solid-svg-icons'
+library.add(faPenToSquare,faTrashCan,faAnglesRight,faAnglesLeft,faArrowLeft,faFilePdf,faPlus,faFloppyDisk,faHammer,faCircleUser,faPowerOff,faChartPie,faPaperclip,faBolt,faAddressBook,faBell,faBagShopping,faChevronDown,faChevronUp,faArrowDown,faHourglassEnd,faFolderPlus)
 
 
 

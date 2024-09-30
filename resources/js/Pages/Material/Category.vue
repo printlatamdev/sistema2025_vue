@@ -37,9 +37,9 @@ defineProps({
                                 <p class="text-lg font-semibold">{{ item.name }}</p>
                             </template>
                             <template #icon>
-                                <div class="bg-gray-200 px-2 py-1 rounded-md">
+                                <div class="border px-2 py-1 rounded-md">
                                     <span v-for="img in item.image" :key="img.id">
-                                        <img :src="img.url" alt="" class="w-10">
+                                        <img :src="img.url" alt="" class="w-8 h-8">
                                     </span>
                                 </div>
                             </template>

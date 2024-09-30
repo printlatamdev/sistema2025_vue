@@ -4,6 +4,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MaterialcategoryController;
 use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\MaterialtypeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QuoteController;
@@ -76,12 +77,13 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     ]);
     Route::controller(MaterialController::class)->group(function () {
         Route::get('/categories', 'getCategories')->name('categories');
-        Route::get('/{materialcategory:name}/types', 'getTypeFromCategories')->name('categories.types');
+        Route::get('/{materialcategory}/types', 'getTypeFromCategories')->name('categories.types');
         Route::get('/categories/types/materials/{type}', 'getMaterialFromType')->name('materials.types');
     });
-    
-    //material category routes
     Route::resource('/categories', MaterialcategoryController::class)->except(['index', 'create', 'edit'])->names([
-        'store' => 'store.categories', 'show' => 'show.categories', 'update' => 'update.categories', 'destroy' => 'categories.categories',
+        'store' => 'store.categories', 'show' => 'show.categories', 'update' => 'update.categories', 'destroy' => 'destroy.categories',
+    ]);
+    Route::resource('/types', MaterialtypeController::class)->except(['index', 'create', 'edit'])->names([
+        'store' => 'store.types', 'show' => 'show.types', 'update' => 'update.types', 'destroy' => 'destroy.types',
     ]);
 });

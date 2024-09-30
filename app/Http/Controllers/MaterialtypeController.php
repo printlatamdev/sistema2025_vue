@@ -19,11 +19,11 @@ class MaterialtypeController extends Controller
     {
         Materialtype::create([
             'name' => $request->name,
-            'status' => $request->status,
+            'status' => 1,
             'materialcategory_id' => $request->materialcategory_id,
             'description' => $request->description,
         ]);
 
-        return redirect()->route('materials');
+        return redirect()->route('categories.types', $request->materialcategory_id, );
     }
 }

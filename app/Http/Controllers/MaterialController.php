@@ -93,6 +93,7 @@ class MaterialController extends Controller
 
         return Inertia::render('Material/Index', [
             'types' => MaterialtypeResource::collection($data),
+            'categories' => MaterialcategoryResource::make($cat),
             'brands' => BrandResource::collection(Brand::get()),
         ]);
     }

@@ -1,10 +1,9 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import TextInput from '@/Components/TextInput.vue';
 import { useMaterialStore } from '@/Store/material';
 import ModalStoreUpdateMaterial from './ModalStoreUpdateMaterial.vue';
+import ModalStoreType from './ModalStoreType.vue';
 
 let store = useMaterialStore();
 defineProps({
@@ -20,6 +19,10 @@ defineProps({
         type: Object,
         default: ([]),
     },
+    categories: {
+        type: Object,
+        default: ([]),
+    },
     maxWidth: {
         type: String,
         default: 'md',
@@ -30,8 +33,7 @@ defineProps({
 <template>
     <AppLayout title="Materiales">
         <div class="w-full">
-            <h2 class="text-3xl font-bold">Datos de materiales <span class="border-b-2 border-green-200">{{ store.title
-                    }}</span></h2>
+            <h2 class="text-3xl font-bold">Datos de materiales <span class="border-b-2 border-green-200">{{ categories.name }}</span></h2>
             <!--tabs-->
             <div class=" mt-5">
                 <ul class='flex justify-start cursor-pointer'>
@@ -52,23 +54,29 @@ defineProps({
             <div v-if="store.activeTab == 0" class="w-full mt-7">
 
                 <div class="grid grid-cols-8 gap-2 mt-14">
-                    <div class="border rounded-lg text-center p-3 bg-blue-50 cursor-pointer">
-                        <span class="bg-gray-200 py-1 px-2 rounded-full">
-                            <font-awesome-icon :icon="['fas', 'plus']" />
+                    <div class="border rounded-lg text-center p-3 bg-blue-50 cursor-pointer" @click.prevent="store.showTypeModal()">
+                        <span class="py-1 px-2 rounded-full">
+                            <font-awesome-icon :icon="['fas', 'plus']" class="text-2xl text-gray-700" />
                         </span>
-                        <p>Ingreso de material</p>
+                        <p class="mt-1">Nuevo tipo de material</p>
+                    </div>
+                    <div class="border rounded-lg text-center p-3 bg-blue-50 cursor-pointer">
+                        <span class="py-1 px-2 rounded-full">
+                            <font-awesome-icon :icon="['fas', 'folder-plus']" class="text-2xl text-gray-700"/>
+                        </span>
+                        <p class="mt-1">Ingreso de material</p>
                     </div>
                     <div class="border rounded-lg text-center p-3 bg-sky-50 cursor-pointer">
-                        <span class="bg-gray-200 py-1 px-2 rounded-full">
-                            <font-awesome-icon :icon="['fas', 'plus']" />
+                        <span class="py-1 px-2 rounded-full">
+                            <font-awesome-icon :icon="['fas', 'arrow-down']"  class="text-2xl text-gray-700"/>
                         </span>
-                        <p>Descarga de material</p>
+                        <p class="mt-1">Descarga de material</p>
                     </div>
                     <div class="border rounded-lg text-center p-3 bg-purple-50 cursor-pointer">
-                        <span class="bg-gray-200 py-1 px-2 rounded-full">
-                            <font-awesome-icon :icon="['fas', 'plus']" />
+                        <span class="py-1 px-2 rounded-full">
+                            <font-awesome-icon :icon="['fas', 'hourglass-end']" class="text-2xl text-gray-700" />
                         </span>
-                        <p>Finalizar material</p>
+                        <p class="mt-1">Finalizar material</p>
                     </div>
                 </div>
             </div>
@@ -89,5 +97,6 @@ defineProps({
             </div>
         </div>
         <ModalStoreUpdateMaterial :show="store.openModal" :brands="brands" />
+        <ModalStoreType :show="store.openTypeModal" :categories="categories" />
     </AppLayout>
 </template>
