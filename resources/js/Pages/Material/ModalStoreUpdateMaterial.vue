@@ -114,25 +114,41 @@ defineProps({
                             <font-awesome-icon :icon="['fas', 'chevron-down']" class="" v-if="store.isForm == false" />
                             <font-awesome-icon :icon="['fas', 'chevron-up']" class="" v-else />
                         </div>
-                        <div class="p-3 bg-gray-50" :class="{ 'hidden': store.isForm == false }">
+                        <div class="px-5 py-2 bg-gray-50" :class="{ 'hidden': store.isForm == false }">
                             <div v-if="categories.name == 'Tintas'">
                                 <!--datapickers-->
                                 <div class="w-full flex mt-3">
-                                    <div class="w-1/4 mr-2">
+                                    <!--<div class="w-1/3 mr-2">
                                         <InputLabel for="entry_date" value="Fecha de ingreso" />
-                                        <VueDatePicker v-model="store.form.entry_date"></VueDatePicker>
-                                    </div>
-                                    <div class="w-1/4 mr-2">
+                                        <VueDatePicker v-model="store.form.entry_date" inline auto-apply></VueDatePicker>
+                                    </div>-->
+                                    <div class="w-1/3 mx-auto">
                                         <InputLabel for="departure_date" value="Fecha de salida" />
-                                        <VueDatePicker v-model="store.form.departure_date"></VueDatePicker>
+                                        <VueDatePicker v-model="store.form.departure_date" inline auto-apply
+                                            locale="es"></VueDatePicker>
                                     </div>
-                                    <div class="w-1/4 mr-2">
+                                    <div class="w-1/3 mx-auto">
                                         <InputLabel for="use_date" value="Fecha de uso" />
-                                        <VueDatePicker v-model="store.form.use_date"></VueDatePicker>
+                                        <VueDatePicker v-model="store.form.use_date" inline auto-apply locale="es">
+                                        </VueDatePicker>
                                     </div>
-                                    <div class="w-1/4 mr-2">
-                                        <InputLabel for="expiration_date" value="Fecha de vencimiento" />
-                                        <VueDatePicker v-model="store.form.expiration_date"></VueDatePicker>
+                                    <div class="w-1/3">
+                                        <div class="w-full mr-2">
+                                            <InputLabel for="expiration_date" value="Fecha de vencimiento" />
+                                            <VueDatePicker v-model="store.form.expiration_date" locale="es" class="mx-auto">
+                                            </VueDatePicker>
+                                            <div class="w-full mt-3 mr-2">
+                                                <InputLabel for="expiration_date" value="Medida" />
+                                                <select v-model="store.form.color"
+                                                    class="block w-full border-gray-300 rounded-md">
+                                                    <option class="text-gray-500" disabled> Seleccione una opción
+                                                    </option>
+                                                    <!--<option v-for="item in store.colors" :key="item.id" :value="item.value">
+                                                {{ item.text }}
+                                            </option>-->
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -33,13 +33,14 @@ defineProps({
                     </div>
                     <div class="w-full mt-3">
                         <InputLabel for="category" value="Categoría" />
-                        <select v-model="store.form.category"
+                      <!-- <select v-model="store.form.category"
                             class="block w-full border-gray-300 rounded-md">
                             <option class="text-gray-500" disabled> Seleccione una opción</option>
                             <option v-for="item in store.categories" :key="item.id" :value="item.value">
                                 {{ item.name }}
                             </option>
-                        </select>
+                        </select>-->
+                        <v-select v-model="store.form.category" :options="store.categories" label="name"></v-select>
                     </div>
                     <div class="mt-3">
                         <InputLabel for="description" value="Descripción" />

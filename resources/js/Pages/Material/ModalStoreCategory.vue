@@ -41,7 +41,7 @@ defineProps({
                     <div class="mt-3">
                         <InputLabel for="name" value="Descripción" />
                         <textarea v-model="store.formCat.description" rows="3"
-                            class="block text-xs w-full border-gray-300 rounded-md"></textarea>
+                            class="block w-full border-gray-300 rounded-md"></textarea>
                     </div>
                     <div class="flex justify-end mt-3">
                         <PrimaryButton @click.prevent="store.storeCategory()">

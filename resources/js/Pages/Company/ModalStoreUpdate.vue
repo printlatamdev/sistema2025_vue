@@ -70,7 +70,7 @@ defineProps({
                         <div class="w-full m-1">
                             <InputLabel for="nit" value="Dirección" />
                             <textarea v-model="store.form.address" rows="3"
-                                class="block text-xs w-full border-gray-300 rounded-md"></textarea>
+                                class="block w-full border-gray-300 rounded-md"></textarea>
                         </div>
                     </div>
                     <div class="flex justify-end mt-3">
