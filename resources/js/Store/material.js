@@ -40,6 +40,7 @@ export const useMaterialStore = defineStore("material", {
             expiration_date: "",
             brand_id: "",
             materialtype_id: "",
+            materialcategory_id: "",
             error: "",
             processing: false,
         }),
@@ -62,11 +63,33 @@ export const useMaterialStore = defineStore("material", {
             { text: "Cantidad", value: "quantity" },
             { text: "Medidas", value: "measures" },
         ],
+        colors: [
+            { text: "Blanco", value: "Blanco" },
+            { text: "Blanco mate", value: "Blanco mate" },
+            { text: "Blanco negro", value: "Blanco negro" },
+            { text: "Blanco gloss", value: "Blanco gloss" },
+            { text: "Blanco kraft", value: "Blanco kraft" },
+            { text: "Transparente", value: "Transparente" },
+            { text: "Transparente gloss", value: "Transparente gloss" },
+            { text: "Satín", value: "Satín" },
+            { text: "Brillante", value: "Brillante" },
+            { text: "Rojo", value: "Rojo" },
+            { text: "Negro", value: "Negro" },
+            { text: "Mate", value: "Mate" },
+            { text: "Azul", value: "Azul" },
+            { text: "Plateado", value: "Rojo" },
+            { text: "Gris", value: "Gris" },
+            { text: "Amarillo", value: "Amarillo" },  
+        ]
     }),
     actions: {
-        storeMaterial() {
+        storeMaterial(type_id, cat_id) {
+            this.form.materialtype_id = type_id;
+            this.form.materialcategory_id = cat_id;
             this.form.post(route("store.materials"), {
-                onSuccess: () => {
+                onSuccess: (response) => {
+                    //this.materials = response.props.materials;
+                    this.getMaterialByTypes(type_id);
                     this.closeModal();
                     this.clearInput();
                     this.alert.successAlert(this.isMessage + " agregado");
@@ -101,7 +124,6 @@ export const useMaterialStore = defineStore("material", {
             axios.get(route("show.types", id)).then((response) => {
                 this.activeTab = id;
                 this.type = response.data;
-                console.log(this.type);
                 this.showStoreModal();
             });
         },
@@ -170,6 +192,27 @@ export const useMaterialStore = defineStore("material", {
         },
         clearInput() {
             this.edit = "";
+            this.form.name = "";
+            this.form.quantity = "";
+            this.form.ounce = "";
+            this.form.thickness = "";
+            this.form.width = "";
+            this.form.lenght = "";
+            this.form.color = "";
+            this.form.finish = "";
+            this.form.density = "";
+            this.form.size = "";
+            this.form.gum = "";
+            this.form.print = "";
+            this.form.status = "";
+            this.form.code = "";
+            this.form.entry_date = "";
+            this.form.departure_date = "";
+            this.form.use_date = "";
+            this.form.expiration_date = "";
+            this.form.brand_id = "";
+            this.form.materialtype_id = "";
+            this.form.materialcategory_id = "";
             this.formCat.name = "";
             this.formCat.image = "";
             this.formCat.description = "";

@@ -45,11 +45,11 @@ defineProps({
             <div class="mt-5">
                 <form action="">
                     <div class="w-full flex mt-3">
-                        <div class="w-2/6 mr-2">
+                        <div class="w-3/6 mr-2">
                             <InputLabel for="name" value="Tipo" />
                             <TextInput v-model="store.form.name" class="w-full" type="text" />
                         </div>
-                        <div class="w-2/6 mr-2">
+                        <div class="w-1/6 mr-2">
                             <InputLabel for="quantity" value="Cantidad" />
                             <TextInput v-model="store.form.quantity" class="w-full" type="text" />
                         </div>
@@ -63,6 +63,10 @@ defineProps({
                         </div>
                     </div>
                     <div class="flex mt-3">
+                        <div class="w-1/4 mr-2">
+                            <InputLabel for="code" value="Código" />
+                            <TextInput v-model="store.form.code" class="w-full" type="text" />
+                        </div>
                         <div class="w-2/4 mr-2">
                             <InputLabel for="brand" value="Marca" />
                             <div class="flex">
@@ -82,8 +86,8 @@ defineProps({
                             <InputLabel for="color" value="Color" />
                             <select v-model="store.form.color" class="block w-full border-gray-300 rounded-md">
                                 <option class="text-gray-500" disabled> Seleccione una opción</option>
-                                <option v-for="item in brands" :key="item.id" :value="item.id">
-                                    {{ item.name }}
+                                <option v-for="item in store.colors" :key="item.id" :value="item.value">
+                                    {{ item.text }}
                                 </option>
                             </select>
                         </div>
@@ -98,63 +102,78 @@ defineProps({
                             Registro para tintas
                         </li>
                     </ul>-->
+                    <!--inks-->
                     <!--materials-->
-
                     <div class="mt-7 bg-gray-100 border rounded-t-xl">
-                        <div
-                            class="flex items-center cursor-pointer justify-between w-full p-3 font-medium text-gray-700  hover:bg-gray-100"
-                            @click="store.showForm()">
-                            <span>Detalles de material</span>
+                        <div class="flex items-center cursor-pointer justify-between w-full p-3 font-medium text-gray-700  hover:bg-gray-100"
+                            @click="store.showForm(store.isForm)">
+                            <span class="font-semibold">Detalles de {{ categories.name == 'Tintas' ? 'tintas' :
+                                'material'
+                                }}</span>
                             <!--icon-->
-                            <font-awesome-icon :icon="['fas', 'chevron-down']" class=""  v-if="store.isForm == false" />
+                            <font-awesome-icon :icon="['fas', 'chevron-down']" class="" v-if="store.isForm == false" />
                             <font-awesome-icon :icon="['fas', 'chevron-up']" class="" v-else />
                         </div>
-                        <div class="p-3 bg-gray-50" :class="{ 'hidden' : store.isForm==false }">
-                            <div class="w-full flex">
-                                <div class="w-1/5 mr-1">
-                                    <InputLabel for="ounce" value="Onzas" />
-                                    <TextInput v-model="store.form.ounce" class="w-full" type="text" />
-                                </div>
-                                <div class="w-1/5 mr-1">
-                                    <InputLabel for="thickness" value="Grosor" />
-                                    <TextInput v-model="store.form.thickness" class="w-full" type="text" />
-                                </div>
-                                <div class="w-1/5 mr-1">
-                                    <InputLabel for="finish" value="Acabado" />
-                                    <TextInput v-model="store.form.finish" class="w-full" type="text" />
+                        <div class="p-3 bg-gray-50" :class="{ 'hidden': store.isForm == false }">
+                            <div v-if="categories.name == 'Tintas'">
+                                <!--datapickers-->
+                                <div class="w-full flex mt-3">
+                                    <div class="w-1/4 mr-2">
+                                        <InputLabel for="entry_date" value="Fecha de ingreso" />
+                                        <VueDatePicker v-model="store.form.entry_date"></VueDatePicker>
+                                    </div>
+                                    <div class="w-1/4 mr-2">
+                                        <InputLabel for="departure_date" value="Fecha de salida" />
+                                        <VueDatePicker v-model="store.form.departure_date"></VueDatePicker>
+                                    </div>
+                                    <div class="w-1/4 mr-2">
+                                        <InputLabel for="use_date" value="Fecha de uso" />
+                                        <VueDatePicker v-model="store.form.use_date"></VueDatePicker>
+                                    </div>
+                                    <div class="w-1/4 mr-2">
+                                        <InputLabel for="expiration_date" value="Fecha de vencimiento" />
+                                        <VueDatePicker v-model="store.form.expiration_date"></VueDatePicker>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="w-full flex mt-3">
-                                <div class="w-1/4 mr-2">
-                                    <InputLabel for="density" value="Densidad" />
-                                    <TextInput v-model="store.form.density" class="w-full" type="text" />
+                            <div v-else>
+                                <div class="w-full flex">
+                                    <div class="w-1/5 mr-1">
+                                        <InputLabel for="ounce" value="Onzas" />
+                                        <TextInput v-model="store.form.ounce" class="w-full" type="text" />
+                                    </div>
+                                    <div class="w-1/5 mr-1">
+                                        <InputLabel for="thickness" value="Grosor" />
+                                        <TextInput v-model="store.form.thickness" class="w-full" type="text" />
+                                    </div>
+                                    <div class="w-1/5 mr-1">
+                                        <InputLabel for="finish" value="Acabado" />
+                                        <TextInput v-model="store.form.finish" class="w-full" type="text" />
+                                    </div>
                                 </div>
-                                <div class="w-1/4 mr-2">
-                                    <InputLabel for="size" value="Medida" />
-                                    <TextInput v-model="store.form.size" class="w-full" type="text" />
-                                </div>
-                                <div class="w-1/4 mr-2">
-                                    <InputLabel for="gum" value="Goma" />
-                                    <TextInput v-model="store.form.gum" class="w-full" type="text" />
-                                </div>
-                                <div class="w-1/4 mr-2">
-                                    <InputLabel for="print" value="Impresión" />
-                                    <TextInput v-model="store.form.print" class="w-full" type="text" />
+                                <div class="w-full flex mt-3">
+                                    <div class="w-1/4 mr-2">
+                                        <InputLabel for="density" value="Densidad" />
+                                        <TextInput v-model="store.form.density" class="w-full" type="text" />
+                                    </div>
+                                    <div class="w-1/4 mr-2">
+                                        <InputLabel for="size" value="Medida" />
+                                        <TextInput v-model="store.form.size" class="w-full" type="text" />
+                                    </div>
+                                    <div class="w-1/4 mr-2">
+                                        <InputLabel for="gum" value="Goma" />
+                                        <TextInput v-model="store.form.gum" class="w-full" type="text" />
+                                    </div>
+                                    <div class="w-1/4 mr-2">
+                                        <InputLabel for="print" value="Impresión" />
+                                        <TextInput v-model="store.form.print" class="w-full" type="text" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!--inks
-                    <div>
-                        <div class="w-full flex mt-3">
-                            <div class="w-1/4 mr-2">
-                                <InputLabel for="code" value="Código" />
-                                <TextInput v-model="store.form.code" class="w-full" type="text" />
-                            </div>
-                        </div>
-                    </div>-->
                     <div class="flex justify-end mt-3">
-                        <PrimaryButton @click.prevent="store.storeCategory()">
+                        <PrimaryButton @click.prevent="store.storeMaterial(type.id, categories.id)">
                             <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar
                         </PrimaryButton>
                     </div>

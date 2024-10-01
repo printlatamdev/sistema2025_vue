@@ -28,7 +28,7 @@ class MaterialController extends Controller
     {
         Material::create([
             'name' => $request->name,
-            'brand' => $request->brand,
+            'quantity' => $request->quantity,
             'serie' => $request->serie,
             'ounce' => $request->ounce,
             'thickness' => $request->thickness,
@@ -40,18 +40,24 @@ class MaterialController extends Controller
             'size' => $request->size,
             'gum' => $request->gum,
             'print' => $request->print,
-            'category_id' => $request->category_id,
-            'type_id' => $request->type_id,
+            'status' => $request->status,
+            'code' => $request->code,
+            'entry_date' => $request->entry_date,
+            'departure_date' => $request->departure_date,
+            'use_date' => $request->use_date,
+            'expiration_date' => $request->expiration_date,
+            'brand_id' => $request->brand_id,
+            'materialtype_id' => $request->materialtype_id,
         ]);
 
-        return redirect()->route('materials');
+        return redirect()->route('categories.types', $request->materialcategory_id);
     }
 
     public function update(Request $request, Material $material)
     {
         $material->update([
             'name' => $request->name,
-            'brand' => $request->brand,
+            'quantity' => $request->quantity,
             'serie' => $request->serie,
             'ounce' => $request->ounce,
             'thickness' => $request->thickness,
@@ -63,8 +69,14 @@ class MaterialController extends Controller
             'size' => $request->size,
             'gum' => $request->gum,
             'print' => $request->print,
-            'category_id' => $request->category_id,
-            'type_id' => $request->type_id,
+            'status' => $request->status,
+            'code' => $request->code,
+            'entry_date' => $request->entry_date,
+            'departure_date' => $request->departure_date,
+            'use_date' => $request->use_date,
+            'expiration_date' => $request->expiration_date,
+            'brand_id' => $request->brand_id,
+            'materialtype_id' => $request->materialtype_id,
         ]);
 
         return redirect()->route('materials');
@@ -89,9 +101,11 @@ class MaterialController extends Controller
     public function getTypeFromCategories($id)
     {
         $cat = Materialcategory::find($id);
+        $mat = Material::orderBy('id', 'desc')->get();
         $data = Materialtype::where('materialcategory_id', $cat->id)->orderBy('id', 'desc')->get();
 
         return Inertia::render('Material/Index', [
+            'materials' => MaterialResource::collection($mat),
             'types' => MaterialtypeResource::collection($data),
             'categories' => MaterialcategoryResource::make($cat),
             'brands' => BrandResource::collection(Brand::get()),

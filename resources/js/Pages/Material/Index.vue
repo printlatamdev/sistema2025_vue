@@ -1,4 +1,5 @@
 <script setup>
+import { onMounted } from 'vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { useMaterialStore } from '@/Store/material';
@@ -28,13 +29,16 @@ defineProps({
         default: 'md',
     },
 });
+onMounted(() => {
+    store.resetToZero();
+});
 
 </script>
 <template>
     <AppLayout title="Materiales">
         <div class="w-full">
             <h2 class="text-3xl font-bold">Datos de materiales <span class="border-b-2 border-green-200">{{
-                    categories.name }}</span></h2>
+                categories.name }}</span></h2>
             <!--tabs-->
             <div class=" mt-5">
                 <ul class='flex justify-start cursor-pointer'>
@@ -85,7 +89,8 @@ defineProps({
             <div v-else>
                 <div class="mt-5 p-2 bg-green-200 flex justify-between">
                     <span v-for="img in categories.image" :key="img.id" class="flex">
-                        <img :src="img.url" alt="" class="w-6 mx-2"><h3 class="text-lg">Existencias</h3>
+                        <img :src="img.url" alt="" class="w-6 mx-2">
+                        <h3 class="text-lg">Existencias</h3>
                     </span>
                     <PrimaryButton @click.prevent="store.showType(store.type_id)">
                         <font-awesome-icon :icon="['fas', 'plus']" class="mr-1" />Nuevo material
@@ -99,7 +104,8 @@ defineProps({
                 </EasyDataTable>
             </div>
         </div>
-        <ModalStoreUpdateMaterial :show="store.openModal" :type="store.type" :brands="brands" :categories="categories" />
+        <ModalStoreUpdateMaterial :show="store.openModal" :type="store.type" :brands="brands"
+            :categories="categories" />
         <ModalStoreType :show="store.openTypeModal" :categories="categories" />
     </AppLayout>
 </template>

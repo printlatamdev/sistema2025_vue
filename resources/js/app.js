@@ -11,7 +11,9 @@ import 'vue3-easy-data-table/dist/style.css';
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import FloatingVue from 'floating-vue'
-import 'floating-vue/dist/style.css'
+import 'floating-vue/dist/style.css';
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -35,6 +37,7 @@ createInertiaApp({
             .use(FloatingVue)
             .component('EasyDataTable', Vue3EasyDataTable)
             .component('font-awesome-icon', FontAwesomeIcon)
+            .component('VueDatePicker', VueDatePicker)
             .mount(el);
     },
     progress: {

@@ -22,6 +22,7 @@
         "@fortawesome/free-regular-svg-icons": "^6.6.0",
         "@fortawesome/free-solid-svg-icons": "^6.6.0",
         "@fortawesome/vue-fontawesome": "^3.0.8",
+        "@vuepic/vue-datepicker": "^9.0.3",
         "filepond": "^4.31.3",
         "filepond-plugin-image-preview": "^4.6.12",
         "floating-vue": "^5.2.2",
