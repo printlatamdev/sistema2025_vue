@@ -135,7 +135,8 @@ defineProps({
                                     <div class="w-1/3">
                                         <div class="w-full mr-2">
                                             <InputLabel for="expiration_date" value="Fecha de vencimiento" />
-                                            <VueDatePicker v-model="store.form.expiration_date" locale="es" class="mx-auto">
+                                            <VueDatePicker v-model="store.form.expiration_date" locale="es"
+                                                class="mx-auto">
                                             </VueDatePicker>
                                             <div class="w-full mt-3 mr-2">
                                                 <InputLabel for="expiration_date" value="Medida" />
@@ -143,9 +144,10 @@ defineProps({
                                                     class="block w-full border-gray-300 rounded-md">
                                                     <option class="text-gray-500" disabled> Seleccione una opción
                                                     </option>
-                                                    <!--<option v-for="item in store.colors" :key="item.id" :value="item.value">
-                                                {{ item.text }}
-                                            </option>-->
+                                                    <option v-for="item in store.colors" :key="item.id"
+                                                        :value="item.value">
+                                                        {{ item.text }}
+                                                    </option>
                                                 </select>
                                             </div>
                                         </div>

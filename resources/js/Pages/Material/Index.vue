@@ -5,6 +5,7 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { useMaterialStore } from '@/Store/material';
 import ModalStoreUpdateMaterial from './ModalStoreUpdateMaterial.vue';
 import ModalStoreType from './ModalStoreType.vue';
+import ModalEntryMaterial from './ModalEntryMaterial.vue';
 
 let store = useMaterialStore();
 defineProps({
@@ -21,6 +22,10 @@ defineProps({
         default: ([]),
     },
     categories: {
+        type: Object,
+        default: ([]),
+    },
+    providers: {
         type: Object,
         default: ([]),
     },
@@ -49,7 +54,7 @@ onMounted(() => {
                     <span v-for="item in types" :key="item.id">
                         <li class='py-2 px-6 rounded-t-lg text-gray-700 bg-gray-100 border'
                             :class="{ 'bg-gray-700 text-white': store.activeTab == item.id }"
-                            @click="store.getMaterialByTypes(item.id)">
+                            @click="store.getMaterialByTypes(item)">
                             {{ item.name }}
                         </li>
                     </span>
@@ -90,7 +95,7 @@ onMounted(() => {
                 <div class="mt-5 p-2 bg-green-200 flex justify-between">
                     <span v-for="img in categories.image" :key="img.id" class="flex">
                         <img :src="img.url" alt="" class="w-6 mx-2">
-                        <h3 class="text-lg">Existencias</h3>
+                        <h3 class="text-lg">Existencias <span class="">{{ store.currentType.name }}</span></h3> 
                     </span>
                     <PrimaryButton @click.prevent="store.showType(store.type_id)">
                         <font-awesome-icon :icon="['fas', 'plus']" class="mr-1" />Nuevo material
@@ -107,5 +112,6 @@ onMounted(() => {
         <ModalStoreUpdateMaterial :show="store.openModal" :type="store.type" :brands="brands"
             :categories="categories" />
         <ModalStoreType :show="store.openTypeModal" :categories="categories" />
+        <ModalEntryMaterial :show="store.openTypeModal" :providers="providers" />
     </AppLayout>
 </template>

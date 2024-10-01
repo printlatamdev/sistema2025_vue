@@ -22,7 +22,6 @@ enum ColorsEnum: string
     case Gris = 'Gris';
     case Amarillo = 'Amarillo';
 
-
     /**public function getLabel()
     {
         return match ($this) {

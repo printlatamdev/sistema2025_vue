@@ -11,6 +11,7 @@ export const useMaterialStore = defineStore("material", {
         title: "",
         isForm: false,
         materials: [],
+        currentType: [],
         type_id: null,
         activeTab: 0,
         openModal: false,
@@ -83,13 +84,13 @@ export const useMaterialStore = defineStore("material", {
         ]
     }),
     actions: {
-        storeMaterial(type_id, cat_id) {
+        storeMaterial(type, cat_id) {
             this.form.materialtype_id = type_id;
             this.form.materialcategory_id = cat_id;
             this.form.post(route("store.materials"), {
                 onSuccess: (response) => {
                     //this.materials = response.props.materials;
-                    this.getMaterialByTypes(type_id);
+                    this.getMaterialByTypes(type.id);
                     this.closeModal();
                     this.clearInput();
                     this.alert.successAlert(this.isMessage + " agregado");
@@ -113,11 +114,12 @@ export const useMaterialStore = defineStore("material", {
                 },
             });
         },
-        getMaterialByTypes(id) {
-            this.type_id = id;
-            axios.get(route("materials.types", id)).then((response) => {
-                this.activeTab = id;
+        getMaterialByTypes(data) {
+            this.type_id = data.id;
+            axios.get(route("materials.types", data.id)).then((response) => {
+                this.activeTab = data.id;
                 this.materials = response.data;
+                this.currentType = data;
             });
         },
         showType(id){

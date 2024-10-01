@@ -17,7 +17,7 @@ class MaterialcategoryController extends Controller
 
     public function store(Request $request)
     {
-        $image = new ImageController();
+        $image = new ImageController;
         $data = Materialcategory::create([
             'name' => $request->name,
             'status' => 1,

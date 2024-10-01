@@ -5,7 +5,7 @@ import { useAlertStore } from './alert';
 export const useOrderStore = defineStore('order', {
   state: () => ({ 
     alert: useAlertStore(),
-    isMessage: 'Order',
+    isMessage: 'Orden',
     openModal: false,
     openDeleteModal: false,
     edit: [],
@@ -21,7 +21,6 @@ export const useOrderStore = defineStore('order', {
  }),
   actions: {
     storeOrder(id){
-      if(!id){
         this.form.post(route("store.order"), {
           onSuccess: () => {
             this.closeModal();
@@ -33,20 +32,7 @@ export const useOrderStore = defineStore('order', {
             this.alert.errorAlert();
           },
         });
-      } else{
-        this.form.put(route("update.order", id), {
-          onSuccess: () => {
-            this.closeModal();
-            this.clearInput();
-            this.alert.successAlert(this.isMessage + ' actualizado');
-          },
-          onError: (error) => { 
-            this.errors = error;
-            this.alert.errorAlert();
-          },
-        });
-      }
-    },
+      },
     deleteOrder(id){
       this.form.delete(route('delete.order', id), {
         onSuccess: () => {

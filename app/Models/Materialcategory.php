@@ -17,7 +17,7 @@ class Materialcategory extends Model
     {
         return $this->hasMany(Materialtype::class);
     }
-    
+
     public function image()
     {
         return $this->morphMany(Image::class, 'imageable');
