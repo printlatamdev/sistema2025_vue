@@ -85,18 +85,19 @@ export const useMaterialStore = defineStore("material", {
     }),
     actions: {
         storeMaterial(type, cat_id) {
-            this.form.materialtype_id = type_id;
+            this.form.materialtype_id = type.id;
             this.form.materialcategory_id = cat_id;
             this.form.post(route("store.materials"), {
                 onSuccess: (response) => {
                     //this.materials = response.props.materials;
-                    this.getMaterialByTypes(type.id);
+                    this.getMaterialByTypes(type);
                     this.closeModal();
                     this.clearInput();
                     this.alert.successAlert(this.isMessage + " agregado");
                 },
                 onError: (error) => {
                     this.errors = error;
+                    console.log
                     this.alert.errorAlert();
                 },
             });

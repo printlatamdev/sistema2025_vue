@@ -24,7 +24,7 @@ class StoreMaterialRequest extends FormRequest
         return [
             'name' => 'required',
             'quantity' => 'required|numeric',
-            'materialtype_id' => 'required|numeric',
+            //'materialtype_id' => 'required|numeric',
         ];
     }
 
@@ -33,8 +33,8 @@ class StoreMaterialRequest extends FormRequest
         return [
             'name.required' => 'El nombre del material es requerido',
             'name.quantity' => 'La cantidad de material es requerida',
-            'type_id.required' => 'El tipo del material es requerido',
-            'type_id.numeric' => 'El id del tipo de material es requerido',
+            'materialtype_id.required' => 'El tipo del material es requerido',
+            'materialtype_id.numeric' => 'El id del tipo de material es requerido',
         ];
     }
 }

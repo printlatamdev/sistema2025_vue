@@ -34,7 +34,7 @@ defineProps({
                     <div class="w-full mt-3">
                         <InputLabel for="category" value="Categoría" />
                       <!-- <select v-model="store.form.category"
-                            class="block w-full border-gray-300 rounded-md">
+                            class="block w-full border-gray-300 rounded-md text-xs">
                             <option class="text-gray-500" disabled> Seleccione una opción</option>
                             <option v-for="item in store.categories" :key="item.id" :value="item.value">
                                 {{ item.name }}

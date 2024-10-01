@@ -38,7 +38,7 @@ defineProps({
                         <div class="w-full mt-3">
                             <InputLabel for="materialcategory_id" value="Categoría" />
                             <select v-model="categories.id" 
-                                class="block w-full border-gray-300 rounded-l-md" disabled>
+                                class="block w-full border-gray-300 rounded-l-md text-xs" disabled>
                                 <option :value="categories.id">
                                     {{ categories.name }}
                                 </option>

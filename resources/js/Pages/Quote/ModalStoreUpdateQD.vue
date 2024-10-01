@@ -73,19 +73,21 @@ defineProps({
                     <div class="flex">
                         <div class="w-1/2">
                             <InputLabel for="product_id" value="Producto" />
-                            <select v-model="store.formQD.product_id"
-                                class="block  w-full border-gray-300 rounded-l-md">
+                            <div class="flex"> 
+                                <v-select v-model="store.formQD.product_id" :options="products" label="name" class="block  w-full"></v-select>
+                                <AddButton v-tooltip="'Agregar nuevo producto'" class="mr-2 self-center"
+                                    @click.prevent="store_product.showStoreModal()">
+                                    <font-awesome-icon :icon="['fas', 'plus']" />
+                                </AddButton>
+                                <InputError class="" :message="store.form.errors.brand_id" />
+                            </div>
+                            <!--<select v-model="store.formQD.product_id"
+                                class="block  w-full border-gray-300 rounded-l-md text-xs">
                                 <option class="text-gray-500" disabledmount>Seleccione una opción</option>
                                 <option v-for="product in products" :key="product.id" :value="product.id">
                                     {{ product.name }}
                                 </option>
-                            </select>
-                            <InputError class="" :message="store.formQD.errors.product_id" />
-                        </div>
-                        <div class="mr-2 self-end">
-                            <AddButton v-tooltip="'Agregar nuevo producto'" @click.prevent="store_product.showStoreModal()">
-                                <font-awesome-icon :icon="['fas', 'plus']"/>
-                            </AddButton>
+                            </select>-->
                         </div>
                         <div class="1/2 flex">
                             <div class="w-2/5 mr-1">
@@ -118,13 +120,13 @@ defineProps({
                             <InputError class="" :message="store.formQD.errors.image" />
                             <div class="flex justify-end mt-1">
                                 <SuccessButton @click.prevent="store.storePivot(store.edit.id)">
-                                    <font-awesome-icon :icon="['fas', 'plus']" class="mr-1"/>Agregar ítem
+                                    <font-awesome-icon :icon="['fas', 'plus']" class="mr-1" />Agregar ítem
                                 </SuccessButton>
                             </div>
                         </div>
                     </div>
                 </form>
-                <hr class="mt-2">
+                <hr class="my-5">
                 <div class="w-full flex">
                     <div class="w-2/3 mr-3 mt-5">
                         <EasyDataTable :headers="store.headersQD" :rows-per-page="5" :items="store.edit.products"
@@ -136,40 +138,40 @@ defineProps({
                         </EasyDataTable>
                     </div>
                     <div class="w-1/3 mt-5">
-                    <form action="">
-                        <div class="w-full mt-5">
-                            <InputLabel for="iva" value="IVA" />
-                            <select v-model="store.formTotal.iva"
-                                class="block w-full border-gray-300 rounded-md">
-                                <option class="text-gray-500" disabled>Seleccione una opción</option>
-                                <option v-for="i in store.iva" :key="i.id" :value="i.value">
-                                    {{ i.name }}
-                                </option>
-                            </select>
-                            <div v-if="store.formTotal.iva == 'Other'" class="mt-3">
-                                <InputLabel for="iva" value="Asignar IVA" />
-                                <TextInput v-model="store.formTotal.iva2" class="w-full" type="text" />
+                        <form action="">
+                            <div class="w-full mt-5">
+                                <InputLabel for="iva" value="IVA" />
+                                <select v-model="store.formTotal.iva" class="block w-full border-gray-300 rounded-md text-xs">
+                                    <option class="text-gray-500" disabled>Seleccione una opción</option>
+                                    <option v-for="i in store.iva" :key="i.id" :value="i.value">
+                                        {{ i.name }}
+                                    </option>
+                                </select>
+                                <div v-if="store.formTotal.iva == 'Other'" class="mt-3">
+                                    <InputLabel for="iva" value="Asignar IVA" />
+                                    <TextInput v-model="store.formTotal.iva2" class="w-full" type="text" />
+                                </div>
+                                <div class="border border-gray-300 bg-gray-50 mt-3 rounded-md p-5">
+                                    <p><span class="font-semibold">Total parcial: </span>${{
+                                        store.getCalc.total_pr.toFixed(2) }}</p>
+                                    <p><span class="font-semibold">IVA:</span> ({{ store.formTotal.iva }}%) ${{
+                                        store.getParcialSubtotal.toFixed(2) }}</p>
+                                    <hr>
+                                    <p class="mt-2"><span class="font-semibold">Total final: </span>${{
+                                        store.getTotalIva.toFixed(2) }}</p>
+                                </div>
                             </div>
-                            <div class="border border-gray-300 bg-gray-50 mt-3 rounded-md p-5">
-                                <p><span class="font-semibold">Total parcial: </span>${{
-                                    store.getCalc.total_pr.toFixed(2) }}</p>
-                                <p><span class="font-semibold">IVA:</span> ({{ store.formTotal.iva }}%) ${{
-                                    store.getParcialSubtotal.toFixed(2) }}</p>
-                                <hr>
-                                <p class="mt-2"><span class="font-semibold">Total final: </span>${{
-                                    store.getTotalIva.toFixed(2) }}</p>
+                            <div class="flex justify-end mt-10">
+                                <SecondaryButton class="mr-2" @click="store.editData(store.edit)">
+                                    <font-awesome-icon :icon="['fas', 'arrow-left']" />Anterior
+                                </SecondaryButton>
+                                <PrimaryButton @click.prevent="store.storeQuoteDetail()">
+                                    <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Finalizar
+                                    cotización
+                                </PrimaryButton>
                             </div>
-                        </div>
-                        <div class="flex justify-end mt-3">
-                            <SecondaryButton class="mr-2" @click="store.editData(store.edit)">
-                                <font-awesome-icon :icon="['fas', 'arrow-left']" />Anterior
-                            </SecondaryButton>
-                            <PrimaryButton @click.prevent="store.storeQuoteDetail()">
-                                <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Finalizar cotización
-                            </PrimaryButton>
-                        </div>
-                    </form>
-                </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </template>

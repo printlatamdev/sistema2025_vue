@@ -4,16 +4,13 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 import { useOrderStore } from '@/Store/order';
+import ModalStoreUpdate from './ModalStoreUpdate.vue';
 
 let store = useOrderStore();
 defineProps({
     orders: {
         type: Object,
         default: ([]),
-    },
-    maxWidth: {
-        type: String,
-        default: 'md',
     },
 });
 
@@ -39,5 +36,6 @@ defineProps({
                 </template>
             </EasyDataTable>
         </div>
+        <ModalStoreUpdate :show="store.openModal"/>
     </AppLayout>
 </template>

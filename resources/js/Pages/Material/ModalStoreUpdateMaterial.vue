@@ -2,6 +2,7 @@
 import { defineProps } from 'vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import DialogModal from '@/Components/DialogModal.vue';
+import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import AddButton from '@/Components/AddButton.vue';
@@ -48,10 +49,12 @@ defineProps({
                         <div class="w-3/6 mr-2">
                             <InputLabel for="name" value="Tipo" />
                             <TextInput v-model="store.form.name" class="w-full" type="text" />
+                            <InputError class="" :message="store.form.errors.name" />
                         </div>
                         <div class="w-1/6 mr-2">
                             <InputLabel for="quantity" value="Cantidad" />
                             <TextInput v-model="store.form.quantity" class="w-full" type="text" />
+                            <InputError class="" :message="store.form.errors.quantity" />
                         </div>
                         <div class="w-1/6 mr-2">
                             <InputLabel for="width" value="Ancho" />
@@ -70,7 +73,7 @@ defineProps({
                         <div class="w-2/4 mr-2">
                             <InputLabel for="brand" value="Marca" />
                             <div class="flex">
-                                <select v-model="store.form.brand_id" class="block w-full border-gray-300 rounded-l-md">
+                                <select v-model="store.form.brand_id" class="block w-full border-gray-300 rounded-l-md text-xs">
                                     <option class="text-gray-500" disabled> Seleccione una opción</option>
                                     <option v-for="item in brands" :key="item.id" :value="item.id">
                                         {{ item.name }}
@@ -80,11 +83,12 @@ defineProps({
                                     @click.prevent="store_brand.showStoreModal()">
                                     <font-awesome-icon :icon="['fas', 'plus']" />
                                 </AddButton>
+                                <InputError class="" :message="store.form.errors.brand_id" />
                             </div>
                         </div>
                         <div class="w-1/4 mr-2">
                             <InputLabel for="color" value="Color" />
-                            <select v-model="store.form.color" class="block w-full border-gray-300 rounded-md">
+                            <select v-model="store.form.color" class="block w-full border-gray-300 rounded-md text-xs">
                                 <option class="text-gray-500" disabled> Seleccione una opción</option>
                                 <option v-for="item in store.colors" :key="item.id" :value="item.value">
                                     {{ item.text }}
@@ -141,7 +145,7 @@ defineProps({
                                             <div class="w-full mt-3 mr-2">
                                                 <InputLabel for="expiration_date" value="Medida" />
                                                 <select v-model="store.form.color"
-                                                    class="block w-full border-gray-300 rounded-md">
+                                                    class="block w-full border-gray-300 rounded-md text-xs">
                                                     <option class="text-gray-500" disabled> Seleccione una opción
                                                     </option>
                                                     <option v-for="item in store.colors" :key="item.id"
@@ -191,7 +195,7 @@ defineProps({
                         </div>
                     </div>
                     <div class="flex justify-end mt-3">
-                        <PrimaryButton @click.prevent="store.storeMaterial(type.id, categories.id)">
+                        <PrimaryButton @click.prevent="store.storeMaterial(type, categories.id)">
                             <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar
                         </PrimaryButton>
                     </div>
