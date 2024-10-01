@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMaterialRequest;
 use App\Http\Resources\BrandResource;
 use App\Http\Resources\MaterialcategoryResource;
 use App\Http\Resources\MaterialResource;
@@ -25,7 +26,7 @@ class MaterialController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreMaterialRequest $request)
     {
         Material::create([
             'name' => $request->name,

@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
@@ -33,6 +34,7 @@ class ProductResource extends JsonResource
             'details' => $this->whenPivotLoaded('product_quote', function () {
                 return $this->pivot->details;
             }),
+            'register_date' => Carbon::parse($this->created_at)->format('Y-m-d'),
         ];
     }
 }

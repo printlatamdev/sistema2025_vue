@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBrandRequest;
 use App\Http\Resources\BrandResource;
 use App\Models\Brand;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class BrandController extends Controller
         return BrandResource::collection($data);
     }
 
-    public function store(Request $request)
+    public function store(StoreBrandRequest $request)
     {
         $data = Brand::create([
             'name' => $request->name,

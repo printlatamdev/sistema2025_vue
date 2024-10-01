@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class MaterialResource extends JsonResource
@@ -42,6 +43,7 @@ class MaterialResource extends JsonResource
             'brand' => new BrandResource($this->brand),
             'category_id' => new MaterialcategoryResource($this->materialcategory),
             'type' => new MaterialtypeResource($this->materialtype),
+            'register_date' => Carbon::parse($this->created_at)->format('Y-m-d'),
         ];
     }
 }

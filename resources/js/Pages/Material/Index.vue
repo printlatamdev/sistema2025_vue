@@ -112,6 +112,6 @@ onMounted(() => {
         <ModalStoreUpdateMaterial :show="store.openModal" :type="store.type" :brands="brands"
             :categories="categories" />
         <ModalStoreType :show="store.openTypeModal" :categories="categories" />
-        <ModalEntryMaterial :show="store.openTypeModal" :providers="providers" />
+        <!--<ModalEntryMaterial :show="store.openTypeModal" :providers="providers" />-->
     </AppLayout>
 </template>

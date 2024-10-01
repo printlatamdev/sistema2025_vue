@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -23,6 +24,7 @@ class ContactResource extends JsonResource
             'email' => $this->email,
             'company' => new CompanyResource($this->whenLoaded('company')),
             'country' => new CountryResource($this->whenLoaded('country')),
+            'register_date' => Carbon::parse($this->created_at)->format('Y-m-d'),
         ];
     }
 }

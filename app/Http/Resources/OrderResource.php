@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class OrderResource extends JsonResource
@@ -31,6 +32,7 @@ class OrderResource extends JsonResource
             'user' => $this->user,
             'company' => $this->company,
             'contact' => $this->contact,
+            'register_date' => Carbon::parse($this->created_at)->format('Y-m-d'),
         ];
     }
 }

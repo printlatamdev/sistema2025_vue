@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMaterialTypeRequest;
 use App\Http\Resources\MaterialtypeResource;
 use App\Models\Materialtype;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class MaterialtypeController extends Controller
         return MaterialtypeResource::collection($data);
     }
 
-    public function store(Request $request)
+    public function store(StoreMaterialTypeRequest $request)
     {
         Materialtype::create([
             'name' => $request->name,

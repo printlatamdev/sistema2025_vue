@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreMaterialRequest extends FormRequest
+class StoreMaterialTypeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,18 +23,15 @@ class StoreMaterialRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'quantity' => 'required|numeric',
-            'materialtype_id' => 'required|numeric',
+            'materialcategory_id' => 'required|numeric',
         ];
     }
 
-    public function messages()
-    {
+    public function messages(){
         return [
-            'name.required' => 'El nombre del material es requerido',
-            'name.quantity' => 'La cantidad de material es requerida',
-            'type_id.required' => 'El tipo del material es requerido',
-            'type_id.numeric' => 'El id del tipo de material es requerido',
+            'name.required' => 'El nombre es requerido',
+            'materialcategory_id.required' => 'La categoría del material es requerida',
+            'materialcategory_id.numeric' => 'La categoría no tiene un formato permitido',
         ];
     }
 }

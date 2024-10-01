@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CountryResource extends JsonResource
@@ -18,6 +19,7 @@ class CountryResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'acronym' => $this->acronym,
+            'register_date' => Carbon::parse($this->created_at)->format('Y-m-d'),
         ];
     }
 }

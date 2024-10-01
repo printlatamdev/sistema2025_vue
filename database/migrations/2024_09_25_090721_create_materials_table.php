@@ -33,7 +33,7 @@ return new class extends Migration
                 $table->date('departure_date')->nullable();
                 $table->date('use_date')->nullable();
                 $table->date('expiration_date')->nullable();
-                $table->foreignId('brand_id')->constrained();
+                $table->foreignId('brand_id')->nullable()->constrained();
                 //$table->foreignId('materialcategory_id')->constrained();
                 $table->foreignId('materialtype_id')->constrained();
                 $table->timestamps();

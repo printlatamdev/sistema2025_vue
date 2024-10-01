@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ImageResource extends JsonResource
@@ -17,6 +18,7 @@ class ImageResource extends JsonResource
         return [
             'id' => $this->id,
             'url' => $this->url,
+            'register_date' => Carbon::parse($this->created_at)->format('Y-m-d'),
         ];
     }
 }
