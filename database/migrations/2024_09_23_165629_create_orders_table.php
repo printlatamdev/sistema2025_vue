@@ -27,6 +27,9 @@ return new class extends Migration
                 $table->float('mod', 8, 2);
                 //$table->foreignId('project_id')->constrained();
                 $table->string('application_number')->default(0);
+                $table->date('application_date')->nullable();
+                $table->date('assign_date')->nullable();
+                $table->date('next_payment_date')->nullable();
                 $table->timestamps();
             });
         }

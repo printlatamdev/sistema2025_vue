@@ -35,4 +35,9 @@ class Company extends Model
     {
         return $this->hasMany(Brand::class);
     } */
+
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

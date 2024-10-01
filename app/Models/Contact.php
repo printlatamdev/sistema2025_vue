@@ -33,4 +33,9 @@ class Contact extends Model
     {
         return $this->hasMany(Quote::class);
     }
+
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

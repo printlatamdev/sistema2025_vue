@@ -10,18 +10,40 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
-        'company_id',
-        'contact_id',
-        'delivery_date',
-        'user_id',
         'status',
         'computo',
         'print',
         'cut',
-        'country_id',
         'payment',
         'mod',
-        //'project_id',
         'application_number',
+        'delivery_date',
+        'application_date',
+        'assign_date',
+        'next_payment_date',
+        'country_id',
+        'user_id',
+        'company_id',
+        'contact_id',
     ];
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    public function contact()
+    {
+        return $this->belongsTo(Contact::class);
+    }
 }
