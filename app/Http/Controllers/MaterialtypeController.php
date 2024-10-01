@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreMaterialTypeRequest;
 use App\Http\Resources\MaterialtypeResource;
 use App\Models\Materialtype;
-use Illuminate\Http\Request;
 
 class MaterialtypeController extends Controller
 {

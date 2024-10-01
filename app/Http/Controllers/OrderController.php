@@ -9,15 +9,17 @@ use Inertia\Inertia;
 
 class OrderController extends Controller
 {
-    
-    public function index(){
+    public function index()
+    {
         $data = Order::orderBy('id', 'desc')->get();
+
         return Inertia::render('Order/Index', [
-            'orders' => OrderResource::collection($data)
+            'orders' => OrderResource::collection($data),
         ]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $data = Order::create([
             'status' => 1,
             'computo' => $request->computo,
@@ -35,11 +37,12 @@ class OrderController extends Controller
             'company_id' => $request->company_id,
             'contact_id' => $request->contact_id,
         ]);
+
         return redirect()->route('orders');
     }
 
-    
-    public function update(Request $request, Order $order){
+    public function update(Request $request, Order $order)
+    {
         $order->update([
             'status' => 1,
             'computo' => $request->computo,
@@ -57,11 +60,14 @@ class OrderController extends Controller
             'company_id' => $request->company_id,
             'contact_id' => $request->contact_id,
         ]);
+
         return redirect()->route('orders');
     }
 
-    public function destroy(Order $order){
+    public function destroy(Order $order)
+    {
         $order->delete();
+
         return redirect()->route('orders');
     }
 }

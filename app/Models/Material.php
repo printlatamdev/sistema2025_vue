@@ -24,7 +24,6 @@ class Material extends Model
         'size',
         'gum',
         'print',
-        //Tintas
         'status',
         'code',
         'entry_date',
@@ -32,7 +31,6 @@ class Material extends Model
         'use_date',
         'expiration_date',
         'brand_id',
-        //'materialcategory_id',
         'materialtype_id',
     ];
 
@@ -48,5 +46,11 @@ class Material extends Model
     public function brand()
     {
         return $this->belongsTo(Brand::class);
+    }
+
+    
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class, 'material_order')->withPivot('price', 'quantity', 'total', 'details')->orderByPivot('id', 'desc');
     }
 }

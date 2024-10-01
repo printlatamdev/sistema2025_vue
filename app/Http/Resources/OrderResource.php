@@ -2,8 +2,8 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class OrderResource extends JsonResource
@@ -28,10 +28,11 @@ class OrderResource extends JsonResource
             'application_date' => $this->application_date,
             'assign_date' => $this->assign_date,
             'next_payment_date' => $this->next_payment_date,
-            'country' => $this->country,
-            'user' => $this->user,
-            'company' => $this->company,
-            'contact' => $this->contact,
+            'country' => new CountryResource($this->country),
+            'user' => new UserResource($this->user),
+            'company' => new CompanyResource($this->company),
+            'contact' => new ContactResource($this->contact),
+            'materials' => MaterialResource::collection($this->materials),
             'register_date' => Carbon::parse($this->created_at)->format('Y-m-d'),
         ];
     }
