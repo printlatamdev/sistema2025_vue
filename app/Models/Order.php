@@ -46,9 +46,9 @@ class Order extends Model
     {
         return $this->belongsTo(Contact::class);
     }
-    
+
     public function materials()
     {
-        return $this->belongsToMany(Material::class, 'material_order')->withPivot('price', 'quantity', 'total', 'details')->orderByPivot('id', 'desc');
+        return $this->belongsToMany(Material::class, 'material_order')->withPivot('price', 'quantity', 'subtotal', 'total', 'details')->orderByPivot('id', 'desc');
     }
 }

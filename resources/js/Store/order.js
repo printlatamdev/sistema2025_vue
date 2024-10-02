@@ -7,12 +7,25 @@ export const useOrderStore = defineStore("order", {
         alert: useAlertStore(),
         isMessage: "Orden",
         openModal: false,
+        openPivotModal: false,
         openDeleteModal: false,
         edit: [],
         errors: [],
         form: useForm({
             name: "",
             error: "",
+            processing: false,
+        }),
+        formOD: useForm({
+            material_id: "",
+            order_id: "",
+            quantity: "",
+            price: "",
+            subtotal: "",
+            total: "",
+            details: "",
+            image: null,
+            error: '',
             processing: false,
         }),
         headers: [
@@ -24,6 +37,11 @@ export const useOrderStore = defineStore("order", {
           { text: "Fecha registro", value: "register_date" },
         ],
     }),
+    getters: {
+        getTotal(state) {
+            return state.formOD.quantity * state.formOD.price;
+        },
+    },
     actions: {
         storeOrder(id) {
             this.form.post(route("store.order"), {
@@ -53,6 +71,9 @@ export const useOrderStore = defineStore("order", {
         },
         showStoreModal() {
             this.openModal = true;
+        },
+        showPivotModal(){
+            this.openPivotModal = true;
         },
         showDeleteModal(data) {
             this.edit = data;

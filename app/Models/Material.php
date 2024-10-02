@@ -48,9 +48,8 @@ class Material extends Model
         return $this->belongsTo(Brand::class);
     }
 
-    
     public function orders()
     {
-        return $this->belongsToMany(Order::class, 'material_order')->withPivot('price', 'quantity', 'total', 'details')->orderByPivot('id', 'desc');
+        return $this->belongsToMany(Order::class, 'material_order')->withPivot('price', 'quantity', 'subtotal', 'total', 'details')->orderByPivot('id', 'desc');
     }
 }

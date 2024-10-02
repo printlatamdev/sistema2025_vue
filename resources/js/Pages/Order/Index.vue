@@ -5,6 +5,7 @@ import SecondaryButton from '@/Components/SecondaryButton.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 import { useOrderStore } from '@/Store/order';
 import ModalStoreUpdate from './ModalStoreUpdate.vue';
+import ModalPivotOrderMaterial from './ModalPivotOrderMaterial.vue';
 
 let store = useOrderStore();
 defineProps({
@@ -37,5 +38,6 @@ defineProps({
             </EasyDataTable>
         </div>
         <ModalStoreUpdate :show="store.openModal"/>
+        <ModalPivotOrderMaterial :show="store.openPivotModal"/>
     </AppLayout>
 </template>

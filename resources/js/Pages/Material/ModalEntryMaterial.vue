@@ -41,11 +41,15 @@ defineProps({
                     </div>
                     <div class="">
                         <InputLabel for="provider_id" value="Proveedor" />
-                        <v-select  :options="store.providers" label="name"></v-select>
+                        <v-select  :options="store.providers" label="name">
+                            <div slot="no-options">No se han encontrado resultados</div>
+                        </v-select>
                     </div>
                     <div class="">
                         <InputLabel for="material_id" value="Material" />
-                        <v-select  :options="store.materials" label="name"></v-select>
+                        <v-select  :options="store.materials" label="name">
+                            
+                        </v-select>
                     </div>
                     <div class="">
                         <InputLabel for="quantity" value="Cantidad" />

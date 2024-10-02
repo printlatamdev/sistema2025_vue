@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MaterialResource;
 use App\Http\Resources\OrderResource;
+use App\Models\Material;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -15,6 +17,7 @@ class OrderController extends Controller
 
         return Inertia::render('Order/Index', [
             'orders' => OrderResource::collection($data),
+            'materials' => MaterialResource::collection(Material::get()),
         ]);
     }
 

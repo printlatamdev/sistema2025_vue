@@ -32,12 +32,18 @@ defineProps({
                 <form @submit.prevent="store.storeOrder(store.edit.id)">
                     <div class="w-full">
                         <InputLabel for="name" value="Proveedor" />
-                        <v-select v-model="store.form.company_id" :options="companies" label="name"></v-select>
-                        <InputError class="" :message="store.form.errors.name" />
+                        <v-select v-model="store.form.company_id" :options="companies" label="name">
+                            <slot name="no-options">No se han encontrado resultados</slot>
+                        </v-select>
+                        <InputError class="" :message="store.form.errors.company_id" />
                     </div>
                     <div class="w-full mt-3">
                         <InputLabel for="name" value="Solicitado por" />
-                        <v-select v-model="store.form.user_id" :options="users" label="name"></v-select>
+                        <v-select v-model="store.form.user_id" :options="users" label="name">
+                            <template #no-options="{search, searching, loading}">
+                                No se han encontrado resultados
+                            </template>
+                        </v-select>
                         <InputError class="" :message="store.form.errors.name" />
                     </div>
                     <div class="flex mt-3">

@@ -74,7 +74,9 @@ defineProps({
                         <div class="w-1/2">
                             <InputLabel for="product_id" value="Producto" />
                             <div class="flex"> 
-                                <v-select v-model="store.formQD.product_id" :options="products" label="name" class="block  w-full"></v-select>
+                                <v-select v-model="store.formQD.product_id" :options="products" label="name" class="block  w-full">
+                                    <slot name="no-options">No se han encontrado resultados</slot>
+                                </v-select>
                                 <AddButton v-tooltip="'Agregar nuevo producto'" class="mr-2 self-center"
                                     @click.prevent="store_product.showStoreModal()">
                                     <font-awesome-icon :icon="['fas', 'plus']" />

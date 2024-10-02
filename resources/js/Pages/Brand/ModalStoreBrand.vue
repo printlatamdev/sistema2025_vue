@@ -40,7 +40,9 @@ defineProps({
                                 {{ item.name }}
                             </option>
                         </select>-->
-                        <v-select v-model="store.form.category" :options="store.categories" label="name"></v-select>
+                        <v-select v-model="store.form.category" :options="store.categories" label="name">
+                            <slot name="no-options">No se han encontrado resultados</slot>
+                        </v-select>
                     </div>
                     <div class="mt-3">
                         <InputLabel for="description" value="Descripción" />
