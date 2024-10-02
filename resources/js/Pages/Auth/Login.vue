@@ -7,7 +7,9 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import { useAlertStore } from '@/Store/alert';
 
+let store = useAlertStore();
 defineProps({
     canResetPassword: Boolean,
     status: String,
@@ -24,7 +26,10 @@ const submit = () => {
         ...data,
         remember: form.remember ? 'on' : '',
     })).post(route('login'), {
-        onFinish: () => form.reset('password'),
+        onFinish: () => { 
+            form.reset('password') 
+            store.successAlert('Sesión iniciada')
+        },
     });
 };
 </script>

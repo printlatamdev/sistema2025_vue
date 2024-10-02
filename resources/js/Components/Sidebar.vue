@@ -16,17 +16,14 @@ const store = useAlertStore();
     </NavLink>
     <!--Quotes-->
     <div>
-        <NavLink @click.prevent="store.showSubmenu(store.showItemMenu)">
-            <div class="flex justify-between">
-                <span><font-awesome-icon :icon="['fas', 'paperclip']" class="mx-2" />Cotizaciones</span>
-                <span class="mr-5 px-1 rounded-sm">
-                    <font-awesome-icon :icon="['fas', 'chevron-down']" class=""
-                        v-if="store.showItemMenu == false" />
-                    <font-awesome-icon :icon="['fas', 'chevron-up']" class=""
-                        v-else />
-                </span>
-            </div>
-        </NavLink>
+        <div class="flex justify-between cursor-pointer items-center px-1 py-2 text-sm hover:bg-gray-700 font-medium text-white transition duration-150 ease-in-out hover:rounded-md"
+            @click.prevent="store.showSubmenu(store.showItemMenu)">
+            <span><font-awesome-icon :icon="['fas', 'paperclip']" class="mx-2" />Cotizaciones</span>
+            <span class="mr-5 px-1 rounded-sm">
+                <font-awesome-icon :icon="['fas', 'chevron-down']" class="" v-if="store.showItemMenu == false" />
+                <font-awesome-icon :icon="['fas', 'chevron-up']" class="" v-else />
+            </span>
+        </div>
         <div class="submenu transition duration-150 ease-in-out " v-if="store.showItemMenu">
             <NavLink :href="route('quotations')" :active="route().current('quotations')">
                 <span><font-awesome-icon :icon="['fas', 'paperclip']" class="mx-2" />Datos de Cotizaciones</span>
@@ -45,17 +42,14 @@ const store = useAlertStore();
     </NavLink>
     <!--Suministros-->
     <div>
-        <NavLink @click.prevent="store.showSubmenu2(store.showItemMenu2)">
-            <div class="flex justify-between">
-                <span><font-awesome-icon :icon="['fas', 'hammer']" class="mx-2" />Suministros</span>
-                <span class="mr-5 px-1 rounded-sm">
-                    <font-awesome-icon :icon="['fas', 'chevron-down']" class=""
-                        v-if="store.showItemMenu2 == false" />
-                    <font-awesome-icon :icon="['fas', 'chevron-up']" class=""
-                        v-else />
-                </span>
-            </div>
-        </NavLink>
+        <div class="flex justify-between cursor-pointer items-center px-1 py-2 text-sm hover:bg-gray-700 font-medium text-white transition duration-150 ease-in-out hover:rounded-md"
+            @click.prevent="store.showSubmenu2(store.showItemMenu2)">
+            <span><font-awesome-icon :icon="['fas', 'hammer']" class="mx-2" />Suministros</span>
+            <span class="mr-5 px-1 rounded-sm">
+                <font-awesome-icon :icon="['fas', 'chevron-down']" class="" v-if="store.showItemMenu2 == false" />
+                <font-awesome-icon :icon="['fas', 'chevron-up']" class="" v-else />
+            </span>
+        </div>
         <div class="submenu transition duration-150 ease-in-out " v-if="store.showItemMenu2">
             <NavLink :href="route('categories')" :active="route().current('categories')">
                 <font-awesome-icon :icon="['fas', 'hammer']" class="mx-2" /> Materiales

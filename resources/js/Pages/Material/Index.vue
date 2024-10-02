@@ -2,10 +2,10 @@
 import { onMounted } from 'vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import { useMaterialStore } from '@/Store/material';
 import ModalStoreUpdateMaterial from './ModalStoreUpdateMaterial.vue';
 import ModalStoreType from './ModalStoreType.vue';
 import ModalEntryMaterial from './ModalEntryMaterial.vue';
+import { useMaterialStore } from '@/Store/material';
 
 let store = useMaterialStore();
 defineProps({

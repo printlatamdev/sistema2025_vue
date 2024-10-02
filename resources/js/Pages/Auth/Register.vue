@@ -7,7 +7,9 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import { useAlertStore } from '@/Store/alert';
 
+let store = useAlertStore();
 const form = useForm({
     name: '',
     email: '',
@@ -18,7 +20,10 @@ const form = useForm({
 
 const submit = () => {
     form.post(route('register'), {
-        onFinish: () => form.reset('password', 'password_confirmation'),
+        onFinish: () => {
+            form.reset('password', 'password_confirmation');
+            store.successAlert('Se ha creado la cuenta e iniciado sesión');
+        },
     });
 };
 </script>

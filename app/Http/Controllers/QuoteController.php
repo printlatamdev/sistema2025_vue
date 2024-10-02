@@ -52,7 +52,7 @@ class QuoteController extends Controller
         ]);
         Quotedetail::create(['quote_id' => $data->id, 'total_products' => 0, 'iva' => 0, 'total' => 0]);
 
-        return new QuoteResource($data);
+        return redirect()->route('quotations');
     }
 
     public function update(QuoteRequest $request, $id)
