@@ -76,7 +76,7 @@ class OrderController extends Controller
 
         return redirect()->route('orders');
     }
-    
+
     public function storeInPivot(Request $request)
     {
         $quote = Order::find($request->order_id);

@@ -85,7 +85,8 @@ defineProps({
                     </div>
                     <div class="flex justify-end mt-3">
                         <PrimaryButton>
-                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />{{ store.edit == '' ? 'Guardar' : 'Actualizar' }}
+                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />{{ store.edit == '' ?
+                            'Guardar' : 'Actualizar' }} contacto
                         </PrimaryButton>
                     </div>
                 </form>

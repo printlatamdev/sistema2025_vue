@@ -73,7 +73,8 @@ defineProps({
                         <div class="w-2/4 mr-2">
                             <InputLabel for="brand" value="Marca" />
                             <div class="flex">
-                                <select v-model="store.form.brand_id" class="block w-full border-gray-300 rounded-l-md text-xs">
+                                <select v-model="store.form.brand_id"
+                                    class="block w-full border-gray-300 rounded-l-md text-xs">
                                     <option class="text-gray-500" disabled> Seleccione una opción</option>
                                     <option v-for="item in brands" :key="item.id" :value="item.id">
                                         {{ item.name }}
@@ -196,7 +197,7 @@ defineProps({
                     </div>
                     <div class="flex justify-end mt-3">
                         <PrimaryButton @click.prevent="store.storeMaterial(type, categories.id)">
-                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar
+                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar material
                         </PrimaryButton>
                     </div>
                 </form>

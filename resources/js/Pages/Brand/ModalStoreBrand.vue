@@ -33,25 +33,18 @@ defineProps({
                     </div>
                     <div class="w-full mt-3">
                         <InputLabel for="category" value="Categoría" />
-                      <!-- <select v-model="store.form.category"
-                            class="block w-full border-gray-300 rounded-md text-xs">
-                            <option class="text-gray-500" disabled> Seleccione una opción</option>
-                            <option v-for="item in store.categories" :key="item.id" :value="item.value">
-                                {{ item.name }}
-                            </option>
-                        </select>-->
-                        <v-select v-model="store.form.category" :options="store.categories" label="name">
-                            <slot name="no-options">No se han encontrado resultados</slot>
+                        <v-select v-model="store.form.category" :reduce="category => category.value"
+                            :options="store.categories" label="name">
                         </v-select>
                     </div>
                     <div class="mt-3">
                         <InputLabel for="description" value="Descripción" />
                         <textarea v-model="store.form.description" rows="3"
-                            class="block w-full border-gray-300 rounded-md"></textarea>
+                            class="block w-full border-gray-300 rounded-md text-sm"></textarea>
                     </div>
                     <div class="flex justify-end mt-3">
                         <PrimaryButton @click.prevent="store.storeBrand()">
-                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar
+                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar marca
                         </PrimaryButton>
                     </div>
                 </form>

@@ -35,23 +35,23 @@ defineProps({
                         <InputLabel for="name" value="Nombre" />
                         <TextInput v-model="store.formType.name" class="w-full" type="text" />
                     </div>
-                        <div class="w-full mt-3">
-                            <InputLabel for="materialcategory_id" value="Categoría" />
-                            <select v-model="categories.id" 
-                                class="block w-full border-gray-300 rounded-l-md text-xs" disabled>
-                                <option :value="categories.id">
-                                    {{ categories.name }}
-                                </option>
-                            </select>
-                        </div>
+                    <div class="w-full mt-3">
+                        <InputLabel for="materialcategory_id" value="Categoría" />
+                        <select v-model="categories.id" class="block w-full border-gray-300 rounded-l-md text-xs"
+                            disabled>
+                            <option :value="categories.id">
+                                {{ categories.name }}
+                            </option>
+                        </select>
+                    </div>
                     <div class="mt-3">
                         <InputLabel for="name" value="Descripción" />
                         <textarea v-model="store.formType.description" rows="3"
-                            class="block w-full border-gray-300 rounded-md"></textarea>
+                            class="block w-full border-gray-300 rounded-md text-sm"></textarea>
                     </div>
                     <div class="flex justify-end mt-3">
                         <PrimaryButton @click.prevent="store.storeType(categories.id)">
-                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar
+                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar tipo
                         </PrimaryButton>
                     </div>
                 </form>

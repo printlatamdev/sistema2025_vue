@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, onMounted } from 'vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import DialogModal from '@/Components/DialogModal.vue';
 import InputLabel from '@/Components/InputLabel.vue';
@@ -33,6 +33,10 @@ defineProps({
         type: Object,
         default: ([]),
     },
+});
+
+onMounted(() => {
+    store.edit.products = '';
 });
 </script>
 <template>
@@ -73,10 +77,9 @@ defineProps({
                     <div class="flex">
                         <div class="w-1/2">
                             <InputLabel for="product_id" value="Producto" />
-                            <div class="flex"> 
-                                <v-select v-model="store.formQD.product_id" :options="products" label="name" class="block  w-full">
-                                    <slot name="no-options">No se han encontrado resultados</slot>
-                                </v-select>
+                            <div class="flex">
+                                <v-select v-model="store.formQD.product_id" :reduce="products=>products.id" :options="products" label="name"
+                                    class="block  w-full"></v-select>
                                 <AddButton v-tooltip="'Agregar nuevo producto'" class="mr-2 self-center"
                                     @click.prevent="store_product.showStoreModal()">
                                     <font-awesome-icon :icon="['fas', 'plus']" />
@@ -113,7 +116,7 @@ defineProps({
                         <div class="w-2/3 mr-3">
                             <InputLabel for="url" value="Descripción" />
                             <textarea v-model="store.formQD.details" rows="4"
-                                class="block w-full border-gray-300 rounded-md"></textarea>
+                                class="block w-full border-gray-300 rounded-md text-sm"></textarea>
                         </div>
                         <div class="w-1/3">
                             <InputLabel for="image" value="Subir imagen" />
@@ -137,7 +140,7 @@ defineProps({
                                 <p>No se ha encontrado ningún resultado</p>
                             </template>
                             <template #item-name="data">
-                                <img :src="data.image" class="w-12 h-10 rounded-md mt-1" />
+                                <img :src="data.image" class="w-8 h-8 rounded-md mt-1" />
                                 {{ data.name }}
                             </template>
                         </EasyDataTable>
@@ -146,7 +149,8 @@ defineProps({
                         <form action="">
                             <div class="w-full mt-5">
                                 <InputLabel for="iva" value="IVA" />
-                                <select v-model="store.formTotal.iva" class="block w-full border-gray-300 rounded-md text-xs">
+                                <select v-model="store.formTotal.iva"
+                                    class="block w-full border-gray-300 rounded-md text-xs">
                                     <option class="text-gray-500" disabled>Seleccione una opción</option>
                                     <option v-for="i in store.iva" :key="i.id" :value="i.value">
                                         {{ i.name }}

@@ -97,7 +97,6 @@ export const useMaterialStore = defineStore("material", {
                 },
                 onError: (error) => {
                     this.errors = error;
-                    console.log
                     this.alert.errorAlert();
                 },
             });

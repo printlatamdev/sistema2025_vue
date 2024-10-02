@@ -70,12 +70,13 @@ defineProps({
                         <div class="w-full m-1">
                             <InputLabel for="nit" value="Dirección" />
                             <textarea v-model="store.form.address" rows="3"
-                                class="block w-full border-gray-300 rounded-md"></textarea>
+                                class="block w-full border-gray-300 rounded-md text-sm"></textarea>
                         </div>
                     </div>
                     <div class="flex justify-end mt-3">
                         <PrimaryButton>
-                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />{{ store.edit == '' ? 'Guardar' : 'Actualizar' }}
+                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />{{ store.edit == '' ?
+                            'Guardar' : 'Actualizar' }} cliente
                         </PrimaryButton>
                     </div>
                 </form>

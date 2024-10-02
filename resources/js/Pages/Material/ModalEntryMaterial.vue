@@ -41,14 +41,14 @@ defineProps({
                     </div>
                     <div class="">
                         <InputLabel for="provider_id" value="Proveedor" />
-                        <v-select  :options="store.providers" label="name">
+                        <v-select :options="store.providers" :reduce="provider=>provider.id" label="name">
                             <div slot="no-options">No se han encontrado resultados</div>
                         </v-select>
                     </div>
                     <div class="">
                         <InputLabel for="material_id" value="Material" />
-                        <v-select  :options="store.materials" label="name">
-                            
+                        <v-select :options="store.materials" :reduce="providers=>providers.id" label="name">
+
                         </v-select>
                     </div>
                     <div class="">
@@ -66,11 +66,11 @@ defineProps({
                     <div class="">
                         <InputLabel for="description" value="Descripción" />
                         <textarea v-model="store.form.description" rows="3"
-                            class="block w-full border-gray-300 rounded-md"></textarea>
+                            class="block w-full border-gray-300 rounded-md text-sm"></textarea>
                     </div>
                     <div class="flex justify-end mt-3">
                         <PrimaryButton @click.prevent="store.entryMaterial()">
-                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar
+                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar material
                         </PrimaryButton>
                     </div>
                 </form>

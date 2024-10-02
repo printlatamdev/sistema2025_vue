@@ -142,11 +142,10 @@ export const useQuoteStore = defineStore("quote", {
                     contact_id: this.form.contact_id,
                 }).then((response) => {
                     this.edit = response.data;
-                    console.log(this.edit);
                     this.alert.successAlert(this.isMessage + ' agregado');
                     this.closeModal();
                     this.showModalQD();
-                    //this.clearMainInput();
+                    this.clearMainInput();
                 }).catch(error => { this.myErrors = error.response.data.errors });
             } else {
                 this.form.put(route("update.quotations", id), {

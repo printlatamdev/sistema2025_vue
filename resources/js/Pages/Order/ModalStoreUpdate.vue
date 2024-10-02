@@ -39,7 +39,7 @@ defineProps({
                     </div>
                     <div class="w-full mt-3">
                         <InputLabel for="name" value="Solicitado por" />
-                        <v-select v-model="store.form.user_id" :options="users" label="name"></v-select>
+                        <v-select v-model="store.form.user_id" :options="users" label="name" :reduce="user=>user.id"></v-select>
                         <InputError class="" :message="store.form.errors.name" />
                     </div>
                     <div class="flex mt-3">
@@ -59,7 +59,7 @@ defineProps({
                     <div class="flex justify-end mt-3">
                         <PrimaryButton @click.prevent="store.showPivotModal()">
                             <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />{{ store.edit == '' ?
-                                'Guardar' : 'Actualizar' }}
+                                'Guardar' : 'Actualizar' }} orden
                         </PrimaryButton>
                     </div>
                 </form>

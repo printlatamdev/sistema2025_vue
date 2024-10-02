@@ -64,7 +64,7 @@ onMounted(() => { });
                 <form @submit.prevent="store.storeQuote(store.edit.id)">
                     <!--QUOTE FORM-->
                     <div class="flex">
-                        <div class="w-1/3 mr-1">
+                        <div class="w-1/3 mr-2">
                             <InputLabel for="company_id" value="Cliente" />
                             <select v-model="store.form.company_id"
                                 @change="store.getContactByCompany(store.form.company_id)"
@@ -77,9 +77,10 @@ onMounted(() => { });
                             <InputError class="" v-if="store.myErrors.company_id"
                                 :message="store.myErrors.company_id[0]" />
                         </div>
-                        <div class="w-1/3 mr-1">
+                        <div class="w-1/3 mr-2">
                             <InputLabel for="contact_id" value="Contacto" />
-                            <select v-model="store.form.contact_id" class="block w-full border-gray-300 rounded-md text-xs">
+                            <select v-model="store.form.contact_id"
+                                class="block w-full border-gray-300 rounded-md text-xs">
                                 <option class="text-gray-500" disabled>Seleccione una opción</option>
                                 <option v-for="contact in store.contactsByCompany" :key="contact.id"
                                     :value="contact.id">
@@ -91,7 +92,8 @@ onMounted(() => { });
                         </div>
                         <div class="w-1/3">
                             <InputLabel for="user_id" value="Vendedor" />
-                            <select v-model="store.form.user_id" class="block  w-full border-gray-300 rounded-md text-xs">
+                            <select v-model="store.form.user_id"
+                                class="block  w-full border-gray-300 rounded-md text-xs">
                                 <option class="text-gray-500" disabled> Seleccione una opción</option>
                                 <option v-for="user in users" :key="user.id" :value="user.id">
                                     {{ user.name }}
@@ -102,7 +104,7 @@ onMounted(() => { });
                     </div>
                     <!--second form-->
                     <div class="flex mt-4">
-                        <div class="w-1/4 mr-1">
+                        <div class="w-1/4 mr-2">
                             <InputLabel for="payment_condition" value="Condiciones de pago" />
                             <select v-model="store.form.payment_condition"
                                 class="block  w-full border-gray-300 rounded-md text-xs">
@@ -113,7 +115,7 @@ onMounted(() => { });
                                 </option>
                             </select>
                         </div>
-                        <div class="w-1/4 mr-1">
+                        <div class="w-1/4 mr-2">
                             <InputLabel for="offer_validity" value="Validez de oferta" />
                             <select v-model="store.form.offer_validity"
                                 class="block  w-full border-gray-300 rounded-md text-xs">
@@ -123,18 +125,20 @@ onMounted(() => { });
                                 </option>
                             </select>
                         </div>
-                        <div class="w-1/4 mr-1">
+                        <div class="w-1/4 mr-2">
                             <InputLabel for="currency" value="Moneda" />
-                            <select v-model="store.form.currency" class="block  w-full border-gray-300 rounded-md text-xs">
+                            <select v-model="store.form.currency"
+                                class="block  w-full border-gray-300 rounded-md text-xs">
                                 <option class="text-gray-500" disabled> Seleccione una opción</option>
                                 <option v-for="currency in store.currency" :key="currency.id" :value="currency.value">
                                     {{ currency.name }}
                                 </option>
                             </select>
                         </div>
-                        <div class="w-1/4 mr-1">
+                        <div class="w-1/4 mr-2">
                             <InputLabel for="incoterm" value="Términos de comercio" />
-                            <select v-model="store.form.incoterm" class="block  w-full border-gray-300 rounded-md text-xs">
+                            <select v-model="store.form.incoterm"
+                                class="block  w-full border-gray-300 rounded-md text-xs">
                                 <option class="text-gray-500" disabled> Seleccione una opción</option>
                                 <option v-for="incoterm in store.incoterm" :key="incoterm.id" :value="incoterm.value">
                                     {{ incoterm.name }}
@@ -154,7 +158,7 @@ onMounted(() => { });
                     <div class="flex justify-end mt-3">
                         <PrimaryButton>
                             <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />{{ store.edit == '' ?
-                                'Guardar' : 'Actualizar' }}
+                                'Guardar' : 'Actualizar' }} cotización
                         </PrimaryButton>
                     </div>
                 </form>

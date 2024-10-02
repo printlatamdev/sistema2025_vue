@@ -23,6 +23,5 @@ class BrandController extends Controller
             'description' => $request->description,
         ]);
 
-        return new BrandResource($data);
     }
 }

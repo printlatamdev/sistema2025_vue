@@ -43,8 +43,7 @@ defineProps({
                         <div class="w-2/3">
                             <InputLabel for="material_id" value="Material" />
                             <div class="flex">
-                                <v-select v-model="store.formOD.material_id" :options="materials" label="name"
-                                    class="block  w-full">
+                                <v-select v-model="store.formOD.material_id" :options="materials" label="name" :reduce="material=>material.id">
                                 </v-select>
                                 <AddButton v-tooltip="'Agregar nuevo material'" class="mr-2 self-center" @click="store_material.showStoreModal()">
                                     <font-awesome-icon :icon="['fas', 'plus']" />
@@ -86,7 +85,7 @@ defineProps({
 
                             <div style="background: white;">
                                 <v-select v-model="store.formOD.user_id" :options="users" label="email"
-                                    class="block w-full" multiple>
+                                    class="block w-full" multiple :reduce="user=>user.id">
                                 </v-select>
                             </div>
                         </div>
