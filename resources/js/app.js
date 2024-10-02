@@ -16,11 +16,12 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import vSelect from 'vue-select';
 import 'vue-select/dist/vue-select.css';
+import { CkeditorPlugin } from '@ckeditor/ckeditor5-vue';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faPenToSquare,faTrashCan,faAnglesRight,faAnglesLeft,faArrowLeft,faFilePdf,faPlus,faFloppyDisk,faHammer,faCircleUser,faPowerOff,faChartPie,faPaperclip,faBolt,faAddressBook,faBell,faBagShopping,faChevronDown,faChevronUp,faArrowDown,faHourglassEnd,faFolderPlus} from '@fortawesome/free-solid-svg-icons'
-library.add(faPenToSquare,faTrashCan,faAnglesRight,faAnglesLeft,faArrowLeft,faFilePdf,faPlus,faFloppyDisk,faHammer,faCircleUser,faPowerOff,faChartPie,faPaperclip,faBolt,faAddressBook,faBell,faBagShopping,faChevronDown,faChevronUp,faArrowDown,faHourglassEnd,faFolderPlus)
+import { faPenToSquare,faTrashCan,faAnglesRight,faAnglesLeft,faArrowLeft,faFilePdf,faPlus,faFloppyDisk,faHammer,faCircleUser,faPowerOff,faChartPie,faPaperclip,faBolt,faAddressBook,faBell,faBagShopping,faChevronDown,faChevronUp,faArrowDown,faHourglassEnd,faFolderPlus,faEnvelope,} from '@fortawesome/free-solid-svg-icons'
+library.add(faPenToSquare,faTrashCan,faAnglesRight,faAnglesLeft,faArrowLeft,faFilePdf,faPlus,faFloppyDisk,faHammer,faCircleUser,faPowerOff,faChartPie,faPaperclip,faBolt,faAddressBook,faBell,faBagShopping,faChevronDown,faChevronUp,faArrowDown,faHourglassEnd,faFolderPlus,faEnvelope,)
 
 
 
@@ -37,6 +38,7 @@ createInertiaApp({
             .use(pinia)
             .use(VueSweetalert2)
             .use(FloatingVue)
+            .use(CkeditorPlugin)
             .component('EasyDataTable', Vue3EasyDataTable)
             .component('font-awesome-icon', FontAwesomeIcon)
             .component('VueDatePicker', VueDatePicker)

@@ -39,11 +39,7 @@ defineProps({
                     </div>
                     <div class="w-full mt-3">
                         <InputLabel for="name" value="Solicitado por" />
-                        <v-select v-model="store.form.user_id" :options="users" label="name">
-                            <template #no-options="{ search, searching, loading }">
-                                No se han encontrado resultados
-                            </template>
-                        </v-select>
+                        <v-select v-model="store.form.user_id" :options="users" label="name"></v-select>
                         <InputError class="" :message="store.form.errors.name" />
                     </div>
                     <div class="flex mt-3">

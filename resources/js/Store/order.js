@@ -1,7 +1,21 @@
 import { defineStore } from "pinia";
 import { useForm } from "@inertiajs/vue3";
 import { useAlertStore } from "./alert";
-
+import {
+    ClassicEditor,
+    Heading,
+    Bold,
+    Essentials,
+    Italic,
+    Mention,
+    Paragraph,
+    Undo,
+    Indent,
+    IndentBlock,
+    BlockQuote,
+    Link,
+} from "ckeditor5";
+import "ckeditor5/ckeditor5.css";
 export const useOrderStore = defineStore("order", {
     state: () => ({
         alert: useAlertStore(),
@@ -11,6 +25,39 @@ export const useOrderStore = defineStore("order", {
         openDeleteModal: false,
         edit: [],
         errors: [],
+        editor: ClassicEditor,
+        editorData:
+            "<p>A continuación se adjunta orden de compra para la adquisicion de X productos, para ser usados en X tareas, favor compartir con Lic. Eduardo para su aprobacion y firma.</p> ",
+        editorConfig: {
+            plugins: [
+                Bold,
+                Heading,
+                Essentials,
+                Italic,
+                Mention,
+                Paragraph,
+                Undo,
+                Indent,
+                IndentBlock,
+                BlockQuote,
+                Link,
+            ],
+            toolbar: [
+                "undo",
+                "redo",
+                "|",
+                "heading",
+                "|",
+                "bold",
+                "italic",
+                "|",
+                "outdent",
+                "indent",
+                "|",
+                "blockquote",
+                "link",
+            ],
+        },
         form: useForm({
             name: "",
             error: "",
@@ -25,16 +72,16 @@ export const useOrderStore = defineStore("order", {
             total: "",
             details: "",
             image: null,
-            error: '',
+            error: "",
             processing: false,
         }),
         headers: [
-          { text: "No. Orden", value: "name" },
-          { text: "Material", value: "material.name" },
-          { text: "Cliente", value: "company.social_reason" },
-          { text: "Cantidad", value: "quantity" },
-          { text: "Precio (Sin IVA)", value: "price" },
-          { text: "Fecha registro", value: "register_date" },
+            { text: "No. Orden", value: "name" },
+            { text: "Material", value: "material.name" },
+            { text: "Cliente", value: "company.social_reason" },
+            { text: "Cantidad", value: "quantity" },
+            { text: "Precio (Sin IVA)", value: "price" },
+            { text: "Fecha registro", value: "register_date" },
         ],
         headersOD: [
             { text: "Material", value: "name" },
@@ -76,22 +123,22 @@ export const useOrderStore = defineStore("order", {
                 },
             });
         },
-        storePivot(id){
+        storePivot(id) {
             this.formOD.material_id = this.edit.id;
             this.formOD.post(route("store.materialorder"), {
                 onSuccess: () => {
                     //this.closeModal();
                     this.refreshData(id);
-                    this.alert.successAlert(this.isMessage + ' agregado');
+                    this.alert.successAlert(this.isMessage + " agregado");
                 },
-                onError: (error) => { 
-                  this.errors = error;
-                  this.alert.errorAlert();
+                onError: (error) => {
+                    this.errors = error;
+                    this.alert.errorAlert();
                 },
             });
         },
-        refreshData(id){
-            axios.get(route('quoterefresh', id)).then(response => {
+        refreshData(id) {
+            axios.get(route("quoterefresh", id)).then((response) => {
                 response.data.map((el) => {
                     this.edit = el;
                 });
@@ -100,7 +147,7 @@ export const useOrderStore = defineStore("order", {
         showStoreModal() {
             this.openModal = true;
         },
-        showPivotModal(){
+        showPivotModal() {
             this.openPivotModal = true;
         },
         showDeleteModal(data) {
@@ -110,6 +157,7 @@ export const useOrderStore = defineStore("order", {
         closeModal() {
             this.openModal = false;
             this.openDeleteModal = false;
+            this.openPivotModal = false;
             this.clearInput();
         },
         editData(data) {

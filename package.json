@@ -19,10 +19,12 @@
         "vue": "^3.3.13"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-vue": "^7.2.0",
         "@fortawesome/free-regular-svg-icons": "^6.6.0",
         "@fortawesome/free-solid-svg-icons": "^6.6.0",
         "@fortawesome/vue-fontawesome": "^3.0.8",
         "@vuepic/vue-datepicker": "^9.0.3",
+        "ckeditor5": "^43.2.0",
         "filepond": "^4.31.3",
         "filepond-plugin-image-preview": "^4.6.12",
         "floating-vue": "^5.2.2",

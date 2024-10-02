@@ -18,9 +18,13 @@ defineProps({
         type: Object,
         default: ([]),
     },
+    users: {
+        type: Object,
+        default: ([]),
+    },
     maxWidth: {
         type: String,
-        default: '5xl',
+        default: '2xl',
     },
 });
 </script>
@@ -29,14 +33,14 @@ defineProps({
         <template #title>Detalles orden de compra</template>
         <template #content>
             <div class="mt-5">
-                
+
                 <form>
                     <div class="flex">
                         <div class="w-1/2">
                             <InputLabel for="material_id" value="Material" />
-                            <div class="flex"> 
-                                <v-select v-model="store.formOD.material_id" :options="materials" label="name" class="block  w-full">
-                                    <slot name="no-options">No se han encontrado resultados</slot>
+                            <div class="flex">
+                                <v-select v-model="store.formOD.material_id" :options="materials" label="name"
+                                    class="block  w-full">
                                 </v-select>
                                 <AddButton v-tooltip="'Agregar nuevo material'" class="mr-2 self-center">
                                     <font-awesome-icon :icon="['fas', 'plus']" />
@@ -62,7 +66,7 @@ defineProps({
                             </div>
                         </div>
                     </div>
-                    
+
                     <!--<div class="w-full mr-3 mt-5">
                         <EasyDataTable :headers="store.headersOD" :rows-per-page="5" :items="store.edit.materials"
                             border-cell buttons-pagination class="">
@@ -71,6 +75,32 @@ defineProps({
                             </template>
                         </EasyDataTable>
                     </div>-->
+                    <div class="bg-gray-50 rounded-lg mt-7 w-full p-7">
+                        <h3 class="text-lg font-semibold">Detalle de correo de notificación</h3>
+                        <div class="mt-5">
+                            <InputLabel for="user_id" value="Seleccionar destinatarios" />
+                            
+                        <div style="background: white;">
+                            <v-select v-model="store.formOD.user_id" :options="users" label="email" class="block w-full"
+                                multiple>
+                            </v-select>
+                        </div>
+                        </div>
+                        <div class="mt-3">
+                            <InputLabel for="subject" value="Título de correo" />
+                            <TextInput v-model="store.formOD.subject" class="w-full" type="text" />
+                        </div>
+                        <div class="mt-3">
+                            <InputLabel for="user_id" value="Cuerpo de correo" />
+                            <ckeditor v-model="store.editorData" :editor="store.editor" :config="store.editorConfig" />
+                        </div>
+                        <div class="flex justify-end mt-5">
+
+                            <PrimaryButton class="mr-1" @click="store.editData(options)" disabled>
+                                <font-awesome-icon :icon="['fas', 'envelope']" class="mr-1" /> Envíar correo
+                            </PrimaryButton>
+                        </div>
+                    </div>
                 </form>
             </div>
         </template>
