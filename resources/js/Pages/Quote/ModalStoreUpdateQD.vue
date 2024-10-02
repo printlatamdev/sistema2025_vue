@@ -133,6 +133,9 @@ defineProps({
                     <div class="w-2/3 mr-3 mt-5">
                         <EasyDataTable :headers="store.headersQD" :rows-per-page="5" :items="store.edit.products"
                             border-cell buttons-pagination class="">
+                            <template #empty-message>
+                                <p>No se ha encontrado ningún resultado</p>
+                            </template>
                             <template #item-name="data">
                                 <img :src="data.image" class="w-12 h-10 rounded-md mt-1" />
                                 {{ data.name }}

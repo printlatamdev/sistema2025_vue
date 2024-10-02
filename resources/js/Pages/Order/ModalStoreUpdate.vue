@@ -1,10 +1,9 @@
 <script setup>
 import { defineProps } from 'vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import AddButton from '@/Components/AddButton.vue';
 import DialogModal from '@/Components/DialogModal.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import TextInput from '@/Components/TextInput.vue';
+import Checkbox from '@/Components/Checkbox.vue';
 import InputError from '@/Components/InputError.vue';
 import { useOrderStore } from '@/Store/order';
 
@@ -20,7 +19,7 @@ defineProps({
     },
     maxWidth: {
         type: String,
-        default: '5xl',
+        default: 'xl',
     },
 });
 </script>
@@ -29,38 +28,43 @@ defineProps({
         <template #title>{{ store.edit == '' ? 'Nuevo' : 'Actualizar' }} registro de orden de compra</template>
         <template #content>
             <div class="mt-5">
+
                 <form>
-                    <div class="flex">
-                        <div class="w-1/2">
-                            <InputLabel for="material_id" value="Material" />
-                            <div class="flex"> 
-                                <v-select v-model="store.formOD.material_id" :options="materials" label="name" class="block  w-full">
-                                    <slot name="no-options">No se han encontrado resultados</slot>
-                                </v-select>
-                                <AddButton v-tooltip="'Agregar nuevo material'" class="mr-2 self-center"
-                                    @click.prevent="store_material.showStoreModal()">
-                                    <font-awesome-icon :icon="['fas', 'plus']" />
-                                </AddButton>
-                                <InputError class="" :message="store.form.errors.material_id" />
-                            </div>
+                    <div class="w-full">
+                        <InputLabel for="name" value="Proveedor" />
+                        <v-select v-model="store.form.company_id" :options="companies" label="name">
+                            <slot name="no-options">No se han encontrado resultados</slot>
+                        </v-select>
+                        <InputError class="" :message="store.form.errors.company_id" />
+                    </div>
+                    <div class="w-full mt-3">
+                        <InputLabel for="name" value="Solicitado por" />
+                        <v-select v-model="store.form.user_id" :options="users" label="name">
+                            <template #no-options="{ search, searching, loading }">
+                                No se han encontrado resultados
+                            </template>
+                        </v-select>
+                        <InputError class="" :message="store.form.errors.name" />
+                    </div>
+                    <div class="flex mt-3">
+                        <div>
+                            <label class="flex items-center">
+                                <Checkbox />
+                                <span class="ms-1 text-sm text-gray-700">PO</span>
+                            </label>
                         </div>
-                        <div class="1/2 flex">
-                            <div class="w-2/5 mr-1">
-                                <InputLabel for="price" value="Precio" />
-                                <TextInput v-model="store.formOD.price" class="w-full" type="text" />
-                                <InputError class="" :message="store.formOD.errors.price" />
-                            </div>
-                            <div class="w-2/5 mr-1">
-                                <InputLabel for="quantity" value="Cantidad" />
-                                <TextInput v-model="store.formOD.quantity" class="w-full" type="text" />
-                                <InputError class="" :message="store.formOD.errors.quantity" />
-                            </div>
-                            <div class="w-1/5 mr-1">
-                                <InputLabel for="subtotal" value="Total" />
-                                <TextInput disabled v-model="store.formOD.subtotal" :placeholder="store.getTotal"
-                                    class="w-full" type="text" />
-                            </div>
+                        <div class="ml-4">
+                            <label class="flex items-center">
+                                <Checkbox />
+                                <span class="ms-1 text-sm text-gray-700">POP</span>
+                            </label>
                         </div>
+                    </div>
+                    <div class="flex justify-end mt-3">
+                        <PrimaryButton @click.prevent="store.showPivotModal()">
+                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />{{ store.edit == '' ?
+                                'Guardar' : 'Actualizar' }}
+                        </PrimaryButton>
                     </div>
                 </form>
             </div>

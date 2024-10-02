@@ -13,6 +13,10 @@ defineProps({
         type: Object,
         default: ([]),
     },
+    materials: {
+        type: Object,
+        default: ([]),
+    },
 });
 
 </script>
@@ -26,7 +30,10 @@ defineProps({
                     <font-awesome-icon :icon="['fas', 'plus']" class="mr-1"/>Nueva orden de compra
                 </PrimaryButton>
             </div>
-            <EasyDataTable :headers="store.headers" :rows-per-page="10" :items="orders" border-cell buttons-pagination class="mt-5">
+            <EasyDataTable :headers="store.headers" :rows-per-page="10" :items="orders" border-cell buttons-pagination class="mt-5"> 
+                <template #empty-message>
+                    <p>No se ha encontrado ningún resultado</p>
+                </template>
                 <template #item-options="options" class="flex justify-center">
                     <SecondaryButton class="mr-1" @click="store.editData(options)" v-tooltip="'Actualizar orden'">
                         <font-awesome-icon :icon="['fas', 'pen-to-square']" />
@@ -38,6 +45,6 @@ defineProps({
             </EasyDataTable>
         </div>
         <ModalStoreUpdate :show="store.openModal"/>
-        <ModalPivotOrderMaterial :show="store.openPivotModal"/>
+        <ModalPivotOrderMaterial :show="store.openPivotModal" :materials="materials"/>
     </AppLayout>
 </template>

@@ -36,6 +36,13 @@ export const useOrderStore = defineStore("order", {
           { text: "Precio (Sin IVA)", value: "price" },
           { text: "Fecha registro", value: "register_date" },
         ],
+        headersOD: [
+            { text: "Material", value: "name" },
+            { text: "Descripción", value: "details" },
+            { text: "Cantidad", value: "quantity", width: 50 },
+            { text: "Unitario", value: "price", width: 50 },
+            { text: "Total", value: "total", width: 50 },
+        ],
     }),
     getters: {
         getTotal(state) {
@@ -67,6 +74,27 @@ export const useOrderStore = defineStore("order", {
                     this.errors = error;
                     this.alert.errorAlert();
                 },
+            });
+        },
+        storePivot(id){
+            this.formOD.material_id = this.edit.id;
+            this.formOD.post(route("store.materialorder"), {
+                onSuccess: () => {
+                    //this.closeModal();
+                    this.refreshData(id);
+                    this.alert.successAlert(this.isMessage + ' agregado');
+                },
+                onError: (error) => { 
+                  this.errors = error;
+                  this.alert.errorAlert();
+                },
+            });
+        },
+        refreshData(id){
+            axios.get(route('quoterefresh', id)).then(response => {
+                response.data.map((el) => {
+                    this.edit = el;
+                });
             });
         },
         showStoreModal() {

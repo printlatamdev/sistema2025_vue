@@ -48,6 +48,9 @@ defineProps({
                 </PrimaryButton>
             </div>
             <EasyDataTable :headers="store.headerMain" :rows-per-page="10" :items="quotedetails" border-cell buttons-pagination class="mt-5 " >
+                <template #empty-message>
+                    <p>No se ha encontrado ningún resultado</p>
+                </template>
                 <template #item-quote.id="data">
                     {{ `${data.quote.id}-${store.getYear}` }}
                 </template>

@@ -103,6 +103,9 @@ onMounted(() => {
                 </div>
                 <EasyDataTable :headers="store.headers" :rows-per-page="10" :items="store.materials" border-cell
                     buttons-pagination>
+                <template #empty-message>
+                    <p>No se ha encontrado ningún resultado</p>
+                </template>
                     <template #item-measures="data">
                         {{ `${data.measures.width} ancho x ${data.measures.lenght} largo` }}
                     </template>
