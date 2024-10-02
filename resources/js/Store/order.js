@@ -1,25 +1,12 @@
 import { defineStore } from "pinia";
 import { useForm } from "@inertiajs/vue3";
 import { useAlertStore } from "./alert";
-import {
-    ClassicEditor,
-    Heading,
-    Bold,
-    Essentials,
-    Italic,
-    Mention,
-    Paragraph,
-    Undo,
-    Indent,
-    IndentBlock,
-    BlockQuote,
-    Link,
-} from "ckeditor5";
+import { ClassicEditor,Heading,Bold,Essentials,Italic,Mention,Paragraph,Undo,Indent,IndentBlock,BlockQuote,Link } from "ckeditor5";
 import "ckeditor5/ckeditor5.css";
 export const useOrderStore = defineStore("order", {
     state: () => ({
         alert: useAlertStore(),
-        isMessage: "Orden",
+        isMessage: "Orden de compra",
         openModal: false,
         openPivotModal: false,
         openDeleteModal: false,
@@ -59,7 +46,20 @@ export const useOrderStore = defineStore("order", {
             ],
         },
         form: useForm({
-            name: "",
+            computo: "",
+            print: "",
+            cut: "",
+            payment: "",
+            mod: "",
+            application_number: "",
+            delivery_date: "",
+            application_date: "",
+            assign_date: "",
+            next_payment_date: "",
+            country_id: "",
+            user_id: "",
+            company_id: "",
+            contact_id: "",
             error: "",
             processing: false,
         }),
@@ -98,17 +98,32 @@ export const useOrderStore = defineStore("order", {
     },
     actions: {
         storeOrder(id) {
-            this.form.post(route("store.order"), {
-                onSuccess: () => {
-                    this.closeModal();
-                    this.clearInput();
+            axios.post(route("store.orders"), {
+                    computo: this.form.computo,
+                    print: this.form.print,
+                    cut: this.form.cut,
+                    payment: this.form.payment,
+                    mod: this.form.mod,
+                    application_number: this.form.application_number,
+                    delivery_date: this.form.delivery_date,
+                    application_date: this.form.application_date,
+                    assign_date: this.form.assign_date,
+                    next_payment_date: this.form.next_payment_date,
+                    country_id: this.form.country_id,
+                    user_id: this.form.user_id,
+                    company_id: this.form.company_id,
+                    contact_id: this.form.contact_id,
+                })
+                .then((response) => {
+                    this.edit = response.data;
                     this.alert.successAlert(this.isMessage + " agregado");
-                },
-                onError: (error) => {
-                    this.errors = error;
-                    this.alert.errorAlert();
-                },
-            });
+                    this.closeModal();
+                    this.showPivotModal();
+                    this.clearMainInput();
+                })
+                .catch((error) => {
+                    this.myErrors = error.response.data.errors;
+                });
         },
         deleteOrder(id) {
             this.form.delete(route("delete.order", id), {

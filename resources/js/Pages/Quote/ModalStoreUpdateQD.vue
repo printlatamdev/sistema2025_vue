@@ -47,7 +47,7 @@ onMounted(() => {
             </ActionMessage>
             <span v-if="store.edit != ''" class="p-1 bg-sky-500 rounded-md">#{{ `${store.edit.id}-${store.getYear}`
                 }}</span>
-            Detalle de Cotización
+            {{store.isSecondMessage }}
         </template>
         <template #content>
             <div class="w-1/2 flex justify-center mx-auto ">
@@ -78,8 +78,15 @@ onMounted(() => {
                         <div class="w-1/2">
                             <InputLabel for="product_id" value="Producto" />
                             <div class="flex">
-                                <v-select v-model="store.formQD.product_id" :reduce="products=>products.id" :options="products" label="name"
-                                    class="block  w-full"></v-select>
+                                <v-select v-model="store.formQD.product_id" :reduce="products => products.id"
+                                    :options="products" label="name" class="block  w-full">
+                                    <template v-slot:no-options="{ search, searching }">
+                                        <template v-if="searching">
+                                            No se ha encontrado resultados para <em>{{ search }}</em>.
+                                        </template>
+                                        <em v-else style="opacity: 0.5">Empieza a escribir para buscar un producto</em>
+                                    </template>
+                                </v-select>
                                 <AddButton v-tooltip="'Agregar nuevo producto'" class="mr-2 self-center"
                                     @click.prevent="store_product.showStoreModal()">
                                     <font-awesome-icon :icon="['fas', 'plus']" />
@@ -176,7 +183,7 @@ onMounted(() => {
                                 </SecondaryButton>
                                 <PrimaryButton @click.prevent="store.storeQuoteDetail()">
                                     <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Finalizar
-                                    cotización
+                                    {{store.isMessage }}
                                 </PrimaryButton>
                             </div>
                         </form>

@@ -21,7 +21,7 @@ defineProps({
 </script>
 <template>
     <DialogModal :show="store.openModal" @close="store.closeModal">
-        <template #title>{{ store.edit == '' ? 'Nuevo' : 'Actualizar' }} registro de Compañia</template>
+        <template #title>{{ store.edit == '' ? 'Nuevo' : 'Actualizar' }} registro de {{store.isMessage }}</template>
         <template #content>
             <div class="mt-5">
                 <form @submit.prevent="store.storeCompany(store.edit.id)">
@@ -76,7 +76,7 @@ defineProps({
                     <div class="flex justify-end mt-3">
                         <PrimaryButton>
                             <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />{{ store.edit == '' ?
-                            'Guardar' : 'Actualizar' }} cliente
+                            'Guardar' : 'Actualizar' }}  {{store.isMessage }}
                         </PrimaryButton>
                     </div>
                 </form>

@@ -17,7 +17,15 @@ defineProps({
         type: Object,
         default: ([]),
     },
+    companies: {
+        type: Object,
+        default: ([]),
+    },
     users: {
+        type: Object,
+        default: ([]),
+    },
+    providers: {
         type: Object,
         default: ([]),
     },
@@ -48,7 +56,7 @@ defineProps({
                 </template>
             </EasyDataTable>
         </div>
-        <ModalStoreUpdate :show="store.openModal"/>
-        <ModalPivotOrderMaterial :show="store.openPivotModal" :materials="materials" :users="users"/>
+        <ModalStoreUpdate :show="store.openModal" :providers="providers" :users="users" />
+        <ModalPivotOrderMaterial :show="store.openPivotModal" :materials="materials" :users="users" />
     </AppLayout>
 </template>

@@ -40,7 +40,7 @@ defineProps({
 <template>
     <DialogModal :show="show" @close="store.closeModal" :max-width="maxWidth">
         <template #title>
-            Nuevo registro de material <span class="bg-blue-200 p-1 rounded-md">{{ type.name }}</span>
+            Nuevo registro de {{store.isMessage }} <span class="bg-blue-200 p-1 rounded-md">{{ type.name }}</span>
         </template>
         <template #content>
             <div class="mt-5">
@@ -197,7 +197,7 @@ defineProps({
                     </div>
                     <div class="flex justify-end mt-3">
                         <PrimaryButton @click.prevent="store.storeMaterial(type, categories.id)">
-                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar material
+                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar  {{store.isMessage }}
                         </PrimaryButton>
                     </div>
                 </form>

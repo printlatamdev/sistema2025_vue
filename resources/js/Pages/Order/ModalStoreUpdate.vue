@@ -3,17 +3,29 @@ import { defineProps } from 'vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import DialogModal from '@/Components/DialogModal.vue';
 import InputLabel from '@/Components/InputLabel.vue';
+import AddButton from '@/Components/AddButton.vue';
 import Checkbox from '@/Components/Checkbox.vue';
 import InputError from '@/Components/InputError.vue';
 import { useOrderStore } from '@/Store/order';
+import { useProviderStore } from '@/Store/provider';
+import ModalStoreProvider from '../Provider/ModalStoreProvider.vue';
 
 let store = useOrderStore();
+let store_provider = useProviderStore();
 defineProps({
     show: {
         type: Boolean,
         default: false,
     },
     materials: {
+        type: Object,
+        default: ([]),
+    },
+    providers: {
+        type: Object,
+        default: ([]),
+    },
+    users: {
         type: Object,
         default: ([]),
     },
@@ -25,21 +37,39 @@ defineProps({
 </script>
 <template>
     <DialogModal :show="show" :max-width="maxWidth" @close="store.closeModal">
-        <template #title>{{ store.edit == '' ? 'Nuevo' : 'Actualizar' }} registro de orden de compra</template>
+        <template #title>{{ store.edit == '' ? 'Nuevo' : 'Actualizar' }} registro de {{store.isMessage }}</template>
         <template #content>
             <div class="mt-5">
-
                 <form>
                     <div class="w-full">
                         <InputLabel for="name" value="Proveedor" />
-                        <v-select v-model="store.form.company_id" :options="companies" label="name">
-                            <slot name="no-options">No se han encontrado resultados</slot>
+                        <div class="flex">
+                            <v-select v-model="store.form.provider_id" :options="providers" label="name" class="w-full">
+                            <template v-slot:no-options="{ search, searching }">
+                                <template v-if="searching">
+                                    No se ha encontrado resultados para <em>{{ search }}</em>.
+                                </template>
+                                <em v-else style="opacity: 0.5">Empieza a escribir para buscar un proveedor</em>
+                            </template>
                         </v-select>
+                        <AddButton v-tooltip="'Agregar nuevo material'" class="mr-2 self-center"
+                            @click="store_provider.showStoreModal()">
+                            <font-awesome-icon :icon="['fas', 'plus']" />
+                        </AddButton>
+                        </div>
                         <InputError class="" :message="store.form.errors.company_id" />
                     </div>
                     <div class="w-full mt-3">
                         <InputLabel for="name" value="Solicitado por" />
-                        <v-select v-model="store.form.user_id" :options="users" label="name" :reduce="user=>user.id"></v-select>
+                        <v-select v-model="store.form.user_id" :options="users" label="name" :reduce="user => user.id">
+                            <template v-slot:no-options="{ search, searching }">
+                                <template v-if="searching">
+                                    No se ha encontrado resultados para <em>{{ search }}</em>.
+                                </template>
+                                <em v-else style="opacity: 0.5">Empieza a escribir para buscar quien solicita la orden
+                                    de compra</em>
+                            </template>
+                        </v-select>
                         <InputError class="" :message="store.form.errors.name" />
                     </div>
                     <div class="flex mt-3">
@@ -59,11 +89,12 @@ defineProps({
                     <div class="flex justify-end mt-3">
                         <PrimaryButton @click.prevent="store.showPivotModal()">
                             <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />{{ store.edit == '' ?
-                                'Guardar' : 'Actualizar' }} orden
+                                'Guardar' : 'Actualizar' }} {{store.isMessage }}
                         </PrimaryButton>
                     </div>
                 </form>
             </div>
         </template>
     </DialogModal>
+    <ModalStoreProvider :show="store_provider.openModal" />
 </template>

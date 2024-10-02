@@ -29,7 +29,7 @@ defineProps({
 </script>
 <template>
     <DialogModal :show="show" :max-width="maxWidth" @close="store.closeModal">
-        <template #title>{{ store.edit == '' ? 'Nuevo' : 'Actualizar' }} registro de contacto</template>
+        <template #title>{{ store.edit == '' ? 'Nuevo' : 'Actualizar' }} registro de {{store.isMessage }}</template>
         <template #content>
             <div class="mt-5">
                 <form @submit.prevent="store.storeContact(store.edit.id)">
@@ -86,7 +86,7 @@ defineProps({
                     <div class="flex justify-end mt-3">
                         <PrimaryButton>
                             <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />{{ store.edit == '' ?
-                            'Guardar' : 'Actualizar' }} contacto
+                            'Guardar' : 'Actualizar' }} {{store.isMessage }}
                         </PrimaryButton>
                     </div>
                 </form>

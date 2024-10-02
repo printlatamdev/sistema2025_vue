@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\MaterialResource;
 use App\Http\Resources\OrderResource;
+use App\Http\Resources\ProviderResource;
 use App\Http\Resources\UserResource;
 use App\Models\Material;
 use App\Models\Order;
+use App\Models\Provider;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -21,6 +23,7 @@ class OrderController extends Controller
             'orders' => OrderResource::collection($data),
             'materials' => MaterialResource::collection(Material::get()),
             'users' => UserResource::collection(User::get()),
+            'providers' => ProviderResource::collection(Provider::get()),
         ]);
     }
 

@@ -7,7 +7,7 @@ export const useMaterialStore = defineStore("material", {
         alert: useAlertStore(),
         isMessage: "Material",
         isCatMessage: "Categoría",
-        isTypeMessage: "Tipo",
+        isTypeMessage: "Tipo de material",
         title: "",
         isForm: false,
         materials: [],

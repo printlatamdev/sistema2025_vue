@@ -30,7 +30,7 @@ defineProps({
 <template>
     <DialogModal :show="show" @close="store.closeModal" :max-width="maxWidth">
         <template #title>
-            Nuevo ingreso de material
+            Nuevo ingreso de {{ store.isMessage }}
         </template>
         <template #content>
             <div class="mt-3">
@@ -42,13 +42,23 @@ defineProps({
                     <div class="">
                         <InputLabel for="provider_id" value="Proveedor" />
                         <v-select :options="store.providers" :reduce="provider=>provider.id" label="name">
-                            <div slot="no-options">No se han encontrado resultados</div>
+                            <template v-slot:no-options="{ search, searching }">
+                                <template v-if="searching">
+                                    No se ha encontrado resultados para <em>{{ search }}</em>.
+                                </template>
+                                <em v-else style="opacity: 0.5">Empieza a escribir para buscar un proveedor</em>
+                            </template>
                         </v-select>
                     </div>
                     <div class="">
                         <InputLabel for="material_id" value="Material" />
                         <v-select :options="store.materials" :reduce="providers=>providers.id" label="name">
-
+                            <template v-slot:no-options="{ search, searching }">
+                                <template v-if="searching">
+                                    No se ha encontrado resultados para <em>{{ search }}</em>.
+                                </template>
+                                <em v-else style="opacity: 0.5">Empieza a escribir para buscar un material</em>
+                            </template>
                         </v-select>
                     </div>
                     <div class="">
@@ -70,7 +80,7 @@ defineProps({
                     </div>
                     <div class="flex justify-end mt-3">
                         <PrimaryButton @click.prevent="store.entryMaterial()">
-                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar material
+                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar {{store.isMessage }}
                         </PrimaryButton>
                     </div>
                 </form>

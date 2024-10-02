@@ -37,7 +37,7 @@ onMounted(() => { });
         <template #title>
             <span v-if="store.edit != ''" class="p-1 bg-sky-500 rounded-md">#{{ `${store.edit.id}-${store.getYear}`
                 }}</span>
-            {{ store.edit == '' ? 'Nuevo' : 'Actualizar' }} registro de Cotización
+            {{ store.edit == '' ? 'Nuevo' : 'Actualizar' }} registro de {{store.isMessage }}
         </template>
         <template #content>
             <div class="w-1/2 flex justify-center mx-auto ">
@@ -158,7 +158,7 @@ onMounted(() => { });
                     <div class="flex justify-end mt-3">
                         <PrimaryButton>
                             <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />{{ store.edit == '' ?
-                                'Guardar' : 'Actualizar' }} cotización
+                                'Guardar' : 'Actualizar' }} {{store.isMessage }}
                         </PrimaryButton>
                     </div>
                 </form>

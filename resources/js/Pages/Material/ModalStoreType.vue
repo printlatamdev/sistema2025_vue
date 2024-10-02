@@ -26,7 +26,7 @@ defineProps({
 <template>
     <DialogModal :show="show" @close="store.closeModal" :max-width="maxWidth">
         <template #title>
-            Nuevo registro de tipo de material
+            Nuevo registro de {{ store.isTypeMessage }}
         </template>
         <template #content>
             <div class="mt-3">
@@ -51,7 +51,7 @@ defineProps({
                     </div>
                     <div class="flex justify-end mt-3">
                         <PrimaryButton @click.prevent="store.storeType(categories.id)">
-                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar tipo
+                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar {{ store.isTypeMessage }}
                         </PrimaryButton>
                     </div>
                 </form>

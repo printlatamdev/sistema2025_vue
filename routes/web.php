@@ -8,6 +8,7 @@ use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MaterialtypeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\QuotedetailController;
 use App\Http\Controllers\UserController;
@@ -128,5 +129,13 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         'store' => 'store.brands',
         'update' => 'update.brands',
         'destroy' => 'delete.brands',
+    ]);
+
+    //providers routes
+    Route::resource('/providers', ProviderController::class)->except(['create', 'edit'])->names([
+        'index' => 'providers',
+        'store' => 'store.providers',
+        'update' => 'update.providers',
+        'destroy' => 'delete.providers',
     ]);
 });
