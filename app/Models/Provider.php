@@ -17,4 +17,8 @@ class Provider extends Model
     protected $casts = [
         'payment_condition' => PaymentConditionEnum::class,
     ];
+
+    public function purchaseorder(){
+        return $this->hasOne(PurchaseOrder::class);
+    }
 }
