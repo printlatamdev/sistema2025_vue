@@ -12,6 +12,11 @@ defineProps({
         type: Boolean,
         default: false,
     },
+    payment_conditions: {
+        type: Array,
+        default: ([]),
+        //default: () => [],
+    },
     maxWidth: {
         type: String,
         default: 'lg',
@@ -22,22 +27,31 @@ defineProps({
 <template>
     <DialogModal :show="show" @close="store.closeModal" :max-width="maxWidth">
         <template #title>
-            Nuevo registro de {{store.isMessage }}
+            Nuevo registro de {{ store.isMessage }}
         </template>
         <template #content>
             <div class="mt-5">
                 <form action="">
                     <div class="w-full">
                         <InputLabel for="name" value="Nombre" />
-                        <TextInput v-model="store.form.name" class="w-full" type="text" />
+                        <TextInput v-model="store.form.name" class="w-full " type="text" />
                     </div>
                     <div class="w-full mt-3">
                         <InputLabel for="name" value="Condición de pago" />
-                        <TextInput v-model="store.form.name" class="w-full" type="text" />
+                        <v-select v-model="store.form.payment_condition" class="w-full" :options="payment_conditions"
+                            label="name" >
+                            <template v-slot:no-options="{ search, searching }">
+                                <template v-if="searching">
+                                    No se ha encontrado resultados para <em>{{ search }}</em>.
+                                </template>
+                                <em v-else style="opacity: 0.5">Empieza a escribir para buscar una condición de pago</em>
+                            </template>
+                        </v-select>
                     </div>
-                    <div class="flex justify-end mt-3">
-                        <PrimaryButton @click.prevent="store.storeProduct()">
-                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar {{store.isMessage }}
+                    <div class="flex justify-end mt-5">
+                        <PrimaryButton @click.prevent="store.storeProvider()">
+                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar {{ store.isMessage
+                            }}
                         </PrimaryButton>
                     </div>
                 </form>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PaymentConditionEnum;
 use App\Http\Resources\MaterialResource;
 use App\Http\Resources\OrderResource;
 use App\Http\Resources\ProviderResource;
@@ -24,8 +25,10 @@ class OrderController extends Controller
             'materials' => MaterialResource::collection(Material::get()),
             'users' => UserResource::collection(User::get()),
             'providers' => ProviderResource::collection(Provider::get()),
+            'payment_conditions' => PaymentConditionEnum::cases(),
         ]);
     }
+    
 
     public function store(Request $request)
     {

@@ -12,11 +12,11 @@ const store = useAlertStore();
     </div>
     <!--Dashboard-->
     <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-        <font-awesome-icon :icon="['fas', 'chart-pie']" class="mx-2" /> Dashboard
+        <font-awesome-icon :icon="['fas', 'chart-pie']" class="mx-2" /> Inicio
     </NavLink>
     <!--Quotes-->
     <div>
-        <div class="flex justify-between cursor-pointer items-center px-1 py-2 text-sm hover:bg-gray-700 font-medium text-white transition duration-150 ease-in-out hover:rounded-md"
+        <div class="flex justify-between cursor-pointer items-center px-1 py-2 text-sm hover:bg-gray-700 font-medium text-white transition duration-150 ease-in-out"
             @click.prevent="store.showSubmenu(store.showItemMenu)">
             <span><font-awesome-icon :icon="['fas', 'paperclip']" class="mx-2" />Cotizaciones</span>
             <span class="mr-5 px-1 rounded-sm">
@@ -42,7 +42,7 @@ const store = useAlertStore();
     </NavLink>
     <!--Suministros-->
     <div>
-        <div class="flex justify-between cursor-pointer items-center px-1 py-2 text-sm hover:bg-gray-700 font-medium text-white transition duration-150 ease-in-out hover:rounded-md"
+        <div class="flex justify-between cursor-pointer items-center px-1 py-2 text-sm hover:bg-gray-700 font-medium text-white transition duration-150 ease-in-out"
             @click.prevent="store.showSubmenu2(store.showItemMenu2)">
             <span><font-awesome-icon :icon="['fas', 'hammer']" class="mx-2" />Suministros</span>
             <span class="mr-5 px-1 rounded-sm">

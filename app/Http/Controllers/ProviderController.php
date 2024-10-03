@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PaymentConditionEnum;
 use App\Http\Resources\ProviderResource;
 use App\Models\Provider;
 use Illuminate\Http\Request;
@@ -22,6 +23,13 @@ class ProviderController extends Controller
             'payment_condition' => $request->payment_condition,
         ]);
 
-        return redirect()->route('providers');
+        //return redirect()->route('providers');
+    }
+
+    public function getEnumData(){
+        $data = PaymentConditionEnum::cases();
+        return response()->json([
+            'payment_condition' => $data
+        ]);
     }
 }

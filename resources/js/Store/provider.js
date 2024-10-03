@@ -9,6 +9,7 @@ export const useProviderStore = defineStore("provider", {
         isMessage: 'Proveedor',
         form: useForm({
             name: "",
+            payment_condition: "",
         }),
     }),
     actions: {

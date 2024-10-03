@@ -29,6 +29,11 @@ defineProps({
         type: Object,
         default: ([]),
     },
+    payment_conditions: {
+        type: Array,
+        default: ([]),
+        //default: () => [],
+    },
     maxWidth: {
         type: String,
         default: 'xl',
@@ -96,5 +101,5 @@ defineProps({
             </div>
         </template>
     </DialogModal>
-    <ModalStoreProvider :show="store_provider.openModal" />
+    <ModalStoreProvider :show="store_provider.openModal" :payment_conditions="payment_conditions" />
 </template>

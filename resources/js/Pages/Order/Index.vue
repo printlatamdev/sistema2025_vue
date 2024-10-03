@@ -29,6 +29,11 @@ defineProps({
         type: Object,
         default: ([]),
     },
+    payment_conditions: {
+        type: Array,
+        default: ([]),
+        //default: () => [],
+    }
 });
 
 </script>
@@ -56,7 +61,7 @@ defineProps({
                 </template>
             </EasyDataTable>
         </div>
-        <ModalStoreUpdate :show="store.openModal" :providers="providers" :users="users" />
+        <ModalStoreUpdate :show="store.openModal" :providers="providers" :users="users" :payment_conditions="payment_conditions"/>
         <ModalPivotOrderMaterial :show="store.openPivotModal" :materials="materials" :users="users" />
     </AppLayout>
 </template>
