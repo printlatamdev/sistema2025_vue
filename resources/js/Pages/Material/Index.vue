@@ -29,6 +29,10 @@ defineProps({
         type: Object,
         default: ([]),
     },
+    colors: {
+        type: Array,
+        default: ([]),
+    },
     maxWidth: {
         type: String,
         default: 'md',
@@ -42,7 +46,7 @@ onMounted(() => {
 <template>
     <AppLayout title="Materiales">
         <div class="w-full">
-            <h2 class="text-3xl font-bold">Datos de materiales <span class="border-b-2 border-green-200">{{
+            <h2 class="text-3xl font-bold">Datos de {{ store.isMessage }}: <span class="border-b-2 border-green-200">{{
                 categories.name }}</span></h2>
             <!--tabs-->
             <div class=" mt-5">
@@ -95,7 +99,7 @@ onMounted(() => {
                 <div class="mt-5 p-2 bg-green-200 flex justify-between">
                     <span v-for="img in categories.image" :key="img.id" class="flex">
                         <img :src="img.url" alt="" class="w-6 mx-2">
-                        <h3 class="text-lg">Existencias <span class="">{{ store.currentType.name }}</span></h3> 
+                        <h3 class="text-lg">Existencias <span class="">{{ store.currentType.name }}</span></h3>
                     </span>
                     <PrimaryButton @click.prevent="store.showType(store.type_id)">
                         <font-awesome-icon :icon="['fas', 'plus']" class="mr-1" />Nuevo material
@@ -103,17 +107,17 @@ onMounted(() => {
                 </div>
                 <EasyDataTable :headers="store.headers" :rows-per-page="10" :items="store.materials" border-cell
                     buttons-pagination>
-                <template #empty-message>
-                    <p>No se ha encontrado ningún resultado</p>
-                </template>
+                    <template #empty-message>
+                        <p>No se ha encontrado ningún resultado</p>
+                    </template>
                     <template #item-measures="data">
                         {{ `${data.measures.width} ancho x ${data.measures.lenght} largo` }}
                     </template>
                 </EasyDataTable>
             </div>
         </div>
-        <ModalStoreUpdateMaterial :show="store.openModal" :type="store.type" :brands="brands"
-            :categories="categories" />
+        <ModalStoreUpdateMaterial :show="store.openModal" :type="store.type" :brands="brands" :categories="categories"
+            :colors="colors" />
         <ModalStoreType :show="store.openTypeModal" :categories="categories" />
         <!--<ModalEntryMaterial :show="store.openTypeModal" :providers="providers" />-->
     </AppLayout>

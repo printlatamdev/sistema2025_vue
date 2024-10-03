@@ -5,10 +5,13 @@ namespace App\Models;
 use App\Enums\ColorsEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 class Material extends Model
 {
     use HasFactory;
+    //use LogsActivity;
 
     protected $fillable = [
         'name',
@@ -52,4 +55,11 @@ class Material extends Model
     {
         return $this->belongsToMany(Order::class, 'material_order')->withPivot('price', 'quantity', 'subtotal', 'total', 'details')->orderByPivot('id', 'desc');
     }
+
+   /* public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+        ->logOnly(['name'])
+        ->logOnlyDirty();
+    }*/
 }

@@ -30,6 +30,10 @@ defineProps({
         type: Object,
         default: ([]),
     },
+    colors: {
+        type: Array,
+        default: ([]),
+    },
     maxWidth: {
         type: String,
         default: '5xl',
@@ -40,7 +44,7 @@ defineProps({
 <template>
     <DialogModal :show="show" @close="store.closeModal" :max-width="maxWidth">
         <template #title>
-            Nuevo registro de {{store.isMessage }} <span class="bg-blue-200 p-1 rounded-md">{{ type.name }}</span>
+            Nuevo registro de {{ store.isMessage }} <span class="bg-blue-200 p-1 rounded-md">{{ type.name }}</span>
         </template>
         <template #content>
             <div class="mt-5">
@@ -73,13 +77,14 @@ defineProps({
                         <div class="w-2/4 mr-2">
                             <InputLabel for="brand" value="Marca" />
                             <div class="flex">
-                                <select v-model="store.form.brand_id"
-                                    class="block w-full border-gray-300 rounded-l-md text-xs">
-                                    <option class="text-gray-500" disabled> Seleccione una opción</option>
-                                    <option v-for="item in brands" :key="item.id" :value="item.id">
-                                        {{ item.name }}
-                                    </option>
-                                </select>
+                                <v-select v-model="store.form.brand_id" :options="brands" label="name" :reduce="brands=>brands.id" class="w-full">
+                                    <template v-slot:no-options="{ search, searching }">
+                                        <template v-if="searching">
+                                            No se ha encontrado resultados para <em>{{ search }}</em>.
+                                        </template>
+                                        <em v-else style="opacity: 0.5">Empieza a escribir para buscar un color</em>
+                                    </template>
+                                </v-select>
                                 <AddButton v-tooltip="'Agregar nueva marca'" class=""
                                     @click.prevent="store_brand.showStoreModal()">
                                     <font-awesome-icon :icon="['fas', 'plus']" />
@@ -89,12 +94,14 @@ defineProps({
                         </div>
                         <div class="w-1/4 mr-2">
                             <InputLabel for="color" value="Color" />
-                            <select v-model="store.form.color" class="block w-full border-gray-300 rounded-md text-xs">
-                                <option class="text-gray-500" disabled> Seleccione una opción</option>
-                                <option v-for="item in store.colors" :key="item.id" :value="item.value">
-                                    {{ item.text }}
-                                </option>
-                            </select>
+                            <v-select v-model="store.form.category" :options="colors" label="name">
+                                <template v-slot:no-options="{ search, searching }">
+                                    <template v-if="searching">
+                                        No se ha encontrado resultados para <em>{{ search }}</em>.
+                                    </template>
+                                    <em v-else style="opacity: 0.5">Empieza a escribir para buscar un color</em>
+                                </template>
+                            </v-select>
                         </div>
                     </div>
                     <!-- <ul class="flex mt-10 text-sm font-medium text-center rounded-lg border">
@@ -123,21 +130,21 @@ defineProps({
                             <div v-if="categories.name == 'Tintas'">
                                 <!--datapickers-->
                                 <div class="w-full flex mt-3">
-                                    <!--<div class="w-1/3 mr-2">
+                                    <div class="w-1/4 mr-2">
                                         <InputLabel for="entry_date" value="Fecha de ingreso" />
-                                        <VueDatePicker v-model="store.form.entry_date" inline auto-apply></VueDatePicker>
-                                    </div>-->
-                                    <div class="w-1/3 mx-auto">
+                                        <VueDatePicker v-model="store.form.entry_date"></VueDatePicker>
+                                    </div>
+                                    <div class="w-1/4 mr-2">
                                         <InputLabel for="departure_date" value="Fecha de salida" />
-                                        <VueDatePicker v-model="store.form.departure_date" inline auto-apply
+                                        <VueDatePicker v-model="store.form.departure_date"
                                             locale="es"></VueDatePicker>
                                     </div>
-                                    <div class="w-1/3 mx-auto">
+                                    <div class="w-1/4 mr-2">
                                         <InputLabel for="use_date" value="Fecha de uso" />
-                                        <VueDatePicker v-model="store.form.use_date" inline auto-apply locale="es">
+                                        <VueDatePicker v-model="store.form.use_date" locale="es">
                                         </VueDatePicker>
                                     </div>
-                                    <div class="w-1/3">
+                                    <div class="w-1/4">
                                         <div class="w-full mr-2">
                                             <InputLabel for="expiration_date" value="Fecha de vencimiento" />
                                             <VueDatePicker v-model="store.form.expiration_date" locale="es"
@@ -197,7 +204,8 @@ defineProps({
                     </div>
                     <div class="flex justify-end mt-3">
                         <PrimaryButton @click.prevent="store.storeMaterial(type, categories.id)">
-                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar  {{store.isMessage }}
+                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar {{ store.isMessage
+                            }}
                         </PrimaryButton>
                     </div>
                 </form>

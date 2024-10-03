@@ -24,10 +24,10 @@ defineProps({
 <template>
     <AppLayout title="Clientes">
         <div class="w-full">
-            <h2 class="text-3xl font-bold">Datos de Clientes</h2>
+            <h2 class="text-3xl font-bold">Datos de {{ store.isMessage }}</h2>
             <div class="flex justify-end">
                 <PrimaryButton @click="store.showStoreModal()">
-                    <font-awesome-icon :icon="['fas', 'plus']" class="mr-1"/>Nueva compañia
+                    <font-awesome-icon :icon="['fas', 'plus']" class="mr-1"/>Nueva {{ store.isMessage }}
                 </PrimaryButton>
             </div>
             <EasyDataTable :headers="store.headers" :rows-per-page="10" :items="companies" border-cell buttons-pagination class="mt-5">

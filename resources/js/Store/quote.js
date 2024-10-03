@@ -275,6 +275,7 @@ export const useQuoteStore = defineStore("quote", {
             this.openModalQD = false;
             this.openDeleteModal = false;
             this.clearInput();
+            this.clearMainInput();
         },
     },
 });

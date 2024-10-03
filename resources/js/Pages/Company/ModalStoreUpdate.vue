@@ -26,7 +26,7 @@ defineProps({
             <div class="mt-5">
                 <form @submit.prevent="store.storeCompany(store.edit.id)">
                     <div class="flex">
-                        <div class="w-1/2 mr-1">
+                        <div class="w-1/2 mr-2">
                             <InputLabel for="commercial_name" value="Nombre comercial" />
                             <TextInput v-model="store.form.commercial_name" class="w-full" type="text" />
                             <InputError class="" :message="store.form.errors.commercial_name" />
@@ -39,7 +39,7 @@ defineProps({
                     </div>
 
                     <div class="flex mt-3">
-                        <div class="w-1/2 mr-1">
+                        <div class="w-1/2 mr-2">
                             <InputLabel for="cellphone" value="Celular" />
                             <TextInput v-model="store.form.cellphone" class="w-full" type="text" />
                             <InputError class="" :message="store.form.errors.cellphone" />
@@ -51,12 +51,12 @@ defineProps({
                     </div>
 
                     <div class="flex mt-3">
-                        <div class="w-1/3 mr-1">
+                        <div class="w-1/3 mr-2">
                             <InputLabel for="nrc" value="NRC" />
                             <TextInput v-model="store.form.nrc" class="w-full" type="text" />
                             <InputError class="" :message="store.form.errors.nrc" />
                         </div>
-                        <div class="w-1/3 mr-1">
+                        <div class="w-1/3 mr-2">
                             <InputLabel for="nit" value="NIT" />
                             <TextInput v-model="store.form.nit" class="w-full" type="text" />
                             <InputError class="" :message="store.form.errors.nit" />

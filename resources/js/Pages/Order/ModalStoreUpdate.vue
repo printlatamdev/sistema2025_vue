@@ -77,6 +77,24 @@ defineProps({
                         </v-select>
                         <InputError class="" :message="store.form.errors.name" />
                     </div>
+                    <div class="w-full mt-3">
+                        <InputLabel for="name" value="Autorizado por" />
+                        <v-select v-model="store.form.user_id" :options="users" label="name" :reduce="user => user.id">
+                            <template v-slot:no-options="{ search, searching }">
+                                <template v-if="searching">
+                                    No se ha encontrado resultados para <em>{{ search }}</em>.
+                                </template>
+                                <em v-else style="opacity: 0.5">Empieza a escribir para buscar quien autoriza la orden
+                                    de compra</em>
+                            </template>
+                        </v-select>
+                        <InputError class="" :message="store.form.errors.name" />
+                    </div>
+                    <div class="mt-3">
+                        <InputLabel for="description" value="Detalle de solicitud" />
+                        <textarea v-model="store.form.description" rows="3"
+                            class="block w-full border-gray-300 rounded-md text-sm"></textarea>
+                    </div>
                     <div class="flex mt-3">
                         <div>
                             <label class="flex items-center">

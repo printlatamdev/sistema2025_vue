@@ -15,7 +15,7 @@ defineProps({
     },
     maxWidth: {
         type: String,
-        default: '2xl',
+        default: '5xl',
     },
     countries: {
         type: Object,
@@ -34,24 +34,24 @@ defineProps({
             <div class="mt-5">
                 <form @submit.prevent="store.storeContact(store.edit.id)">
                     <div class="flex">
-                        <div class="w-1/3 mr-1">
+                        <div class="w-1/3 mr-2">
                             <InputLabel for="name" value="Nombre" />
                             <TextInput v-model="store.form.name" class="w-full" type="text" />
                             <InputError class="" :message="store.form.errors.name" />
                         </div>
-                        <div class="w-1/3">
+                        <div class="w-1/3 mr-2">
                             <InputLabel for="lastname" value="Apellido" />
                             <TextInput v-model="store.form.lastname" class="w-full" type="text" />
                             <InputError class="" :message="store.form.errors.lastname" />
                         </div>
-                        <div class="w-1/3 ml-1">
+                        <div class="w-1/3">
                             <InputLabel for="email" value="Correo electrónico" />
                             <TextInput v-model="store.form.email" class="w-full" type="email" />
                             <InputError class="" :message="store.form.errors.email" />
                         </div>
                     </div>
                     <div class="flex mt-4">
-                        <div class="w-1/4 mr-1">
+                        <div class="w-1/4 mr-2">
                             <InputLabel for="country_id" value="País" />
                             <select v-model="store.form.country_id"
                                 class="block w-full border-gray-300 rounded-md text-xs">
@@ -62,18 +62,20 @@ defineProps({
                             </select>
                             <InputError class="" :message="store.form.errors.country_id" />
                         </div>
-                        <div class="w-1/4 mr-1">
+                        <div class="w-1/4 mr-2">
                             <InputLabel for="company_id" value="Cliente" />
-                            <select v-model="store.form.company_id"
-                                class="block w-full border-gray-300 rounded-md text-xs">
-                                <option class="text-gray-500" disabled> Seleccione una opción</option>
-                                <option v-for="company in companies" :key="company.id" :value="company.id">
-                                    {{ company.social_reason }}
-                                </option>
-                            </select>
+                            <v-select v-model="store.form.company_id" :reduce="companies => companies.id"
+                                :options="companies" label="social_reason">
+                                <template v-slot:no-options="{ search, searching }">
+                                    <template v-if="searching">
+                                        No se ha encontrado resultados para <em>{{ search }}</em>.
+                                    </template>
+                                    <em v-else style="opacity: 0.5">Empieza a escribir para buscar un cliente</em>
+                                </template>
+                            </v-select>
                             <InputError class="" :message="store.form.errors.company_id" />
                         </div>
-                        <div class="w-1/4 mr-1">
+                        <div class="w-1/4 mr-2">
                             <InputLabel for="cellphone" value="Celular" />
                             <TextInput v-model="store.form.cellphone" class="w-full" type="text" />
                             <InputError class="" :message="store.form.errors.cellphone" />
@@ -85,7 +87,7 @@ defineProps({
                     </div>
                     <div class="flex justify-end mt-3">
                         <PrimaryButton>
-                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />{{ store.edit == '' ?
+                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-2" />{{ store.edit == '' ?
                             'Guardar' : 'Actualizar' }} {{store.isMessage }}
                         </PrimaryButton>
                     </div>

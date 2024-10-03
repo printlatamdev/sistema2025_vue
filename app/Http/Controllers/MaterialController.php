@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ColorsEnum;
 use App\Http\Requests\StoreMaterialRequest;
 use App\Http\Resources\BrandResource;
 use App\Http\Resources\MaterialcategoryResource;
@@ -111,6 +112,7 @@ class MaterialController extends Controller
             'types' => MaterialtypeResource::collection($data),
             'categories' => MaterialcategoryResource::make($cat),
             'brands' => BrandResource::collection(Brand::get()),
+            'colors' => ColorsEnum::cases()
         ]);
     }
 

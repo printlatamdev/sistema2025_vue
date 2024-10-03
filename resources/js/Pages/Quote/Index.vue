@@ -41,10 +41,10 @@ defineProps({
 <template>
     <AppLayout title="Cotizaciones">
         <div class="w-full">
-            <h2 class="text-3xl font-bold">Datos de Cotizaciones</h2>
+            <h2 class="text-3xl font-bold">Datos de {{ store.isMessage }}</h2>
             <div class="flex justify-end">
                 <PrimaryButton @click="store.showStoreModal()">
-                    <font-awesome-icon :icon="['fas', 'plus']" class="mr-1"/>Nueva Cotización
+                    <font-awesome-icon :icon="['fas', 'plus']" class="mr-1"/>Nueva {{ store.isMessage }}
                 </PrimaryButton>
             </div>
             <EasyDataTable :headers="store.headerMain" :rows-per-page="10" :items="quotedetails" border-cell buttons-pagination class="mt-5 " >
