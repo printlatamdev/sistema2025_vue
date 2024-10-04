@@ -24,7 +24,7 @@ class StoreUserRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required',
+            'password' => 'required|password',
             'roles' => 'required',
         ];
     }
@@ -37,6 +37,7 @@ class StoreUserRequest extends FormRequest
             'email.email' => 'El correo tiene un formato incorrecto',
             'email.unique' => 'El correo ingresado ya esta en uso',
             'password.required' => 'La contraseña es requerida',
+            'password.password' => 'La contraseña no tiene un formato correspondiente',
             'roles.required' => 'El rol es requerido',
         ];
     }

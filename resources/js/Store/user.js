@@ -9,9 +9,35 @@ export const useUserStore = defineStore("user", {
         isMessage: 'Usuario',
         form: useForm({
             name: "",
+            email: "",
+            password: "",
+            roles: [],
+            error: '',
+            processing: false,
         }),
     }),
+    getters: {
+        filledInputs(state) {
+            return state.form.name=='' || state.form.email=='' || state.form.password=='' || state.form.roles=='';
+        },
+    },
     actions: {
+        storeUser() {
+            this.form.processing = true;
+            this.form.post(route("store.users"), {
+                onSuccess: () => {
+                    this.closeModal();
+                    this.alert.successAlert(this.isMessage + ' agregado');
+                    this.resetInputs();
+                },
+            });
+        },
+        resetInputs(){
+            this.form.name = "";
+            this.form.email = "";
+            this.form.password = "";
+            this.form.roles = [];
+        },
         showStoreModal() {
             this.openModal = true;
         },

@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Resources\RoleResource;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -18,6 +20,7 @@ class UserController extends Controller
 
         return Inertia::render('User/Index', [
             'users' => UserResource::collection($data),
+            'roles' => RoleResource::collection(Role::get())
         ]);
     }
 
@@ -35,6 +38,7 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
+        $pass = '';
         $request->password ? $pass = Hash::make($request->password) : $pass = $user->password;
         $user->update([
             'name' => $request->name,
