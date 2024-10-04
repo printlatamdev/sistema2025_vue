@@ -13,33 +13,12 @@ defineProps({
         type: Object,
         default: ([]),
     },
-    materials: {
-        type: Object,
-        default: ([]),
-    },
-    companies: {
-        type: Object,
-        default: ([]),
-    },
-    users: {
-        type: Object,
-        default: ([]),
-    },
-    providers: {
-        type: Object,
-        default: ([]),
-    },
-    payment_conditions: {
-        type: Array,
-        default: ([]),
-        //default: () => [],
-    }
 });
 
 </script>
 
 <template>
-    <AppLayout title="Ordenes de compra">
+    <AppLayout title="Ordenes">
         <div class="w-full">
             <h2 class="text-3xl font-bold">Datos de {{ store.isMessage }}</h2>
             <div class="flex justify-end">

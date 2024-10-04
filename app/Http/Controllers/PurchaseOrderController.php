@@ -25,6 +25,7 @@ class PurchaseorderController extends Controller
             'details' => $request->details,
             'ordertype' => $request->ordertype,
         ]);
+        $data->users()->attach($request->user_id, []);
 
         return redirect()->route('purchaseorders');
     }
