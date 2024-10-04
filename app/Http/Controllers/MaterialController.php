@@ -112,7 +112,7 @@ class MaterialController extends Controller
             'types' => MaterialtypeResource::collection($data),
             'categories' => MaterialcategoryResource::make($cat),
             'brands' => BrandResource::collection(Brand::get()),
-            'colors' => ColorsEnum::cases()
+            'colors' => ColorsEnum::cases(),
         ]);
     }
 

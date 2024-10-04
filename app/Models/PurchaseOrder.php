@@ -2,25 +2,26 @@
 
 namespace App\Models;
 
-use App\Enums\OrderEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PurchaseOrder extends Model
+class Purchaseorder extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'provider_id',
         'details',
-        'ordertype'
+        'ordertype',
     ];
 
-    public function users(){
+    public function users()
+    {
         return $this->belongsToMany(User::class);
     }
 
-    public function provider(){
+    public function provider()
+    {
         return $this->belongsTo(Provider::class);
     }
 }

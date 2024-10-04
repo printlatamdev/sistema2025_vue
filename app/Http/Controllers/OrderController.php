@@ -28,7 +28,6 @@ class OrderController extends Controller
             'payment_conditions' => PaymentConditionEnum::cases(),
         ]);
     }
-    
 
     public function store(Request $request)
     {

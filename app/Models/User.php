@@ -70,7 +70,8 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
-    public function purchaseorders(){
-        return $this->belongsToMany(PurchaseOrder::class)->withPivot('category');
+    public function purchaseorders()
+    {
+        return $this->belongsToMany(Purchaseorder::class)->withPivot('category');
     }
 }

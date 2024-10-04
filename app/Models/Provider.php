@@ -18,7 +18,8 @@ class Provider extends Model
         'payment_condition' => PaymentConditionEnum::class,
     ];
 
-    public function purchaseorder(){
-        return $this->hasOne(PurchaseOrder::class);
+    public function purchaseorder()
+    {
+        return $this->hasOne(Purchaseorder::class);
     }
 }

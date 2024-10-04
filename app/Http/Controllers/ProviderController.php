@@ -26,10 +26,12 @@ class ProviderController extends Controller
         //return redirect()->route('providers');
     }
 
-    public function getEnumData(){
+    public function getEnumData()
+    {
         $data = PaymentConditionEnum::cases();
+
         return response()->json([
-            'payment_condition' => $data
+            'payment_condition' => $data,
         ]);
     }
 }
