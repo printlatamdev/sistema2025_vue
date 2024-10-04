@@ -11,17 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('material_order', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('material_id')->constrained();
-            $table->foreignId('order_id')->constrained();
-            $table->float('price', 8, 2);
-            $table->integer('quantity');
-            $table->float('subtotal', 8, 2);
-            $table->float('total', 8, 2);
-            $table->longText('details')->nullable();
-            $table->timestamps();
-        });
+        if (! Schema::hasTable('material_order')) {
+            Schema::create('material_order', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('material_id')->constrained();
+                $table->foreignId('order_id')->constrained();
+                $table->float('price', 8, 2);
+                $table->integer('quantity');
+                $table->float('subtotal', 8, 2);
+                $table->float('total', 8, 2);
+                $table->longText('details')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

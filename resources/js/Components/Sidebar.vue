@@ -14,6 +14,10 @@ const store = useAlertStore();
     <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
         <font-awesome-icon :icon="['fas', 'chart-pie']" class="mx-2" /> Inicio
     </NavLink>
+    <!--Orders-->
+    <NavLink :href="route('users')" :active="route().current('users')">
+        <font-awesome-icon :icon="['fas', 'circle-user']" class="mx-2" /> Usuarios
+    </NavLink>
     <!--Quotes-->
     <div>
         <div class="flex justify-between cursor-pointer items-center px-1 py-2 text-sm hover:bg-gray-700 font-medium text-white transition duration-150 ease-in-out"

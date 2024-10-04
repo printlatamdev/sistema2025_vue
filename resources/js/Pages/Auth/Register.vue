@@ -14,6 +14,7 @@ const form = useForm({
     name: '',
     email: '',
     password: '',
+    roles: 6,
     password_confirmation: '',
     terms: false,
 });
@@ -40,21 +41,21 @@ const submit = () => {
                 <AuthenticationCardLogo />
                 <div>
                     <InputLabel for="name" value="Nombre" />
-                    <TextInput id="name" v-model="form.name" type="text" class="mt-1 block w-full" required autofocus
+                    <TextInput id="name" v-model="form.name" type="text" class="block w-full" required autofocus
                         autocomplete="name" />
                     <InputError class="mt-2" :message="form.errors.name" />
                 </div>
 
                 <div class="mt-4">
                     <InputLabel for="email" value="Correo electrónico" />
-                    <TextInput id="email" v-model="form.email" type="email" class="mt-1 block w-full" required
+                    <TextInput id="email" v-model="form.email" type="email" class="block w-full" required
                         autocomplete="username" />
                     <InputError class="mt-2" :message="form.errors.email" />
                 </div>
 
                 <div class="mt-4">
                     <InputLabel for="password" value="Contraseña" />
-                    <TextInput id="password" v-model="form.password" type="password" class="mt-1 block w-full" required
+                    <TextInput id="password" v-model="form.password" type="password" class="block w-full" required
                         autocomplete="new-password" />
                     <InputError class="mt-2" :message="form.errors.password" />
                 </div>
@@ -62,7 +63,7 @@ const submit = () => {
                 <div class="mt-4">
                     <InputLabel for="password_confirmation" value="Confirmar contraseña" />
                     <TextInput id="password_confirmation" v-model="form.password_confirmation" type="password"
-                        class="mt-1 block w-full" required autocomplete="new-password" />
+                        class="block w-full" required autocomplete="new-password" />
                     <InputError class="mt-2" :message="form.errors.password_confirmation" />
                 </div>
 

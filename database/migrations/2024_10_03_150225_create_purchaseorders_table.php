@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('purchaseorders', function (Blueprint $table) {
-            $table->id();
-            $table->string('ordertype')->nullable();
-            $table->text('details')->nullable();
-            $table->foreingId('provider_id')->constrained();
-            $table->text('details')->nullable();
-            $table->timestamps();
-        });
+        if (! Schema::hasTable('purchaseorders')) {
+            Schema::create('purchaseorders', function (Blueprint $table) {
+                $table->id();
+                $table->string('ordertype')->nullable();
+                $table->text('details')->nullable();
+                $table->foreignId('provider_id')->constrained();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

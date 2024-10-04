@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('purchaseorder_user', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('purchaseorder_id')->constrained();
-            $table->foreignId('user_id')->constrained();
-            $table->timestamps();
-        });
+        if (! Schema::hasTable('purchaseorder_user')) {
+            Schema::create('purchaseorder_user', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('purchaseorder_id')->constrained();
+                $table->foreignId('user_id')->constrained();
+                $table->timestamps();
+            });
+        }
     }
 
     /**
