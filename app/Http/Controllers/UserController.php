@@ -20,7 +20,7 @@ class UserController extends Controller
 
         return Inertia::render('User/Index', [
             'users' => UserResource::collection($data),
-            'roles' => RoleResource::collection(Role::get())
+            'roles' => Role::get(),
         ]);
     }
 

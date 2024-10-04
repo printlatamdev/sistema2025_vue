@@ -22,9 +22,9 @@ class OrderController extends Controller
 
         return Inertia::render('Order/Index', [
             'orders' => OrderResource::collection($data),
-            'materials' => MaterialResource::collection(Material::get()),
-            'users' => UserResource::collection(User::get()),
-            'providers' => ProviderResource::collection(Provider::get()),
+            'materials' => Material::get(),
+            'users' => User::get(),
+            'providers' => Provider::get(),
             'payment_conditions' => PaymentConditionEnum::cases(),
         ]);
     }

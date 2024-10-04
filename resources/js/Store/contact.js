@@ -32,6 +32,11 @@ export const useContactStore = defineStore('contact', {
         { text: "Acciones", value: "options", width: 100 },
     ],
  }),
+ getters: {
+     filledInputs(state) {
+         return state.form.name=='' || state.form.lastname=='' || state.form.cellphone=='' || state.form.email==''  || state.form.company_id==''  || state.form.country_id=='';
+     },
+ },
   actions: {
     storeContact(id){
       if(!id){

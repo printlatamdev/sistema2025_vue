@@ -14,12 +14,13 @@ class RoleSeeder extends Seeder
     {
 
         $roles = [
-            'Superadministrador',
+            'Superadmin',
             'Producción administración',
             'Producción planta',
             'Facturación',
             'Bodega',
             'Recepción',
+            'Ventas',
         ];
         foreach ($roles as $item) {
             Role::create(['name' => $item]);

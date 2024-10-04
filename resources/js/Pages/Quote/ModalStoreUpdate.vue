@@ -33,7 +33,7 @@ onMounted(() => { });
 </script>
 <template>
 
-    <DialogModal :show="show" :max-width="maxWidth" @close="store.closeModal">
+    <DialogModal :show="show" :max-width="maxWidth">
         <template #title>
             <span v-if="store.edit != ''" class="p-1 bg-sky-500 rounded-md">#{{ `${store.edit.id}-${store.getYear}`
                 }}</span>
@@ -156,7 +156,7 @@ onMounted(() => { });
                         </div>
                     </div>
                     <div class="flex justify-end mt-3">
-                        <PrimaryButton>
+                        <PrimaryButton :disabled="store.filledInputs">
                             <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />{{ store.edit == '' ?
                                 'Guardar' : 'Actualizar' }} {{store.isMessage }}
                         </PrimaryButton>

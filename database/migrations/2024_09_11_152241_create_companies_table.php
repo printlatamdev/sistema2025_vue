@@ -16,8 +16,8 @@ return new class extends Migration
                 $table->id();
                 $table->string('social_reason');
                 $table->string('commercial_name');
-                $table->text('address');
-                $table->string('cellphone')->nullable();
+                $table->text('address')->nullable();
+                $table->string('cellphone');
                 $table->string('telephone')->nullable();
                 $table->string('nrc')->nullable();
                 $table->string('business_line')->nullable();

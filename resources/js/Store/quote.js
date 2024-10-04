@@ -1,13 +1,13 @@
 import { defineStore } from "pinia";
-import { useForm,router } from "@inertiajs/vue3";
-import { useAlertStore } from './alert';
+import { useForm, router } from "@inertiajs/vue3";
+import { useAlertStore } from "./alert";
 
 export const useQuoteStore = defineStore("quote", {
     state: () => ({
         alert: useAlertStore(),
-        isMessage: 'Cotización',
-        isSecondMessage: 'Detalle de cotización',
-        getYear: parseInt(new Date().getFullYear().toString().substr(2,2), 10),
+        isMessage: "Cotización",
+        isSecondMessage: "Detalle de cotización",
+        getYear: parseInt(new Date().getFullYear().toString().substr(2, 2), 10),
         edit: [],
         myErrors: [],
         newQuote: [],
@@ -27,7 +27,7 @@ export const useQuoteStore = defineStore("quote", {
             user_id: "",
             company_id: "",
             contact_id: "",
-            error: '',
+            error: "",
             processing: false,
         }),
         formQD: useForm({
@@ -38,27 +38,27 @@ export const useQuoteStore = defineStore("quote", {
             subtotal: "",
             details: "",
             image: null,
-            error: '',
+            error: "",
             processing: false,
         }),
         formTotal: useForm({
             quote_id: "",
             iva: null,
             iva2: null,
-            error: '',
+            error: "",
             processing: false,
         }),
         getCalc: {
             total_pr: 0,
-            withIva: null
+            withIva: null,
         },
         headerMain: [
             { text: "No. Orden", value: "quote.id", width: 50 },
-            { text: "Cliente", value: "quote.company.social_reason",  },
-            { text: "Contacto", value: "quote.contact.name",  },
-            { text: "Vendedor", value: "quote.user.name",  },
+            { text: "Cliente", value: "quote.company.social_reason" },
+            { text: "Contacto", value: "quote.contact.name" },
+            { text: "Vendedor", value: "quote.user.name" },
             { text: "Reporte", value: "report", width: 50 },
-            { text: "Fecha de registro", value: "register_date", width:150 },
+            { text: "Fecha de registro", value: "register_date", width: 150 },
             { text: "Acciones", value: "options", width: 100 },
         ],
         headers: [
@@ -67,7 +67,11 @@ export const useQuoteStore = defineStore("quote", {
             { text: "Cliente", value: "company.social_reason" },
             { text: "Contacto", value: "contact.name" },
             { text: "Reporte", value: "report", width: 50 },
-            { text: "Condición de pago", value: "payment_condition", width: 75, },
+            {
+                text: "Condición de pago",
+                value: "payment_condition",
+                width: 75,
+            },
             { text: "Validez oferta", value: "offer_validity", width: 50 },
             { text: "Moneda", value: "currency", width: 50 },
             { text: "Estado", value: "status", width: 100 },
@@ -118,125 +122,155 @@ export const useQuoteStore = defineStore("quote", {
             return state.getCalc.total_pr * state.formTotal.iva;
         },
         getTotalIva(state) {
-            let newIva = '';
-            if(state.formTotal.iva2 != ''){
+            let newIva = "";
+            if (state.formTotal.iva2 != "") {
                 newIva = state.formTotal.iva2;
             } else {
                 newIva = state.formTotal.iva;
             }
-            return state.getCalc.total_pr + (state.getCalc.total_pr * newIva);
+            return state.getCalc.total_pr + state.getCalc.total_pr * newIva;
+        },
+        filledInputs(state) {
+            return (
+                state.form.user_id == "" ||
+                state.form.company_id == "" ||
+                state.form.contact_id == ""
+            );
+        },
+        filledInputsQD(state) {
+            return (
+                state.formQD.product_id == "" ||
+                state.formQD.quantity == "" ||
+                state.formQD.price == "" ||
+                state.formQD.image == null
+            );
+        },
+        filledInputsTotal(state) {
+            return (
+                state.formsTotal.iva == ""
+            );
         },
     },
     actions: {
         storeQuote(id) {
-            if(!id){
-                axios.post(route('store.quotations'), {
-                    important_note: this.form.important_note,
-                    payment_condition: this.form.payment_condition,
-                    offer_validity: this.form.offer_validity,
-                    currency: this.form.currency,
-                    status: this.form.status,
-                    incoterm: this.form.incoterm,
-                    user_id: this.form.user_id,
-                    company_id: this.form.company_id,
-                    contact_id: this.form.contact_id,
-                }).then((response) => {
-                    this.edit = response.data;
-                    this.alert.successAlert(this.isMessage + ' agregado');
-                    this.closeModal();
-                    this.showModalQD();
-                    this.clearMainInput();
-                }).catch(error => { this.myErrors = error.response.data.errors });
+            if (!id) {
+                axios
+                    .post(route("store.quotations"), {
+                        important_note: this.form.important_note,
+                        payment_condition: this.form.payment_condition,
+                        offer_validity: this.form.offer_validity,
+                        currency: this.form.currency,
+                        status: this.form.status,
+                        incoterm: this.form.incoterm,
+                        user_id: this.form.user_id,
+                        company_id: this.form.company_id,
+                        contact_id: this.form.contact_id,
+                    })
+                    .then((response) => {
+                        this.edit = response.data;
+                        this.alert.successAlert(this.isMessage + " agregado");
+                        //this.closeModal();
+                        this.showModalQD();
+                        //this.clearMainInput();
+                    })
+                    .catch((error) => {
+                        this.myErrors = error.response.data.errors;
+                    });
             } else {
                 this.form.put(route("update.quotations", id), {
                     onSuccess: () => {
-                        this.alert.successAlert(this.isMessage + ' actualizada');
-                        this.closeModal();
+                        this.alert.successAlert(
+                            this.isMessage + " actualizada"
+                        );
+                        //this.closeModal();
                         this.showModalQD();
                     },
-                    onError: (error) => { 
-                      this.errors = error;
-                      this.alert.errorAlert();
+                    onError: (error) => {
+                        this.errors = error;
+                        this.alert.errorAlert();
                     },
                 });
             }
         },
-        storePivot(id){
+        storePivot(id) {
             this.formQD.quote_id = this.edit.id;
             this.formQD.post(route("store.productquote"), {
                 onSuccess: () => {
                     //this.closeModal();
                     this.refreshData(id);
-                    this.alert.successAlert(this.isMessage + ' agregado');
+                    this.alert.successAlert(this.isMessage + " agregado");
                 },
-                onError: (error) => { 
-                  this.errors = error;
-                  this.alert.errorAlert();
+                onError: (error) => {
+                    this.errors = error;
+                    this.alert.errorAlert();
                 },
             });
         },
-        storeQuoteDetail(id){
+        storeQuoteDetail(id) {
             this.formTotal.quote_id = this.edit.id;
             this.formTotal.put(route("store.quotedetail", this.edit.id), {
                 onSuccess: () => {
                     this.closeModal();
-                    this.alert.successAlert(this.isSecondMessage + ' agregado');
-                    this.edit = '';
+                    this.alert.successAlert(this.isSecondMessage + " agregado");
+                    this.edit = "";
                 },
-                onError: (error) => { 
-                  this.errors = error;
-                  this.alert.errorAlert();
+                onError: (error) => {
+                    this.errors = error;
+                    this.alert.errorAlert();
                 },
             });
         },
-        deleteQuote(){
-            this.form.delete(route('delete.quotations', id), {
+        deleteQuote() {
+            this.form.delete(route("delete.quotations", id), {
                 onSuccess: () => {
-                  this.closeModal();
-                  this.alert.successAlert(this.isMessage + ' eliminada');
+                    this.closeModal();
+                    this.alert.successAlert(this.isMessage + " eliminada");
                 },
-                onError: (error) => { 
-                  this.errors = error;
-                  this.alert.errorAlert();
+                onError: (error) => {
+                    this.errors = error;
+                    this.alert.errorAlert();
                 },
             });
         },
-        getReport(id){
-            router.get(route('report.quote', id));
+        getReport(id) {
+            router.get(route("report.quote", id));
         },
-        refreshData(id){
-            axios.get(route('quoterefresh', id)).then(response => {
+        refreshData(id) {
+            axios.get(route("quoterefresh", id)).then((response) => {
                 response.data.map((el) => {
                     this.edit = el;
-                    this.getCalc.total_pr = el.products.reduce((accumulator, current) => accumulator + current.total, 0);
+                    this.getCalc.total_pr = el.products.reduce(
+                        (accumulator, current) => accumulator + current.total,
+                        0
+                    );
                 });
             });
         },
-        getContactByCompany(id){
-            axios.get(route('contact.company', id)).then(response => {
+        getContactByCompany(id) {
+            axios.get(route("contact.company", id)).then((response) => {
                 this.contactsByCompany = response.data;
             });
         },
-        handleFile(e){
+        handleFile(e) {
             const image = e.target.files[0];
-            if(!image) return;
+            if (!image) return;
             const reader = new FileReader();
             reader.onload = (e) => {
                 this.formQD.image = image;
             };
             reader.readAsDataURL(image);
         },
-        clearMainInput(){
-            this.edit = '';
+        clearMainInput() {
+            this.edit = "";
             this.form.important_note = "";
             this.form.payment_condition = "";
-            this.form.offer_validity = ""; 
-            this.form.currency = ""; 
+            this.form.offer_validity = "";
+            this.form.currency = "";
             this.form.status = "";
             this.form.incoterm = "";
-            this.form.user_id =  "";
-            this.form.company_id =  "";
-            this.form.contact_id =  "";
+            this.form.user_id = "";
+            this.form.company_id = "";
+            this.form.contact_id = "";
         },
         clearInput() {
             this.formQD.quote_id = "";
@@ -248,17 +282,17 @@ export const useQuoteStore = defineStore("quote", {
             this.formQD.subtotal = "";
             this.formQD.details = "";
         },
-        editData(data){
-          this.showStoreModal();
-          this.edit = data;
-          this.form.offer_validity = data.offer_validity;
-          this.form.payment_condition = data.payment_condition;
-          this.form.currency = data.currency;
-          this.form.status = data.status;
-          this.form.incoterm = data.incoterm;
-          this.form.user_id = data.user.id;
-          this.form.company_id = data.company.id;
-          this.form.contact_id = data.contact.id;
+        editData(data) {
+            this.showStoreModal();
+            this.edit = data;
+            this.form.offer_validity = data.offer_validity;
+            this.form.payment_condition = data.payment_condition;
+            this.form.currency = data.currency;
+            this.form.status = data.status;
+            this.form.incoterm = data.incoterm;
+            this.form.user_id = data.user.id;
+            this.form.company_id = data.company.id;
+            this.form.contact_id = data.contact.id;
         },
         showStoreModal() {
             this.openModal = true;
@@ -271,7 +305,7 @@ export const useQuoteStore = defineStore("quote", {
             this.openDeleteModal = true;
         },
         closeModal() {
-            this.openModal = false;
+            //this.openModal = false;
             this.openModalQD = false;
             this.openDeleteModal = false;
             this.clearInput();

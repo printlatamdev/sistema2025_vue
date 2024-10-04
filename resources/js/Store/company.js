@@ -35,6 +35,11 @@ export const useCompanyStore = defineStore("company", {
             { text: "Acciones", value: "options", width: 100 },
         ],
     }),
+    getters: {
+        filledInputs(state) {
+            return state.form.commercial_name=='' || state.form.social_reason=='' || state.form.cellphone=='';
+        },
+    },
     actions: {
         storeCompany(id) {
             if(!id){

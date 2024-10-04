@@ -131,7 +131,7 @@ onMounted(() => {
                                 allow-multiple="false" max-files="1" />
                             <InputError class="" :message="store.formQD.errors.image" />
                             <div class="flex justify-end mt-1">
-                                <SuccessButton @click.prevent="store.storePivot(store.edit.id)">
+                                <SuccessButton @click.prevent="store.storePivot(store.edit.id)" :disabled="store.filledInputsQD">
                                     <font-awesome-icon :icon="['fas', 'plus']" class="mr-1" />Agregar ítem
                                 </SuccessButton>
                             </div>
@@ -178,10 +178,7 @@ onMounted(() => {
                                 </div>
                             </div>
                             <div class="flex justify-end mt-10">
-                                <SecondaryButton class="mr-2" @click="store.editData(store.edit)">
-                                    <font-awesome-icon :icon="['fas', 'arrow-left']" />Anterior
-                                </SecondaryButton>
-                                <PrimaryButton @click.prevent="store.storeQuoteDetail()">
+                                <PrimaryButton @click.prevent="store.storeQuoteDetail()" :disabled="store.filledInputsTotal">
                                     <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Finalizar
                                     {{store.isMessage }}
                                 </PrimaryButton>
