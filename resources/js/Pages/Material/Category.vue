@@ -23,7 +23,7 @@ defineProps({
         <div class="w-full">
             <h2 class="text-3xl font-bold">Categorías de Material</h2>
             <!--cards-->
-            <div class="grid grid-cols-6 gap-2 mt-14">
+            <div class="grid grid-cols-6 gap-3 mt-14">
                 <div class="border rounded-lg text-center p-3 cursor-pointer" @click="store.showCatModal()">
                     <span class="bg-gray-200 py-1 px-2 rounded-full">
                         <font-awesome-icon :icon="['fas', 'plus']" />

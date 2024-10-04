@@ -20,6 +20,7 @@ class UserResource extends JsonResource
             'profile_photo_url' => $this->profile_photo_url,
             'name' => $this->name,
             'email' => $this->email,
+            'roles' => RoleResource::collection($this->roles),
             'register_date' => Carbon::parse($this->created_at)->format('Y-m-d'),
         ];
     }

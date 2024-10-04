@@ -35,7 +35,7 @@ function handleImageError() {
         <p class="text-md">
             Selecciona el país donde te encuentras para gestionar los datos dentro de este.
         </p>
-        <div class="grid grid-cols-2 gap-2 mt-7">
+        <div class="grid grid-cols-2 gap-3 mt-7">
             <Link :href="route('login')">
             <Card>
                 <template #description>
