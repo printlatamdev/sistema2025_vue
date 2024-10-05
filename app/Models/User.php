@@ -65,6 +65,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function countries()
+    {
+        return $this->belongsToMany(Country::class);
+    }
+
     public function order()
     {
         return $this->hasMany(Order::class);

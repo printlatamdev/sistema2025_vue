@@ -14,6 +14,10 @@ defineProps({
         type: Object,
         default: ([]),
     },
+    countries: {
+        type: Object,
+        default: ([]),
+    },
 });
 
 </script>
@@ -57,7 +61,7 @@ defineProps({
                 </div>
             </div>
         </div>
-        <ModalStoreUpdate :show="store.openModal" :roles="roles" />
+        <ModalStoreUpdate :show="store.openModal" :roles="roles" :countries="countries" />
         <ModalProfile :show="store.openProfileModal" />
     </AppLayout>
 </template>

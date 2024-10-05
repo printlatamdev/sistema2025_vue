@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use Illuminate\Http\Request;
-use App\Http\Resources\OrderResource;
 use Inertia\Inertia;
 
 class OrderController extends Controller

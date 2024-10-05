@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\PurchaseorderResource;
-use App\Models\Purchaseorder;
-use Illuminate\Http\Request;
 use App\Enums\PaymentConditionEnum;
+use App\Http\Resources\PurchaseorderResource;
 use App\Models\Material;
 use App\Models\Provider;
+use App\Models\Purchaseorder;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class PurchaseorderController extends Controller

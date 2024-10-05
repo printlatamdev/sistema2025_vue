@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
-use App\Http\Resources\RoleResource;
 use App\Http\Resources\UserResource;
+use App\Models\Country;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,6 +21,7 @@ class UserController extends Controller
         return Inertia::render('User/Index', [
             'users' => UserResource::collection($data),
             'roles' => Role::get(),
+            'countries' => Country::get(),
         ]);
     }
 
@@ -32,6 +33,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
         $data->assignRole($request->roles);
+        $data->countries()->attach($request->countries, []);
 
         return redirect()->route('users');
     }

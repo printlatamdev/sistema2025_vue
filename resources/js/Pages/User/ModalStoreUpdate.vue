@@ -17,6 +17,10 @@ defineProps({
         type: Object,
         default: ([]),
     },
+    countries: {
+        type: Object,
+        default: ([]),
+    },
     maxWidth: {
         type: String,
         default: 'lg',
@@ -42,7 +46,8 @@ defineProps({
                         <TextInput v-model="store.form.email" class="w-full" type="email" />
                         <InputError class="" :message="store.form.errors.email" />
                     </div>
-                    <div class="w-full mt-3">
+                    <div class="flex">
+                    <div class="w-1/2 mt-3 mr-2">
                         <InputLabel for="roles" value="Roles" />
                         <v-select v-model="store.form.roles" :reduce="roles => roles['id']"
                             :options="roles" label="name" multiple>
@@ -55,6 +60,20 @@ defineProps({
                         </v-select>
                         <InputError class="" :message="store.form.errors.roles" />
                     </div>
+                    <div class="w-1/2 mt-3">
+                        <InputLabel for="countries" value="País" />
+                        <v-select v-model="store.form.countries" :reduce="countries => countries['id']"
+                            :options="countries" label="name" multiple>
+                            <template v-slot:no-options="{ search, searching }">
+                                <template v-if="searching">
+                                    No se ha encontrado resultados para <em>{{ search }}</em>.
+                                </template>
+                                <em v-else style="opacity: 0.5">Empieza a escribir para buscar los paises</em>
+                            </template>
+                        </v-select>
+                        <InputError class="" :message="store.form.errors.roles" />
+                    </div>
+                </div>
                     <div class="w-full mt-3">
                         <InputLabel for="password" value="Contraseña" />
                         <TextInput v-model="store.form.password" class="w-full" type="password" />
