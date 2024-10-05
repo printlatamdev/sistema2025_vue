@@ -43,8 +43,8 @@ export const useQuoteStore = defineStore("quote", {
         }),
         formTotal: useForm({
             quote_id: "",
-            iva: null,
-            iva2: null,
+            iva: 0,
+            iva2: 0,
             error: "",
             processing: false,
         }),
@@ -81,8 +81,8 @@ export const useQuoteStore = defineStore("quote", {
         headersQD: [
             { text: "Producto", value: "name" },
             { text: "Descripción", value: "details" },
+            { text: "Precio", value: "price", width: 50 },
             { text: "Cantidad", value: "quantity", width: 50 },
-            { text: "Unitario", value: "price", width: 50 },
             { text: "Total", value: "total", width: 50 },
         ],
         payment_condition: [
@@ -106,12 +106,12 @@ export const useQuoteStore = defineStore("quote", {
             { name: "DDP", value: "DDP" },
         ],
         iva: [
-            { name: "No asignar", value: "null" },
+            { name: "No asignar", value: "0" },
             { name: "7%", value: "7" },
             { name: "12%", value: "12" },
             { name: "13%", value: "13" },
             { name: "15%", value: "15" },
-            { name: "Otro porcentaje", value: "Other" },
+            { name: "Otro porcentaje", value: "0" },
         ],
     }),
     getters: {
@@ -128,7 +128,14 @@ export const useQuoteStore = defineStore("quote", {
             } else {
                 newIva = state.formTotal.iva;
             }
-            return state.getCalc.total_pr + state.getCalc.total_pr * newIva;
+            if (newIva == 0) {
+                return state.getCalc.total_pr;
+            } else {
+                return (
+                    state.getCalc.total_pr +
+                    state.getCalc.total_pr * (newIva * 100)
+                );
+            }
         },
         filledInputs(state) {
             return (
@@ -146,9 +153,7 @@ export const useQuoteStore = defineStore("quote", {
             );
         },
         filledInputsTotal(state) {
-            return (
-                state.formsTotal.iva == ""
-            );
+            return state.formTotal.iva == null;
         },
     },
     actions: {
@@ -239,10 +244,7 @@ export const useQuoteStore = defineStore("quote", {
             axios.get(route("quoterefresh", id)).then((response) => {
                 response.data.map((el) => {
                     this.edit = el;
-                    this.getCalc.total_pr = el.products.reduce(
-                        (accumulator, current) => accumulator + current.total,
-                        0
-                    );
+                    this.getCalc.total_pr = el.products.reduce((accumulator, current) => accumulator + current.total, 0);
                 });
             });
         },
@@ -305,11 +307,10 @@ export const useQuoteStore = defineStore("quote", {
             this.openDeleteModal = true;
         },
         closeModal() {
-            //this.openModal = false;
+            this.openModal = false;
             this.openModalQD = false;
             this.openDeleteModal = false;
             this.clearInput();
-            this.clearMainInput();
         },
     },
 });

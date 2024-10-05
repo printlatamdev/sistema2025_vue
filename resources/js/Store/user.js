@@ -5,6 +5,8 @@ import { useAlertStore } from './alert';
 export const useUserStore = defineStore("user", {
     state: () => ({
         openModal: false,
+        openProfileModal: false,
+        profile: [],
         alert: useAlertStore(),
         isMessage: 'Usuario',
         form: useForm({
@@ -41,8 +43,13 @@ export const useUserStore = defineStore("user", {
         showStoreModal() {
             this.openModal = true;
         },
+        showProfileModal(data) {
+            this.openProfileModal = true;
+            this.profile = data;
+        },
         closeModal() {
             this.openModal = false;
+            this.openProfileModal = false;
         },
     },
 });

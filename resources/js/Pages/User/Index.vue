@@ -1,10 +1,8 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
-import DangerButton from '@/Components/DangerButton.vue';
 import { useUserStore } from '@/Store/user';
 import ModalStoreUpdate from './ModalStoreUpdate.vue';
+import ModalProfile from './ModalProfile.vue';
 
 let store = useUserStore();
 defineProps({
@@ -24,7 +22,7 @@ defineProps({
     <AppLayout title="Usuarios">
         <div class="w-full">
             <h2 class="text-3xl font-bold">Datos de {{ store.isMessage }}</h2>
-            <div class="grid grid-cols-6 gap-6 mt-7">
+            <div class=" mt-7 grid gap-6 grid-cols-2 xl:grid-cols-6 md:grid-cols-3">
                 <!--Begin card-->
                 <div class="w-full border text-center cursor-pointer p-4 rounded-lg transform hover:scale-105 transition duration-500"
                     @click="store.showStoreModal()">
@@ -36,8 +34,8 @@ defineProps({
                 <div class="border p-2 rounded-lg transform hover:scale-105 transition duration-500"
                     v-for="item in users" :key="item.id">
                     <div class="flex justify-end">
-                        <font-awesome-icon :icon="['fas', 'gear']" class="text-gray-500 cursor-pointer"
-                            v-tooltip="'Configuración de la cuenta'" />
+                        <font-awesome-icon :icon="['fas', 'gear']" class="text-gray-500 cursor-pointer text-lg"
+                            v-tooltip="'Configuración de la cuenta'" @click.prevent="store.showProfileModal(item)" />
                     </div>
                     <img :src="item.profile_photo_url" class="rounded-full w-28 h-28 bg-teal-50 p-2 mx-auto" alt="">
                     <div class="text-center">
@@ -60,5 +58,6 @@ defineProps({
             </div>
         </div>
         <ModalStoreUpdate :show="store.openModal" :roles="roles" />
+        <ModalProfile :show="store.openProfileModal" />
     </AppLayout>
 </template>

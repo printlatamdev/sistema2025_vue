@@ -66,7 +66,7 @@ onMounted(() => {
             </div>
             <!--cards-->
             <div v-if="store.activeTab == 0" class="w-full mt-7">
-                <div class="grid grid-cols-6 gap-3 mt-12">
+                <div class="mt-12 grid grid-cols-2 xl:grid-cols-6 md:grid-cols-3">
                     <div class="border rounded-lg text-center p-3 bg-blue-50 cursor-pointer"
                         @click.prevent="store.showTypeModal()">
                         <span class="py-1 px-2 rounded-full">

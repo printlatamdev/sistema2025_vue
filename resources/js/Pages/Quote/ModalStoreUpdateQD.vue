@@ -47,7 +47,7 @@ onMounted(() => {
             </ActionMessage>
             <span v-if="store.edit != ''" class="p-1 bg-sky-500 rounded-md">#{{ `${store.edit.id}-${store.getYear}`
                 }}</span>
-            {{store.isSecondMessage }}
+            {{ store.isSecondMessage }}
         </template>
         <template #content>
             <div class="w-1/2 flex justify-center mx-auto ">
@@ -131,7 +131,8 @@ onMounted(() => {
                                 allow-multiple="false" max-files="1" />
                             <InputError class="" :message="store.formQD.errors.image" />
                             <div class="flex justify-end mt-1">
-                                <SuccessButton @click.prevent="store.storePivot(store.edit.id)" :disabled="store.filledInputsQD">
+                                <SuccessButton @click.prevent="store.storePivot(store.edit.id)"
+                                    :disabled="store.filledInputsQD">
                                     <font-awesome-icon :icon="['fas', 'plus']" class="mr-1" />Agregar ítem
                                 </SuccessButton>
                             </div>
@@ -139,6 +140,7 @@ onMounted(() => {
                     </div>
                 </form>
                 <hr class="my-5">
+                <!--Table products-->
                 <div class="w-full flex">
                     <div class="w-2/3 mr-3 mt-5">
                         <EasyDataTable :headers="store.headersQD" :rows-per-page="5" :items="store.edit.products"
@@ -163,13 +165,15 @@ onMounted(() => {
                                         {{ i.name }}
                                     </option>
                                 </select>
-                                <div v-if="store.formTotal.iva == 'Other'" class="mt-3">
+                                <div v-if="store.formTotal.iva == '0'" class="mt-3">
                                     <InputLabel for="iva" value="Asignar IVA" />
                                     <TextInput v-model="store.formTotal.iva2" class="w-full" type="text" />
                                 </div>
                                 <div class="border border-gray-300 bg-gray-50 mt-3 rounded-md p-5">
-                                    <p><span class="font-semibold">Total parcial: </span>${{
-                                        store.getCalc.total_pr.toFixed(2) }}</p>
+                                    <p><span class="font-semibold">Total parcial: </span>
+                                    ${{ store.getCalc.total_pr.toFixed(2) }}
+                                    {{ store.edit.products }}
+                                    </p>
                                     <p><span class="font-semibold">IVA:</span> ({{ store.formTotal.iva }}%) ${{
                                         store.getParcialSubtotal.toFixed(2) }}</p>
                                     <hr>
@@ -178,9 +182,10 @@ onMounted(() => {
                                 </div>
                             </div>
                             <div class="flex justify-end mt-10">
-                                <PrimaryButton @click.prevent="store.storeQuoteDetail()" :disabled="store.filledInputsTotal">
+                                <PrimaryButton @click.prevent="store.storeQuoteDetail()"
+                                    :disabled="store.filledInputsTotal">
                                     <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Finalizar
-                                    {{store.isMessage }}
+                                    {{ store.isMessage }}
                                 </PrimaryButton>
                             </div>
                         </form>
