@@ -21,6 +21,7 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'roles' => RoleResource::collection($this->roles),
+            'countries' => CountryResource::collection($this->countries),
             'register_date' => Carbon::parse($this->created_at)->format('Y-m-d'),
         ];
     }

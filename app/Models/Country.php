@@ -11,11 +11,6 @@ class Country extends Model
 
     protected $fillable = ['name', 'acronym'];
 
-    public function user()
-    {
-        return $this->hasMany(User::class);
-    }
-
     /** public function image()
     {
         return $this->morphMany(Image::class, 'imageable');
@@ -33,5 +28,10 @@ class Country extends Model
     public function users()
     {
         return $this->belongsToMany(User::class);
+    }
+    
+    public function image()
+    {
+        return $this->morphTo(Image::class, 'imageable');
     }
 }

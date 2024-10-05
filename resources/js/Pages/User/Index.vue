@@ -54,6 +54,7 @@ defineProps({
                                 'bg-yellow-100': rol.id == 4,
                                 'bg-gray-100': rol.id == 5,
                                 'bg-red-100': rol.id == 6,
+                                'bg-orange-200': rol.id == 7,
                             }">
                             {{ rol.name }}
                         </span>

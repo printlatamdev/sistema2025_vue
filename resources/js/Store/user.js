@@ -14,13 +14,14 @@ export const useUserStore = defineStore("user", {
             email: "",
             password: "",
             roles: [],
+            countries: [],
             error: '',
             processing: false,
         }),
     }),
     getters: {
         filledInputs(state) {
-            return state.form.name=='' || state.form.email=='' || state.form.password=='' || state.form.roles=='';
+            return state.form.name=='' || state.form.email=='' || state.form.password=='' || state.form.roles=='' || state.form.countries=='';
         },
     },
     actions: {
