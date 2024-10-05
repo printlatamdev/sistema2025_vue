@@ -4,14 +4,29 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 import { useOrderStore } from '@/Store/order';
-import ModalStoreUpdate from './ModalStoreUpdate.vue';
-import ModalPivotOrderMaterial from './ModalPivotOrderMaterial.vue';
 
 let store = useOrderStore();
 defineProps({
     orders: {
         type: Object,
         default: ([]),
+    },
+    materials: {
+        type: Object,
+        default: ([]),
+    },
+    providers: {
+        type: Object,
+        default: ([]),
+    },
+    users: {
+        type: Object,
+        default: ([]),
+    },
+    payment_conditions: {
+        type: Array,
+        default: ([]),
+        //default: () => [],
     },
 });
 
@@ -40,7 +55,5 @@ defineProps({
                 </template>
             </EasyDataTable>
         </div>
-        <ModalStoreUpdate :show="store.openModal" :providers="providers" :users="users" :payment_conditions="payment_conditions"/>
-        <ModalPivotOrderMaterial :show="store.openPivotModal" :materials="materials" :users="users" />
     </AppLayout>
 </template>

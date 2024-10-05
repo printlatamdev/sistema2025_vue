@@ -2,16 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\PaymentConditionEnum;
-use App\Http\Resources\MaterialResource;
-use App\Http\Resources\OrderResource;
-use App\Http\Resources\ProviderResource;
-use App\Http\Resources\UserResource;
-use App\Models\Material;
 use App\Models\Order;
-use App\Models\Provider;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Resources\OrderResource;
 use Inertia\Inertia;
 
 class OrderController extends Controller
@@ -22,10 +15,6 @@ class OrderController extends Controller
 
         return Inertia::render('Order/Index', [
             'orders' => OrderResource::collection($data),
-            'materials' => Material::get(),
-            'users' => User::get(),
-            'providers' => Provider::get(),
-            'payment_conditions' => PaymentConditionEnum::cases(),
         ]);
     }
 

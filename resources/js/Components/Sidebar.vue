@@ -41,7 +41,7 @@ const store = useAlertStore();
         </div>
     </div>
     <!--Orders-->
-    <NavLink :href="route('orders')" :active="route().current('orders')">
+    <NavLink :href="route('purchaseorders')" :active="route().current('purchaseorders')">
         <font-awesome-icon :icon="['fas', 'bag-shopping']" class="mx-2" /> Ordenes de compra
     </NavLink>
     <!--Suministros-->

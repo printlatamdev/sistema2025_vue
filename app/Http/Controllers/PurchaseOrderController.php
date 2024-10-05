@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Resources\PurchaseorderResource;
 use App\Models\Purchaseorder;
 use Illuminate\Http\Request;
+use App\Enums\PaymentConditionEnum;
+use App\Models\Material;
+use App\Models\Provider;
+use App\Models\User;
 use Inertia\Inertia;
 
 class PurchaseorderController extends Controller
@@ -15,6 +19,10 @@ class PurchaseorderController extends Controller
 
         return Inertia::render('Purchaseorder/Index', [
             'purchaseorders' => PurchaseorderResource::collection($data),
+            'materials' => Material::get(),
+            'users' => User::get(),
+            'providers' => Provider::get(),
+            'payment_conditions' => PaymentConditionEnum::cases(),
         ]);
     }
 

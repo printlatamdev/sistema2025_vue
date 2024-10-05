@@ -3,14 +3,30 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import DangerButton from '@/Components/DangerButton.vue';
-import { useOrderStore } from '@/Store/order';
+import { usePurchaseorderStore } from '@/Store/purchaseorder';
 import ModalStoreUpdate from './ModalStoreUpdate.vue';
 import ModalPivotOrderMaterial from './ModalPivotOrderMaterial.vue';
 
-let store = useOrderStore();
+let store = usePurchaseorderStore();
 defineProps({
     purchaseorders: {
         type: Object,
+        default: ([]),
+    },
+    materials: {
+        type: Object,
+        default: ([]),
+    },
+    providers: {
+        type: Object,
+        default: ([]),
+    },
+    users: {
+        type: Object,
+        default: ([]),
+    },
+    payment_conditions: {
+        type: Array,
         default: ([]),
     },
 });
@@ -26,7 +42,7 @@ defineProps({
                     <font-awesome-icon :icon="['fas', 'plus']" class="mr-1"/>Nueva {{ store.isMessage }}
                 </PrimaryButton>
             </div>
-            <EasyDataTable :headers="store.headers" :rows-per-page="10" :items="orders" border-cell buttons-pagination class="mt-5"> 
+            <EasyDataTable :headers="store.headers" :rows-per-page="10" :items="purchaseorders" border-cell buttons-pagination class="mt-5"> 
                 <template #empty-message>
                     <p>No se ha encontrado ningún resultado</p>
                 </template>

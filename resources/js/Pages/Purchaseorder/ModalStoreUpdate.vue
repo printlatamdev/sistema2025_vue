@@ -6,11 +6,11 @@ import InputLabel from '@/Components/InputLabel.vue';
 import AddButton from '@/Components/AddButton.vue';
 import Checkbox from '@/Components/Checkbox.vue';
 import InputError from '@/Components/InputError.vue';
-import { useOrderStore } from '@/Store/order';
+import { usePurchaseorderStore } from '@/Store/purchaseorder';
 import { useProviderStore } from '@/Store/provider';
 import ModalStoreProvider from '../Provider/ModalStoreProvider.vue';
 
-let store = useOrderStore();
+let store = usePurchaseorderStore();
 let store_provider = useProviderStore();
 defineProps({
     show: {
@@ -110,7 +110,7 @@ defineProps({
                         </div>
                     </div>
                     <div class="flex justify-end mt-3">
-                        <PrimaryButton @click.prevent="store.showPivotModal()">
+                        <PrimaryButton @click.prevent="store.showPivotModal()" :disabled="store.filledInputs">
                             <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />{{ store.edit == '' ?
                                 'Guardar' : 'Actualizar' }} {{store.isMessage }}
                         </PrimaryButton>
