@@ -20,7 +20,7 @@ defineProps({
 <template>
     <DialogModal :show="show" @close="store.closeModal" :max-width="maxWidth">
         <template #content>
-            <div class="mt-5 text-center">
+            <div class="text-center">
                 <p>¿Seguro que desea eliminar la cotización <span class="font-semibold">#{{ store.edit.id }}</span> seleccionada?</p>
                 <p>El registro no podrá recuperarse posteriormente</p>
                 <div class="flex justify-end mt-3">

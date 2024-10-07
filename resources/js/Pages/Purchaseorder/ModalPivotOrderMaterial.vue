@@ -37,7 +37,7 @@ defineProps({
     <DialogModal :show="show" :max-width="maxWidth" @close="store.closeModal">
         <template #title>Detalles orden de compra</template>
         <template #content>
-            <div class="mt-5">
+            <div class="">
                 <form>
                     <div class="flex">
                         <div class="w-2/5">

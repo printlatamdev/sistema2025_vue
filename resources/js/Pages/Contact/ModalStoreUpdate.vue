@@ -31,7 +31,7 @@ defineProps({
     <DialogModal :show="show" :max-width="maxWidth" @close="store.closeModal">
         <template #title>{{ store.edit == '' ? 'Nuevo' : 'Actualizar' }} registro de {{store.isMessage }}</template>
         <template #content>
-            <div class="mt-5">
+            <div class="">
                 <form @submit.prevent="store.storeContact(store.edit.id)">
                     <div class="flex">
                         <div class="w-1/3 mr-2">

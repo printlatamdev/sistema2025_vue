@@ -44,7 +44,7 @@ defineProps({
     <DialogModal :show="show" :max-width="maxWidth" @close="store.closeModal">
         <template #title>{{ store.edit == '' ? 'Nuevo' : 'Actualizar' }} registro de {{store.isMessage }}</template>
         <template #content>
-            <div class="mt-5">
+            <div class="">
                 <form>
                     <div class="w-full">
                         <InputLabel for="name" value="Proveedor" />

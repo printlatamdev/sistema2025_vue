@@ -83,6 +83,11 @@ export const useMaterialStore = defineStore("material", {
             { text: "Amarillo", value: "Amarillo" },  
         ]
     }),
+    getters: {
+        filledInputCat(state) {
+            return state.formCat.name == "" || state.formCat.image == "";
+        },
+    },
     actions: {
         storeMaterial(type, cat_id) {
             this.form.materialtype_id = type.id;

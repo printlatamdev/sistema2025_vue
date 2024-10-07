@@ -60,7 +60,7 @@ onMounted(() => { });
                     </li>
                 </ol>
             </div>
-            <div class="mt-5">
+            <div class="">
                 <form @submit.prevent="store.storeQuote(store.edit.id)">
                     <!--QUOTE FORM-->
                     <div class="flex">

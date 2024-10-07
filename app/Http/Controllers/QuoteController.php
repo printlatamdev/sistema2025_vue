@@ -17,6 +17,7 @@ use App\Models\Quotedetail;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -29,7 +30,9 @@ class QuoteController extends Controller
 
         return Inertia::render('Quote/Index', [
             'quotes' => QuoteResource::collection($quotes),
-            'users' => User::where('id', 1)->orderBy('id', 'desc')->get(),
+            'users' => User::whereHas('roles', function(Builder $query) {
+                $query->where('id', 7);
+            })->orderBy('id', 'desc')->get(),
             'companies' => Company::orderBy('id', 'desc')->get(),
             'contacts' => Contact::orderBy('id', 'desc')->get(),
             'products' => Product::orderBy('id', 'desc')->get(),

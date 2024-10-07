@@ -30,7 +30,7 @@ defineProps({
             Nuevo registro de {{ store.isMessage }}
         </template>
         <template #content>
-            <div class="mt-5">
+            <div class="">
                 <form action="">
                     <div class="w-full">
                         <InputLabel for="name" value="Nombre" />

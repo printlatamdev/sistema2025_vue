@@ -26,7 +26,7 @@ defineProps({
             Nuevo registro de {{store.isCatMessage }}
         </template>
         <template #content>
-            <div class="mt-5">
+            <div class="">
                 <form action="">
                     <div class="w-full">
                         <InputLabel for="name" value="Nombre" />
@@ -43,8 +43,8 @@ defineProps({
                         <textarea v-model="store.formCat.description" rows="3"
                             class="block w-full border-gray-300 rounded-md text-sm"></textarea>
                     </div>
-                    <div class="flex justify-end mt-3">
-                        <PrimaryButton @click.prevent="store.storeCategory()">
+                    <div class="flex justify-end mt-5">
+                        <PrimaryButton @click.prevent="store.storeCategory()" :disabled="store.filledInputCat">
                             <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar {{store.isCatMessage }}
                         </PrimaryButton>
                     </div>

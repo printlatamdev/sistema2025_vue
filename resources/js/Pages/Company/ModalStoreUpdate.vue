@@ -23,7 +23,7 @@ defineProps({
     <DialogModal :show="store.openModal" @close="store.closeModal">
         <template #title>{{ store.edit == '' ? 'Nuevo' : 'Actualizar' }} registro de {{store.isMessage }}</template>
         <template #content>
-            <div class="mt-5">
+            <div class="">
                 <form @submit.prevent="store.storeCompany(store.edit.id)">
                     <div class="flex">
                         <div class="w-1/2 mr-2">

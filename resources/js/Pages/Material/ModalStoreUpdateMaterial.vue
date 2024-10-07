@@ -47,7 +47,7 @@ defineProps({
             Nuevo registro de {{ store.isMessage }} <span class="bg-blue-200 p-1 rounded-md">{{ type.name }}</span>
         </template>
         <template #content>
-            <div class="mt-5">
+            <div class="">
                 <form action="">
                     <div class="w-full flex mt-3">
                         <div class="w-3/6 mr-2">

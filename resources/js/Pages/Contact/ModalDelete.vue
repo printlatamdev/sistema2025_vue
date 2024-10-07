@@ -20,7 +20,7 @@ defineProps({
 <template>
     <DialogModal :show="show" @close="store.closeModal" :max-width="maxWidth">
         <template #content>
-            <div class="mt-5 text-center">
+            <div class=" text-center">
                 <p>¿Seguro que desea eliminar el contacto de <span class="font-semibold">{{ store.edit.name + ' '
                     +store.edit.lastname }}</span> seleccionado?</p>
                 <p>El registro no podrá recuperarse posteriormente</p>
