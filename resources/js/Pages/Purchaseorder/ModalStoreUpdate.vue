@@ -25,7 +25,11 @@ defineProps({
         type: Object,
         default: ([]),
     },
-    users: {
+    requestedBy: {
+        type: Object,
+        default: ([]),
+    },
+    approvedBy: {
         type: Object,
         default: ([]),
     },
@@ -64,9 +68,10 @@ defineProps({
                         </div>
                         <InputError class="" :message="store.form.errors.company_id" />
                     </div>
-                    <div class="w-full mt-3">
+                    <div class="flex">
+                    <div class="w-full mt-3 mr-2">
                         <InputLabel for="name" value="Solicitado por" />
-                        <v-select v-model="store.form.user_id" :options="users" label="name" :reduce="user => user.id">
+                        <v-select v-model="store.form.user_id" :options="requestedBy" label="name" :reduce="user => user.id">
                             <template v-slot:no-options="{ search, searching }">
                                 <template v-if="searching">
                                     No se ha encontrado resultados para <em>{{ search }}</em>.
@@ -79,7 +84,7 @@ defineProps({
                     </div>
                     <div class="w-full mt-3">
                         <InputLabel for="name" value="Autorizado por" />
-                        <v-select v-model="store.form.user_id" :options="users" label="name" :reduce="user => user.id">
+                        <v-select v-model="store.form.user_id" :options="approvedBy" label="name" :reduce="user => user.id">
                             <template v-slot:no-options="{ search, searching }">
                                 <template v-if="searching">
                                     No se ha encontrado resultados para <em>{{ search }}</em>.
@@ -90,6 +95,7 @@ defineProps({
                         </v-select>
                         <InputError class="" :message="store.form.errors.name" />
                     </div>
+                </div>
                     <div class="mt-3">
                         <InputLabel for="description" value="Detalle de solicitud" />
                         <textarea v-model="store.form.description" rows="3"

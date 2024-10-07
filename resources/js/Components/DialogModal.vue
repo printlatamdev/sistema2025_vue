@@ -39,8 +39,7 @@ const close = () => {
                     <font-awesome-icon :icon="['fas', 'rectangle-xmark']" class="text-xl text-gray-600"/>
                 </div>
            </div>
-            <br>
-            <div class="text-sm text-gray-600 px-5 py-3">
+            <div class="text-sm text-gray-600 p-7">
                 <slot name="content" />
             </div>
         </div>

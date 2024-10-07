@@ -4,8 +4,8 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import DialogModal from '@/Components/DialogModal.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
-import Filepond from '@/Components/Filepond.vue';
 import { useMaterialStore } from '@/Store/material';
+import FilepondImage from '@/Components/FilepondImage.vue';
 
 let store = useMaterialStore();
 defineProps({
@@ -34,7 +34,7 @@ defineProps({
                     </div>
                     <div class="w-full mt-3">
                         <InputLabel for="image" value="Subir imagen" />
-                        <Filepond v-model="store.formCat.image" @change="store.handleFile($event)"
+                        <FilepondImage v-model="store.formCat.image" @change="store.handleFile($event)"
                             allow-multiple="false" max-files="1" />
                         <InputError class="" :message="store.formCat.errors.image" />
                     </div>

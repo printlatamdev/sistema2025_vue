@@ -8,6 +8,7 @@ use App\Models\Material;
 use App\Models\Provider;
 use App\Models\Purchaseorder;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -20,7 +21,12 @@ class PurchaseorderController extends Controller
         return Inertia::render('Purchaseorder/Index', [
             'purchaseorders' => PurchaseorderResource::collection($data),
             'materials' => Material::get(),
-            'users' => User::get(),
+            'requestedBy' => User::whereHas('roles', function(Builder $query) {
+                $query->where('id', 2);
+            })->orderBy('id', 'desc')->get(),
+            'approvedBy' => User::whereHas('roles', function(Builder $query) {
+                $query->where('id', 1);
+            })->orderBy('id', 'desc')->get(),
             'providers' => Provider::get(),
             'payment_conditions' => PaymentConditionEnum::cases(),
         ]);

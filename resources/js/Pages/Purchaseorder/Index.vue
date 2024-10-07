@@ -21,7 +21,11 @@ defineProps({
         type: Object,
         default: ([]),
     },
-    users: {
+    requestedBy: {
+        type: Object,
+        default: ([]),
+    },
+    approvedBy: {
         type: Object,
         default: ([]),
     },
@@ -56,7 +60,7 @@ defineProps({
                 </template>
             </EasyDataTable>
         </div>
-        <ModalStoreUpdate :show="store.openModal" :providers="providers" :users="users" :payment_conditions="payment_conditions"/>
+        <ModalStoreUpdate :show="store.openModal" :providers="providers" :requestedBy="requestedBy" :approvedBy="approvedBy"  :payment_conditions="payment_conditions"/>
         <ModalPivotOrderMaterial :show="store.openPivotModal" :materials="materials" :users="users" />
     </AppLayout>
 </template>
