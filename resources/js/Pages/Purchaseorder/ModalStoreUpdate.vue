@@ -117,7 +117,7 @@ defineProps({
                         </label>
                     </div>
                     <div class="flex justify-end mt-3">
-                        <PrimaryButton @click.prevent="store.storeOrder()" :disabled="store.filledInputs">
+                        <PrimaryButton @click.prevent="store.storeOrder(store.edit.id)" :disabled="store.filledInputs">
                             <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />{{ store.edit == '' ?
                                 'Guardar' : 'Actualizar' }} {{ store.isMessage }}
                         </PrimaryButton>

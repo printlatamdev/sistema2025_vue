@@ -69,7 +69,7 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
         }),
         formOD: useForm({
             material_id: "",
-            order_id: "",
+            purchaseorder_id: "",
             quantity: "",
             price: "",
             subtotal: "",
@@ -97,6 +97,9 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
         ],
     }),
     getters: {
+        getTotal(state) {
+            return state.formOD.quantity * state.formOD.price;
+        },
         filledInputs(state) {
             return (
                 state.form.provider_id == "" ||
@@ -104,11 +107,18 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
                 state.form.requested_by == ""
             );
         },
+        filledInputsOD(state) {
+            return (
+                state.formOD.material_id == "" ||
+                state.formOD.quantity == "" ||
+                state.formOD.price == ""
+            );
+        },
     },
     actions: {
-        storeOrder() {
-            let userData = this.form;
-            userData.users = [userData.approved_by, userData.requested_by];
+        storeOrder(id) {
+            this.form.users = [this.form.approved_by,  this.form.requested_by];
+            if (!id) {
             axios.post(route("store.purchaseorders"), {
                     provider_id: this.form.provider_id,
                     details: this.form.details,
@@ -122,6 +132,20 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
                 }).catch((error) => {
                     this.myErrors = error.response.data.errors;
                 });
+            } else {
+                this.form.put(route("update.purchaseorders", id), {
+                    onSuccess: () => {
+                        this.alert.successAlert(
+                            this.isMessage + " actualizada"
+                        );
+                        this.showPivotModal();
+                    },
+                    onError: (error) => {
+                        this.errors = error;
+                        this.alert.errorAlert();
+                    },
+                });
+            }
         },
         deleteOrder(id) {
             this.form.delete(route("delete.order", id), {
@@ -137,7 +161,7 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             });
         },
         storePivot(id) {
-            this.formOD.material_id = this.edit.id;
+            this.formOD.purchaseorder_id = this.edit.id;
             this.formOD.post(route("store.materialorder"), {
                 onSuccess: () => {
                     this.refreshData(id);
@@ -165,6 +189,13 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             });
             this.form.ordertype = data.ordertype;
         },
+        refreshData(id) {
+            axios.get(route("purchaseorder.refresh", id)).then((response) => {
+                response.data.map((el) => {
+                    this.edit = el;
+                });
+            });
+        },
         showStoreModal() {
             this.openModal = true;
         },
@@ -187,6 +218,7 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             this.form.details = "";
             this.form.approved_by = "";
             this.form.requested_by = "";
+            this.form.ordertype = "";
         },
     },
 });

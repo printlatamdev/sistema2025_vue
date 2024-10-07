@@ -70,21 +70,4 @@ class OrderController extends Controller
 
         return redirect()->route('orders');
     }
-
-    public function storeInPivot(Request $request)
-    {
-        $quote = Order::find($request->order_id);
-        $subtotal = $request->price * $request->quantity;
-        $total = $subtotal + ($subtotal * 0.13);
-        //store in pivot table
-        $quote->products()->attach($request->product_id, [
-            'price' => $request->price,
-            'quantity' => $request->quantity,
-            'subtotal' => $subtotal,
-            'total' => $total,
-            'details' => $request->details,
-        ]);
-
-        return redirect()->route('orders');
-    }
 }

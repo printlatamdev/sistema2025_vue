@@ -30,6 +30,7 @@ class PurchaseorderController extends Controller
                 $query->where('id', 1);
             })->orderBy('id', 'desc')->get(),
             'providers' => Provider::get(),
+            'users' => User::get(),
             'orderTypes' => OrderEnum::cases(),
             'payment_conditions' => PaymentConditionEnum::cases(),
         ]);
@@ -63,5 +64,34 @@ class PurchaseorderController extends Controller
         $purchaseorder->delete();
 
         return redirect()->route('purchaseorders');
+    }
+
+    public function storeInPivot(Request $request)
+    {
+        $order = Purchaseorder::find($request->purchaseorder_id);
+        $subtotal = $request->price * $request->quantity;
+        $total = $subtotal + ($subtotal * 0.13);
+        //store in pivot table
+        $order->materials()->attach($request->material_id, [
+            'price' => $request->price,
+            'quantity' => $request->quantity,
+            'subtotal' => $subtotal,
+            'total' => $total,
+            'details' => $request->details,
+        ]);
+
+        return redirect()->route('purchaseorders');
+    }
+
+    
+
+    public function getPurchaseorderPivot($id)
+    {
+        $id = Purchaseorder::find($id);
+        $data = Purchaseorder::where('id', $id->id)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return PurchaseorderResource::collection($data);
     }
 }

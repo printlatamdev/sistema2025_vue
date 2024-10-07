@@ -26,9 +26,4 @@ class BrandController extends Controller
         ]);
 
     }
-
-    public function testFunction()
-    {
-        return PurchaseorderResource::collection(Purchaseorder::get());
-    }
 }

@@ -44,7 +44,7 @@ defineProps({
                             <InputLabel for="material_id" value="Material" />
                             <div class="w-full flex">
                                 <v-select v-model="store.formOD.material_id" class="w-full" :options="materials"
-                                    label="name" :reduce="material => materials.id">
+                                    label="name" :reduce="materials => materials.id">
                                     <template v-slot:no-options="{ search, searching }">
                                         <template v-if="searching">
                                             No se ha encontrado resultados para <em>{{ search }}</em>.
@@ -76,22 +76,22 @@ defineProps({
                                     class="w-full" type="text" />
                             </div>
                             <div class="w-1/4 self-end">
-                                <PrimaryButton class="mr-1" @click="store.editData(options)">
-                                    <font-awesome-icon :icon="['fas', 'envelope']" class="mr-1" /> Agregar ítem
+                                <PrimaryButton class="ml-1" @click.prevent="store.storePivot(store.edit.id)" :disabled="store.filledInputsOD">
+                                    <font-awesome-icon :icon="['fas', 'plus']" class="mr-1" /> Agregar ítem
                                 </PrimaryButton>
                             </div>
                         </div>
                     </div>
-
+                    <pre>{{ store.edit.materials }}</pre>
                     <div class="w-full flex">
                         <div class="w-3/5 mr-3 mt-5">
-                            <p>lorem</p>
                             <EasyDataTable :headers="store.headersOD" :rows-per-page="5" :items="store.edit.materials"
                             border-cell buttons-pagination class="">
                             <template #empty-message>
                                 <p>No se ha encontrado ningún resultado</p>
                             </template>
                         </EasyDataTable>
+                        <div class="bg-red-100 p-1"><span class="font-semibold">Nota: </span>No se pueden ingresar más de 9 ítems</div>
                         </div>
                         <div class="bg-gray-50 rounded-lg mt-7 w-2/5 p-5">
                             <h3 class="text-lg font-semibold">Detalle de correo de notificación</h3>

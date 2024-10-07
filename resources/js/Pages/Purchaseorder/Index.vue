@@ -21,6 +21,10 @@ defineProps({
         type: Object,
         default: ([]),
     },
+    users: {
+        type: Object,
+        default: ([]),
+    },
     requestedBy: {
         type: Object,
         default: ([]),

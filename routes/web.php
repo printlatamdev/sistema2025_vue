@@ -94,9 +94,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         'update' => 'update.orders',
         'destroy' => 'delete.orders',
     ]);
-    Route::controller(OrderController::class)->group(function () {
-        Route::post('/store-material-order', 'storeInPivot')->name('store.materialorder');
-    });
 
     //materials routes
     Route::resource('/materials', MaterialController::class)->except(['create', 'edit'])->names([
@@ -147,4 +144,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         'update' => 'update.purchaseorders',
         'destroy' => 'delete.purchaseorders',
     ]);
+    Route::controller(PurchaseorderController::class)->group(function () {
+        Route::post('/store-material-order', 'storeInPivot')->name('store.materialorder');
+        Route::get('/purchaseorder-refresh/{purchaseorder}', 'getPurchaseorderPivot')->name('purchaseorder.refresh');
+    });
 });
