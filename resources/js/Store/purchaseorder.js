@@ -61,7 +61,9 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
         form: useForm({
             provider_id: "",
             details: "",
-            ordertype: "",
+            ordertype: [],
+            approvedBy: "",
+            requestedBy: "",
             users: [],
             processing: false,
         }),
@@ -102,7 +104,10 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
         },
     },
     actions: {
-        storeOrder(id) {
+        storeOrder() {
+            let userData = state.form;
+            userData.users = [userData.approvedBy, userData.requestedBy];
+
             this.form.post(route("store.purchaseorders"), {
                 onSuccess: () => {
                     this.closeModal();

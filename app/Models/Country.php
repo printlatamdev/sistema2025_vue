@@ -29,7 +29,7 @@ class Country extends Model
     {
         return $this->belongsToMany(User::class);
     }
-    
+
     public function image()
     {
         return $this->morphTo(Image::class, 'imageable');

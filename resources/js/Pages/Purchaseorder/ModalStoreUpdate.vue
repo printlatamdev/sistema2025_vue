@@ -33,10 +33,13 @@ defineProps({
         type: Object,
         default: ([]),
     },
+    orderTypes: {
+        type: Array,
+        default: ([]),
+    },
     payment_conditions: {
         type: Array,
         default: ([]),
-        //default: () => [],
     },
     maxWidth: {
         type: String,
@@ -46,79 +49,78 @@ defineProps({
 </script>
 <template>
     <DialogModal :show="show" :max-width="maxWidth" @close="store.closeModal">
-        <template #title>{{ store.edit == '' ? 'Nuevo' : 'Actualizar' }} registro de {{store.isMessage }}</template>
+        <template #title>{{ store.edit == '' ? 'Nuevo' : 'Actualizar' }} registro de {{ store.isMessage }}</template>
         <template #content>
             <div class="">
                 <form>
                     <div class="w-full">
                         <InputLabel for="name" value="Proveedor" />
                         <div class="flex">
-                            <v-select v-model="store.form.provider_id" :options="providers" label="name" class="w-full">
-                            <template v-slot:no-options="{ search, searching }">
-                                <template v-if="searching">
-                                    No se ha encontrado resultados para <em>{{ search }}</em>.
+                            <v-select v-model="store.form.provider_id" :options="providers" label="name"
+                                :reduce="providers => providers.id" class="w-full">
+                                <template v-slot:no-options="{ search, searching }">
+                                    <template v-if="searching">
+                                        No se ha encontrado resultados para <em>{{ search }}</em>.
+                                    </template>
+                                    <em v-else style="opacity: 0.5">Empieza a escribir para buscar un proveedor</em>
                                 </template>
-                                <em v-else style="opacity: 0.5">Empieza a escribir para buscar un proveedor</em>
-                            </template>
-                        </v-select>
-                        <AddButton v-tooltip="'Agregar nuevo material'" class="mr-2 self-center"
-                            @click="store_provider.showStoreModal()">
-                            <font-awesome-icon :icon="['fas', 'plus']" />
-                        </AddButton>
+                            </v-select>
+                            <AddButton v-tooltip="'Agregar nuevo material'" class="mr-2 self-center"
+                                @click="store_provider.showStoreModal()">
+                                <font-awesome-icon :icon="['fas', 'plus']" />
+                            </AddButton>
                         </div>
                         <InputError class="" :message="store.form.errors.company_id" />
                     </div>
                     <div class="flex">
-                    <div class="w-full mt-3 mr-2">
-                        <InputLabel for="name" value="Solicitado por" />
-                        <v-select v-model="store.form.user_id" :options="requestedBy" label="name" :reduce="user => user.id">
-                            <template v-slot:no-options="{ search, searching }">
-                                <template v-if="searching">
-                                    No se ha encontrado resultados para <em>{{ search }}</em>.
+                        <div class="w-full mt-3 mr-2">
+                            <InputLabel for="name" value="Solicitado por" />
+                            <v-select v-model="store.form.requestedBy" :options="requestedBy" label="name"
+                                :reduce="user => user.id">
+                                <template v-slot:no-options="{ search, searching }">
+                                    <template v-if="searching">
+                                        No se ha encontrado resultados para <em>{{ search }}</em>.
+                                    </template>
+                                    <em v-else style="opacity: 0.5">Empieza a escribir para buscar quien solicita la
+                                        orden
+                                        de compra</em>
                                 </template>
-                                <em v-else style="opacity: 0.5">Empieza a escribir para buscar quien solicita la orden
-                                    de compra</em>
-                            </template>
-                        </v-select>
-                        <InputError class="" :message="store.form.errors.name" />
-                    </div>
-                    <div class="w-full mt-3">
-                        <InputLabel for="name" value="Autorizado por" />
-                        <v-select v-model="store.form.user_id" :options="approvedBy" label="name" :reduce="user => user.id">
-                            <template v-slot:no-options="{ search, searching }">
-                                <template v-if="searching">
-                                    No se ha encontrado resultados para <em>{{ search }}</em>.
+                            </v-select>
+                            <InputError class="" :message="store.form.errors.name" />
+                        </div>
+                        <div class="w-full mt-3">
+                            <InputLabel for="name" value="Autorizado por" />
+                            <v-select v-model="store.form.approvedBy" :options="approvedBy" label="name"
+                                :reduce="user => user.id">
+                                <template v-slot:no-options="{ search, searching }">
+                                    <template v-if="searching">
+                                        No se ha encontrado resultados para <em>{{ search }}</em>.
+                                    </template>
+                                    <em v-else style="opacity: 0.5">Empieza a escribir para buscar quien autoriza la
+                                        orden
+                                        de compra</em>
                                 </template>
-                                <em v-else style="opacity: 0.5">Empieza a escribir para buscar quien autoriza la orden
-                                    de compra</em>
-                            </template>
-                        </v-select>
-                        <InputError class="" :message="store.form.errors.name" />
+                            </v-select>
+                            <InputError class="" :message="store.form.errors.name" />
+                        </div>
                     </div>
-                </div>
                     <div class="mt-3">
                         <InputLabel for="description" value="Detalle de solicitud" />
                         <textarea v-model="store.form.description" rows="3"
                             class="block w-full border-gray-300 rounded-md text-sm"></textarea>
                     </div>
                     <div class="flex mt-3">
-                        <div>
-                            <label class="flex items-center">
-                                <Checkbox />
-                                <span class="ms-1 text-sm text-gray-700">PO</span>
-                            </label>
-                        </div>
-                        <div class="ml-4">
-                            <label class="flex items-center">
-                                <Checkbox />
-                                <span class="ms-1 text-sm text-gray-700">POP</span>
-                            </label>
-                        </div>
+                        <label class="flex items-center">
+                            <span v-for="item in orderTypes" :key="item.id" class="mr-3">
+                                <input type="radio" :value="item" v-model="store.form.ordertype" class="cursor-pointer"/>
+                                <span class="ms-1 text-sm text-gray-700">{{ item }}</span>
+                            </span>
+                        </label>
                     </div>
                     <div class="flex justify-end mt-3">
                         <PrimaryButton @click.prevent="store.showPivotModal()" :disabled="store.filledInputs">
                             <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />{{ store.edit == '' ?
-                                'Guardar' : 'Actualizar' }} {{store.isMessage }}
+                                'Guardar' : 'Actualizar' }} {{ store.isMessage }}
                         </PrimaryButton>
                     </div>
                 </form>

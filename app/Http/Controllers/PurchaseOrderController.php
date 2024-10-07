@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\OrderEnum;
 use App\Enums\PaymentConditionEnum;
 use App\Http\Resources\PurchaseorderResource;
 use App\Models\Material;
@@ -21,13 +22,14 @@ class PurchaseorderController extends Controller
         return Inertia::render('Purchaseorder/Index', [
             'purchaseorders' => PurchaseorderResource::collection($data),
             'materials' => Material::get(),
-            'requestedBy' => User::whereHas('roles', function(Builder $query) {
+            'requestedBy' => User::whereHas('roles', function (Builder $query) {
                 $query->where('id', 2);
             })->orderBy('id', 'desc')->get(),
-            'approvedBy' => User::whereHas('roles', function(Builder $query) {
+            'approvedBy' => User::whereHas('roles', function (Builder $query) {
                 $query->where('id', 1);
             })->orderBy('id', 'desc')->get(),
             'providers' => Provider::get(),
+            'orderTypes' => OrderEnum::cases(),
             'payment_conditions' => PaymentConditionEnum::cases(),
         ]);
     }
@@ -39,7 +41,7 @@ class PurchaseorderController extends Controller
             'details' => $request->details,
             'ordertype' => $request->ordertype,
         ]);
-        $data->users()->attach($request->user_id, []);
+        $data->users()->attach($request->users, []);
 
         return redirect()->route('purchaseorders');
     }

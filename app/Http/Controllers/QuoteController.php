@@ -30,7 +30,7 @@ class QuoteController extends Controller
 
         return Inertia::render('Quote/Index', [
             'quotes' => QuoteResource::collection($quotes),
-            'users' => User::whereHas('roles', function(Builder $query) {
+            'users' => User::whereHas('roles', function (Builder $query) {
                 $query->where('id', 7);
             })->orderBy('id', 'desc')->get(),
             'companies' => Company::orderBy('id', 'desc')->get(),
