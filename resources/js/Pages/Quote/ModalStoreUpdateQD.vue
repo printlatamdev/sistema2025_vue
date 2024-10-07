@@ -93,13 +93,6 @@ onMounted(() => {
                                 </AddButton>
                                 <InputError class="" :message="store.form.errors.brand_id" />
                             </div>
-                            <!--<select v-model="store.formQD.product_id"
-                                class="block  w-full border-gray-300 rounded-l-md text-xs">
-                                <option class="text-gray-500" disabledmount>Seleccione una opción</option>
-                                <option v-for="product in products" :key="product.id" :value="product.id">
-                                    {{ product.name }}
-                                </option>
-                            </select>-->
                         </div>
                         <div class="1/2 flex">
                             <div class="w-2/5 mr-1">

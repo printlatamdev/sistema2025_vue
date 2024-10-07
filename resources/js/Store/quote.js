@@ -159,8 +159,7 @@ export const useQuoteStore = defineStore("quote", {
     actions: {
         storeQuote(id) {
             if (!id) {
-                axios
-                    .post(route("store.quotations"), {
+                axios.post(route("store.quotations"), {
                         important_note: this.form.important_note,
                         payment_condition: this.form.payment_condition,
                         offer_validity: this.form.offer_validity,
@@ -174,9 +173,7 @@ export const useQuoteStore = defineStore("quote", {
                     .then((response) => {
                         this.edit = response.data;
                         this.alert.successAlert(this.isMessage + " agregado");
-                        //this.closeModal();
                         this.showModalQD();
-                        //this.clearMainInput();
                     })
                     .catch((error) => {
                         this.myErrors = error.response.data.errors;
@@ -244,7 +241,10 @@ export const useQuoteStore = defineStore("quote", {
             axios.get(route("quoterefresh", id)).then((response) => {
                 response.data.map((el) => {
                     this.edit = el;
-                    this.getCalc.total_pr = el.products.reduce((accumulator, current) => accumulator + current.total, 0);
+                    this.getCalc.total_pr = el.products.reduce(
+                        (accumulator, current) => accumulator + current.total,
+                        0
+                    );
                 });
             });
         },

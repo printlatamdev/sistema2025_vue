@@ -96,24 +96,31 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
         ],
     }),
     getters: {
-        getTotal(state) {
-            return state.formOD.quantity * state.formOD.price;
-        },
         filledInputs(state) {
-            return state.form.provider_id == "" || state.form.users == "";
+            return (
+                state.form.provider_id == "" ||
+                state.form.approvedBy == "" ||
+                state.form.requestedBy == ""
+            );
         },
     },
     actions: {
         storeOrder() {
-            let userData = state.form;
+            let userData = this.form;
             userData.users = [userData.approvedBy, userData.requestedBy];
-
-            this.form.post(route("store.purchaseorders"), {
-                onSuccess: () => {
+            axios.post(route("store.purchaseorders"), {
+                    provider_id: this.form.provider_id,
+                    details: this.form.details,
+                    ordertype: this.form.ordertype,
+                    users: this.form.users,
+                }).then((response) => {
+                    this.edit = response.data;
                     this.closeModal();
+                    this.showPivotModal();
                     this.alert.successAlert(this.isMessage + " agregada");
-                },
-            });
+                }).catch((error) => {
+                    this.myErrors = error.response.data.errors;
+                });
         },
         deleteOrder(id) {
             this.form.delete(route("delete.order", id), {

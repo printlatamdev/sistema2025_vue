@@ -9,11 +9,11 @@ import InputError from '@/Components/InputError.vue';
 import SuccessButton from '@/Components/SuccessButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import ModalStoreUpdateMaterial from '../Material/ModalStoreUpdateMaterial.vue';
-import { useOrderStore } from '@/Store/order';
+import { usePurchaseorderStore } from '@/Store/purchaseorder';
 import { useMaterialStore } from '@/Store/material';
 
 let store_material = useMaterialStore();
-let store = useOrderStore();
+let store = usePurchaseorderStore();
 defineProps({
     show: {
         type: Boolean,
@@ -44,7 +44,7 @@ defineProps({
                             <InputLabel for="material_id" value="Material" />
                             <div class="w-full flex">
                                 <v-select v-model="store.formOD.material_id" class="w-full" :options="materials"
-                                    label="name" :reduce="material => material.id">
+                                    label="name" :reduce="material => materials.id">
                                     <template v-slot:no-options="{ search, searching }">
                                         <template v-if="searching">
                                             No se ha encontrado resultados para <em>{{ search }}</em>.

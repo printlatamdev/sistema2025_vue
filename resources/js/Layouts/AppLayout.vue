@@ -120,7 +120,7 @@ const logout = () => {
                                                 </template>
                                             </Dropdown>
                                         </div>
-                                        <div v-tooltip="'No hay notificaciones'" class="cursor-pointer">
+                                        <div v-tooltip="'No se han encontrado notificaciones'" class="cursor-pointer">
                                             <font-awesome-icon :icon="['fas', 'bell']" class="text-gray-500 text-xl hover:text-gray-600" />
                                         </div>
                                         <!-- Settings Dropdown -->

@@ -43,7 +43,7 @@ class PurchaseorderController extends Controller
         ]);
         $data->users()->attach($request->users, []);
 
-        return redirect()->route('purchaseorders');
+        return new PurchaseorderResource($data);
     }
 
     public function update(Request $request, Purchaseorder $purchaseorder)

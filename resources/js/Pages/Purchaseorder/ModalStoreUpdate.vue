@@ -105,20 +105,20 @@ defineProps({
                         </div>
                     </div>
                     <div class="mt-3">
-                        <InputLabel for="description" value="Detalle de solicitud" />
-                        <textarea v-model="store.form.description" rows="3"
+                        <InputLabel for="details" value="Detalle de solicitud" />
+                        <textarea v-model="store.form.details" rows="3"
                             class="block w-full border-gray-300 rounded-md text-sm"></textarea>
                     </div>
                     <div class="flex mt-3">
                         <label class="flex items-center">
                             <span v-for="item in orderTypes" :key="item.id" class="mr-3">
-                                <input type="radio" :value="item" v-model="store.form.ordertype" class="cursor-pointer"/>
+                                <input type="radio" :value="item" v-model="store.form.ordertype" class="cursor-pointer w-4 h-4 text-gray-600 bg-gray-100 border-gray-300 focus:ring-gray-500"/>
                                 <span class="ms-1 text-sm text-gray-700">{{ item }}</span>
                             </span>
                         </label>
                     </div>
                     <div class="flex justify-end mt-3">
-                        <PrimaryButton @click.prevent="store.showPivotModal()" :disabled="store.filledInputs">
+                        <PrimaryButton @click.prevent="store.storeOrder()" :disabled="store.filledInputs">
                             <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />{{ store.edit == '' ?
                                 'Guardar' : 'Actualizar' }} {{ store.isMessage }}
                         </PrimaryButton>

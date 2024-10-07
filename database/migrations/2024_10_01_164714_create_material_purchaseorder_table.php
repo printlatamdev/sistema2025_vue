@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (! Schema::hasTable('material_order')) {
-            Schema::create('material_order', function (Blueprint $table) {
+        if (! Schema::hasTable('material_purchaseorders')) {
+            Schema::create('material_purchaseorder', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('material_id')->constrained();
-                $table->foreignId('order_id')->constrained();
+                $table->foreignId('purchaseorder_id')->constrained();
                 $table->float('price', 8, 2);
                 $table->integer('quantity');
                 $table->float('subtotal', 8, 2);
