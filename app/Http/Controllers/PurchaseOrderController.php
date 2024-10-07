@@ -18,6 +18,7 @@ class PurchaseorderController extends Controller
     public function index()
     {
         $data = Purchaseorder::orderBy('id', 'desc')->get();
+        $data->load('users');
 
         return Inertia::render('Purchaseorder/Index', [
             'purchaseorders' => PurchaseorderResource::collection($data),

@@ -62,8 +62,8 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             provider_id: "",
             details: "",
             ordertype: [],
-            approvedBy: "",
-            requestedBy: "",
+            approved_by: "",
+            requested_by: "",
             users: [],
             processing: false,
         }),
@@ -86,6 +86,7 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             { text: "Cantidad", value: "quantity" },
             { text: "Precio (Sin IVA)", value: "price" },
             { text: "Fecha registro", value: "register_date" },
+            { text: "Opciones", value: "options" },
         ],
         headersOD: [
             { text: "Material", value: "name" },
@@ -99,15 +100,15 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
         filledInputs(state) {
             return (
                 state.form.provider_id == "" ||
-                state.form.approvedBy == "" ||
-                state.form.requestedBy == ""
+                state.form.approved_by == "" ||
+                state.form.requested_by == ""
             );
         },
     },
     actions: {
         storeOrder() {
             let userData = this.form;
-            userData.users = [userData.approvedBy, userData.requestedBy];
+            userData.users = [userData.approved_by, userData.requested_by];
             axios.post(route("store.purchaseorders"), {
                     provider_id: this.form.provider_id,
                     details: this.form.details,
@@ -139,7 +140,6 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             this.formOD.material_id = this.edit.id;
             this.formOD.post(route("store.materialorder"), {
                 onSuccess: () => {
-                    //this.closeModal();
                     this.refreshData(id);
                     this.alert.successAlert(this.isMessage + " agregado");
                 },
@@ -149,12 +149,21 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
                 },
             });
         },
-        refreshData(id) {
-            axios.get(route("quoterefresh", id)).then((response) => {
-                response.data.map((el) => {
-                    this.edit = el;
+        editData(data) {
+            this.showStoreModal();
+            this.edit = data;
+            this.form.provider_id = data.provider.id;
+            this.form.details = data.details;
+            data.users.map((el) => {
+                el.roles.map((element) => {
+                    if(element.id == 1){
+                        this.form.approved_by = el.id;
+                    } else {
+                        this.form.requested_by = el.id;
+                    }
                 });
             });
+            this.form.ordertype = data.ordertype;
         },
         showStoreModal() {
             this.openModal = true;
@@ -172,13 +181,12 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             this.openPivotModal = false;
             this.clearInput();
         },
-        editData(data) {
-            this.showStoreModal();
-            this.edit = data;
-            this.form.name = data.name;
-        },
         clearInput() {
             this.edit = "";
+            this.form.provider_id = "";
+            this.form.details = "";
+            this.form.approved_by = "";
+            this.form.requested_by = "";
         },
     },
 });

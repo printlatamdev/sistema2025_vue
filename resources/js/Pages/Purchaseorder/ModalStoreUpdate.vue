@@ -75,30 +75,28 @@ defineProps({
                     <div class="flex">
                         <div class="w-full mt-3 mr-2">
                             <InputLabel for="name" value="Solicitado por" />
-                            <v-select v-model="store.form.requestedBy" :options="requestedBy" label="name"
+                            <v-select v-model="store.form.requested_by" :options="requestedBy" label="name"
                                 :reduce="user => user.id">
                                 <template v-slot:no-options="{ search, searching }">
                                     <template v-if="searching">
                                         No se ha encontrado resultados para <em>{{ search }}</em>.
                                     </template>
                                     <em v-else style="opacity: 0.5">Empieza a escribir para buscar quien solicita la
-                                        orden
-                                        de compra</em>
+                                        orden de compra</em>
                                 </template>
                             </v-select>
                             <InputError class="" :message="store.form.errors.name" />
                         </div>
                         <div class="w-full mt-3">
                             <InputLabel for="name" value="Autorizado por" />
-                            <v-select v-model="store.form.approvedBy" :options="approvedBy" label="name"
+                            <v-select v-model="store.form.approved_by" :options="approvedBy" label="name"
                                 :reduce="user => user.id">
                                 <template v-slot:no-options="{ search, searching }">
                                     <template v-if="searching">
                                         No se ha encontrado resultados para <em>{{ search }}</em>.
                                     </template>
                                     <em v-else style="opacity: 0.5">Empieza a escribir para buscar quien autoriza la
-                                        orden
-                                        de compra</em>
+                                        orden de compra</em>
                                 </template>
                             </v-select>
                             <InputError class="" :message="store.form.errors.name" />
@@ -112,7 +110,8 @@ defineProps({
                     <div class="flex mt-3">
                         <label class="flex items-center">
                             <span v-for="item in orderTypes" :key="item.id" class="mr-3">
-                                <input type="radio" :value="item" v-model="store.form.ordertype" class="cursor-pointer w-4 h-4 text-gray-600 bg-gray-100 border-gray-300 focus:ring-gray-500"/>
+                                <input type="radio" :value="item" v-model="store.form.ordertype"
+                                    class="cursor-pointer w-4 h-4 text-gray-600 bg-gray-100 border-gray-300 focus:ring-gray-500" />
                                 <span class="ms-1 text-sm text-gray-700">{{ item }}</span>
                             </span>
                         </label>

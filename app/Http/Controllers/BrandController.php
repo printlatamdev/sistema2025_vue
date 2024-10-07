@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Resources\BrandResource;
+use App\Http\Resources\PurchaseorderResource;
 use App\Models\Brand;
+use App\Models\Purchaseorder;
 
 class BrandController extends Controller
 {
@@ -23,5 +25,10 @@ class BrandController extends Controller
             'description' => $request->description,
         ]);
 
+    }
+
+    public function testFunction()
+    {
+        return PurchaseorderResource::collection(Purchaseorder::get());
     }
 }

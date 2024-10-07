@@ -46,5 +46,4 @@ class Order extends Model
     {
         return $this->belongsTo(Contact::class);
     }
-
 }
