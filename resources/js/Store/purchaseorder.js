@@ -90,10 +90,10 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
         ],
         headersOD: [
             { text: "Material", value: "name" },
-            { text: "Descripción", value: "details" },
-            { text: "Cantidad", value: "quantity", width: 50 },
-            { text: "Unitario", value: "price", width: 50 },
-            { text: "Total", value: "total", width: 50 },
+            { text: "Descripción", value: "pivot.details" },
+            { text: "Cantidad", value: "pivot.quantity", width: 50 },
+            { text: "Unitario", value: "pivot.price", width: 50 },
+            { text: "Total", value: "pivot.total", width: 50 },
         ],
     }),
     getters: {

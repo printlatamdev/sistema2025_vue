@@ -76,24 +76,34 @@ defineProps({
                                     class="w-full" type="text" />
                             </div>
                             <div class="w-1/4 self-end">
-                                <PrimaryButton class="ml-1" @click.prevent="store.storePivot(store.edit.id)" :disabled="store.filledInputsOD">
+                                <PrimaryButton class="ml-1" @click.prevent="store.storePivot(store.edit.id)"
+                                    :disabled="store.filledInputsOD">
                                     <font-awesome-icon :icon="['fas', 'plus']" class="mr-1" /> Agregar ítem
                                 </PrimaryButton>
                             </div>
                         </div>
                     </div>
-                    <pre>{{ store.edit.materials }}</pre>
                     <div class="w-full flex">
-                        <div class="w-3/5 mr-3 mt-5">
+                        <div class="w-3/5 mt-5 mr-3">
                             <EasyDataTable :headers="store.headersOD" :rows-per-page="5" :items="store.edit.materials"
-                            border-cell buttons-pagination class="">
-                            <template #empty-message>
-                                <p>No se ha encontrado ningún resultado</p>
-                            </template>
-                        </EasyDataTable>
-                        <div class="bg-red-100 p-1"><span class="font-semibold">Nota: </span>No se pueden ingresar más de 9 ítems</div>
+                                border-cell buttons-pagination class="">
+                                <template #empty-message>
+                                    <p>No se ha encontrado ningún resultado</p>
+                                </template>
+                            </EasyDataTable>
+                            <div class="bg-red-100 p-1"><span class="font-semibold">Nota: </span>No se pueden ingresar
+                                más de 9 ítems</div>
+                                
+                            <div class="flex justify-end mt-7">
+                                <SuccessButton class="mr-1" @click="">
+                                    <font-awesome-icon :icon="['fas', 'file-pdf']" /> Generar orden
+                                </SuccessButton>
+                                <SecondaryButton class="mr-1" @click="">
+                                    <font-awesome-icon :icon="['fas', 'file-pdf']" /> Generar orden sin IVA
+                                </SecondaryButton>
+                            </div>
                         </div>
-                        <div class="bg-gray-50 rounded-lg mt-7 w-2/5 p-5">
+                        <div class="bg-gray-50 rounded-lg mt-7 ml-3 w-2/5 p-7">
                             <h3 class="text-lg font-semibold">Detalle de correo de notificación</h3>
                             <div class="mt-5">
                                 <InputLabel for="user_id" value="Seleccionar destinatarios" />
@@ -105,7 +115,8 @@ defineProps({
                                             <template v-if="searching">
                                                 No se ha encontrado resultados para <em>{{ search }}</em>.
                                             </template>
-                                            <em v-else style="opacity: 0.5">Empieza a escribir para buscar el o los destinatarios</em>
+                                            <em v-else style="opacity: 0.5">Empieza a escribir para buscar el o los
+                                                destinatarios</em>
                                         </template>
                                     </v-select>
                                 </div>
@@ -120,13 +131,7 @@ defineProps({
                                     :config="store.editorConfig" />
                             </div>
                             <div class="flex justify-end mt-7">
-                                <SuccessButton class="mr-1" @click="">
-                                    <font-awesome-icon :icon="['fas', 'file-pdf']" /> Generar orden
-                                </SuccessButton>
-                                <SecondaryButton class="mr-1" @click="">
-                                    <font-awesome-icon :icon="['fas', 'file-pdf']" /> Generar orden sin IVA
-                                </SecondaryButton>
-                                <PrimaryButton class="mr-1" @click="store.editData(options)" disabled
+                                <PrimaryButton class="mr-1 w-full" @click="store.editData(options)" disabled
                                     v-tooltip="'Debe generar la orden para habilitar el envío de correo electrónico'">
                                     <font-awesome-icon :icon="['fas', 'envelope']" class="mr-1" /> Envíar correo
                                 </PrimaryButton>

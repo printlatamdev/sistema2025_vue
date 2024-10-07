@@ -44,6 +44,23 @@ class MaterialResource extends JsonResource
             'category_id' => new MaterialcategoryResource($this->materialcategory),
             'type' => new MaterialtypeResource($this->materialtype),
             'register_date' => Carbon::parse($this->created_at)->format('Y-m-d'),
+            'pivot' => [
+                'price' => $this->whenPivotLoaded('material_purchaseorder', function () {
+                    return $this->pivot->price;
+                }),
+                'quantity' => $this->whenPivotLoaded('material_purchaseorder', function () {
+                    return $this->pivot->quantity;
+                }),
+                'subtotal' => $this->whenPivotLoaded('material_purchaseorder', function () {
+                    return $this->pivot->subtotal;
+                }),
+                'total' => $this->whenPivotLoaded('material_purchaseorder', function () {
+                    return $this->pivot->total;
+                }),
+                'details' => $this->whenPivotLoaded('material_purchaseorder', function () {
+                    return $this->pivot->details;
+                }),
+            ],
         ];
     }
 }
