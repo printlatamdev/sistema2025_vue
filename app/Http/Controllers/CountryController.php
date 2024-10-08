@@ -25,6 +25,6 @@ class CountryController extends Controller
         $img = $image->store($request->image, Country::class, $data->id);
         $data->image()->save($img);
 
-        return new CountryResource($data);
+        return redirect()->route('/');
     }
 }

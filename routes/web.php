@@ -14,8 +14,6 @@ use App\Http\Controllers\PurchaseorderController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\QuotedetailController;
 use App\Http\Controllers\UserController;
-use App\Http\Resources\CountryResource;
-use App\Models\Country;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -26,6 +24,11 @@ Route::get('/', function () {
         //'countries' => CountryResource::collection(Country::get()),
     ]);
 });
+//country routes
+Route::resource('/countries', CountryController::class)->only(['index', 'store'])->names([
+    'index' => 'countries',
+    'store' => 'store.countries',
+]);
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', function () {
@@ -130,13 +133,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         'destroy' => 'delete.brands',
     ]);
 
-    //country routes
-    Route::resource('/countries', CountryController::class)->except(['create', 'edit'])->names([
-        'index' => 'countries',
-        'store' => 'store.countries',
-        'update' => 'update.countries',
-        'destroy' => 'delete.countries',
-    ]);
 
     //providers routes
     Route::resource('/providers', ProviderController::class)->except(['create', 'edit'])->names([

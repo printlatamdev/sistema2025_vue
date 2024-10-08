@@ -5,6 +5,7 @@ import { useAlertStore } from './alert';
 export const useCountryStore = defineStore("country", {
     state: () => ({
         openModal: false,
+        countries: [],
         alert: useAlertStore(),
         isMessage: 'País',
         form: useForm({
@@ -30,11 +31,17 @@ export const useCountryStore = defineStore("country", {
         },
     },
     actions: {
+        getCountries() {
+            axios.get(route("countries")).then((response) => {
+                this.countries = response.data;
+            });
+        },
         storeCountry() {
             this.form.post(route("store.countries"), {
                 onSuccess: (response) => {
                     this.closeModal();
                     this.alert.successAlert(this.isMessage + ' agregado');
+                    this.getCountries();
                 },
                 onError: (error) => { 
                   this.errors = error;

@@ -27,7 +27,6 @@ defineProps({
             Nuevo registro de  {{store.isMessage }}
         </template>
         <template #content>
-            {{ store.form }}
             <div class="">
                 <form action="" enctype="multipart/form-data">
                     <div class="w-full">

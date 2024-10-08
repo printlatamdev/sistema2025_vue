@@ -28,6 +28,6 @@ class Country extends Model
 
     public function image()
     {
-        return $this->morphTo(Image::class, 'imageable');
+        return $this->morphOne(Image::class, 'imageable');
     }
 }
