@@ -3,6 +3,7 @@
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CountryController;
 use App\Http\Controllers\MaterialcategoryController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MaterialtypeController;
@@ -13,7 +14,8 @@ use App\Http\Controllers\PurchaseorderController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\QuotedetailController;
 use App\Http\Controllers\UserController;
-use Illuminate\Foundation\Application;
+use App\Http\Resources\CountryResource;
+use App\Models\Country;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -21,8 +23,7 @@ Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
+        //'countries' => CountryResource::collection(Country::get()),
     ]);
 });
 
@@ -127,6 +128,14 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         'store' => 'store.brands',
         'update' => 'update.brands',
         'destroy' => 'delete.brands',
+    ]);
+
+    //country routes
+    Route::resource('/countries', CountryController::class)->except(['create', 'edit'])->names([
+        'index' => 'countries',
+        'store' => 'store.countries',
+        'update' => 'update.countries',
+        'destroy' => 'delete.countries',
     ]);
 
     //providers routes

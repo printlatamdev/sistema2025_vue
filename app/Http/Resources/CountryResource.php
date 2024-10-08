@@ -19,7 +19,7 @@ class CountryResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'acronym' => $this->acronym,
-            'flag' => new ImageResource($this->image),
+            'image' => new ImageResource($this->image),
             'register_date' => Carbon::parse($this->created_at)->format('Y-m-d'),
         ];
     }

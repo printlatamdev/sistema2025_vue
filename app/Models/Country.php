@@ -11,10 +11,6 @@ class Country extends Model
 
     protected $fillable = ['name', 'acronym'];
 
-    /** public function image()
-    {
-        return $this->morphMany(Image::class, 'imageable');
-    } */
     public function contact()
     {
         return $this->hasMany(Contact::class);

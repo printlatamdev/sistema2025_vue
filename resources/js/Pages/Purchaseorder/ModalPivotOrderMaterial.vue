@@ -83,9 +83,9 @@ defineProps({
                             </div>
                         </div>
                     </div>
-                    <div class="w-full flex">
-                        <div class="w-3/5 mt-5 mr-3">
-                            <EasyDataTable :headers="store.headersOD" :rows-per-page="5" :items="store.edit.materials"
+                    <div class="w-full flex mt-10">
+                        <div class="w-3/5 mr-3">
+                            <EasyDataTable :headers="store.headersOD" :rows-per-page="9" :items="store.edit.materials"
                                 border-cell buttons-pagination class="">
                                 <template #empty-message>
                                     <p>No se ha encontrado ningún resultado</p>
@@ -103,7 +103,7 @@ defineProps({
                                 </SecondaryButton>
                             </div>
                         </div>
-                        <div class="bg-gray-50 rounded-lg mt-7 ml-3 w-2/5 p-7">
+                        <div class="bg-gray-50 rounded-lg ml-3 w-2/5 p-7">
                             <h3 class="text-lg font-semibold">Detalle de correo de notificación</h3>
                             <div class="mt-5">
                                 <InputLabel for="user_id" value="Seleccionar destinatarios" />

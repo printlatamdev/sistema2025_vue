@@ -83,8 +83,6 @@ class PurchaseorderController extends Controller
         return redirect()->route('purchaseorders');
     }
 
-    
-
     public function getPurchaseorderPivot($id)
     {
         $id = Purchaseorder::find($id);

@@ -41,7 +41,7 @@ defineProps({
                         <font-awesome-icon :icon="['fas', 'gear']" class="text-gray-500 cursor-pointer text-lg"
                             v-tooltip="'Configuración de la cuenta'" @click.prevent="store.showProfileModal(item)" />
                     </div>
-                    <img :src="item.profile_photo_url" class="rounded-full w-28 h-28 bg-teal-50 p-2 mx-auto" alt="">
+                    <img :src="item.profile_photo_url" class="rounded-full w-24 h-24 bg-teal-50 p-2 mx-auto" alt="">
                     <div class="text-center">
                         <h4 class="text-lg font-semibold">{{ item.name }}</h4>
                         <h4 class="text-sm">{{ item.email }}</h4>
