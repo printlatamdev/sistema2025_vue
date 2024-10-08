@@ -93,7 +93,7 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             { text: "Descripción", value: "pivot.details" },
             { text: "Cantidad", value: "pivot.quantity", width: 50 },
             { text: "Unitario", value: "pivot.price", width: 50 },
-            { text: "Total", value: "pivot.total", width: 50 },
+            { text: "Total", value: "pivot.subtotal", width: 50 },
         ],
     }),
     getters: {

@@ -133,7 +133,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         'destroy' => 'delete.brands',
     ]);
 
-
     //providers routes
     Route::resource('/providers', ProviderController::class)->except(['create', 'edit'])->names([
         'index' => 'providers',

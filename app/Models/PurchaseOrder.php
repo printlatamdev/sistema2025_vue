@@ -13,6 +13,7 @@ class Purchaseorder extends Model
         'provider_id',
         'details',
         'ordertype',
+        'total'
     ];
 
     public function users()

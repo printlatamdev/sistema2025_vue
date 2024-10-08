@@ -17,6 +17,7 @@ return new class extends Migration
                 $table->string('ordertype')->nullable();
                 $table->text('details')->nullable();
                 $table->foreignId('provider_id')->constrained();
+                $table->float('total', 8, 2)->nullable();
                 $table->timestamps();
             });
         }

@@ -68,15 +68,18 @@ class PurchaseorderController extends Controller
 
     public function storeInPivot(Request $request)
     {
+        $iva = $request->iva / 100;
         $order = Purchaseorder::find($request->purchaseorder_id);
+        $getData = $order->materials->pluck('pivot');
         $subtotal = $request->price * $request->quantity;
-        $total = $subtotal + ($subtotal * 0.13);
+        $totalSum = $getData->sum('subtotal');
+        $total = $totalSum + ($totalSum * $iva);
         //store in pivot table
-        $order->materials()->attach($request->material_id, [
+        $pivot_id = $order->materials()->attach($request->material_id, [
             'price' => $request->price,
             'quantity' => $request->quantity,
             'subtotal' => $subtotal,
-            'total' => $total,
+            'total' => 0,
             'details' => $request->details,
         ]);
 
@@ -85,10 +88,8 @@ class PurchaseorderController extends Controller
 
     public function getPurchaseorderPivot($id)
     {
-        $id = Purchaseorder::find($id);
-        $data = Purchaseorder::where('id', $id->id)
-            ->orderBy('id', 'desc')
-            ->get();
+        $purchaseOrder = Purchaseorder::find($id);
+        $data = $purchaseOrder->orderBy('id', 'desc') ->get();
 
         return PurchaseorderResource::collection($data);
     }

@@ -26,15 +26,19 @@ const submit = () => {
         ...data,
         remember: form.remember ? 'on' : '',
     })).post(route('login'), {
-        onFinish: () => { 
-            form.reset('password') 
+        onSuccess: (response) => {
+            form.reset('password')
             store.successAlert('Sesión iniciada')
+        },
+        onError: (error) => {
+            store.errorAlert();
         },
     });
 };
 </script>
 
 <template>
+
     <Head title="Inicio de sesión" />
 
     <AuthenticationCard>
@@ -43,52 +47,40 @@ const submit = () => {
         </div>
 
         <div class="border rounded-lg p-5">
-        <AuthenticationCardLogo />
-        <form @submit.prevent="submit" class="mt-5">
-            <div>
-                <InputLabel for="email" value="Correo electrónico" />
-                <TextInput
-                    id="email"
-                    v-model="form.email"
-                    type="email"
-                    class=" block w-full"
-                    required
-                    autofocus
-                    autocomplete="username"
-                />
-                <InputError class="" :message="form.errors.email" />
-            </div>
+            <AuthenticationCardLogo />
+            <form @submit.prevent="submit" class="mt-5">
+                <div>
+                    <InputLabel for="email" value="Correo electrónico" />
+                    <TextInput id="email" v-model="form.email" type="email" class=" block w-full" required autofocus
+                        autocomplete="username" />
+                    <InputError class="" :message="form.errors.email" />
+                </div>
 
-            <div class="mt-4">
-                <InputLabel for="password" value="Contraseña" />
-                <TextInput
-                    id="password"
-                    v-model="form.password"
-                    type="password"
-                    class=" block w-full"
-                    required
-                    autocomplete="current-password"
-                />
-                <InputError class="" :message="form.errors.password" />
-            </div>
+                <div class="mt-4">
+                    <InputLabel for="password" value="Contraseña" />
+                    <TextInput id="password" v-model="form.password" type="password" class=" block w-full" required
+                        autocomplete="current-password" />
+                    <InputError class="" :message="form.errors.password" />
+                </div>
 
-            <div class="block mt-4">
-                <label class="flex items-center">
-                    <Checkbox v-model:checked="form.remember" name="remember" />
-                    <span class="ms-2 text-sm text-gray-600">Recordar credenciales</span>
-                </label>
-            </div>
+                <div class="block mt-4">
+                    <label class="flex items-center">
+                        <Checkbox v-model:checked="form.remember" name="remember" />
+                        <span class="ms-2 text-sm text-gray-600">Recordar credenciales</span>
+                    </label>
+                </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                <div class="flex items-center justify-end mt-4">
+                    <Link v-if="canResetPassword" :href="route('password.request')"
+                        class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                     Forgot your password?
-                </Link>
+                    </Link>
 
-                <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Iniciar sesión
-                </PrimaryButton>
-            </div>
-        </form>
+                    <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                        Iniciar sesión
+                    </PrimaryButton>
+                </div>
+            </form>
         </div>
     </AuthenticationCard>
 </template>

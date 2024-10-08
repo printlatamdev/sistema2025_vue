@@ -20,9 +20,12 @@ const form = useForm({
 
 const submit = () => {
     form.post(route('register'), {
-        onFinish: () => {
+        onSuccess: () => {
             form.reset('password', 'password_confirmation');
             store.successAlert('Se ha creado la cuenta e iniciado sesión');
+        },
+        onError: (error) => {
+            store.errorAlert();
         },
     });
 };

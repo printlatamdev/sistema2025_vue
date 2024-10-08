@@ -22,6 +22,7 @@ class PurchaseorderResource extends JsonResource
             'provider' => new ProviderResource($this->provider),
             'materials' => MaterialResource::collection($this->materials),
             'users' => UserResource::collection($this->whenLoaded('users')),
+            'total' => $this->total,
             'register_date' => Carbon::parse($this->created_at)->format('Y-m-d'),
         ];
     }
