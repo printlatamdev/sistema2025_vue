@@ -1,5 +1,6 @@
 <script setup>
 import Modal from './Modal.vue';
+import ActionMessage from '@/Components/ActionMessage.vue';
 
 const emit = defineEmits(['close']);
 
@@ -39,6 +40,9 @@ const close = () => {
                     <font-awesome-icon :icon="['fas', 'rectangle-xmark']" class="text-xl text-gray-600"/>
                 </div>
            </div>
+           <div class="">
+                <slot name="alert" />
+            </div>
             <div class="text-sm text-gray-600 p-7">
                 <slot name="content" />
             </div>

@@ -4,7 +4,6 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import DialogModal from '@/Components/DialogModal.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
 import AddButton from '@/Components/AddButton.vue';
 import SuccessButton from '@/Components/SuccessButton.vue';
 import Filepond from '@/Components/Filepond.vue';
@@ -42,12 +41,14 @@ onMounted(() => {
 <template>
     <DialogModal :show="show" :max-width="maxWidth" @close="store.closeModal">
         <template #title>
-            <ActionMessage :on="store.formQD.recentlySuccessful || store.formTotal.recentlySuccessful" class="me-3">
-                Agregado satisfactoriamente.
-            </ActionMessage>
             <span v-if="store.edit != ''" class="p-1 bg-sky-500 rounded-md">#{{ `${store.edit.id}-${store.getYear}`
                 }}</span>
             {{ store.isSecondMessage }}
+        </template>
+        <template #alert>
+            <ActionMessage :on="store.formQD.recentlySuccessful">
+                <font-awesome-icon :icon="['fas', 'circle-check']" />Producto agregado satisfactoriamente
+            </ActionMessage>
         </template>
         <template #content>
             <div class="w-1/2 flex justify-center mx-auto ">

@@ -8,6 +8,7 @@ import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import SuccessButton from '@/Components/SuccessButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
+import ActionMessage from '@/Components/ActionMessage.vue';
 import ModalStoreUpdateMaterial from '../Material/ModalStoreUpdateMaterial.vue';
 import { usePurchaseorderStore } from '@/Store/purchaseorder';
 import { useMaterialStore } from '@/Store/material';
@@ -36,6 +37,11 @@ defineProps({
 <template>
     <DialogModal :show="show" :max-width="maxWidth" @close="store.closeModal">
         <template #title>Detalles orden de compra</template>
+        <template #alert>
+            <ActionMessage :on="store.formOD.recentlySuccessful">
+                <font-awesome-icon :icon="['fas', 'circle-check']" />Material agregado satisfactoriamente
+            </ActionMessage>
+        </template>
         <template #content>
             <div class="">
                 <form>

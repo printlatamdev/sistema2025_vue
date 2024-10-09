@@ -86,7 +86,7 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             { text: "Cantidad", value: "quantity" },
             { text: "Precio (Sin IVA)", value: "price" },
             { text: "Fecha registro", value: "register_date" },
-            { text: "Opciones", value: "options" },
+            { text: "Acciones", value: "options", width: 100 },
         ],
         headersOD: [
             { text: "Material", value: "name" },
