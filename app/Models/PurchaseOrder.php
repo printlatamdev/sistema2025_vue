@@ -13,7 +13,7 @@ class Purchaseorder extends Model
         'provider_id',
         'details',
         'ordertype',
-        'total'
+        'total',
     ];
 
     public function users()
@@ -28,6 +28,10 @@ class Purchaseorder extends Model
 
     public function materials()
     {
-        return $this->belongsToMany(Material::class, 'material_purchaseorder')->withPivot('price', 'quantity', 'subtotal', 'total', 'details')->orderByPivot('id', 'desc');
+        return $this->belongsToMany(Material::class, 'material_purchaseorder')->withPivot('price', 'quantity', 'subtotal', 'details')->orderByPivot('id', 'desc');
+    }
+
+    public function purchaseorderdetail(){
+        return $this->hasOne(PurchaseorderDetail::class);
     }
 }

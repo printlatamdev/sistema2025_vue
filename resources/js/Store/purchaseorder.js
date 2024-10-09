@@ -164,6 +164,7 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             this.formOD.purchaseorder_id = this.edit.id;
             this.formOD.post(route("store.materialorder"), {
                 onSuccess: () => {
+                    this.clearPivotInput();
                     this.refreshData(id);
                     this.alert.successAlert(this.isMessage + " agregado");
                 },
@@ -211,6 +212,12 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             this.openDeleteModal = false;
             this.openPivotModal = false;
             this.clearInput();
+        },
+        clearPivotInput() {
+            this.formOD.material_id = "";
+            this.formOD.price = "";
+            this.formOD.quantity = "";
+            this.formOD.subtotal = "";
         },
         clearInput() {
             this.edit = "";
