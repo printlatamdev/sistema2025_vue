@@ -80,12 +80,12 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             processing: false,
         }),
         headers: [
-            { text: "No. Orden", value: "name" },
-            { text: "Material", value: "material.name" },
-            { text: "Cliente", value: "company.social_reason" },
-            { text: "Cantidad", value: "quantity" },
-            { text: "Precio (Sin IVA)", value: "price" },
-            { text: "Fecha registro", value: "register_date" },
+            { text: "No. Orden", value: "id", width:50 },
+            //{ text: "Aprobado por", value: "approvedBy" },
+            //{ text: "Autorizado por", value: "requestedBy" },
+            { text: "Cliente", value: "provider.name" },
+            { text: "Precio (Sin IVA)", value: "order_details.total_materials", width: 100 },
+            { text: "Fecha registro", value: "register_date", width: 150 },
             { text: "Acciones", value: "options", width: 100 },
         ],
         headersOD: [

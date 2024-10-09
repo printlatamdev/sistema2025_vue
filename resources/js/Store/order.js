@@ -35,7 +35,7 @@ export const useOrderStore = defineStore("order", {
             { text: "Cliente", value: "company.social_reason" },
             { text: "Cantidad", value: "quantity" },
             { text: "Precio (Sin IVA)", value: "price" },
-            { text: "Fecha registro", value: "register_date" },
+            { text: "Fecha registro", value: "register_date", width: 150 },
         ],
     }),
     getters: {

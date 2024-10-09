@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -22,7 +23,9 @@ class PurchaseorderResource extends JsonResource
             'provider' => new ProviderResource($this->provider),
             'materials' => MaterialResource::collection($this->materials),
             'users' => UserResource::collection($this->whenLoaded('users')),
+            'approvedBy' => '',
             'total' => $this->total,
+            'order_details' => new PurchaseorderdetailResource($this->purchaseorderdetail),
             'register_date' => Carbon::parse($this->created_at)->format('Y-m-d'),
         ];
     }

@@ -58,7 +58,7 @@ export const useQuoteStore = defineStore("quote", {
             { text: "Contacto", value: "quote.contact.name" },
             { text: "Vendedor", value: "quote.user.name" },
             { text: "Reporte", value: "report", width: 50 },
-            { text: "Fecha de registro", value: "register_date", width: 150 },
+            { text: "Fecha registro", value: "register_date", width: 150 },
             { text: "Acciones", value: "options", width: 100 },
         ],
         headers: [

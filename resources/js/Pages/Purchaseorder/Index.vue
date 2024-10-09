@@ -13,6 +13,10 @@ defineProps({
         type: Object,
         default: ([]),
     },
+    purchaseorderdetails: {
+        type: Object,
+        default: ([]),
+    },
     materials: {
         type: Object,
         default: ([]),

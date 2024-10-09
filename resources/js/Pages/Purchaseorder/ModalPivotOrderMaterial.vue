@@ -92,14 +92,24 @@ defineProps({
                     <div class="w-full flex mt-10">
                         <div class="w-3/5 mr-3">
                             <EasyDataTable :headers="store.headersOD" :rows-per-page="9" :items="store.edit.materials"
-                                border-cell buttons-pagination class="">
+                                border-cell buttons-pagination hide-footer class="">
                                 <template #empty-message>
                                     <p>No se ha encontrado ningún resultado</p>
                                 </template>
                             </EasyDataTable>
-                            <div class="bg-red-100 p-1"><span class="font-semibold">Nota: </span>No se pueden ingresar
+                            <div class="border py-1 px-2 border-y-0 flex justify-end">
+                                <div class="text-sm">
+                                    <p><span class="font-semibold">Subtotal:</span> ${{
+                                        store.edit.order_details.total_materials }}</p>
+                                    <p><span class="font-semibold">IVA:</span> ${{ store.edit.order_details.iva }}</p>
+                                    <p><span class="font-semibold">Costo total:</span> ${{
+                                        store.edit.order_details.total }}</p>
+                                </div>
+                            </div>
+                            <div class="border text-xs p-1"><span class="font-semibold">*Nota: </span>No se podrán
+                                ingresar
                                 más de 9 ítems</div>
-                                
+
                             <div class="flex justify-end mt-7">
                                 <SuccessButton class="mr-1" @click="">
                                     <font-awesome-icon :icon="['fas', 'file-pdf']" /> Generar orden
