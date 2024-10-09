@@ -66,95 +66,112 @@ defineProps({
                             </div>
                         </div>
                         <div class="w-3/5 flex">
-                            <div class="w-1/4 mr-1">
+                            <div class="w-1/3 mr-2">
                                 <InputLabel for="price" value="Precio" />
                                 <TextInput v-model="store.formOD.price" class="w-full" type="text" />
                                 <InputError class="" :message="store.formOD.errors.price" />
                             </div>
-                            <div class="w-1/4 mr-1">
+                            <div class="w-1/3 mr-2">
                                 <InputLabel for="quantity" value="Cantidad" />
                                 <TextInput v-model="store.formOD.quantity" class="w-full" type="text" />
                                 <InputError class="" :message="store.formOD.errors.quantity" />
                             </div>
-                            <div class="w-1/4 mr-1">
+                            <div class="w-1/3 mr-2">
                                 <InputLabel for="subtotal" value="Total" />
                                 <TextInput disabled v-model="store.formOD.subtotal" :placeholder="store.getTotal"
                                     class="w-full" type="text" />
                             </div>
-                            <div class="w-1/4 self-end">
-                                <PrimaryButton class="ml-1" @click.prevent="store.storePivot(store.edit.id)"
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <div class="mt-3 w-2/3 mr-3">
+                            <InputLabel for="details" value="Detalles de orden" />
+                            <textarea v-model="store.formOD.details" rows="3"
+                                class="block w-full border-gray-300 rounded-md text-sm"></textarea>
+                        </div>
+                        <div class="mt-5 w-1/3">
+                            <InputLabel for="iva" value="IVA" />
+                            <select v-model="store.formOD.iva"
+                                class="block w-full border-gray-300 rounded-md text-xs">
+                                <option class="text-gray-500" disabled>Seleccione una opción</option>
+                                <option v-for="i in store.iva" :key="i.id" :value="i.value">
+                                    {{ i.name }}
+                                </option>
+                            </select>
+                            <div class="mt-3">
+                                <PrimaryButton class="w-full" @click.prevent="store.storePivot(store.edit.id)"
                                     :disabled="store.filledInputsOD">
                                     <font-awesome-icon :icon="['fas', 'plus']" class="mr-1" /> Agregar ítem
                                 </PrimaryButton>
                             </div>
                         </div>
                     </div>
-                    <div class="w-full flex mt-10">
-                        <div class="w-3/5 mr-3">
-                            <EasyDataTable :headers="store.headersOD" :rows-per-page="9" :items="store.edit.materials"
-                                border-cell buttons-pagination hide-footer class="">
-                                <template #empty-message>
-                                    <p>No se ha encontrado ningún resultado</p>
-                                </template>
-                            </EasyDataTable>
-                            <div class="border py-1 px-2 border-y-0 flex justify-end">
-                                <div class="text-sm">
-                                    <p><span class="font-semibold">Subtotal:</span> ${{
-                                        store.edit.order_details.total_materials }}</p>
-                                    <p><span class="font-semibold">IVA:</span> ${{ store.edit.order_details.iva }}</p>
-                                    <p><span class="font-semibold">Costo total:</span> ${{
-                                        store.edit.order_details.total }}</p>
-                                </div>
-                            </div>
-                            <div class="border text-xs p-1"><span class="font-semibold">*Nota: </span>No se podrán
-                                ingresar
-                                más de 9 ítems</div>
-
-                            <div class="flex justify-end mt-7">
-                                <SuccessButton class="mr-1" @click="">
-                                    <font-awesome-icon :icon="['fas', 'file-pdf']" /> Generar orden
-                                </SuccessButton>
-                                <SecondaryButton class="mr-1" @click="">
-                                    <font-awesome-icon :icon="['fas', 'file-pdf']" /> Generar orden sin IVA
-                                </SecondaryButton>
+                </form>
+                <hr class="mt-7">
+                <div class="w-full flex mt-7">
+                    <div class="w-3/5 mr-3">
+                        <EasyDataTable :headers="store.headersOD" :rows-per-page="9" :items="store.edit.materials"
+                            border-cell buttons-pagination hide-footer class="">
+                            <template #empty-message>
+                                <p>No se ha encontrado ningún resultado</p>
+                            </template>
+                        </EasyDataTable>
+                        <div class="border py-1 px-2 border-y-0 flex justify-end">
+                            <div class="text-sm">
+                                <p><span class="font-semibold">Subtotal:</span> ${{
+                                    store.edit.order_details.total_materials }}</p>
+                                <p><span class="font-semibold">IVA:</span> ${{ store.edit.order_details.iva }}</p>
+                                <p><span class="font-semibold">Costo total:</span> ${{
+                                    store.edit.order_details.total }}</p>
                             </div>
                         </div>
-                        <div class="bg-gray-50 rounded-lg ml-3 w-2/5 p-7">
-                            <h3 class="text-lg font-semibold">Detalle de correo de notificación</h3>
-                            <div class="mt-5">
-                                <InputLabel for="user_id" value="Seleccionar destinatarios" />
+                        <div class="border text-xs p-1"><span class="font-semibold">*Nota: </span>No se podrán
+                            ingresar
+                            más de 9 ítems</div>
 
-                                <div style="background: white;">
-                                    <v-select v-model="store.formOD.user_id" :options="users" label="email"
-                                        class="block w-full" multiple :reduce="user => user.id">
-                                        <template v-slot:no-options="{ search, searching }">
-                                            <template v-if="searching">
-                                                No se ha encontrado resultados para <em>{{ search }}</em>.
-                                            </template>
-                                            <em v-else style="opacity: 0.5">Empieza a escribir para buscar el o los
-                                                destinatarios</em>
-                                        </template>
-                                    </v-select>
-                                </div>
-                            </div>
-                            <div class="mt-3">
-                                <InputLabel for="subject" value="Título de correo" />
-                                <TextInput v-model="store.formOD.subject" class="w-full" type="text" />
-                            </div>
-                            <div class="mt-3">
-                                <InputLabel for="user_id" value="Cuerpo de correo" />
-                                <ckeditor v-model="store.editorData" :editor="store.editor"
-                                    :config="store.editorConfig" />
-                            </div>
-                            <div class="flex justify-end mt-7">
-                                <PrimaryButton class="mr-1 w-full" @click="store.editData(options)" disabled
-                                    v-tooltip="'Debe generar la orden para habilitar el envío de correo electrónico'">
-                                    <font-awesome-icon :icon="['fas', 'envelope']" class="mr-1" /> Envíar correo
-                                </PrimaryButton>
-                            </div>
+                        <div class="flex justify-end mt-7">
+                            <SuccessButton class="mr-1" @click="">
+                                <font-awesome-icon :icon="['fas', 'file-pdf']" /> Generar orden
+                            </SuccessButton>
+                            <SecondaryButton class="mr-1" @click="">
+                                <font-awesome-icon :icon="['fas', 'file-pdf']" /> Generar orden sin IVA
+                            </SecondaryButton>
                         </div>
                     </div>
-                </form><br>
+                    <div class="bg-gray-50 rounded-lg ml-3 w-2/5 p-7">
+                        <h3 class="text-lg font-semibold">Detalle de correo de notificación</h3>
+                        <div class="mt-5">
+                            <InputLabel for="user_id" value="Seleccionar destinatarios" />
+
+                            <div style="background: white;">
+                                <v-select v-model="store.formOD.user_id" :options="users" label="email"
+                                    class="block w-full" multiple :reduce="user => user.id">
+                                    <template v-slot:no-options="{ search, searching }">
+                                        <template v-if="searching">
+                                            No se ha encontrado resultados para <em>{{ search }}</em>.
+                                        </template>
+                                        <em v-else style="opacity: 0.5">Empieza a escribir para buscar el o los
+                                            destinatarios</em>
+                                    </template>
+                                </v-select>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <InputLabel for="subject" value="Título de correo" />
+                            <TextInput v-model="store.formOD.subject" class="w-full" type="text" />
+                        </div>
+                        <div class="mt-3">
+                            <InputLabel for="user_id" value="Cuerpo de correo" />
+                            <ckeditor v-model="store.editorData" :editor="store.editor" :config="store.editorConfig" />
+                        </div>
+                        <div class="flex justify-end mt-7">
+                            <PrimaryButton class="mr-1 w-full" @click="store.editData(options)" disabled
+                                v-tooltip="'Debe generar la orden para habilitar el envío de correo electrónico'">
+                                <font-awesome-icon :icon="['fas', 'envelope']" class="mr-1" /> Envíar correo
+                            </PrimaryButton>
+                        </div>
+                    </div>
+                </div><br>
             </div>
         </template>
     </DialogModal>

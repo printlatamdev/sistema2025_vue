@@ -73,6 +73,7 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             quantity: "",
             price: "",
             subtotal: "",
+            iva: '',
             total: "",
             details: "",
             image: null,
@@ -87,6 +88,14 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             { text: "Precio (Sin IVA)", value: "order_details.total_materials", width: 100 },
             { text: "Fecha registro", value: "register_date", width: 150 },
             { text: "Acciones", value: "options", width: 100 },
+        ],
+        iva: [
+            { name: "No asignar", value: "0" },
+            { name: "7%", value: "7" },
+            { name: "12%", value: "12" },
+            { name: "13%", value: "13" },
+            { name: "15%", value: "15" },
+            { name: "Otro porcentaje", value: "0" },
         ],
         headersOD: [
             { text: "Material", value: "name" },
@@ -219,6 +228,8 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             this.formOD.price = "";
             this.formOD.quantity = "";
             this.formOD.subtotal = "";
+            this.formOD.details = "";
+            this.formOD.iva = "";
         },
         clearInput() {
             this.edit = "";

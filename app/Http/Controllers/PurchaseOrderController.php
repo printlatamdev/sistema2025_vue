@@ -46,7 +46,7 @@ class PurchaseorderController extends Controller
             'ordertype' => $request->ordertype,
         ]);
         $data->users()->attach($request->users, []);
-        $gg = PurchaseorderDetail::create(['purchaseorder_id' => $data->id, 'total_materials' => 0, 'iva' => 0, 'total' => 0]);
+        PurchaseorderDetail::create(['purchaseorder_id' => $data->id, 'total_materials' => 0, 'iva' => 0, 'total' => 0]);
         return new PurchaseorderResource($data);
     }
 
@@ -88,7 +88,7 @@ class PurchaseorderController extends Controller
         $total = $totalSum + ($totalSum * $iva);
         foreach($detail as $item){
             $item->update([
-                'total_materials' => $total,
+                'total_materials' => $totalSum,
                 'iva' => $totalSum * $iva,
                 'total' => $total,
             ]);

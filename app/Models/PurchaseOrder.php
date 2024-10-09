@@ -28,7 +28,7 @@ class Purchaseorder extends Model
 
     public function materials()
     {
-        return $this->belongsToMany(Material::class, 'material_purchaseorder')->withPivot('price', 'quantity', 'subtotal', 'details')->orderByPivot('id', 'desc');
+        return $this->belongsToMany(Material::class, 'material_purchaseorder')->withPivot('price', 'quantity', 'subtotal', 'iva', 'details')->orderByPivot('id', 'desc');
     }
 
     public function purchaseorderdetail()

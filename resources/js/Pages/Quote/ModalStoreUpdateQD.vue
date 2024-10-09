@@ -166,7 +166,6 @@ onMounted(() => {
                                 <div class="border border-gray-300 bg-gray-50 mt-3 rounded-md p-5">
                                     <p><span class="font-semibold">Total parcial: </span>
                                     ${{ store.getCalc.total_pr.toFixed(2) }}
-                                    {{ store.edit.products }}
                                     </p>
                                     <p><span class="font-semibold">IVA:</span> ({{ store.formTotal.iva }}%) ${{
                                         store.getParcialSubtotal.toFixed(2) }}</p>

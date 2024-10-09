@@ -13,7 +13,6 @@ class Quotedetail extends Model
         'quote_id',
         'total_products',
         'iva',
-        'total',
     ];
 
     public function quote()
