@@ -8,6 +8,7 @@ use App\Http\Resources\PurchaseorderResource;
 use App\Models\Material;
 use App\Models\Provider;
 use App\Models\Purchaseorder;
+use App\Models\PurchaseorderDetail;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -44,7 +45,7 @@ class PurchaseorderController extends Controller
             'ordertype' => $request->ordertype,
         ]);
         $data->users()->attach($request->users, []);
-
+        $gg = PurchaseorderDetail::create(['purchaseorder_id' => $data->id, 'total_materials' => 0, 'iva' => 0, 'total' => 0]);
         return new PurchaseorderResource($data);
     }
 
@@ -70,18 +71,27 @@ class PurchaseorderController extends Controller
     {
         $iva = $request->iva / 100;
         $order = Purchaseorder::find($request->purchaseorder_id);
-        $getData = $order->materials->pluck('pivot');
         $subtotal = $request->price * $request->quantity;
         //store in pivot table
-        $pivotStore = $order->materials()->attach($request->material_id, [
+        $order->materials()->attach($request->material_id, [
             'price' => $request->price,
             'quantity' => $request->quantity,
             'subtotal' => $subtotal,
             'details' => $request->details,
         ]);
+        //store in detail table
+        $getData = $order->materials->pluck('pivot');
         $totalSum = $getData->sum('subtotal');
+        $detail = PurchaseorderDetail::where('purchaseorder_id', $request->purchaseorder_id)->get();
+
         $total = $totalSum + ($totalSum * $iva);
-        $order->update(['total' => $total]);
+        foreach($detail as $item){
+            $item->update([
+                'total_materials' => $total,
+                'iva' => $totalSum * $iva,
+                'total' => $total,
+            ]);
+        }
 
         return redirect()->route('purchaseorders');
     }

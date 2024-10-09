@@ -31,7 +31,8 @@ class Purchaseorder extends Model
         return $this->belongsToMany(Material::class, 'material_purchaseorder')->withPivot('price', 'quantity', 'subtotal', 'details')->orderByPivot('id', 'desc');
     }
 
-    public function purchaseorderdetail(){
+    public function purchaseorderdetail()
+    {
         return $this->hasOne(PurchaseorderDetail::class);
     }
 }

@@ -30,7 +30,7 @@ defineProps({
                 <!--Begin card-->
                 <div class="w-full border text-center cursor-pointer p-4 rounded-lg transform hover:scale-105 transition duration-500"
                     @click="store.showStoreModal()">
-                    <div class="bg-gray-200 px-3 py-2 rounded-full w-10 h-10 mt-20 mx-auto">
+                    <div class="bg-gray-200 px-3 py-2 rounded-full w-10 h-10 mt-12 mx-auto">
                         <font-awesome-icon :icon="['fas', 'plus']" />
                     </div>
                     <p>Agregar nuevo usuario</p>

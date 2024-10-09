@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class PurchaseorderDetail extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'purchaseorder_id', 'total_materials', 'iva', 'total'
+        'purchaseorder_id', 'total_materials', 'iva', 'total',
     ];
 
-    public function purchaseorder(){
+    public function purchaseorder()
+    {
         return $this->belongsTo(Purchaseorder::class);
     }
 }
