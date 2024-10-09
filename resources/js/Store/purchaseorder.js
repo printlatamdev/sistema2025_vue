@@ -194,6 +194,7 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             axios.get(route("purchaseorder.refresh", id)).then((response) => {
                 response.data.map((el) => {
                     this.edit = el;
+                    console.log(this.edit);
                 });
             });
         },

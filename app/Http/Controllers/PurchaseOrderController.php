@@ -98,8 +98,10 @@ class PurchaseorderController extends Controller
 
     public function getPurchaseorderPivot($id)
     {
-        $purchaseOrder = Purchaseorder::find($id);
-        $data = $purchaseOrder->orderBy('id', 'desc')->get();
+        $po = Purchaseorder::find($id);
+        $data = Purchaseorder::where('id', $po->id)
+                ->orderBy('id', 'desc')
+                ->get();
 
         return PurchaseorderResource::collection($data);
     }
