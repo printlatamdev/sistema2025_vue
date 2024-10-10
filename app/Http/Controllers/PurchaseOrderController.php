@@ -6,6 +6,7 @@ use App\Enums\OrderEnum;
 use App\Enums\PaymentConditionEnum;
 use App\Http\Resources\PurchaseorderdetailResource;
 use App\Http\Resources\PurchaseorderResource;
+use App\Mail\SendPurchaseorder;
 use App\Models\Material;
 use App\Models\Provider;
 use App\Models\Purchaseorder;
@@ -13,6 +14,7 @@ use App\Models\PurchaseorderDetail;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
 class PurchaseorderController extends Controller
@@ -105,5 +107,13 @@ class PurchaseorderController extends Controller
                 ->get();
 
         return PurchaseorderResource::collection($data);
+    }
+
+    public function sendPurchaseOrder(Request $request){
+        $emailData = [
+            'title' => $request->emailTitle,
+            'body' => $request->emailBody
+        ];
+        Mail::to($request->emails)->send(new SendPurchaseorder($emailData));
     }
 }

@@ -157,15 +157,15 @@ defineProps({
                             </div>
                         </div>
                         <div class="mt-3">
-                            <InputLabel for="subject" value="Título de correo" />
-                            <TextInput v-model="store.formOD.subject" class="w-full" type="text" />
+                            <InputLabel for="title" value="Título de correo" />
+                            <TextInput v-model="store.formMail.title" class="w-full" type="text" />
                         </div>
                         <div class="mt-3">
-                            <InputLabel for="user_id" value="Cuerpo de correo" />
+                            <InputLabel for="body" value="Cuerpo de correo" />
                             <ckeditor v-model="store.editorData" :editor="store.editor" :config="store.editorConfig" />
                         </div>
                         <div class="flex justify-end mt-7">
-                            <PrimaryButton class="mr-1 w-full" @click="store.editData(options)" disabled
+                            <PrimaryButton class="mr-1 w-full" @click="store.sendPurchaseOrder()" disabled
                                 v-tooltip="'Debe generar la orden para habilitar el envío de correo electrónico'">
                                 <font-awesome-icon :icon="['fas', 'envelope']" class="mr-1" /> Envíar correo
                             </PrimaryButton>

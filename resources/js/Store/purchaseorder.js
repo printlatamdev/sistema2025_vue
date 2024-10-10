@@ -199,6 +199,9 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             });
             this.form.ordertype = data.ordertype;
         },
+        sendPurchaseOrder(){
+
+        },
         refreshData(id) {
             axios.get(route("purchaseorder.refresh", id)).then((response) => {
                 response.data.map((el) => {
