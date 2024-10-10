@@ -26,8 +26,6 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
         edit: [],
         errors: [],
         editor: ClassicEditor,
-        editorData:
-            "<p>A continuación se adjunta orden de compra para la adquisicion de X productos, para ser usados en X tareas, favor compartir con Lic. Eduardo para su aprobacion y firma.</p> ",
         editorConfig: {
             plugins: [
                 Bold,
@@ -79,6 +77,13 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             image: null,
             error: "",
             processing: false,
+        }),
+        formMail: useForm({
+            purchaseorder_id: '',
+            users: [],
+            title: '',
+            body:
+            "<p>A continuación se adjunta orden de compra para la adquisicion de X productos, para ser usados en X tareas, favor compartir con Lic. Eduardo para su aprobacion y firma.</p> ",
         }),
         headers: [
             { text: "No. Orden", value: "id", width:50 },
@@ -199,14 +204,23 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             });
             this.form.ordertype = data.ordertype;
         },
-        sendPurchaseOrder(){
-
+        sendPurchaseOrder(purchaseorder_id){
+            this.formMail.purchaseorder_id = purchaseorder_id,
+            this.formMail.post(route("sendemail.purchaseorder"), {
+                onSuccess: () => {
+                    this.clearEmailInput();
+                    this.alert.successAlert('Correo envíado ');
+                },
+                onError: (error) => {
+                    this.errors = error;
+                    this.alert.errorAlert();
+                },
+            });
         },
         refreshData(id) {
             axios.get(route("purchaseorder.refresh", id)).then((response) => {
                 response.data.map((el) => {
                     this.edit = el;
-                    console.log(this.edit);
                 });
             });
         },
@@ -233,6 +247,11 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             this.formOD.subtotal = "";
             this.formOD.details = "";
             this.formOD.iva = "";
+        },
+        clearEmailInput() {
+            this.formMail.users = "";
+            this.formMail.title = "";
+            this.formMail.body = "";
         },
         clearInput() {
             this.edit = "";

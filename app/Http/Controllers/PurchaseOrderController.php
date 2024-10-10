@@ -111,9 +111,13 @@ class PurchaseorderController extends Controller
 
     public function sendPurchaseOrder(Request $request){
         $emailData = [
-            'title' => $request->emailTitle,
-            'body' => $request->emailBody
+            'purchaseorder_id' => $request->purchaseorder_id,
+            'title' => $request->title,
+            'body' => $request->body
         ];
-        Mail::to($request->emails)->send(new SendPurchaseorder($emailData));
+        foreach ([$request->users] as $recipient) {
+            Mail::to($recipient)->send(new SendPurchaseorder($emailData));
+        }
+        return redirect()->route('purchaseorders');
     }
 }

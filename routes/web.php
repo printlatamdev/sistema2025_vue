@@ -151,6 +151,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::controller(PurchaseorderController::class)->group(function () {
         Route::post('/store-material-order', 'storeInPivot')->name('store.materialorder');
         Route::get('/purchaseorder-refresh/{purchaseorder}', 'getPurchaseorderPivot')->name('purchaseorder.refresh');
-        Route::get('/send-purchaseorder', 'sendPurchaseOrder')->name('sendemail.purchaseorder');
+        Route::post('/send-purchaseorder', 'sendPurchaseOrder')->name('sendemail.purchaseorder');
     });
 });

@@ -36,10 +36,10 @@ defineProps({
 </script>
 <template>
     <DialogModal :show="show" :max-width="maxWidth" @close="store.closeModal">
-        <template #title>Detalles orden de compra</template>
+        <template #title>Detalles orden de compra <span class="bg-teal-200 rounded-md px-2">#{{ store.edit.id }}</span></template>
         <template #alert>
-            <ActionMessage :on="store.formOD.recentlySuccessful">
-                <font-awesome-icon :icon="['fas', 'circle-check']" />Material agregado satisfactoriamente
+            <ActionMessage :on="store.formOD.recentlySuccessful || store.formMail.recentlySuccessful">
+                <font-awesome-icon :icon="['fas', 'circle-check']" class="mr-2"/>{{ store.formOD.recentlySuccessful ? 'Material agregado satisfactoriamente' : 'Se ha envíado el correo satisfactoriamente' }}
             </ActionMessage>
         </template>
         <template #content>
@@ -91,8 +91,7 @@ defineProps({
                         </div>
                         <div class="mt-5 w-1/3">
                             <InputLabel for="iva" value="IVA" />
-                            <select v-model="store.formOD.iva"
-                                class="block w-full border-gray-300 rounded-md text-xs">
+                            <select v-model="store.formOD.iva" class="block w-full border-gray-300 rounded-md text-xs">
                                 <option class="text-gray-500" disabled>Seleccione una opción</option>
                                 <option v-for="i in store.iva" :key="i.id" :value="i.value">
                                     {{ i.name }}
@@ -140,36 +139,38 @@ defineProps({
                     </div>
                     <div class="bg-gray-50 rounded-lg ml-3 w-2/5 p-7">
                         <h3 class="text-lg font-semibold">Detalle de correo de notificación</h3>
-                        <div class="mt-5">
-                            <InputLabel for="user_id" value="Seleccionar destinatarios" />
-
-                            <div style="background: white;">
-                                <v-select v-model="store.formOD.user_id" :options="users" label="email"
-                                    class="block w-full" multiple :reduce="user => user.id">
-                                    <template v-slot:no-options="{ search, searching }">
-                                        <template v-if="searching">
-                                            No se ha encontrado resultados para <em>{{ search }}</em>.
+                        <form action="">
+                            <div class="mt-5">
+                                <InputLabel for="user_id" value="Seleccionar destinatarios" />
+                                <div style="background: white;">
+                                    <v-select v-model="store.formMail.users" :options="users" label="email"
+                                        class="block w-full" multiple :reduce="user => user.email">
+                                        <template v-slot:no-options="{ search, searching }">
+                                            <template v-if="searching">
+                                                No se ha encontrado resultados para <em>{{ search }}</em>.
+                                            </template>
+                                            <em v-else style="opacity: 0.5">Empieza a escribir para buscar el o los
+                                                destinatarios</em>
                                         </template>
-                                        <em v-else style="opacity: 0.5">Empieza a escribir para buscar el o los
-                                            destinatarios</em>
-                                    </template>
-                                </v-select>
+                                    </v-select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="mt-3">
-                            <InputLabel for="title" value="Título de correo" />
-                            <TextInput v-model="store.formMail.title" class="w-full" type="text" />
-                        </div>
-                        <div class="mt-3">
-                            <InputLabel for="body" value="Cuerpo de correo" />
-                            <ckeditor v-model="store.editorData" :editor="store.editor" :config="store.editorConfig" />
-                        </div>
-                        <div class="flex justify-end mt-7">
-                            <PrimaryButton class="mr-1 w-full" @click="store.sendPurchaseOrder()" disabled
-                                v-tooltip="'Debe generar la orden para habilitar el envío de correo electrónico'">
-                                <font-awesome-icon :icon="['fas', 'envelope']" class="mr-1" /> Envíar correo
-                            </PrimaryButton>
-                        </div>
+                            <div class="mt-3">
+                                <InputLabel for="title" value="Título de correo" />
+                                <TextInput v-model="store.formMail.title" class="w-full" type="text" />
+                            </div>
+                            <div class="mt-3">
+                                <InputLabel for="body" value="Cuerpo de correo" />
+                                <ckeditor v-model="store.formMail.body" :editor="store.editor"
+                                    :config="store.editorConfig" />
+                            </div>
+                            <div class="flex justify-end mt-7">
+                                <PrimaryButton class="mr-1 w-full" @click.prevent="store.sendPurchaseOrder(store.edit.id)"
+                                    v-tooltip="'Debe generar la orden para habilitar el envío de correo electrónico'">
+                                    <font-awesome-icon :icon="['fas', 'envelope']" class="mr-1" /> Envíar correo
+                                </PrimaryButton>
+                            </div>
+                        </form>
                     </div>
                 </div><br>
             </div>

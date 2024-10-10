@@ -38,7 +38,7 @@ class SendPurchaseorder extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.purchase-order',
+            view: 'emails.purchase-order',
         );
     }
 
