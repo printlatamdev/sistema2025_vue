@@ -11,7 +11,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Material extends Model
 {
     use HasFactory;
-    //use LogsActivity;
+    use LogsActivity;
 
     protected $fillable = [
         'name',
@@ -56,10 +56,10 @@ class Material extends Model
         return $this->belongsToMany(Purchaseorder::class, 'material_purchaseorder')->withPivot('price', 'quantity', 'subtotal', 'details')->orderByPivot('id', 'desc');
     }
 
-    /* public function getActivitylogOptions(): LogOptions
-     {
-         return LogOptions::defaults()
-         ->logOnly(['name'])
-         ->logOnlyDirty();
-     }*/
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['name', 'quantity', 'width', 'lenght', 'materialtype_id'])
+            ->logOnlyDirty();
+    }
 }
