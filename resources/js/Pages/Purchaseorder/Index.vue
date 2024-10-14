@@ -63,8 +63,8 @@ defineProps({
                     <p>No se ha encontrado ningún resultado</p>
                 </template>
                 <template #item-report="data">
-                    <a target="_blank" :href="route('report.quote', data.id)" >
-                        <font-awesome-icon v-tooltip="'Generar reporte de cotización'" :icon="['fas', 'file-pdf']" class="text-xl cursor-pointer text-red-500" />
+                    <a target="_blank" :href="route('report.purchaseorder', data.id)" >
+                        <font-awesome-icon v-tooltip="'Generar reporte de orden de compra'" :icon="['fas', 'file-pdf']" class="text-xl cursor-pointer text-red-500" />
                     </a>
                 </template>
                 <template #item-options="options" class="flex justify-center">

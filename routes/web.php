@@ -152,5 +152,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::post('/store-material-order', 'storeInPivot')->name('store.materialorder');
         Route::get('/purchaseorder-refresh/{purchaseorder}', 'getPurchaseorderPivot')->name('purchaseorder.refresh');
         Route::post('/send-purchaseorder', 'sendPurchaseOrder')->name('sendemail.purchaseorder');
+        Route::get('/purchase-orders/get-report/{purchaseorderdetail}', 'getPurchaseOrderReport')->name('report.purchaseorder');
     });
 });

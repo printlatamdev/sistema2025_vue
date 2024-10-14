@@ -102,7 +102,7 @@
         <table class="producttable">
             <tr class="">
                 <th class="widthproduct">PRODUCTO</th>
-                <th style="widthproduct">DESCRIPCIÓN</th>
+                <th class="widthproduct">DESCRIPCIÓN</th>
                 <th class="widthproduct">CANTIDAD</th>
                 <th class="widthproduct">UNITARIO</th>
                 <th class="widthproduct">TOTAL</th>

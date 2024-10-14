@@ -87,11 +87,11 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             "<p>A continuación se adjunta orden de compra para la adquisicion de X productos, para ser usados en X tareas, favor compartir con Lic. Eduardo para su aprobacion y firma.</p> ",
         }),
         headers: [
-            { text: "No. Orden", value: "id", width:50 },
+            { text: "No. Orden", value: "id", width: 100 },
             //{ text: "Aprobado por", value: "approvedBy" },
             //{ text: "Autorizado por", value: "requestedBy" },
             { text: "Cliente", value: "provider.name" },
-            { text: "Precio (Sin IVA)", value: "order_details.total_materials", width: 100 },
+            { text: "Precio (Sin IVA)", value: "order_details.total_materials", width: 150 },
             { text: "Reporte", value: "report", width: 50 },
             { text: "Fecha registro", value: "register_date", width: 150 },
             { text: "Acciones", value: "options", width: 100 },

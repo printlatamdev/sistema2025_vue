@@ -125,20 +125,17 @@ class PurchaseorderController extends Controller
         return redirect()->route('purchaseorders');
     }
 
-    
-
     public function getPurchaseOrderReport($id)
     {
         $pod = PurchaseorderDetail::find($id);
         $purchaseorder = Purchaseorder::where('id', $pod->purchaseorder_id)->with(['provider'])->get();
         $data = [
             'purchaseorderDetail' => $pod,
-            'quote' => $purchaseorder,
+            'purchaseorder' => $purchaseorder,
             'date' => Carbon::parse($pod->created_at)->format('Y-m-d'),
         ];
         $pdf = Pdf::loadView('reports/purchaseorderReport', compact('data'));
 
-        return $pdf->download('cotizacion-'.$pod->id.Carbon::now().'-'.'.pdf');
+        return $pdf->download('orden-de-compra-'.$pod->id.Carbon::now().'-'.'.pdf');
     }
-
 }
