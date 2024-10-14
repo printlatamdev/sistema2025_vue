@@ -16,9 +16,9 @@ class PurchaseorderdetailResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'total_materials' => $this->total_materials,
-            'iva' => $this->iva,
-            'total' => $this->total,
+            'total_materials' => number_format($this->total_materials, 2),
+            'iva' => number_format($this->iva, 2),
+            'total' => number_format($this->total, 2),
         ];
     }
 }

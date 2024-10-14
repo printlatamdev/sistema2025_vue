@@ -128,7 +128,7 @@ class PurchaseorderController extends Controller
     public function getPurchaseOrderReport($id)
     {
         $pod = PurchaseorderDetail::find($id);
-        $purchaseorder = Purchaseorder::where('id', $pod->purchaseorder_id)->with(['provider'])->get();
+        $purchaseorder = Purchaseorder::where('id', $pod->purchaseorder_id)->with(['provider', 'materials'])->get();
         $data = [
             'purchaseorderDetail' => $pod,
             'purchaseorder' => $purchaseorder,

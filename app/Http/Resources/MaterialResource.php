@@ -52,10 +52,10 @@ class MaterialResource extends JsonResource
                     return $this->pivot->quantity;
                 }),
                 'subtotal' => $this->whenPivotLoaded('material_purchaseorder', function () {
-                    return $this->pivot->subtotal;
+                    return number_format($this->pivot->subtotal, 2);
                 }),
                 'total' => $this->whenPivotLoaded('material_purchaseorder', function () {
-                    return $this->pivot->total;
+                    return number_format($this->pivot->total, 2);
                 }),
                 'details' => $this->whenPivotLoaded('material_purchaseorder', function () {
                     return $this->pivot->details;
