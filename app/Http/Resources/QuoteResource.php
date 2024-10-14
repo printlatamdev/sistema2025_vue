@@ -29,13 +29,13 @@ class QuoteResource extends JsonResource
             'contact' => new ContactResource($this->contact),
             'products' => ProductResource::collection($this->products),
             'price' => $this->whenPivotLoaded('product_quote', function () {
-                return $this->pivot->price;
+                return number_format($this->pivot->price, 2);
             }),
             'quantity' => $this->whenPivotLoaded('product_quote', function () {
                 return $this->pivot->quantity;
             }),
             'total' => $this->whenPivotLoaded('product_quote', function () {
-                return $this->pivot->total;
+                return number_format($this->pivot->total, 2);
             }),
             'details' => $this->whenPivotLoaded('product_quote', function () {
                 return $this->pivot->details;

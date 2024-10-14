@@ -20,7 +20,7 @@ class ProductResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'price' => $this->whenPivotLoaded('product_quote', function () {
-                return $this->pivot->price;
+                return number_format($this->pivot->price, 2);
             }),
             'image' => $this->whenPivotLoaded('product_quote', function () {
                 return $this->pivot->image;
@@ -29,7 +29,7 @@ class ProductResource extends JsonResource
                 return $this->pivot->quantity;
             }),
             'total' => $this->whenPivotLoaded('product_quote', function () {
-                return $this->pivot->total;
+                return number_format($this->pivot->total, 2);
             }),
             'details' => $this->whenPivotLoaded('product_quote', function () {
                 return $this->pivot->details;

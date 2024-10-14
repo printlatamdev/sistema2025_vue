@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <title>Orden de compra Color Digital</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,7 +50,7 @@
                 <td style="width:50%; float:left;">
                     <img src="{{ public_path('images/logo.jpg') }}" style="width:40%" />
                 </td>
-                <td style="width:50%; float:right">ORDEN No. {{ $item['id'] }}<br></td>
+                <td style="width:50%; text-align:right; font-weight: bold;">ORDEN No. {{ $item['id'] }}</td>
             </tr>
         </table>
         <!--second section-->

@@ -136,6 +136,6 @@ class PurchaseorderController extends Controller
         ];
         $pdf = Pdf::loadView('reports/purchaseorderReport', compact('data'));
 
-        return $pdf->download('orden-de-compra-'.$pod->id.Carbon::now().'-'.'.pdf');
+        return $pdf->stream('orden-de-compra-'.$pod->id.Carbon::now().'-'.'.pdf');
     }
 }

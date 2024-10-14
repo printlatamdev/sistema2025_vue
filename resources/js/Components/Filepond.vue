@@ -13,8 +13,9 @@ const FilePond = vueFilePond();
 <template>
     <file-pond
         class-name="my-pond"
-        label-idle="Seleccionar imagen"
+        label-idle="Seleccionar un archivo"
         allow-multiple="false"
+        accepted-file-types="image/jpeg, image/png, application/pdf"
         class="cursor-pointer text-xs"
     />
 </template>

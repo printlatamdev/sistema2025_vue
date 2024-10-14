@@ -33,10 +33,6 @@ defineProps({
         type: Array,
         default: ([]),
     },
-    maxWidth: {
-        type: String,
-        default: 'md',
-    },
 });
 onMounted(() => {
     store.resetToZero();
@@ -74,7 +70,7 @@ onMounted(() => {
                         </span>
                         <p class="mt-1">Nuevo tipo de material</p>
                     </div>
-                    <div class="border rounded-lg text-center p-3 bg-blue-50 cursor-pointer">
+                    <div class="border rounded-lg text-center p-3 bg-blue-50 cursor-pointer" @click.prevent="store.showTypeModal()">
                         <span class="py-1 px-2 rounded-full">
                             <font-awesome-icon :icon="['fas', 'folder-plus']" class="text-2xl text-gray-700" />
                         </span>
@@ -119,6 +115,6 @@ onMounted(() => {
         <ModalStoreUpdateMaterial :show="store.openModal" :type="store.type" :brands="brands" :categories="categories"
             :colors="colors" />
         <ModalStoreType :show="store.openTypeModal" :categories="categories" />
-        <!--<ModalEntryMaterial :show="store.openTypeModal" :providers="providers" />-->
+        <ModalEntryMaterial :show="store.openTypeModal" :providers="providers" />
     </AppLayout>
 </template>
