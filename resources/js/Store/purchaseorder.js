@@ -27,6 +27,7 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
         errors: [],
         editor: ClassicEditor,
         editorConfig: {
+            htmlEncodeOutput: true,
             plugins: [
                 Bold,
                 Heading,
@@ -91,6 +92,7 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             //{ text: "Autorizado por", value: "requestedBy" },
             { text: "Cliente", value: "provider.name" },
             { text: "Precio (Sin IVA)", value: "order_details.total_materials", width: 100 },
+            { text: "Reporte", value: "report", width: 50 },
             { text: "Fecha registro", value: "register_date", width: 150 },
             { text: "Acciones", value: "options", width: 100 },
         ],

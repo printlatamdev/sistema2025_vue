@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Enums\OrderEnum;
 use App\Enums\PaymentConditionEnum;
-use App\Http\Resources\PurchaseorderdetailResource;
 use App\Http\Resources\PurchaseorderResource;
 use App\Mail\SendPurchaseorder;
 use App\Models\Material;
@@ -12,6 +11,8 @@ use App\Models\Provider;
 use App\Models\Purchaseorder;
 use App\Models\PurchaseorderDetail;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -49,6 +50,7 @@ class PurchaseorderController extends Controller
         ]);
         $data->users()->attach($request->users, []);
         PurchaseorderDetail::create(['purchaseorder_id' => $data->id, 'total_materials' => 0, 'iva' => 0, 'total' => 0]);
+
         return new PurchaseorderResource($data);
     }
 
@@ -88,7 +90,7 @@ class PurchaseorderController extends Controller
         $detail = PurchaseorderDetail::where('purchaseorder_id', $request->purchaseorder_id)->get();
 
         $total = $totalSum + ($totalSum * $iva);
-        foreach($detail as $item){
+        foreach ($detail as $item) {
             $item->update([
                 'total_materials' => $totalSum,
                 'iva' => $totalSum * $iva,
@@ -103,21 +105,40 @@ class PurchaseorderController extends Controller
     {
         $po = Purchaseorder::find($id);
         $data = Purchaseorder::where('id', $po->id)
-                ->orderBy('id', 'desc')
-                ->get();
+            ->orderBy('id', 'desc')
+            ->get();
 
         return PurchaseorderResource::collection($data);
     }
 
-    public function sendPurchaseOrder(Request $request){
+    public function sendPurchaseOrder(Request $request)
+    {
         $emailData = [
             'purchaseorder_id' => $request->purchaseorder_id,
             'title' => $request->title,
-            'body' => $request->body
+            'body' => $request->body,
         ];
         foreach ([$request->users] as $recipient) {
             Mail::to($recipient)->send(new SendPurchaseorder($emailData));
         }
+
         return redirect()->route('purchaseorders');
     }
+
+    
+
+    public function getPurchaseOrderReport($id)
+    {
+        $pod = PurchaseorderDetail::find($id);
+        $purchaseorder = Purchaseorder::where('id', $pod->purchaseorder_id)->with(['provider'])->get();
+        $data = [
+            'purchaseorderDetail' => $pod,
+            'quote' => $purchaseorder,
+            'date' => Carbon::parse($pod->created_at)->format('Y-m-d'),
+        ];
+        $pdf = Pdf::loadView('reports/purchaseorderReport', compact('data'));
+
+        return $pdf->download('cotizacion-'.$pod->id.Carbon::now().'-'.'.pdf');
+    }
+
 }
