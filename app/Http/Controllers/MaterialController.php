@@ -15,7 +15,6 @@ use App\Models\Material;
 use App\Models\Materialcategory;
 use App\Models\Materialtype;
 use App\Models\Provider;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -75,12 +74,6 @@ class MaterialController extends Controller
             'size' => $request->size,
             'gum' => $request->gum,
             'print' => $request->print,
-            'status' => $request->status,
-            'code' => $request->code,
-            'entry_date' => Carbon::now(),
-            'departure_date' => $request->departure_date,
-            'use_date' => $request->use_date,
-            'expiration_date' => $request->expiration_date,
             'brand_id' => $request->brand_id,
             'materialtype_id' => $request->materialtype_id,
         ]);

@@ -15,7 +15,7 @@ class Color extends Model
 
     public function materialtypes()
     {
-        return $this->belongsToMany(Materialtype::class, 'color_materialtype')->withPivot('quantity')->withTimestamps();
+        return $this->belongsToMany(Materialtype::class, 'color_materialtype')->withPivot('code', 'entry_date', 'departure_date', 'use_date', 'expiration_date')->withTimestamps();
     }
 
     public function material()

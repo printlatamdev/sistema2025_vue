@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreMaterialTypeRequest;
 use App\Http\Resources\MaterialtypeResource;
 use App\Models\Materialtype;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class MaterialtypeController extends Controller
@@ -35,7 +36,14 @@ class MaterialtypeController extends Controller
         return MaterialtypeResource::make($data);
     }
 
-    public function storeInColorMaterialtype(Request $request){
-        
+    public function storeInColorMaterialtype(Request $request, $data)
+    {
+        $data->colors()->attach($request->colors, [
+            'code' => $request->code,
+            'entry_date' => Carbon::now(),
+            'departure_date' => $request->departure_date,
+            'use_date' => $request->use_date,
+            'expiration_date' => $request->expiration_date,
+        ]);
     }
 }

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('color_id')->constrained();
             $table->foreignId('materialtype_id')->constrained();
             $table->string('code');
-            $table->string('status')->nullable();
             $table->date('entry_date')->nullable();
             $table->date('departure_date')->nullable();
             $table->date('use_date')->nullable();
