@@ -17,6 +17,7 @@ export const useMaterialStore = defineStore("material", {
         openModal: false,
         openCatModal: false,
         openTypeModal: false,
+        openStockModal: false,
         openDeleteModal: false,
         edit: [],
         errors: [],
@@ -64,24 +65,6 @@ export const useMaterialStore = defineStore("material", {
             { text: "Cantidad", value: "quantity" },
             { text: "Medidas", value: "measures" },
         ],
-        colors: [
-            { text: "Blanco", value: "Blanco" },
-            { text: "Blanco mate", value: "Blanco mate" },
-            { text: "Blanco negro", value: "Blanco negro" },
-            { text: "Blanco gloss", value: "Blanco gloss" },
-            { text: "Blanco kraft", value: "Blanco kraft" },
-            { text: "Transparente", value: "Transparente" },
-            { text: "Transparente gloss", value: "Transparente gloss" },
-            { text: "Satín", value: "Satín" },
-            { text: "Brillante", value: "Brillante" },
-            { text: "Rojo", value: "Rojo" },
-            { text: "Negro", value: "Negro" },
-            { text: "Mate", value: "Mate" },
-            { text: "Azul", value: "Azul" },
-            { text: "Plateado", value: "Rojo" },
-            { text: "Gris", value: "Gris" },
-            { text: "Amarillo", value: "Amarillo" },  
-        ]
     }),
     getters: {
         filledInputCat(state) {
@@ -178,6 +161,9 @@ export const useMaterialStore = defineStore("material", {
         showTypeModal() {
             this.openTypeModal = true;
         },
+        showModalStock() {
+            this.openStockModal = true;
+        },
         showCatModal() {
             this.openCatModal = true;
         },
@@ -190,6 +176,7 @@ export const useMaterialStore = defineStore("material", {
             this.openDeleteModal = false;
             this.openCatModal = false;
             this.openTypeModal = false;
+            this.openStockModal = false;
             this.clearInput();
         },
         editData(data) {

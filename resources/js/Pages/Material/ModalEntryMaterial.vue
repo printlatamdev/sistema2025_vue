@@ -17,13 +17,25 @@ defineProps({
         type: Object,
         default: ([]),
     },
+    categories: {
+        type: Object,
+        default: ([]),
+    },
     materials: {
+        type: Object,
+        default: ([]),
+    },
+    types: {
         type: Object,
         default: ([]),
     },
     maxWidth: {
         type: String,
         default: 'xl',
+    },
+    colors: {
+        type: Array,
+        default: ([]),
     },
 });
 
@@ -35,14 +47,38 @@ defineProps({
         </template>
         <template #content>
             <form action="">
-                <div class="flex">
+                <div class="flex" v-if="categories.id == 1">
+                    <div class="w-1/2 mr-2">
+                        <InputLabel for="type_id" value="Tipo de tinta" />
+                        <v-select :options="types" :reduce="types => types.id" label="name" class="w-full">
+                            <template v-slot:no-options="{ search, searching }">
+                                <template v-if="searching">
+                                    No se ha encontrado resultados para <em>{{ search }}</em>.
+                                </template>
+                                <em v-else style="opacity: 0.5">Empieza a escribir para buscar un tipo</em>
+                            </template>
+                        </v-select>
+                    </div>
+                    <div class="w-1/2">
+                        <InputLabel for="color" value="Color" />
+                        <v-select v-model="store.form.color" :options="colors" label="name">
+                                <template v-slot:no-options="{ search, searching }">
+                                    <template v-if="searching">
+                                        No se ha encontrado resultados para <em>{{ search }}</em>.
+                                    </template>
+                                    <em v-else style="opacity: 0.5">Empieza a escribir para buscar un color</em>
+                                </template>
+                            </v-select>
+                    </div>
+                </div>
+                <div class="flex mt-3" v-else>
                     <div class="w-1/3 mr-2">
                         <InputLabel for="name" value="Orden de compra" />
                         <TextInput class="w-full" type="text" />
                     </div>
                     <div class="w-2/3">
                         <InputLabel for="provider_id" value="Proveedor" />
-                        <v-select :options="store.providers" :reduce="provider => provider.id" label="name">
+                        <v-select :options="providers" :reduce="providers => providers.id" label="name">
                             <template v-slot:no-options="{ search, searching }">
                                 <template v-if="searching">
                                     No se ha encontrado resultados para <em>{{ search }}</em>.
@@ -52,32 +88,32 @@ defineProps({
                         </v-select>
                     </div>
                 </div>
-               <div class="flex mt-3">
-                <div class="w-3/4 mr-2">
-                    <InputLabel for="material_id" value="Material" />
-                    <v-select :options="store.materials" :reduce="providers => providers.id" label="name">
-                        <template v-slot:no-options="{ search, searching }">
-                            <template v-if="searching">
-                                No se ha encontrado resultados para <em>{{ search }}</em>.
+                <div class="flex mt-3">
+                    <div class="w-3/4 mr-2">
+                        <InputLabel for="material_id" value="Material" />
+                        <v-select :options="materials" :reduce="materials => materials.id" label="name">
+                            <template v-slot:no-options="{ search, searching }">
+                                <template v-if="searching">
+                                    No se ha encontrado resultados para <em>{{ search }}</em>.
+                                </template>
+                                <em v-else style="opacity: 0.5">Empieza a escribir para buscar un material</em>
                             </template>
-                            <em v-else style="opacity: 0.5">Empieza a escribir para buscar un material</em>
-                        </template>
-                    </v-select>
+                        </v-select>
+                    </div>
+                    <div class="w-1/4">
+                        <InputLabel for="quantity" value="Cantidad" />
+                        <TextInput class="w-full" type="text" />
+                    </div>
                 </div>
-                <div class="w-1/4">
-                    <InputLabel for="quantity" value="Cantidad" />
-                    <TextInput class="w-full" type="text" />
-                </div>
-               </div>
                 <div class="flex w-full mt-3">
                     <div class="w-1/2 mr-2">
-                    <InputLabel for="" value="Archivo de orden de compra" />
-                    <Filepond @change="store.handleFile($event)" allow-multiple="false" max-files="1" />
-                </div>
-                <div class="w-1/2">
-                    <InputLabel for="" value="Factura" />
-                    <Filepond @change="store.handleFile($event)" allow-multiple="false" max-files="1" />
-                </div>
+                        <InputLabel for="" value="Archivo de orden de compra" />
+                        <Filepond @change="store.handleFile($event, 1)" allow-multiple="false" max-files="1" />
+                    </div>
+                    <div class="w-1/2">
+                        <InputLabel for="" value="Factura" />
+                        <Filepond @change="store.handleFile($event, 2)" allow-multiple="false" max-files="1" />
+                    </div>
                 </div>
                 <div>
                     <InputLabel for="description" value="Descripción" />

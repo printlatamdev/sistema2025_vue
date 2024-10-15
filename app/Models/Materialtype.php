@@ -10,7 +10,7 @@ class Materialtype extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'status', 'materialcategory_id', 'description',
+        'name', 'color', 'quantity', 'status', 'materialcategory_id', 'description',
     ];
 
     public function image()

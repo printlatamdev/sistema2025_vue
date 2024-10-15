@@ -82,7 +82,7 @@ defineProps({
                                         <template v-if="searching">
                                             No se ha encontrado resultados para <em>{{ search }}</em>.
                                         </template>
-                                        <em v-else style="opacity: 0.5">Empieza a escribir para buscar un color</em>
+                                        <em v-else style="opacity: 0.5">Empieza a escribir para buscar una marca</em>
                                     </template>
                                 </v-select>
                                 <AddButton v-tooltip="'Agregar nueva marca'" class=""
@@ -94,7 +94,7 @@ defineProps({
                         </div>
                         <div class="w-1/4 mr-2">
                             <InputLabel for="color" value="Color" />
-                            <v-select v-model="store.form.category" :options="colors" label="name">
+                            <v-select v-model="store.form.color" :options="colors" label="name">
                                 <template v-slot:no-options="{ search, searching }">
                                     <template v-if="searching">
                                         No se ha encontrado resultados para <em>{{ search }}</em>.
@@ -104,18 +104,7 @@ defineProps({
                             </v-select>
                         </div>
                     </div>
-                    <!-- <ul class="flex mt-10 text-sm font-medium text-center rounded-lg border">
-                        <li class="w-full inline-block p-3 text-gray-900 border-r border-gray-200 cursor-pointer"
-                            :class="{ 'bg-sky-200 text-gray-900': store.isForm == 1 }" @click="store.isForm = 1">
-                            Registro para materiales
-                        </li>
-                        <li class="inline-block w-full p-3 bg-white border-r border-gray-200 cursor-pointer"
-                            @click="store.isForm = 2" :class="{ 'bg-sky-200 text-gray-900': store.isForm == 2 }">
-                            Registro para tintas
-                        </li>
-                    </ul>-->
                     <!--inks-->
-                    <!--materials-->
                     <div class="mt-7 bg-gray-100 border rounded-t-xl">
                         <div class="flex items-center cursor-pointer justify-between w-full p-3 font-medium text-gray-700  hover:bg-gray-100"
                             @click="store.showForm(store.isForm)">

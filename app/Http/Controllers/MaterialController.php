@@ -8,10 +8,12 @@ use App\Http\Resources\BrandResource;
 use App\Http\Resources\MaterialcategoryResource;
 use App\Http\Resources\MaterialResource;
 use App\Http\Resources\MaterialtypeResource;
+use App\Http\Resources\ProviderResource;
 use App\Models\Brand;
 use App\Models\Material;
 use App\Models\Materialcategory;
 use App\Models\Materialtype;
+use App\Models\Provider;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -113,6 +115,7 @@ class MaterialController extends Controller
             'categories' => MaterialcategoryResource::make($cat),
             'brands' => BrandResource::collection(Brand::get()),
             'colors' => ColorsEnum::cases(),
+            'providers' => ProviderResource::collection(Provider::get()),
         ]);
     }
 

@@ -17,6 +17,8 @@ return new class extends Migration
                 $table->string('name');
                 $table->foreignId('materialcategory_id')->constrained();
                 $table->integer('status')->default(1);
+                $table->string('color')->nullable();
+                $table->integer('quantity')->nullable();
                 $table->text('description')->nullable();
                 $table->timestamps();
             });

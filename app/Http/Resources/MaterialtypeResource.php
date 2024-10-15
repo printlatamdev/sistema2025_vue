@@ -18,7 +18,9 @@ class MaterialtypeResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'color' => $this->color,
             'status' => $this->status,
+            'quantity' => $this->quantity,
             'category' => new MaterialcategoryResource($this->materialcategory),
             'description' => $this->description,
             'register_date' => Carbon::parse($this->created_at)->format('Y-m-d'),

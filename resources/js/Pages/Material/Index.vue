@@ -63,26 +63,29 @@ onMounted(() => {
             <!--cards-->
             <div v-if="store.activeTab == 0" class="w-full mt-7">
                 <div class="mt-12 grid grid-cols-2 xl:grid-cols-6 md:grid-cols-3 gap-3">
-                    <div class="border rounded-lg text-center p-3 bg-blue-50 cursor-pointer"
+                    <div class="border text-center p-3 bg-blue-50 cursor-pointer rounded-lg transform hover:scale-105 transition duration-500"
                         @click.prevent="store.showTypeModal()">
                         <span class="py-1 px-2 rounded-full">
                             <font-awesome-icon :icon="['fas', 'plus']" class="text-2xl text-gray-700" />
                         </span>
                         <p class="mt-1">Nuevo tipo de material</p>
                     </div>
-                    <div class="border rounded-lg text-center p-3 bg-blue-50 cursor-pointer" @click.prevent="store.showTypeModal()">
+                    <div class="border text-center p-3 bg-blue-50 cursor-pointer rounded-lg transform hover:scale-105 transition duration-500"
+                        @click.prevent="store.showModalStock()">
                         <span class="py-1 px-2 rounded-full">
                             <font-awesome-icon :icon="['fas', 'folder-plus']" class="text-2xl text-gray-700" />
                         </span>
                         <p class="mt-1">Ingreso de material</p>
                     </div>
-                    <div class="border rounded-lg text-center p-3 bg-sky-50 cursor-pointer">
+                    <div
+                        class="border text-center p-3 bg-sky-50 cursor-pointer rounded-lg transform hover:scale-105 transition duration-500">
                         <span class="py-1 px-2 rounded-full">
                             <font-awesome-icon :icon="['fas', 'arrow-down']" class="text-2xl text-gray-700" />
                         </span>
                         <p class="mt-1">Descarga de material</p>
                     </div>
-                    <div class="border rounded-lg text-center p-3 bg-purple-50 cursor-pointer">
+                    <div
+                        class="border text-center p-3 bg-purple-50 cursor-pointer rounded-lg transform hover:scale-105 transition duration-500">
                         <span class="py-1 px-2 rounded-full">
                             <font-awesome-icon :icon="['fas', 'hourglass-end']" class="text-2xl text-gray-700" />
                         </span>
@@ -115,6 +118,7 @@ onMounted(() => {
         <ModalStoreUpdateMaterial :show="store.openModal" :type="store.type" :brands="brands" :categories="categories"
             :colors="colors" />
         <ModalStoreType :show="store.openTypeModal" :categories="categories" />
-        <ModalEntryMaterial :show="store.openTypeModal" :providers="providers" />
+        <ModalEntryMaterial :show="store.openStockModal" :providers="providers" :categories="categories"
+            :materials="materials" :types="types" :colors="colors" />
     </AppLayout>
 </template>

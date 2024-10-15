@@ -56,6 +56,11 @@ class Material extends Model
         return $this->belongsToMany(Purchaseorder::class, 'material_purchaseorder')->withPivot('price', 'quantity', 'subtotal', 'details')->orderByPivot('id', 'desc');
     }
 
+    public function files()
+    {
+        return $this->morphedByMany(File::class, 'fileable');
+    }
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
