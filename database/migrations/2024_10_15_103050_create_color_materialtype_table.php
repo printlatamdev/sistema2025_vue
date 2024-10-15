@@ -15,7 +15,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('color_id')->constrained();
             $table->foreignId('materialtype_id')->constrained();
-            $table->integer('quantity');
+            $table->string('code');
+            $table->string('status')->nullable();
+            $table->date('entry_date')->nullable();
+            $table->date('departure_date')->nullable();
+            $table->date('use_date')->nullable();
+            $table->date('expiration_date')->nullable();
             $table->timestamps();
         });
     }

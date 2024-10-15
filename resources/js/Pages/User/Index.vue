@@ -21,7 +21,6 @@ defineProps({
 });
 
 </script>
-
 <template>
     <AppLayout title="Usuarios">
         <div class="w-full">

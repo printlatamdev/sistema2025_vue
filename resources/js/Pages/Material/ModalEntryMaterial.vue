@@ -106,9 +106,6 @@ defineProps({
                         <InputLabel for="quantity" value="Cantidad" />
                         <TextInput class="w-full" type="text" />
                     </div>
-                    <div class="flex justify-end items-center mx-3">
-                        Cantidad actual de tintas: 
-                    </div>
                 </div>
                 <div class="flex w-full mt-3">
                     <div class="w-1/2 mr-2">

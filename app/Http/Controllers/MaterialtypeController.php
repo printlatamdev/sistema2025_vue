@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreMaterialTypeRequest;
 use App\Http\Resources\MaterialtypeResource;
 use App\Models\Materialtype;
+use Illuminate\Http\Request;
 
 class MaterialtypeController extends Controller
 {
@@ -32,5 +33,9 @@ class MaterialtypeController extends Controller
         $data = Materialtype::find($id);
 
         return MaterialtypeResource::make($data);
+    }
+
+    public function storeInColorMaterialtype(Request $request){
+        
     }
 }

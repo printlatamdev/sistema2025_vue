@@ -26,12 +26,6 @@ return new class extends Migration
                 $table->string('size')->nullable();
                 $table->string('gum')->nullable();
                 $table->string('print')->nullable();
-                $table->string('status')->nullable();
-                $table->string('code')->nullable();
-                $table->date('entry_date')->nullable();
-                $table->date('departure_date')->nullable();
-                $table->date('use_date')->nullable();
-                $table->date('expiration_date')->nullable();
                 $table->foreignId('color_id')->nullable()->constrained();
                 $table->foreignId('brand_id')->nullable()->constrained();
                 //$table->foreignId('materialcategory_id')->constrained();

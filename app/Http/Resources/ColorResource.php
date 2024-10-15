@@ -19,6 +19,9 @@ class ColorResource extends JsonResource
             'name' => $this->name,
             'hex' => $this->hex,
             'description' => $this->description,
+            'quantity' => $this->whenPivotLoaded('color_materialtype', function () {
+                return $this->quantity;
+            }),
         ];
     }
 }

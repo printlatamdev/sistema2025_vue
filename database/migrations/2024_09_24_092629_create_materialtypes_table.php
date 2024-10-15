@@ -18,7 +18,6 @@ return new class extends Migration
                 $table->foreignId('materialcategory_id')->constrained();
                 $table->integer('status')->default(1);
                 $table->foreignId('color_id')->nullable()->constrained();
-                $table->integer('quantity')->nullable();
                 $table->text('description')->nullable();
                 $table->timestamps();
             });

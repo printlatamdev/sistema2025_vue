@@ -31,7 +31,7 @@ defineProps({
 <template>
     <DialogModal :show="show" @close="store.closeModal" :max-width="maxWidth">
         <template #title>
-            Nuevo registro de  {{store.isMessage }}
+            Nuevo registro de {{ store.isMessage }}
         </template>
         <template #content>
             <div class="">
@@ -47,33 +47,33 @@ defineProps({
                         <InputError class="" :message="store.form.errors.email" />
                     </div>
                     <div class="flex">
-                    <div class="w-1/2 mt-3 mr-2">
-                        <InputLabel for="roles" value="Roles" />
-                        <v-select v-model="store.form.roles" :reduce="roles => roles['id']"
-                            :options="roles" label="name" multiple>
-                            <template v-slot:no-options="{ search, searching }">
-                                <template v-if="searching">
-                                    No se ha encontrado resultados para <em>{{ search }}</em>.
+                        <div class="w-1/2 mt-3 mr-2">
+                            <InputLabel for="roles" value="Roles" />
+                            <v-select v-model="store.form.roles" :reduce="roles => roles['id']" :options="roles"
+                                label="name" multiple>
+                                <template v-slot:no-options="{ search, searching }">
+                                    <template v-if="searching">
+                                        No se ha encontrado resultados para <em>{{ search }}</em>.
+                                    </template>
+                                    <em v-else style="opacity: 0.5">Empieza a escribir para buscar los roles</em>
                                 </template>
-                                <em v-else style="opacity: 0.5">Empieza a escribir para buscar los roles</em>
-                            </template>
-                        </v-select>
-                        <InputError class="" :message="store.form.errors.roles" />
-                    </div>
-                    <div class="w-1/2 mt-3">
-                        <InputLabel for="countries" value="País" />
-                        <v-select v-model="store.form.countries" :reduce="countries => countries['id']"
-                            :options="countries" label="name" multiple>
-                            <template v-slot:no-options="{ search, searching }">
-                                <template v-if="searching">
-                                    No se ha encontrado resultados para <em>{{ search }}</em>.
+                            </v-select>
+                            <InputError class="" :message="store.form.errors.roles" />
+                        </div>
+                        <div class="w-1/2 mt-3">
+                            <InputLabel for="countries" value="País" />
+                            <v-select v-model="store.form.countries" :reduce="countries => countries['id']"
+                                :options="countries" label="name" multiple>
+                                <template v-slot:no-options="{ search, searching }">
+                                    <template v-if="searching">
+                                        No se ha encontrado resultados para <em>{{ search }}</em>.
+                                    </template>
+                                    <em v-else style="opacity: 0.5">Empieza a escribir para buscar los paises</em>
                                 </template>
-                                <em v-else style="opacity: 0.5">Empieza a escribir para buscar los paises</em>
-                            </template>
-                        </v-select>
-                        <InputError class="" :message="store.form.errors.roles" />
+                            </v-select>
+                            <InputError class="" :message="store.form.errors.roles" />
+                        </div>
                     </div>
-                </div>
                     <div class="w-full mt-3">
                         <InputLabel for="password" value="Contraseña" />
                         <TextInput v-model="store.form.password" class="w-full" type="password" />
@@ -81,7 +81,8 @@ defineProps({
                     </div>
                     <div class="flex justify-end mt-3">
                         <PrimaryButton @click.prevent="store.storeUser()" :disabled="store.filledInputs">
-                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar {{store.isMessage }}
+                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar {{ store.isMessage
+                            }}
                         </PrimaryButton>
                     </div>
                 </form>
