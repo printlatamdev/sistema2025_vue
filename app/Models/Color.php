@@ -10,15 +10,16 @@ class Color extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'hex', 'description'
+        'name', 'hex', 'description',
     ];
-    
 
-    public function materialtypes(){
-        return $this->belongsToMany(Materialtype::class)->withTimestamps();
+    public function materialtypes()
+    {
+        return $this->belongsToMany(Materialtype::class)->withPivot('quantity')->withTimestamps();
     }
 
-    public function material(){
+    public function material()
+    {
         return $this->hasOne(Material::class);
     }
 }

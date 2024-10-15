@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\ColorsEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\LogOptions;
@@ -21,7 +20,6 @@ class Material extends Model
         'thickness',
         'width',
         'lenght',
-        'color_id',
         'finish',
         'density',
         'size',
@@ -33,12 +31,9 @@ class Material extends Model
         'departure_date',
         'use_date',
         'expiration_date',
+        'color_id',
         'brand_id',
         'materialtype_id',
-    ];
-
-    protected $cast = [
-        'color' => ColorsEnum::class,
     ];
 
     public function materialtype()
@@ -61,7 +56,8 @@ class Material extends Model
         return $this->morphedByMany(File::class, 'fileable');
     }
 
-    public function color(){
+    public function color()
+    {
         return $this->belongsTo(Color::class);
     }
 
