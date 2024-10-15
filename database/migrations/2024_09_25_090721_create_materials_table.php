@@ -21,7 +21,6 @@ return new class extends Migration
                 $table->string('thickness')->nullable();
                 $table->float('width')->nullable();
                 $table->float('lenght')->nullable();
-                $table->string('color')->nullable();
                 $table->string('finish')->nullable();
                 $table->float('density')->nullable();
                 $table->string('size')->nullable();
@@ -33,6 +32,7 @@ return new class extends Migration
                 $table->date('departure_date')->nullable();
                 $table->date('use_date')->nullable();
                 $table->date('expiration_date')->nullable();
+                $table->foreignId('color_id')->nullable()->constrained();
                 $table->foreignId('brand_id')->nullable()->constrained();
                 //$table->foreignId('materialcategory_id')->constrained();
                 $table->foreignId('materialtype_id')->constrained();

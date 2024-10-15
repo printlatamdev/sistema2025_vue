@@ -21,7 +21,7 @@ class Material extends Model
         'thickness',
         'width',
         'lenght',
-        'color',
+        'color_id',
         'finish',
         'density',
         'size',
@@ -59,6 +59,10 @@ class Material extends Model
     public function files()
     {
         return $this->morphedByMany(File::class, 'fileable');
+    }
+
+    public function color(){
+        return $this->belongsTo(Color::class);
     }
 
     public function getActivitylogOptions(): LogOptions
