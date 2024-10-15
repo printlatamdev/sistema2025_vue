@@ -21,6 +21,8 @@ class MaterialtypeController extends Controller
     {
         Materialtype::create([
             'name' => $request->name,
+            'code' => $request->code,
+            'measure' => $request->measure,
             'status' => 1,
             'materialcategory_id' => $request->materialcategory_id,
             'description' => $request->description,

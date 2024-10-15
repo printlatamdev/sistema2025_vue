@@ -53,8 +53,21 @@ export const useMaterialStore = defineStore("material", {
             error: "",
             processing: false,
         }),
+        formInk: useForm({
+            material_type_id: '',
+            color_id: '',
+            quantity: '',
+            code: '',
+            departure_date: '',
+            use_date: '',
+            expiration_date: '',
+            error: "",
+            processing: false,
+        }),
         formType: useForm({
             name: "",
+            code: "",
+            measure: "",
             materialcategory_id: "",
             description: "",
             error: "",
@@ -70,6 +83,9 @@ export const useMaterialStore = defineStore("material", {
         filledInputCat(state) {
             return state.formCat.name == "" || state.formCat.image == "";
         },
+        createInks(state){
+          
+        }
     },
     actions: {
         storeMaterial(type, cat_id) {
@@ -145,6 +161,9 @@ export const useMaterialStore = defineStore("material", {
                     this.alert.successAlert(this.isTypeMessage + " agregado");
                 },
             });
+        },
+        storePivotInk(){
+
         },
         handleFile(e) {
             const image = e.target.files[0];

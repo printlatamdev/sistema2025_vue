@@ -15,9 +15,10 @@ return new class extends Migration
             Schema::create('materialtypes', function (Blueprint $table) {
                 $table->id();
                 $table->string('name');
+                $table->string('code')->nullable();
+                $table->string('measure')->nullable();
                 $table->foreignId('materialcategory_id')->constrained();
                 $table->integer('status')->default(1);
-                $table->foreignId('color_id')->nullable()->constrained();
                 $table->text('description')->nullable();
                 $table->timestamps();
             });

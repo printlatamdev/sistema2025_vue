@@ -17,6 +17,7 @@ class MaterialcategoryResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'code' => $this->code,
             'name' => $this->name,
             'status' => $this->status,
             'image' => ImageResource::collection($this->image),

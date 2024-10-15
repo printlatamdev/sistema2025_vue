@@ -49,10 +49,11 @@ defineProps({
         </template>
         <template #content>
             <form action="">
+                {{ store.formInk }}
                 <div class="flex" v-if="categories.id == 1">
                     <div class="w-1/2 mr-2">
                         <InputLabel for="type_id" value="Tipo de tinta" />
-                        <v-select :options="types" :reduce="types => types.id" label="name" class="w-full">
+                        <v-select v-model="store.formInk.types" :options="types" :reduce="types => types.id" label="name" class="w-full">
                             <template v-slot:no-options="{ search, searching }">
                                 <template v-if="searching">
                                     No se ha encontrado resultados para <em>{{ search }}</em>.
@@ -63,7 +64,7 @@ defineProps({
                     </div>
                     <div class="w-1/2">
                         <InputLabel for="color" value="Color" />
-                        <v-select v-model="store.form.color" :options="colors" label="name">
+                        <v-select v-model="store.formInk.colors" :options="colors" :reduce="colors => colors.id"  label="name">
                             <template v-slot:no-options="{ search, searching }">
                                 <template v-if="searching">
                                     No se ha encontrado resultados para <em>{{ search }}</em>.
@@ -104,16 +105,18 @@ defineProps({
                     </div>
                     <div class="w-1/4">
                         <InputLabel for="quantity" value="Cantidad" />
-                        <TextInput class="w-full" type="text" />
+                        <TextInput v-model="store.formInk.quantity" class="w-full" type="text" />
                     </div>
                 </div>
                 <div class="flex w-full mt-3">
                     <div class="w-1/2 mr-2">
-                        <InputLabel for="" value="Archivo de orden de compra" />
+                        <InputLabel for="" value="Comprobante 1"  v-if="categories.id==1" />
+                        <InputLabel for="" value="Archivo de orden de compra" v-else />
                         <Filepond @change="store.handleFile($event, 1)" allow-multiple="false" max-files="1" />
                     </div>
                     <div class="w-1/2">
-                        <InputLabel for="" value="Factura" />
+                        <InputLabel for="" value="Comprobante 2"  v-if="categories.id==1" />
+                        <InputLabel for="" value="Factura" v-else />
                         <Filepond @change="store.handleFile($event, 2)" allow-multiple="false" max-files="1" />
                     </div>
                 </div>
