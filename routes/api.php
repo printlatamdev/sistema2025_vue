@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\PurchaseorderController;
+use App\Http\Controllers\MaterialtypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-//Route::get('/storepivot/{purchaseorder}', [PurchaseorderController::class, 'getPurchaseorderPivot']);
+Route::get('/test', [MaterialtypeController::class, 'storeInColorMaterialtype']);
 
 Route::get('/user', function (Request $request) {
     return $request->user();

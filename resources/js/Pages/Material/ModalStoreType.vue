@@ -29,7 +29,6 @@ defineProps({
             Nuevo registro de {{ store.isTypeMessage }}
         </template>
         <template #content>
-            {{ categories }}
             <form action="">
                 <div class="flex">
                     <div class="w-full mr-2">

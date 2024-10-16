@@ -49,11 +49,10 @@ defineProps({
         </template>
         <template #content>
             <form action="">
-                {{ store.formInk }}
                 <div class="flex" v-if="categories.id == 1">
                     <div class="w-1/2 mr-2">
                         <InputLabel for="type_id" value="Tipo de tinta" />
-                        <v-select v-model="store.formInk.types" :options="types" :reduce="types => types.id" label="name" class="w-full">
+                        <v-select v-model="store.formInk.type_id" :options="types" :reduce="types => types.id" label="name" class="w-full">
                             <template v-slot:no-options="{ search, searching }">
                                 <template v-if="searching">
                                     No se ha encontrado resultados para <em>{{ search }}</em>.
@@ -64,7 +63,7 @@ defineProps({
                     </div>
                     <div class="w-1/2">
                         <InputLabel for="color" value="Color" />
-                        <v-select v-model="store.formInk.colors" :options="colors" :reduce="colors => colors.id"  label="name">
+                        <v-select v-model="store.formInk.color_id" :options="colors" :reduce="colors => colors.id"  label="name">
                             <template v-slot:no-options="{ search, searching }">
                                 <template v-if="searching">
                                     No se ha encontrado resultados para <em>{{ search }}</em>.
@@ -93,7 +92,7 @@ defineProps({
                 </div>
                 <div class="flex mt-3">
                     <div class="w-3/4 mr-2" v-if="categories.id != 1">
-                        <InputLabel for="material_id" value="Material" />
+                        <InputLabel v-model="store.formInk.material_id" for="material_id" value="Material" />
                         <v-select :options="materials" :reduce="materials => materials.id" label="name">
                             <template v-slot:no-options="{ search, searching }">
                                 <template v-if="searching">

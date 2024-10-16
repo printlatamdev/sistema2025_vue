@@ -6,6 +6,7 @@ import ModalStoreUpdateMaterial from './ModalStoreUpdateMaterial.vue';
 import ModalStoreType from './ModalStoreType.vue';
 import ModalEntryMaterial from './ModalEntryMaterial.vue';
 import { useMaterialStore } from '@/Store/material';
+import ModalDownloadMaterial from './ModalDownloadMaterial.vue';
 
 let store = useMaterialStore();
 defineProps({
@@ -78,6 +79,7 @@ onMounted(() => {
                         <p class="mt-1">Ingreso de material</p>
                     </div>
                     <div
+                        @click.prevent="store.showModalDown()"
                         class="border text-center p-3 bg-sky-50 cursor-pointer rounded-lg transform hover:scale-105 transition duration-500">
                         <span class="py-1 px-2 rounded-full">
                             <font-awesome-icon :icon="['fas', 'arrow-down']" class="text-2xl text-gray-700" />
@@ -120,5 +122,6 @@ onMounted(() => {
         <ModalStoreType :show="store.openTypeModal" :categories="categories" />
         <ModalEntryMaterial :show="store.openStockModal" :providers="providers" :categories="categories"
             :materials="materials" :types="types" :colors="colors" />
+        <ModalDownloadMaterial :show="store.openDownModal" :categories="categories" />
     </AppLayout>
 </template>

@@ -19,6 +19,7 @@ export const useMaterialStore = defineStore("material", {
         openTypeModal: false,
         openStockModal: false,
         openDeleteModal: false,
+        openDownModal: false,
         edit: [],
         errors: [],
         form: useForm({
@@ -54,8 +55,8 @@ export const useMaterialStore = defineStore("material", {
             processing: false,
         }),
         formInk: useForm({
-            material_type_id: '',
             color_id: '',
+            type_id: '',
             quantity: '',
             code: '',
             departure_date: '',
@@ -70,6 +71,12 @@ export const useMaterialStore = defineStore("material", {
             measure: "",
             materialcategory_id: "",
             description: "",
+            error: "",
+            processing: false,
+        }),
+        formDown: useForm({
+            material_id: "",
+            quantity: "",
             error: "",
             processing: false,
         }),
@@ -183,6 +190,9 @@ export const useMaterialStore = defineStore("material", {
         showModalStock() {
             this.openStockModal = true;
         },
+        showModalDown() {
+            this.openDownModal = true;
+        },
         showCatModal() {
             this.openCatModal = true;
         },
@@ -196,6 +206,7 @@ export const useMaterialStore = defineStore("material", {
             this.openCatModal = false;
             this.openTypeModal = false;
             this.openStockModal = false;
+            this.openDownModal = false;
             this.clearInput();
         },
         editData(data) {
