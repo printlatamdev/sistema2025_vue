@@ -40,6 +40,7 @@ export const useUserStore = defineStore("user", {
             this.form.email = "";
             this.form.password = "";
             this.form.roles = [];
+            this.form.countries = [];
         },
         showStoreModal() {
             this.openModal = true;

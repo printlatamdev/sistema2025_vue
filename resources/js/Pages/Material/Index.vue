@@ -34,6 +34,18 @@ defineProps({
         type: Array,
         default: ([]),
     },
+    orderTypes: {
+        type: Array,
+        default: ([]),
+    },
+    localCompanies: {
+        type: Array,
+        default: ([]),
+    },
+    purchaseorders: {
+        type: Object,
+        default: ([]),
+    },
 });
 onMounted(() => {
     store.resetToZero();
@@ -122,6 +134,6 @@ onMounted(() => {
         <ModalStoreType :show="store.openTypeModal" :categories="categories" />
         <ModalEntryMaterial :show="store.openStockModal" :providers="providers" :categories="categories"
             :materials="materials" :types="types" :colors="colors" />
-        <ModalDownloadMaterial :show="store.openDownModal" :categories="categories" />
+        <ModalDownloadMaterial :show="store.openDownModal" :categories="categories" :purchaseorders="purchaseorders" :orderTypes="orderTypes" :localCompanies="localCompanies" />
     </AppLayout>
 </template>

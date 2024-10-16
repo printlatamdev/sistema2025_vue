@@ -76,7 +76,10 @@ export const useMaterialStore = defineStore("material", {
         }),
         formDown: useForm({
             material_id: "",
+            purchaseorder_id: "",
             quantity: "",
+            ordertype: "",
+            description: "",
             error: "",
             processing: false,
         }),

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CompanyEnum;
+use App\Enums\OrderEnum;
 use App\Http\Requests\StoreMaterialRequest;
 use App\Http\Resources\BrandResource;
 use App\Http\Resources\ColorResource;
@@ -9,12 +11,14 @@ use App\Http\Resources\MaterialcategoryResource;
 use App\Http\Resources\MaterialResource;
 use App\Http\Resources\MaterialtypeResource;
 use App\Http\Resources\ProviderResource;
+use App\Http\Resources\PurchaseorderResource;
 use App\Models\Brand;
 use App\Models\Color;
 use App\Models\Material;
 use App\Models\Materialcategory;
 use App\Models\Materialtype;
 use App\Models\Provider;
+use App\Models\Purchaseorder;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -110,6 +114,9 @@ class MaterialController extends Controller
             'brands' => BrandResource::collection(Brand::get()),
             'colors' => ColorResource::collection(Color::get()),
             'providers' => ProviderResource::collection(Provider::get()),
+            'purchaseorders' => PurchaseorderResource::collection(Purchaseorder::get()),
+            'orderTypes' => OrderEnum::cases(),
+            'localCompanies' => CompanyEnum::cases()
         ]);
     }
 
