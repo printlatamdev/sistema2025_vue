@@ -46,7 +46,7 @@ defineProps({
                         <h4 class="text-sm">{{ item.email }}</h4>
                         <br>
                         <span v-for="rol in item.roles" :key="rol.id" class="w-auto mx-auto rounded-lg p-1 text-sm ml-1"
-                            v-tooltip="'Rol de ' + `${item.name}`" :class="{
+                            v-tooltip.bottom="'Rol asignado a ' + `${item.name}`" :class="{
                                 'bg-green-100': rol.id == 1,
                                 'bg-blue-100': rol.id == 2,
                                 'bg-purple-100': rol.id == 3,

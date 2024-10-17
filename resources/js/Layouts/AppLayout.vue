@@ -38,7 +38,8 @@ const logout = () => {
             <!-- Page Content -->
             <main>
                 <div class="w-full flex">
-                    <div class="bg-gray-900 w-1/6 px-1 text-sm h-screen sticky top-0 hidden lg:block md:block transition-transform -translate-x-full sm:translate-x-0">
+                    <div
+                        class="bg-gray-900 w-1/6 px-1 text-sm h-screen sticky top-0 hidden lg:block md:block transition-transform -translate-x-full sm:translate-x-0">
                         <Sidebar />
                     </div>
                     <div class="bg-white overflow-hidden w-full lg:w-5/6">
@@ -120,14 +121,27 @@ const logout = () => {
                                                 </template>
                                             </Dropdown>
                                         </div>
-                                        <div v-tooltip="'No se han encontrado notificaciones'" class="cursor-pointer">
-                                            <font-awesome-icon :icon="['fas', 'bell']" size="lg" fade class="text-gray-500 hover:text-gray-600" />
+                                        <div class="w-32 flex justify-between bg-gray-50 p-2 rounded-md mr-3">
+                                            <div v-tooltip="'No se han encontrado notificaciones'"
+                                                class="cursor-pointer">
+                                                <font-awesome-icon :icon="['fas', 'bell']" size="lg"
+                                                    class="text-gray-500 hover:text-gray-600" />
+                                            </div>
+                                            <div v-tooltip="'Preguntas frecuentes'" class="cursor-pointer">
+                                                <font-awesome-icon :icon="['fas', 'circle-question']" size="lg"
+                                                    class="text-gray-500 hover:text-gray-600" />
+                                            </div>
+                                            <div v-tooltip="'Configuración de sistema'" class="cursor-pointer">
+                                                <font-awesome-icon :icon="['fas', 'gear']" size="lg"
+                                                    class="text-gray-500 hover:text-gray-600" />
+                                            </div>
                                         </div>
                                         <!-- Settings Dropdown -->
                                         <div class="ms-3 relative ">
                                             <Dropdown align="right" width="48">
                                                 <template #trigger>
-                                                    <div v-if="$page.props.jetstream.managesProfilePhotos" class="flex cursor-pointer items-center border rounded-2xl mx-1">
+                                                    <div v-if="$page.props.jetstream.managesProfilePhotos"
+                                                        class="flex cursor-pointer items-center border rounded-2xl mx-1">
                                                         <button
                                                             class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
                                                             <img class="h-8 w-8 rounded-full object-cover"
@@ -135,7 +149,8 @@ const logout = () => {
                                                                 :alt="$page.props.auth.user.name">
                                                         </button>
                                                         <div>
-                                                            <span class="text-sm mx-1">{{ $page.props.auth.user.name }}</span>
+                                                            <span class="text-sm mx-1">{{ $page.props.auth.user.name
+                                                                }}</span>
                                                         </div>
                                                     </div>
 
@@ -162,7 +177,8 @@ const logout = () => {
                                                     </div>
 
                                                     <DropdownLink :href="route('profile.show')">
-                                                        <font-awesome-icon :icon="['fas', 'circle-user']" class="text-gray-600" /> Mi Perfil
+                                                        <font-awesome-icon :icon="['fas', 'circle-user']"
+                                                            class="text-gray-600" /> Mi Perfil
                                                     </DropdownLink>
 
                                                     <DropdownLink v-if="$page.props.jetstream.hasApiFeatures"
@@ -175,7 +191,8 @@ const logout = () => {
                                                     <!-- Authentication -->
                                                     <form @submit.prevent="logout">
                                                         <DropdownLink as="button">
-                                                            <font-awesome-icon :icon="['fas', 'power-off']" /> Cerrar sesión
+                                                            <font-awesome-icon :icon="['fas', 'power-off']" /> Cerrar
+                                                            sesión
                                                         </DropdownLink>
                                                     </form>
                                                 </template>
@@ -188,22 +205,23 @@ const logout = () => {
                                         <div class="">
                                             <ApplicationLogo />
                                         </div>
-                                       <div class="">
-                                        <button
-                                            class="justify-center rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
-                                            @click="showingNavigationDropdown = !showingNavigationDropdown">
-                                            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                                <path
-                                                    :class="{ 'hidden': showingNavigationDropdown, 'inline-flex': !showingNavigationDropdown }"
-                                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M4 6h16M4 12h16M4 18h16" />
-                                                <path
-                                                    :class="{ 'hidden': !showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }"
-                                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M6 18L18 6M6 6l12 12" />
-                                            </svg>
-                                        </button>
-                                       </div>
+                                        <div class="">
+                                            <button
+                                                class="justify-center rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
+                                                @click="showingNavigationDropdown = !showingNavigationDropdown">
+                                                <svg class="h-6 w-6" stroke="currentColor" fill="none"
+                                                    viewBox="0 0 24 24">
+                                                    <path
+                                                        :class="{ 'hidden': showingNavigationDropdown, 'inline-flex': !showingNavigationDropdown }"
+                                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M4 6h16M4 12h16M4 18h16" />
+                                                    <path
+                                                        :class="{ 'hidden': !showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }"
+                                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -228,7 +246,8 @@ const logout = () => {
                                                 {{ $page.props.auth.user.email }}
                                             </div>
                                         </div>
-                                    </div><hr>
+                                    </div>
+                                    <hr>
                                     <div class="mt-3 space-y-1">
                                         <MobileItems />
                                         <!-- Authentication -->

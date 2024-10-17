@@ -78,6 +78,7 @@ class QuoteController extends Controller
 
     public function storeInPivot(PivotProductQuoteRequest $request)
     {
+        //store image
         $name = time().'.'.$request->image->extension();
         $urlImage = $request->image->storeAs('images', $name);
 

@@ -36,7 +36,7 @@ const close = () => {
                 <div class="text-lg font-medium text-gray-900">
                     <slot name="title" />
                 </div>
-                <div class="cursor-pointer" @click="close">
+                <div class="cursor-pointer" @click="close" v-tooltip="'Cerrar ventana'">
                     <font-awesome-icon :icon="['fas', 'rectangle-xmark']" class="text-xl text-gray-600"/>
                 </div>
            </div>
@@ -52,3 +52,8 @@ const close = () => {
         </div>-->
     </Modal>
 </template>
+<!--<style scoped>
+    .v-popper__popper--no-positioning {
+        z-index: 9999;
+    }
+</style>-->

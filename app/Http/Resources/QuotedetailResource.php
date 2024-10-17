@@ -19,7 +19,7 @@ class QuotedetailResource extends JsonResource
             'id' => $this->id,
             'quote' => new QuoteResource($this->quote),
             'total_products' => number_format($this->total_products, 2),
-            'iva' => number_format($this->pivot->iva, 2),
+            'iva' => number_format($this->iva, 2),
             'total' => number_format($this->total, 2),
             'register_date' => Carbon::parse($this->created_at)->format('Y-m-d'),
         ];

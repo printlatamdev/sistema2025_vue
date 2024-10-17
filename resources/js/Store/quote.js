@@ -159,7 +159,8 @@ export const useQuoteStore = defineStore("quote", {
     actions: {
         storeQuote(id) {
             if (!id) {
-                axios.post(route("store.quotations"), {
+                axios
+                    .post(route("store.quotations"), {
                         important_note: this.form.important_note,
                         payment_condition: this.form.payment_condition,
                         offer_validity: this.form.offer_validity,

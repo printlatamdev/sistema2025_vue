@@ -130,11 +130,11 @@ defineProps({
 
                         <div class="flex justify-end mt-7">
                             <SuccessButton class="mr-1" @click="">
-                                <font-awesome-icon :icon="['fas', 'file-pdf']" /> Generar orden
+                                <font-awesome-icon :icon="['fas', 'file-pdf']" /> Generar reporte de orden
                             </SuccessButton>
-                            <SecondaryButton class="mr-1" @click="">
+                            <!--<SecondaryButton class="mr-1" @click="">
                                 <font-awesome-icon :icon="['fas', 'file-pdf']" /> Generar orden sin IVA
-                            </SecondaryButton>
+                            </SecondaryButton>-->
                         </div>
                     </div>
                     <div class="bg-gray-50 rounded-lg ml-3 w-2/5 p-7">
