@@ -49,7 +49,7 @@ class MaterialtypeController extends Controller
         foreach ($type->colors as $item) {
             //$slice =  Str::contains($item->pivot->code, $type->code);
             $padded = Str::padLeft($num++, 3, '0');
-            $code = $type->code . $color->name[0] . $padded;
+            $code = $type->code.$color->name[0].$padded;
 
             $type->colors()->attach($request->color_id, [
                 'code' => $code,

@@ -116,7 +116,7 @@ class MaterialController extends Controller
             'providers' => ProviderResource::collection(Provider::get()),
             'purchaseorders' => PurchaseorderResource::collection(Purchaseorder::get()),
             'orderTypes' => OrderEnum::cases(),
-            'localCompanies' => CompanyEnum::cases()
+            'localCompanies' => CompanyEnum::cases(),
         ]);
     }
 

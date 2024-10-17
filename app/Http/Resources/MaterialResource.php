@@ -61,6 +61,7 @@ class MaterialResource extends JsonResource
                     return $this->pivot->details;
                 }),
             ],
+            'activity' => ActivitylogResource::collection($this->whenLoaded('activities')),
         ];
     }
 }
