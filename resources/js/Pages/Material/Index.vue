@@ -99,11 +99,20 @@ onMounted(() => {
                         <p class="mt-1">Descarga de material</p>
                     </div>
                     <div
+                        v-if="categories.id == 1"
                         class="border text-center p-3 bg-purple-50 cursor-pointer rounded-lg transform hover:scale-105 transition duration-500">
                         <span class="py-1 px-2 rounded-full">
                             <font-awesome-icon :icon="['fas', 'hourglass-end']" class="text-2xl text-gray-700" />
                         </span>
-                        <p class="mt-1">Finalizar material</p>
+                        <p class="mt-1">Finalizar tinta</p>
+                    </div>
+                    <div
+                        @click.prevent="store.showModalDown()"
+                        class="border text-center p-3 bg-teal-50 cursor-pointer rounded-lg transform hover:scale-105 transition duration-500">
+                        <span class="py-1 px-2 rounded-full">
+                            <font-awesome-icon :icon="['fas', 'scroll']" class="text-2xl text-gray-700" />
+                        </span>
+                        <p class="mt-1">Actividad</p>
                     </div>
                 </div>
             </div>

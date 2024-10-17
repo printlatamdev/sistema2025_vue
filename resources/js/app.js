@@ -20,8 +20,8 @@ import { CkeditorPlugin } from '@ckeditor/ckeditor5-vue';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faPenToSquare,faTrashCan,faAnglesRight,faAnglesLeft,faArrowLeft,faFilePdf,faPlus,faFloppyDisk,faHammer,faCircleUser,faPowerOff,faChartPie,faPaperclip,faBolt,faAddressBook,faBell,faBagShopping,faChevronDown,faChevronUp,faArrowDown,faHourglassEnd,faFolderPlus,faEnvelope,faGear,faRectangleXmark,faCircleCheck,faFileExcel} from '@fortawesome/free-solid-svg-icons'
-library.add(faPenToSquare,faTrashCan,faAnglesRight,faAnglesLeft,faArrowLeft,faFilePdf,faPlus,faFloppyDisk,faHammer,faCircleUser,faPowerOff,faChartPie,faPaperclip,faBolt,faAddressBook,faBell,faBagShopping,faChevronDown,faChevronUp,faArrowDown,faHourglassEnd,faFolderPlus,faEnvelope,faGear,faRectangleXmark,faCircleCheck,faFileExcel)
+import { faPenToSquare,faTrashCan,faAnglesRight,faAnglesLeft,faArrowLeft,faFilePdf,faPlus,faFloppyDisk,faHammer,faCircleUser,faPowerOff,faChartPie,faPaperclip,faBolt,faAddressBook,faBell,faBagShopping,faChevronDown,faChevronUp,faArrowDown,faHourglassEnd,faFolderPlus,faEnvelope,faGear,faRectangleXmark,faCircleCheck,faFileExcel,faScroll} from '@fortawesome/free-solid-svg-icons'
+library.add(faPenToSquare,faTrashCan,faAnglesRight,faAnglesLeft,faArrowLeft,faFilePdf,faPlus,faFloppyDisk,faHammer,faCircleUser,faPowerOff,faChartPie,faPaperclip,faBolt,faAddressBook,faBell,faBagShopping,faChevronDown,faChevronUp,faArrowDown,faHourglassEnd,faFolderPlus,faEnvelope,faGear,faRectangleXmark,faCircleCheck,faFileExcel,faScroll)
 
 
 

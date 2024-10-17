@@ -79,6 +79,7 @@ export const useMaterialStore = defineStore("material", {
             purchaseorder_id: "",
             quantity: "",
             ordertype: "",
+            company: "",
             description: "",
             error: "",
             processing: false,
@@ -173,6 +174,9 @@ export const useMaterialStore = defineStore("material", {
             });
         },
         storePivotInk(){
+
+        },
+        downloadMaterial(){
 
         },
         handleFile(e) {
