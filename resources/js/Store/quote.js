@@ -84,7 +84,7 @@ export const useQuoteStore = defineStore("quote", {
             { text: "Descripción", value: "details" },
             { text: "Precio", value: "price", width: 50 },
             { text: "Cantidad", value: "quantity", width: 50 },
-            { text: "Total", value: "total", width: 50 },
+            { text: "Subtotal", value: "subtotal", width: 50 },
         ],
         payment_condition: [
             { name: "Anticipo", value: "Anticipo" },
@@ -119,24 +119,8 @@ export const useQuoteStore = defineStore("quote", {
         getTotal(state) {
             return state.formQD.quantity * state.formQD.price;
         },
-        getParcialSubtotal(state) {
-            return state.getCalc.total_pr * state.formTotal.iva;
-        },
-        getTotalIva(state) {
-            let newIva = "";
-            if (state.formTotal.iva2 != "") {
-                newIva = state.formTotal.iva2;
-            } else {
-                newIva = state.formTotal.iva;
-            }
-            if (newIva == 0) {
-                return state.getCalc.total_pr;
-            } else {
-                return (
-                    state.getCalc.total_pr +
-                    state.getCalc.total_pr * (newIva * 100)
-                );
-            }
+        getIva(state) {
+            return state.quotedetail.total_products + state.quotedetail.total_products * (state.formTotal.iva * 100);           
         },
         filledInputs(state) {
             return (
@@ -175,7 +159,6 @@ export const useQuoteStore = defineStore("quote", {
                     .then((response) => {
                         this.edit = response.data;
                         this.alert.successAlert(this.isMessage + " agregado");
-                        this.showModalQD();
                     })
                     .catch((error) => {
                         this.myErrors = error.response.data.errors;
@@ -202,7 +185,6 @@ export const useQuoteStore = defineStore("quote", {
                 onSuccess: () => {
                     //this.closeModal();
                     this.refreshData(id);
-                    this.getQuoteDetail(id);
                     this.alert.successAlert(this.isMessage + " agregado");
                 },
                 onError: (error) => {
@@ -211,7 +193,7 @@ export const useQuoteStore = defineStore("quote", {
                 },
             });
         },
-        storeQuoteDetail(id) {
+        updateInQuoteDetail(id) {
             this.formTotal.quote_id = this.edit.id;
             this.formTotal.put(route("store.quotedetail", this.edit.id), {
                 onSuccess: () => {
@@ -312,6 +294,7 @@ export const useQuoteStore = defineStore("quote", {
         },
         showModalQD() {
             this.openModalQD = true;
+            this.getQuoteDetail(this.edit.id);
         },
         showDeleteModal(data) {
             this.edit = data;

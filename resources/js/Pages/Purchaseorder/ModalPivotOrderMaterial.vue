@@ -116,13 +116,13 @@ defineProps({
                             </template>
                         </EasyDataTable>
                         <div class="border py-1 px-2 border-y-0 flex justify-end">
-                            <div class="text-sm">
+                            <!--<div class="text-sm">
                                 <p><span class="font-semibold">Subtotal:</span> ${{
-                                    store.edit.order_details.total_materials }}</p>
+                                    store.edit.order_details.total_materials ?? '' }}</p>
                                 <p><span class="font-semibold">IVA:</span> ${{ store.edit.order_details.iva }}</p>
                                 <p><span class="font-semibold">Costo total:</span> ${{
                                     store.edit.order_details.total }}</p>
-                            </div>
+                            </div>-->
                         </div>
                         <div class="border text-xs p-1"><span class="font-semibold">*Nota: </span>No se podrán
                             ingresar

@@ -134,7 +134,6 @@ onMounted(() => {
                     </div>
                 </form>
                 <hr class="my-5">
-                {{ store.quotedetail }}
                 <!--Table products-->
                 <div class="w-full flex">
                     <div class="w-2/3 mr-3 mt-5">
@@ -164,19 +163,20 @@ onMounted(() => {
                                     <InputLabel for="iva" value="Asignar IVA" />
                                     <TextInput v-model="store.formTotal.iva2" class="w-full" type="text" />
                                 </div>
+                                iva{{ store.getIva }}
                                 <div class="border border-gray-300 bg-gray-50 mt-3 rounded-md p-5">
                                     <p><span class="font-semibold">Total parcial: </span>
                                         ${{ store.quotedetail.total_products }}
                                     </p>
                                     <p><span class="font-semibold">IVA:</span>
-                                        {{ store.quotedetail.iva }}</p>
+                                        {{ store.getIva }}</p>
                                     <hr>
                                     <p class="mt-2"><span class="font-semibold">Total final: </span>${{
                                         store.quotedetail.total }}</p>
                                 </div>
                             </div>
                             <div class="flex justify-end mt-10">
-                                <PrimaryButton @click.prevent="store.storeQuoteDetail()"
+                                <PrimaryButton @click.prevent="store.updateInQuoteDetail()"
                                     :disabled="store.filledInputsTotal">
                                     <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Finalizar
                                     {{ store.isMessage }}

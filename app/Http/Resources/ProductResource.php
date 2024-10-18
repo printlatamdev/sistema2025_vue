@@ -28,8 +28,8 @@ class ProductResource extends JsonResource
             'quantity' => $this->whenPivotLoaded('product_quote', function () {
                 return $this->pivot->quantity;
             }),
-            'total' => $this->whenPivotLoaded('product_quote', function () {
-                return number_format($this->pivot->total, 2);
+            'subtotal' => $this->whenPivotLoaded('product_quote', function () {
+                return number_format($this->pivot->subtotal, 2);
             }),
             'details' => $this->whenPivotLoaded('product_quote', function () {
                 return $this->pivot->details;

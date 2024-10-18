@@ -18,6 +18,7 @@ use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -27,6 +28,7 @@ class QuoteController extends Controller
     {
         $quotes = Quote::orderBy('id', 'desc')->get();
         $qd = Quotedetail::orderBy('id', 'desc')->get();
+        $qd->load('quote');
 
         return Inertia::render('Quote/Index', [
             'quotes' => QuoteResource::collection($quotes),
@@ -81,6 +83,7 @@ class QuoteController extends Controller
         //store image
         $name = time().'.'.$request->image->extension();
         $urlImage = $request->image->storeAs('images', $name);
+        $iva = $request->iva / 100;
 
         $quote = Quote::find($request->quote_id);
         $subtotal = $request->price * $request->quantity;
@@ -92,17 +95,24 @@ class QuoteController extends Controller
             'details' => $request->details,
             'image' => Storage::url($urlImage),
         ]);
-
-        return redirect()->route('quotations');
-    }
-
-    public function storeInQuoteDetail(StoreQuoteDetailRequest $request, Quote $quote)
-    {
-        //Store in quotedetail table
-        $iva = $request->iva / 100;
         $getData = $quote->products->pluck('pivot');
         $totalSum = $getData->sum('subtotal');
         $detail = Quotedetail::where('quote_id', $request->quote_id)->get();
+        foreach ($detail as $item) {
+            $item->update(['quote_id' => $quote->id, 'total_products' => $totalSum,
+            ]);
+        }
+        return redirect()->route('quotations');
+    }
+
+    public function updateInQuoteDetail(StoreQuoteDetailRequest $request, $id)
+    {
+        //Store in quotedetail table
+        $iva = $request->iva / 100;
+        $detail = Quotedetail::find($id);
+        $quote = Quote::where('quote_id', $detail->quote_id)->get();
+        $getData = $quote->products->pluck('pivot');
+        $totalSum = $getData->sum('subtotal');
         $total = $totalSum + ($totalSum * $iva);
 
         foreach ($detail as $item) {
