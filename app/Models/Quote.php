@@ -47,7 +47,7 @@ class Quote extends Model
         return $this->belongsTo(Contact::class);
     }
 
-    public function quotedetails()
+    public function quotedetail()
     {
         return $this->hasOne(Quotedetail::class);
     }

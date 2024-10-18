@@ -19,7 +19,7 @@ class ProductResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            /**'price' => $this->whenPivotLoaded('product_quote', function () {
+            'price' => $this->whenPivotLoaded('product_quote', function () {
                 return number_format($this->pivot->price, 2);
             }),
             'image' => $this->whenPivotLoaded('product_quote', function () {
@@ -33,7 +33,7 @@ class ProductResource extends JsonResource
             }),
             'details' => $this->whenPivotLoaded('product_quote', function () {
                 return $this->pivot->details;
-            }), */
+            }),
             'register_date' => Carbon::parse($this->created_at)->format('Y-m-d'),
         ];
     }

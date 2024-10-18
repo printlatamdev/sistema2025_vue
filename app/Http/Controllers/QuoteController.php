@@ -83,12 +83,12 @@ class QuoteController extends Controller
         $urlImage = $request->image->storeAs('images', $name);
 
         $quote = Quote::find($request->quote_id);
-        $total = $request->price * $request->quantity;
+        $subtotal = $request->price * $request->quantity;
         //store in pivot table
         $quote->products()->attach($request->product_id, [
             'price' => $request->price,
             'quantity' => $request->quantity,
-            'total' => $total,
+            'subtotal' => $subtotal,
             'details' => $request->details,
             'image' => Storage::url($urlImage),
         ]);
@@ -101,15 +101,16 @@ class QuoteController extends Controller
         //Store in quotedetail table
         $iva = $request->iva / 100;
         $getData = $quote->products->pluck('pivot');
-        foreach ($getData as $data) {
-            $total = $data->sum('total');
-            $request->iva == null ? $totaltotal = $total : $totaltotal = $total + ($total * $iva);
-            $qd = Quotedetail::where('quote_id', $quote->id)->first();
-            $qd->update([
-                'total_products' => $total,
+        $totalSum = $getData->sum('subtotal');
+        $detail = Quotedetail::where('quote_id', $request->quote_id)->get();
+        $total = $totalSum + ($totalSum * $iva);
+
+        foreach ($detail as $item) {
+            $item->update([
                 'quote_id' => $quote->id,
-                'iva' => $request->iva,
-                'total' => $totaltotal,
+                'total_products' => $totalSum,
+                'iva' => $totalSum * $iva,
+                'total' => $total,
             ]);
 
             return redirect()->route('quotations');
@@ -125,11 +126,16 @@ class QuoteController extends Controller
 
     public function getProductPivot(Quote $quote)
     {
-        $data = Quote::where('id', $quote->id)
-            ->orderBy('id', 'desc')
-            ->get();
+        $data = Quote::where('id', $quote->id)->orderBy('id', 'desc')->get();
 
         return QuoteResource::collection($data);
+    }
+    
+    public function getQuoteDetail(Quote $quote)
+    {
+        $data = Quotedetail::where('id', $quote->id)->orderBy('id', 'desc')->get();
+
+        return QuotedetailResource::collection($data);
     }
 
     public function getQuoteReport(Quotedetail $quotedetail)

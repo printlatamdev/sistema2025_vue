@@ -47,7 +47,7 @@ onMounted(() => {
         </template>
         <template #alert>
             <ActionMessage :on="store.formQD.recentlySuccessful">
-                <font-awesome-icon :icon="['fas', 'circle-check']" />Producto agregado satisfactoriamente
+                <font-awesome-icon :icon="['fas', 'circle-check']" class="mx-2" />Producto agregado satisfactoriamente
             </ActionMessage>
         </template>
         <template #content>
@@ -134,6 +134,7 @@ onMounted(() => {
                     </div>
                 </form>
                 <hr class="my-5">
+                {{ store.quotedetail }}
                 <!--Table products-->
                 <div class="w-full flex">
                     <div class="w-2/3 mr-3 mt-5">
@@ -165,13 +166,13 @@ onMounted(() => {
                                 </div>
                                 <div class="border border-gray-300 bg-gray-50 mt-3 rounded-md p-5">
                                     <p><span class="font-semibold">Total parcial: </span>
-                                    ${{ store.getCalc.total_pr.toFixed(2) }}
+                                        ${{ store.quotedetail.total_products }}
                                     </p>
-                                    <p><span class="font-semibold">IVA:</span> ({{ store.formTotal.iva }}%) ${{
-                                        store.getParcialSubtotal.toFixed(2) }}</p>
+                                    <p><span class="font-semibold">IVA:</span>
+                                        {{ store.quotedetail.iva }}</p>
                                     <hr>
                                     <p class="mt-2"><span class="font-semibold">Total final: </span>${{
-                                        store.getTotalIva.toFixed(2) }}</p>
+                                        store.quotedetail.total }}</p>
                                 </div>
                             </div>
                             <div class="flex justify-end mt-10">

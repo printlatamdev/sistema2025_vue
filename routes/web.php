@@ -57,6 +57,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::get('/quotations/get-report/{quotedetail}', 'getQuoteReport')->name('report.quote');
         Route::get('/contact-by-company/{company}', 'getContactByCompany')->name('contact.company');
         Route::get('/quoterefresh/{quote}', 'getProductPivot')->name('quoterefresh');
+        Route::get('/quotedetail-refresh/{quote}', 'getQuoteDetail')->name('quotedetailrefresh');
     });
 
     //quotedetail routes

@@ -9,6 +9,7 @@ export const useQuoteStore = defineStore("quote", {
         isSecondMessage: "Detalle de cotización",
         getYear: parseInt(new Date().getFullYear().toString().substr(2, 2), 10),
         edit: [],
+        quotedetail: [],
         myErrors: [],
         newQuote: [],
         contactsByCompany: [],
@@ -201,6 +202,7 @@ export const useQuoteStore = defineStore("quote", {
                 onSuccess: () => {
                     //this.closeModal();
                     this.refreshData(id);
+                    this.getQuoteDetail(id);
                     this.alert.successAlert(this.isMessage + " agregado");
                 },
                 onError: (error) => {
@@ -242,10 +244,18 @@ export const useQuoteStore = defineStore("quote", {
             axios.get(route("quoterefresh", id)).then((response) => {
                 response.data.map((el) => {
                     this.edit = el;
-                    this.getCalc.total_pr = el.products.reduce(
+                    this.clearInput();
+                    /*this.getCalc.total_pr = el.products.reduce(
                         (accumulator, current) => accumulator + current.total,
                         0
-                    );
+                    );*/
+                });
+            });
+        },
+        getQuoteDetail(id){
+            axios.get(route("quotedetailrefresh", id)).then((response) => {
+                response.data.map((el) => {
+                    this.quotedetail = el;
                 });
             });
         },
