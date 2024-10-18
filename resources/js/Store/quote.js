@@ -44,8 +44,8 @@ export const useQuoteStore = defineStore("quote", {
         }),
         formTotal: useForm({
             quote_id: "",
-            iva: 0,
-            iva2: 0,
+            iva: "",
+            iva2: "",
             error: "",
             processing: false,
         }),
@@ -107,20 +107,30 @@ export const useQuoteStore = defineStore("quote", {
             { name: "DDP", value: "DDP" },
         ],
         iva: [
-            { name: "No asignar", value: "0" },
             { name: "7%", value: "7" },
             { name: "12%", value: "12" },
             { name: "13%", value: "13" },
             { name: "15%", value: "15" },
-            { name: "Otro porcentaje", value: "0" },
+            { name: "No asignar", value: "0" },
+            { name: "Otro porcentaje", value: "other" },
         ],
     }),
     getters: {
-        getTotal(state) {
-            return state.formQD.quantity * state.formQD.price;
-        },
         getIva(state) {
-            return state.quotedetail.total_products + state.quotedetail.total_products * (state.formTotal.iva * 100);           
+            let newIva = "";
+            let iva = "";
+            if(state.formTotal.iva != 'other'){
+                newIva = state.formTotal.iva;
+                iva = state.quotedetail.total_products * (newIva / 100).toFixed(2);
+            } else {
+                newIva = state.formTotal.iva2;
+                iva = state.quotedetail.total_products * (newIva / 100).toFixed(2);
+            }
+            return iva.toFixed(2);
+        },
+        getTotal(state) {
+            let total = parseFloat(state.quotedetail.total_products) + parseFloat(this.getIva);
+            return total.toFixed(2);
         },
         filledInputs(state) {
             return (
@@ -234,7 +244,7 @@ export const useQuoteStore = defineStore("quote", {
                 });
             });
         },
-        getQuoteDetail(id){
+        getQuoteDetail(id) {
             axios.get(route("quotedetailrefresh", id)).then((response) => {
                 response.data.map((el) => {
                     this.quotedetail = el;

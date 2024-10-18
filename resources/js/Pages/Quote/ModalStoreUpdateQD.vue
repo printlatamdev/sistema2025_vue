@@ -149,9 +149,10 @@ onMounted(() => {
                         </EasyDataTable>
                     </div>
                     <div class="w-1/3 mt-5">
+                        {{ store.formTotal.iva }}
                         <form action="">
                             <div class="w-full mt-5">
-                                <InputLabel for="iva" value="IVA" />
+                                <InputLabel for="iva" value="Asignar IVA" />
                                 <select v-model="store.formTotal.iva"
                                     class="block w-full border-gray-300 rounded-md text-xs">
                                     <option class="text-gray-500" disabled>Seleccione una opción</option>
@@ -159,20 +160,20 @@ onMounted(() => {
                                         {{ i.name }}
                                     </option>
                                 </select>
-                                <div v-if="store.formTotal.iva == '0'" class="mt-3">
+                                
+                                <div v-if="store.formTotal.iva === 'other'" class="mt-3">
                                     <InputLabel for="iva" value="Asignar IVA" />
                                     <TextInput v-model="store.formTotal.iva2" class="w-full" type="text" />
                                 </div>
-                                iva{{ store.getIva }}
                                 <div class="border border-gray-300 bg-gray-50 mt-3 rounded-md p-5">
                                     <p><span class="font-semibold">Total parcial: </span>
                                         ${{ store.quotedetail.total_products }}
                                     </p>
                                     <p><span class="font-semibold">IVA:</span>
-                                        {{ store.getIva }}</p>
+                                        ${{ store.formTotal.iva=='' ? 0 : store.getIva }}</p>
                                     <hr>
                                     <p class="mt-2"><span class="font-semibold">Total final: </span>${{
-                                        store.quotedetail.total }}</p>
+                                        store.getTotal }}</p>
                                 </div>
                             </div>
                             <div class="flex justify-end mt-10">

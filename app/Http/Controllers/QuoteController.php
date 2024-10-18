@@ -18,7 +18,6 @@ use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -102,6 +101,7 @@ class QuoteController extends Controller
             $item->update(['quote_id' => $quote->id, 'total_products' => $totalSum,
             ]);
         }
+
         return redirect()->route('quotations');
     }
 
@@ -140,7 +140,7 @@ class QuoteController extends Controller
 
         return QuoteResource::collection($data);
     }
-    
+
     public function getQuoteDetail(Quote $quote)
     {
         $data = Quotedetail::where('id', $quote->id)->orderBy('id', 'desc')->get();
