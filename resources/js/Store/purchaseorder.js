@@ -24,6 +24,7 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
         openPivotModal: false,
         openDeleteModal: false,
         edit: [],
+        purchaseorder: [],
         errors: [],
         editor: ClassicEditor,
         editorConfig: {
@@ -219,6 +220,13 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
                 },
             });
         },
+        getPurchaseorderDetail(id){
+            axios.get(route("podetailrefresh", id)).then((response) => {
+                response.data.map((el) => {
+                    this.purchaseorder = el;
+                });
+            });    
+        },
         refreshData(id) {
             axios.get(route("purchaseorder.refresh", id)).then((response) => {
                 response.data.map((el) => {
@@ -231,6 +239,7 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
         },
         showPivotModal() {
             this.openPivotModal = true;
+            this.getPurchaseorderDetail(this.edit.id);
         },
         showDeleteModal(data) {
             this.edit = data;

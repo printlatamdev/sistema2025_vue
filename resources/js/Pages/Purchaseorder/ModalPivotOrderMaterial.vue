@@ -7,7 +7,6 @@ import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import SuccessButton from '@/Components/SuccessButton.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
 import ActionMessage from '@/Components/ActionMessage.vue';
 import ModalStoreUpdateMaterial from '../Material/ModalStoreUpdateMaterial.vue';
 import { usePurchaseorderStore } from '@/Store/purchaseorder';
@@ -44,6 +43,7 @@ defineProps({
         </template>
         <template #content>
             <div class="">
+                {{ store.edit }}
                 <form>
                     <div class="flex">
                         <div class="w-2/5">
@@ -116,21 +116,21 @@ defineProps({
                             </template>
                         </EasyDataTable>
                         <div class="border py-1 px-2 border-y-0 flex justify-end">
-                            <!--<div class="text-sm">
+                            <div class="text-sm">
                                 <p><span class="font-semibold">Subtotal:</span> ${{
-                                    store.edit.order_details.total_materials ?? '' }}</p>
-                                <p><span class="font-semibold">IVA:</span> ${{ store.edit.order_details.iva }}</p>
+                                    store.purchaseorder.total_materials }}</p>
+                                <p><span class="font-semibold">IVA:</span> ${{ store.purchaseorder.iva }}</p>
                                 <p><span class="font-semibold">Costo total:</span> ${{
-                                    store.edit.order_details.total }}</p>
-                            </div>-->
+                                    store.purchaseorder.total }}</p>
+                            </div>
                         </div>
                         <div class="border text-xs p-1"><span class="font-semibold">*Nota: </span>No se podrán
                             ingresar
                             más de 9 ítems</div>
 
-                        <div class="flex justify-end mt-7">
-                            <SuccessButton class="mr-1" @click="">
-                                <font-awesome-icon :icon="['fas', 'file-pdf']" /> Generar reporte de orden
+                        <div class="flex justify-end mt-5">
+                            <SuccessButton @click="">
+                                <font-awesome-icon :icon="['fas', 'file-pdf']" /> Generar reporte para la orden #{{ store.edit.id }}
                             </SuccessButton>
                             <!--<SecondaryButton class="mr-1" @click="">
                                 <font-awesome-icon :icon="['fas', 'file-pdf']" /> Generar orden sin IVA

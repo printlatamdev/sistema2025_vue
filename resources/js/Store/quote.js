@@ -116,6 +116,9 @@ export const useQuoteStore = defineStore("quote", {
         ],
     }),
     getters: {
+        getTotal(state) {
+            return state.formQD.quantity * state.formQD.price;
+        },
         getIva(state) {
             let newIva = "";
             let iva = "";
@@ -128,7 +131,7 @@ export const useQuoteStore = defineStore("quote", {
             }
             return iva.toFixed(2);
         },
-        getTotal(state) {
+        getIvaTotal(state) {
             let total = parseFloat(state.quotedetail.total_products) + parseFloat(this.getIva);
             return total.toFixed(2);
         },

@@ -149,7 +149,6 @@ onMounted(() => {
                         </EasyDataTable>
                     </div>
                     <div class="w-1/3 mt-5">
-                        {{ store.formTotal.iva }}
                         <form action="">
                             <div class="w-full mt-5">
                                 <InputLabel for="iva" value="Asignar IVA" />
@@ -173,7 +172,7 @@ onMounted(() => {
                                         ${{ store.formTotal.iva=='' ? 0 : store.getIva }}</p>
                                     <hr>
                                     <p class="mt-2"><span class="font-semibold">Total final: </span>${{
-                                        store.getTotal }}</p>
+                                        store.getIvaTotal }}</p>
                                 </div>
                             </div>
                             <div class="flex justify-end mt-10">

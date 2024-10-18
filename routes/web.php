@@ -154,5 +154,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::get('/purchaseorder-refresh/{purchaseorder}', 'getPurchaseorderPivot')->name('purchaseorder.refresh');
         Route::post('/send-purchaseorder', 'sendPurchaseOrder')->name('sendemail.purchaseorder');
         Route::get('/purchase-orders/get-report/{purchaseorderdetail}', 'getPurchaseOrderReport')->name('report.purchaseorder');
+        Route::get('/po-detail-refresh/{purchaseorder}', 'getPODetail')->name('podetailrefresh');
     });
 });

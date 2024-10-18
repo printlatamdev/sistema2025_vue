@@ -17,4 +17,9 @@ class PurchaseorderDetail extends Model
     {
         return $this->belongsTo(Purchaseorder::class);
     }
+
+    public function file()
+    {
+        return $this->morphOne(File::class, 'fileable');
+    }
 }

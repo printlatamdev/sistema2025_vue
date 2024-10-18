@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\OrderEnum;
 use App\Enums\PaymentConditionEnum;
+use App\Http\Resources\PurchaseorderdetailResource;
 use App\Http\Resources\PurchaseorderResource;
 use App\Mail\SendPurchaseorder;
 use App\Models\Material;
@@ -72,6 +73,13 @@ class PurchaseorderController extends Controller
         return redirect()->route('purchaseorders');
     }
 
+
+    public function getPODetail(Purchaseorder $purchaseorder)
+    {
+        $data = PurchaseorderDetail::where('id', $purchaseorder->id)->orderBy('id', 'desc')->get();
+
+        return PurchaseorderdetailResource::collection($data);
+    }
     public function storeInPivot(Request $request)
     {
         $iva = $request->iva / 100;
