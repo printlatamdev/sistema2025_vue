@@ -83,8 +83,11 @@ defineProps({
                     <div class="flex mt-3">
                         <div class="w-2/4 mr-2">
                             <InputLabel for="quantity" value="Orden de compra" />
-                            <v-select v-model="store.formDown.purchaseorder_id" :options="purchaseorders" label="id"
-                                :reduce="purchaseorders => purchaseorders.id">
+                            <v-select v-model="store.formDown.purchaseorder_id" :options="purchaseorders"
+                             :reduce="purchaseorders => purchaseorders.id">
+                                <template #option="{ id, provider }">
+                                    #{{ id + ' - ' +provider.name }}
+                                </template>
                                 <template v-slot:no-options="{ search, searching }">
                                     <template v-if="searching">
                                         No se ha encontrado resultados para <em>{{ search }}</em>.
