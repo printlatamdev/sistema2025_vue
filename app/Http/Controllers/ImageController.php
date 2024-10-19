@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
@@ -18,5 +19,9 @@ class ImageController extends Controller
         ]);
 
         return $data;
+    }
+
+    public function temUpload(Request $request){
+
     }
 }

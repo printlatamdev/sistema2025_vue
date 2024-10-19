@@ -73,13 +73,13 @@ class PurchaseorderController extends Controller
         return redirect()->route('purchaseorders');
     }
 
-
     public function getPODetail(Purchaseorder $purchaseorder)
     {
         $data = PurchaseorderDetail::where('id', $purchaseorder->id)->orderBy('id', 'desc')->get();
 
         return PurchaseorderdetailResource::collection($data);
     }
+
     public function storeInPivot(Request $request)
     {
         $iva = $request->iva / 100;
@@ -143,7 +143,12 @@ class PurchaseorderController extends Controller
             'date' => Carbon::parse($pod->created_at)->format('Y-m-d'),
         ];
         $pdf = Pdf::loadView('reports/purchaseorderReport', compact('data'));
-
         return $pdf->stream('orden-de-compra-'.$pod->id.Carbon::now().'-'.'.pdf');
+    }
+
+    public function storeReport(Request $request, $data){
+        $file = new FileController();
+        $pdf = $file->store($request->pdf, Purchaseorder::class, $data->id);
+        $data->file()->save($pdf);
     }
 }

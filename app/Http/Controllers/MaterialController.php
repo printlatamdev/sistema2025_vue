@@ -105,7 +105,8 @@ class MaterialController extends Controller
     {
         $cat = Materialcategory::find($id);
         $mat = Material::orderBy('id', 'desc')->get();
-        $data = Materialtype::where('materialcategory_id', $cat->id)->orderBy('id', 'desc')->get();
+        $data = Materialtype::get();
+        return $data;
 
         return Inertia::render('Material/Index', [
             'materials' => MaterialResource::collection($mat),
