@@ -10,6 +10,7 @@ import Filepond from '@/Components/Filepond.vue';
 import ModalStoreUpdate from '../Product/ModalStoreUpdate.vue';
 import InputError from '@/Components/InputError.vue';
 import ActionMessage from '@/Components/ActionMessage.vue';
+import { FlowerSpinner } from 'epic-spinners';
 import { useQuoteStore } from '@/Store/quote';
 import { useProductStore } from '@/Store/product';
 
@@ -122,7 +123,11 @@ onMounted(() => {
                         <div class="w-1/3">
                             <InputLabel for="image" value="Subir imagen" />
                             <Filepond v-model="store.formQD.image" @change="store.handleFile($event)"
-                                allow-multiple="false" max-files="1" />
+                                allow-multiple="false" max-files="1" @click="store.loadingImage = true" />
+                            <div class="flex" v-if="store.loadingImage == true">
+                                <flower-spinner :animation-duration="2000" :size="20" color="#0D7C66" />
+                                <span class="ml-1">Subiendo imagen</span>
+                            </div>
                             <InputError class="" :message="store.formQD.errors.image" />
                             <div class="flex justify-end mt-1">
                                 <SuccessButton @click.prevent="store.storePivot(store.edit.id)"
@@ -159,7 +164,7 @@ onMounted(() => {
                                         {{ i.name }}
                                     </option>
                                 </select>
-                                
+
                                 <div v-if="store.formTotal.iva === 'other'" class="mt-3">
                                     <InputLabel for="iva" value="Asignar IVA" />
                                     <TextInput v-model="store.formTotal.iva2" class="w-full" type="text" />
@@ -169,7 +174,7 @@ onMounted(() => {
                                         ${{ store.quotedetail.total_products }}
                                     </p>
                                     <p><span class="font-semibold">IVA:</span>
-                                        ${{ store.formTotal.iva=='' ? 0 : store.getIva }}</p>
+                                        ${{ store.formTotal.iva == '' ? 0 : store.getIva }}</p>
                                     <hr>
                                     <p class="mt-2"><span class="font-semibold">Total final: </span>${{
                                         store.getIvaTotal }}</p>

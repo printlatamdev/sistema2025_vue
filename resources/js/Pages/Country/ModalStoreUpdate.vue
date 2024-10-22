@@ -7,6 +7,7 @@ import InputError from '@/Components/InputError.vue';
 import TextInput from '@/Components/TextInput.vue';
 import FilepondImage from '@/Components/FilepondImage.vue';
 import { useCountryStore } from '@/Store/country';
+import { FlowerSpinner } from 'epic-spinners';
 
 let store = useCountryStore();
 defineProps({
@@ -24,7 +25,7 @@ defineProps({
 <template>
     <DialogModal :show="show" @close="store.closeModal" :max-width="maxWidth">
         <template #title>
-            Nuevo registro de  {{store.isMessage }}
+            Nuevo registro de {{ store.isMessage }}
         </template>
         <template #content>
             <div class="">
@@ -42,12 +43,17 @@ defineProps({
                     <div class="w-full mt-3">
                         <InputLabel for="image" value="Subir imagen" />
                         <FilepondImage v-model="store.form.image" @change="store.handleFile($event)"
-                            allow-multiple="false" max-files="1" />
+                            @click="store.loadingImage = true" allow-multiple="false" max-files="1" />
+                        <div class="flex" v-if="store.loadingImage == true">
+                            <flower-spinner :animation-duration="2000" :size="20" color="#0D7C66" />
+                            <span class="ml-1">Subiendo imagen</span>
+                        </div>
                         <InputError class="" :message="store.form.errors.image" />
                     </div>
                     <div class="flex justify-end mt-3">
                         <PrimaryButton @click.prevent="store.storeCountry()" :disabled="store.filledInputs">
-                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar {{store.isMessage }}
+                            <font-awesome-icon :icon="['fas', 'floppy-disk']" class="mr-1" />Guardar {{ store.isMessage
+                            }}
                         </PrimaryButton>
                     </div>
                 </form>

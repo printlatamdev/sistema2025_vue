@@ -23,6 +23,7 @@ export const useMaterialStore = defineStore("material", {
         openDownModal: false,
         edit: [],
         search: '',
+        loadingImage: false,
         errors: [],
         form: useForm({
             name: "",
@@ -186,6 +187,7 @@ export const useMaterialStore = defineStore("material", {
             if (!image) return;
             const reader = new FileReader();
             reader.onload = (e) => {
+                this.loadingImage = false;
                 this.formCat.image = image;
             };
             reader.readAsDataURL(image);

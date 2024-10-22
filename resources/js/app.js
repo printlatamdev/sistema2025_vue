@@ -16,6 +16,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import vSelect from 'vue-select';
 import 'vue-select/dist/vue-select.css';
+import {AtomSpinner} from 'epic-spinners'
 import { CkeditorPlugin } from '@ckeditor/ckeditor5-vue';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -44,6 +45,7 @@ createInertiaApp({
             .component('font-awesome-icon', FontAwesomeIcon)
             .component('VueDatePicker', VueDatePicker)
             .component('v-select', vSelect)
+            .component('AtomSpinner', AtomSpinner)
             .mount(el);
     },
     progress: {

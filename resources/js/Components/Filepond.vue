@@ -19,5 +19,6 @@ const FilePond = vueFilePond(
         allow-multiple="false"
         accepted-file-types="image/jpeg, image/png, application/pdf"
         class="cursor-pointer text-xs"
+        instant-upload="false"
     />
 </template>
