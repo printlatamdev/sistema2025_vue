@@ -9,6 +9,7 @@ export const useContactStore = defineStore('contact', {
     openModal: false,
     openDeleteModal: false,
     edit: [],
+    search: '',
     errors: [],
     form: useForm({
       name: '',

@@ -74,7 +74,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
     //orders routes
     Route::resource('/orders', OrderController::class)->except(['create', 'edit'])->names([
-        'index' => 'orders', 'store' => 'store.orders', 'update' => 'update.orders','destroy' => 'delete.orders',
+        'index' => 'orders', 'store' => 'store.orders', 'update' => 'update.orders', 'destroy' => 'delete.orders',
     ]);
 
     //materials routes
@@ -90,7 +90,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         'index' => 'categories', 'store' => 'store.categories', 'update' => 'update.categories', 'destroy' => 'destroy.categories',
     ]);
     Route::resource('/types', MaterialtypeController::class)->except(['index', 'create', 'edit'])->names([
-        'index' => 'types', 'store' => 'store.types', 'show' => 'show.types', 'update' => 'update.types','destroy' => 'destroy.types',
+        'index' => 'types', 'store' => 'store.types', 'show' => 'show.types', 'update' => 'update.types', 'destroy' => 'destroy.types',
     ]);
 
     //brands routes

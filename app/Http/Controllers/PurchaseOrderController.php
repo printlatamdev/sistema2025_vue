@@ -145,11 +145,13 @@ class PurchaseorderController extends Controller
             'date' => Carbon::parse($pod->created_at)->format('Y-m-d'),
         ];
         $pdf = Pdf::loadView('reports/purchaseorderReport', compact('data'));
+
         return $pdf->stream('orden-de-compra-'.$pod->id.Carbon::now().'-'.'.pdf');
     }
 
-    public function storeReport($request, $id){
-        $file = new FileController();
+    public function storeReport($request, $id)
+    {
+        $file = new FileController;
         $pod = PurchaseorderDetail::find($id);
 
         $pdf = $file->store($request->report, PurchaseorderDetail::class, $pod->id);

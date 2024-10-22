@@ -13,10 +13,6 @@ defineProps({
         type: Object,
         default: ([]),
     },
-    maxWidth: {
-        type: String,
-        default: 'md',
-    },
 });
 
 </script>

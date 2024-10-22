@@ -5,6 +5,8 @@ import SecondaryButton from '@/Components/SecondaryButton.vue';
 import DangerButton from '@/Components/DangerButton.vue';
 import ModalStoreUpdate from './ModalStoreUpdate.vue';
 import ModalDelete from './ModalDelete.vue';
+import InputLabel from '@/Components/InputLabel.vue';
+import TextInput from '@/Components/TextInput.vue';
 import { useContactStore } from '@/Store/contact';
 
 let store = useContactStore();
@@ -29,12 +31,20 @@ defineProps({
     <AppLayout title="Contactos">
         <div class="w-full">
             <h2 class="text-3xl font-bold">Datos de Contactos</h2>
-            <div class="flex justify-end">
-                <PrimaryButton @click="store.showStoreModal()">
-                    <font-awesome-icon :icon="['fas', 'plus']" /> Nuevo contacto
-                </PrimaryButton>
+            <div class="mt-3 flex justify-between">
+                <div class="w-1/5 mr-2">
+                    <InputLabel for="name" value="Buscar" />
+                    <TextInput v-model="store.search" class="w-full" type="text" />
+                </div>
+                <div class="self-end">
+                    <PrimaryButton @click="store.showStoreModal()">
+                        <font-awesome-icon :icon="['fas', 'plus']" /> Nuevo contacto
+                    </PrimaryButton>
+                </div>
             </div>
-            <EasyDataTable :headers="store.headers" :rows-per-page="10" :items="contacts" border-cell buttons-pagination class="mt-5" >
+            <EasyDataTable :headers="store.headers" :rows-per-page="10" :items="contacts" border-cell buttons-pagination
+                class="mt-2" table-class-name="customize-table" theme-color="#0D7C66" header-text-direction="center"
+                body-text-direction="center" :search-value="store.search">
                 <template #empty-message>
                     <p>No se ha encontrado ningún resultado</p>
                 </template>
@@ -48,7 +58,7 @@ defineProps({
                 </template>
             </EasyDataTable>
         </div>
-        <ModalStoreUpdate :show="store.openModal" :companies="companies" :countries="countries"/>
-        <ModalDelete :show="store.openDeleteModal"/>
+        <ModalStoreUpdate :show="store.openModal" :companies="companies" :countries="countries" />
+        <ModalDelete :show="store.openDeleteModal" />
     </AppLayout>
 </template>

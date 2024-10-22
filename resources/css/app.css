@@ -12,3 +12,9 @@
     font-weight: 400;
     font-style: normal;
 }
+.customize-table {
+    border-radius: 7px;
+    --easy-table-header-font-size: 13px;
+    --easy-table-body-row-font-color: #424242;
+    --easy-table-body-row-font-size: 13px;
+}

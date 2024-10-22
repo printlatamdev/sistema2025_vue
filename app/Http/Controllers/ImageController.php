@@ -21,7 +21,5 @@ class ImageController extends Controller
         return $data;
     }
 
-    public function temUpload(Request $request){
-
-    }
+    public function temUpload(Request $request) {}
 }
