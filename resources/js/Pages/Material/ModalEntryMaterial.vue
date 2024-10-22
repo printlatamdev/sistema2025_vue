@@ -125,7 +125,7 @@ defineProps({
                         class="block w-full border-gray-300 rounded-md text-sm"></textarea>
                 </div>
                 <div class="flex justify-end mt-3">
-                    <WarningButton @click.prevent="store.entryMaterial()" class="mr-2">
+                    <WarningButton class="mr-2">
                         <font-awesome-icon :icon="['fas', 'file-excel']" class="mr-1"/>Generar excel
                     </WarningButton>
                     <PrimaryButton @click.prevent="store.entryMaterial()">

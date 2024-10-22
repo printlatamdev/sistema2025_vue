@@ -24,11 +24,13 @@ class PurchaseorderController extends Controller
     public function index()
     {
         $data = Purchaseorder::orderBy('id', 'desc')->get();
+        $pod = PurchaseorderDetail::orderBy('id', 'desc')->get();
         $data->load('users');
 
         return Inertia::render('Purchaseorder/Index', [
             'purchaseorders' => PurchaseorderResource::collection($data),
             'materials' => Material::get(),
+            'purchaseorderdetails' => PurchaseorderdetailResource::collection($pod),
             'requestedBy' => User::whereHas('roles', function (Builder $query) {
                 $query->where('id', 2);
             })->orderBy('id', 'desc')->get(),

@@ -7,6 +7,7 @@ import { usePurchaseorderStore } from '@/Store/purchaseorder';
 import ModalStoreUpdate from './ModalStoreUpdate.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
+import WarningButton from '@/Components/WarningButton.vue';
 import ModalPivotOrderMaterial from './ModalPivotOrderMaterial.vue';
 
 let store = usePurchaseorderStore();
@@ -56,17 +57,24 @@ defineProps({
         <div class="w-full">
             <h2 class="text-3xl font-bold">Datos de {{ store.isMessage }}</h2>
             <div class="mt-3 flex justify-between">
-                <div class="w-1/5 mr-2">
+                <div class="flex w-1/2">
+                    <div class="w-1/3 mr-2">
                     <InputLabel for="name" value="Buscar" />
                     <TextInput v-model="store.search" class="w-full" type="text" />
                 </div>
+                    <div class="self-end">
+                        <WarningButton class="mr-2">
+                            <font-awesome-icon :icon="['fas', 'filter']" class="mr-1" />Filtrar
+                        </WarningButton>
+                    </div>
+            </div>
                 <div class="self-end">
                     <PrimaryButton @click="store.showStoreModal()">
                         <font-awesome-icon :icon="['fas', 'plus']" class="mr-1" />Nueva {{ store.isMessage }}
                     </PrimaryButton>
                 </div>
             </div>
-            <EasyDataTable :headers="store.headers" :rows-per-page="10" :items="purchaseorders" border-cell
+            <EasyDataTable :headers="store.headers" :rows-per-page="10" :items="purchaseorderdetails" border-cell
                 buttons-pagination class="mt-2" table-class-name="customize-table" theme-color="#0D7C66"
                 header-text-direction="center" body-text-direction="center" :search-value="store.search">
                 <template #empty-message>

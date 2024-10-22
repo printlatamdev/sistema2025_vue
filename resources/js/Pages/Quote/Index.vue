@@ -7,8 +7,9 @@ import ModalStoreUpdate from './ModalStoreUpdate.vue';
 import ModalStoreUpdateQD from './ModalStoreUpdateQD.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { useQuoteStore } from '@/Store/quote';
+import WarningButton from '@/Components/WarningButton.vue';
 import ModalDelete from './ModalDelete.vue';
+import { useQuoteStore } from '@/Store/quote';
 
 let store = useQuoteStore();
 defineProps({
@@ -45,9 +46,16 @@ defineProps({
         <div class="w-full">
             <h2 class="text-3xl font-bold">Datos de {{ store.isMessage }}</h2>
             <div class="mt-3 flex justify-between">
-                <div class="w-1/5">
-                    <InputLabel for="name" value="Buscar" />
-                    <TextInput v-model="store.search" class="w-full" type="text" />
+                <div class="flex w-1/2">
+                    <div class="w-1/3 mr-2">
+                        <InputLabel for="name" value="Buscar" />
+                        <TextInput v-model="store.search" class="w-full" type="text" />
+                    </div>
+                    <div class="self-end">
+                        <WarningButton class="mr-2">
+                            <font-awesome-icon :icon="['fas', 'filter']" class="mr-1" />Filtrar
+                        </WarningButton>
+                    </div>
                 </div>
                 <div class="self-end">
                     <PrimaryButton @click="store.showStoreModal()">
