@@ -33,7 +33,7 @@ onMounted(() => { });
 </script>
 <template>
 
-    <DialogModal :show="show" :max-width="maxWidth">
+    <DialogModal :show="show" :max-width="maxWidth" @close="store.closeModal">
         <template #title>
             <span v-if="store.edit != ''" class="p-1 bg-sky-500 rounded-md">#{{ `${store.edit.id}-${store.getYear}`
                 }}</span>

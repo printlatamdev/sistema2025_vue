@@ -77,6 +77,7 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             total: "",
             details: "",
             image: null,
+            report: null,
             error: "",
             processing: false,
         }),
@@ -191,6 +192,18 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
                 },
             });
         },
+        storePODReport(id) {
+            this.formOD.post(route("store.podreport"), {
+                onSuccess: () => {
+                    //this.refreshData(id);
+                    this.alert.successAlert(" agregado el Reporte de Orden de compra");
+                },
+                onError: (error) => {
+                    this.errors = error;
+                    this.alert.errorAlert();
+                },
+            });
+        },
         editData(data) {
             this.showStoreModal();
             this.edit = data;
@@ -234,6 +247,15 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
                 });
             });
         },
+        handleFile(e) {
+            const pdf = e.target.files[0];
+            if (!pdf) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                this.formOD.report = pdf;
+            };
+            reader.readAsDataURL(pdf);
+        },
         showStoreModal() {
             this.openModal = true;
         },
@@ -265,7 +287,7 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             this.formMail.body = "";
         },
         clearInput() {
-            this.edit = "";
+            //this.edit = "";
             this.form.provider_id = "";
             this.form.details = "";
             this.form.approved_by = "";

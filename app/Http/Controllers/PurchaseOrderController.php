@@ -126,6 +126,7 @@ class PurchaseorderController extends Controller
             'title' => $request->title,
             'body' => $request->body,
         ];
+        //$this->storeReport($request->report, $request->purchaseorder_id);
         foreach ([$request->users] as $recipient) {
             Mail::to($recipient)->send(new SendPurchaseorder($emailData));
         }
@@ -140,15 +141,18 @@ class PurchaseorderController extends Controller
         $data = [
             'purchaseorderDetail' => $pod,
             'purchaseorder' => $purchaseorder,
+            'report' => $pod->report,
             'date' => Carbon::parse($pod->created_at)->format('Y-m-d'),
         ];
         $pdf = Pdf::loadView('reports/purchaseorderReport', compact('data'));
         return $pdf->stream('orden-de-compra-'.$pod->id.Carbon::now().'-'.'.pdf');
     }
 
-    public function storeReport(Request $request, $data){
+    public function storeReport($request, $id){
         $file = new FileController();
-        $pdf = $file->store($request->pdf, Purchaseorder::class, $data->id);
-        $data->file()->save($pdf);
+        $pod = PurchaseorderDetail::find($id);
+
+        $pdf = $file->store($request->report, PurchaseorderDetail::class, $pod->id);
+        $pod->file()->save($pdf);
     }
 }

@@ -126,9 +126,8 @@ defineProps({
                         <div class="border text-xs p-1"><span class="font-semibold">*Nota: </span>No se podrán
                             ingresar
                             más de 9 ítems</div>
-
                         <div class="flex justify-end mt-5">
-                            <SuccessButton @click="">
+                            <SuccessButton @click="store.storePODReport(store.purchaseorder.id)">
                                 <font-awesome-icon :icon="['fas', 'file-pdf']" /> Generar reporte para la orden #{{ store.edit.id }}
                             </SuccessButton>
                             <!--<SecondaryButton class="mr-1" @click="">

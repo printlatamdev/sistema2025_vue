@@ -171,6 +171,7 @@ export const useQuoteStore = defineStore("quote", {
                     })
                     .then((response) => {
                         this.edit = response.data;
+                        this.closeModal();
                         this.alert.successAlert(this.isMessage + " agregado");
                     })
                     .catch((error) => {

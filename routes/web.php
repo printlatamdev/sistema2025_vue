@@ -44,7 +44,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     ]);
     Route::controller(QuoteController::class)->group(function () {
         Route::post('/store-quoteproduct', 'storeInPivot')->name('store.productquote');
-        Route::post('/get-quotedetails', 'getQuotedetails')->name('get.quotedetails');
         Route::get('/products-quote/{quote}', 'getPivot')->name('product.quote');
         Route::put('/store-quotedetail/{quote}', 'updateInQuoteDetail')->name('store.quotedetail');
         Route::get('/quotations/get-report/{quotedetail}', 'getQuoteReport')->name('report.quote');
@@ -114,5 +113,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
         Route::post('/send-purchaseorder', 'sendPurchaseOrder')->name('sendemail.purchaseorder');
         Route::get('/purchase-orders/get-report/{purchaseorderdetail}', 'getPurchaseOrderReport')->name('report.purchaseorder');
         Route::get('/po-detail-refresh/{purchaseorder}', 'getPODetail')->name('podetailrefresh');
+        Route::post('/store-purchaseorder-report/{purchaseorderdetail}', 'storeReport')->name('store.podreport');
     });
 });
