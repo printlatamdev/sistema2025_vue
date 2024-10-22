@@ -7,6 +7,7 @@ import ModalStoreType from './ModalStoreType.vue';
 import ModalEntryMaterial from './ModalEntryMaterial.vue';
 import { useMaterialStore } from '@/Store/material';
 import ModalDownloadMaterial from './ModalDownloadMaterial.vue';
+import ModalActivityModal from './ModalActivityModal.vue';
 
 let store = useMaterialStore();
 defineProps({
@@ -100,6 +101,7 @@ onMounted(() => {
                     </div>
                     <div
                         v-if="categories.id == 1"
+                         @click.prevent="store.showModalDown()"
                         class="border text-center p-3 bg-purple-50 cursor-pointer rounded-lg transform hover:scale-105 transition duration-500">
                         <span class="py-1 px-2 rounded-full">
                             <font-awesome-icon :icon="['fas', 'hourglass-end']" class="text-2xl text-gray-700" />
@@ -107,7 +109,7 @@ onMounted(() => {
                         <p class="mt-1">Finalizar tinta</p>
                     </div>
                     <div
-                        @click.prevent="store.showModalDown()"
+                       @click.prevent="store.showLogModal()"
                         class="border text-center p-3 bg-teal-50 cursor-pointer rounded-lg transform hover:scale-105 transition duration-500">
                         <span class="py-1 px-2 rounded-full">
                             <font-awesome-icon :icon="['fas', 'scroll']" class="text-2xl text-gray-700" />
@@ -144,5 +146,6 @@ onMounted(() => {
         <ModalEntryMaterial :show="store.openStockModal" :providers="providers" :categories="categories"
             :materials="materials" :types="types" :colors="colors" />
         <ModalDownloadMaterial :show="store.openDownModal" :categories="categories" :purchaseorders="purchaseorders" :orderTypes="orderTypes" :localCompanies="localCompanies" />
+        <ModalActivityModal :show="store.openLogModal" :materials="materials" />
     </AppLayout>
 </template>

@@ -27,6 +27,7 @@ class MaterialController extends Controller
     public function index()
     {
         $data = Material::orderBy('id', 'desc')->get();
+        $data->load('activities');
 
         return Inertia::render('Material/Index', [
             'materials' => MaterialResource::collection($data),
@@ -105,8 +106,8 @@ class MaterialController extends Controller
     {
         $cat = Materialcategory::find($id);
         $mat = Material::orderBy('id', 'desc')->get();
+        $mat->load('activities');
         $data = Materialtype::get();
-        return $data;
 
         return Inertia::render('Material/Index', [
             'materials' => MaterialResource::collection($mat),

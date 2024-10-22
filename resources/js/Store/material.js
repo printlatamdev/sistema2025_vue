@@ -17,6 +17,7 @@ export const useMaterialStore = defineStore("material", {
         openModal: false,
         openCatModal: false,
         openTypeModal: false,
+        openLogModal: false,
         openStockModal: false,
         openDeleteModal: false,
         openDownModal: false,
@@ -191,6 +192,9 @@ export const useMaterialStore = defineStore("material", {
         showStoreModal() {
             this.openModal = true;
         },
+        showLogModal() {
+            this.openLogModal = true;
+        },
         showTypeModal() {
             this.openTypeModal = true;
         },
@@ -214,6 +218,7 @@ export const useMaterialStore = defineStore("material", {
             this.openTypeModal = false;
             this.openStockModal = false;
             this.openDownModal = false;
+            this.openLogModal = false;
             this.clearInput();
         },
         editData(data) {

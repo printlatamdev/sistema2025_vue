@@ -58,6 +58,8 @@ class Material extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-            ->logOnly(['name', 'quantity', 'width', 'lenght', 'materialtype_id']);
+            ->logOnly(['name', 'quantity', 'width', 'lenght', 'materialtype_id'])
+            ->logOnlyDirty()
+            ->dontSubmitEmptyLogs();
     }
 }
