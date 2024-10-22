@@ -8,6 +8,7 @@ export const useCountryStore = defineStore("country", {
         countries: [],
         alert: useAlertStore(),
         isMessage: 'País',
+        search: '',
         form: useForm({
             name: "",
             acronym: "",

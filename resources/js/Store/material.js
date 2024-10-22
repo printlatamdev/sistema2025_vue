@@ -22,6 +22,7 @@ export const useMaterialStore = defineStore("material", {
         openDeleteModal: false,
         openDownModal: false,
         edit: [],
+        search: '',
         errors: [],
         form: useForm({
             name: "",

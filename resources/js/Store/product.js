@@ -7,6 +7,7 @@ export const useProductStore = defineStore("product", {
         openModal: false,
         alert: useAlertStore(),
         isMessage: 'Producto',
+        search: '',
         form: useForm({
             name: "",
             description: "",

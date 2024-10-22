@@ -24,6 +24,7 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
         openPivotModal: false,
         openDeleteModal: false,
         edit: [],
+        search: '',
         purchaseorder: [],
         errors: [],
         editor: ClassicEditor,

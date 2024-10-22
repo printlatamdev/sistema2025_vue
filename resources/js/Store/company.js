@@ -9,6 +9,7 @@ export const useCompanyStore = defineStore("company", {
         openModal: false,
         openDeleteModal: false,
         edit: [],
+        search: '',
         form: useForm({
             commercial_name: "",
             social_reason: "",

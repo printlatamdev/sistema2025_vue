@@ -7,6 +7,7 @@ export const useUserStore = defineStore("user", {
         openModal: false,
         openProfileModal: false,
         profile: [],
+        search: '',
         alert: useAlertStore(),
         isMessage: 'Usuario',
         form: useForm({

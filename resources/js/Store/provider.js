@@ -7,6 +7,7 @@ export const useProviderStore = defineStore("provider", {
         openModal: false,
         alert: useAlertStore(),
         isMessage: 'Proveedor',
+        search: '',
         form: useForm({
             name: "",
             payment_condition: "",

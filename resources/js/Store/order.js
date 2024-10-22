@@ -10,6 +10,7 @@ export const useOrderStore = defineStore("order", {
         openPivotModal: false,
         openDeleteModal: false,
         edit: [],
+        search: '',
         errors: [],
         form: useForm({
             computo: "",

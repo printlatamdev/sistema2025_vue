@@ -9,6 +9,7 @@ export const useQuoteStore = defineStore("quote", {
         isSecondMessage: "Detalle de cotización",
         getYear: parseInt(new Date().getFullYear().toString().substr(2, 2), 10),
         edit: [],
+        search: '',
         quotedetail: [],
         myErrors: [],
         newQuote: [],

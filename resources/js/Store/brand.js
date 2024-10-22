@@ -7,6 +7,7 @@ export const useBrandStore = defineStore("brand", {
         openModal: false,
         alert: useAlertStore(),
         isMessage: 'Marca',
+        search: '',
         form: useForm({
             name: "",
             category: "",
