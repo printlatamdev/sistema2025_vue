@@ -38,7 +38,8 @@ defineProps({
                             <!--<h3 class="text-md font-semibold text-gray-900">{{ item }}
                             </h3>-->
                             <p class="text-sm font-normal text-gray-600">
-                                {{ item.causer.name }} ha agregado {{ item.properties.attributes.name }} con la cantidad de {{
+                                {{ item.causer.name }} ha agregado {{ item.properties.attributes.name }} con la cantidad
+                                de {{
                                     item.properties.attributes.quantity }} unidades
                             </p>
                         </li>
