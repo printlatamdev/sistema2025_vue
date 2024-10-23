@@ -15,7 +15,7 @@ defineProps({
     },
     maxWidth: {
         type: String,
-        default: '3xl',
+        default: '5xl',
     },
 });
 
@@ -23,7 +23,7 @@ defineProps({
 <template>
     <DialogModal :show="show" @close="store.closeModal" :max-width="maxWidth">
         <template #title>
-            Nuevo registro de  {{store.isMessage }}
+            Perfil <span class="bg-teal-100 px-2 rounded-md">{{ store.profile.name }}</span>
         </template>
         <template #content>
             <div class="">

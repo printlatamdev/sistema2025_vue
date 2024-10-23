@@ -51,7 +51,13 @@ class PurchaseorderController extends Controller
             'details' => $request->details,
             'ordertype' => $request->ordertype,
         ]);
-        $data->users()->attach($request->users, []);
+        $user = User::whereIn('id', $request->users)->get();
+        foreach($user as $item){
+            $data->users()->attach($request->users, [
+                'approvedBy' => $item->find(1)->name,
+                'requestedBy' => $item->find(2)->name,
+            ]);
+        }
         PurchaseorderDetail::create(['purchaseorder_id' => $data->id, 'total_materials' => 0, 'iva' => 0, 'total' => 0]);
 
         return new PurchaseorderResource($data);

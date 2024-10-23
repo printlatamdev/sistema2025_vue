@@ -6,6 +6,7 @@ use App\Http\Requests\StoreMaterialTypeRequest;
 use App\Http\Resources\MaterialtypeResource;
 use App\Models\Color;
 use App\Models\Materialtype;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -42,7 +43,7 @@ class MaterialtypeController extends Controller
 
     public function storeInColorMaterialtype(Request $request)
     {
-        $num = 1;
+        /**$num = 1;
         $type = Materialtype::find($request->materialtype_id);
         $color = Color::find($request->color_id);
 
@@ -58,6 +59,6 @@ class MaterialtypeController extends Controller
                 'use_date' => $request->use_date,
                 'expiration_date' => $request->expiration_date,
             ]);
-        }
+        } */
     }
 }

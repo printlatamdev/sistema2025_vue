@@ -22,10 +22,14 @@ class PurchaseorderResource extends JsonResource
             'provider' => new ProviderResource($this->provider),
             'materials' => MaterialResource::collection($this->materials),
             'users' => UserResource::collection($this->whenLoaded('users')),
-            'approvedBy' => '',
             'total' => number_format($this->total, 2),
-            //'order_details' => new PurchaseorderdetailResource($this->purchaseorderdetail),
             'register_date' => Carbon::parse($this->created_at)->format('Y-m-d'),
+            'approvedBy' => $this->whenPivotLoaded('purchaseorder_user', function () {
+                return $this->pivot->approvedBy;
+            }),
+            'requestedBy' => $this->whenPivotLoaded('purchaseorder_user', function () {
+                return $this->pivot->requestedBy;
+            }),
         ];
     }
 }

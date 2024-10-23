@@ -16,6 +16,8 @@ return new class extends Migration
                 $table->id();
                 $table->foreignId('purchaseorder_id')->constrained();
                 $table->foreignId('user_id')->constrained();
+                $table->string('approvedBy')->nullable();
+                $table->string('requestedBy')->nullable();
                 $table->timestamps();
             });
         }
