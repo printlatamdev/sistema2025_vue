@@ -15,6 +15,7 @@ export const useQuoteStore = defineStore("quote", {
         newQuote: [],
         contactsByCompany: [],
         tempQuotedetails: [],
+        loadingImage: false,
         openModal: false,
         openModalQD: false,
         openDeleteModal: false,
@@ -266,6 +267,7 @@ export const useQuoteStore = defineStore("quote", {
             if (!image) return;
             const reader = new FileReader();
             reader.onload = (e) => {
+                this.loadingImage = false;
                 this.formQD.image = image;
             };
             reader.readAsDataURL(image);

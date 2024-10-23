@@ -53,7 +53,6 @@ defineProps({
         <template #content>
             <div class="">
                 <form>
-                    {{ store.form }}
                     <div class="w-full">
                         <InputLabel for="name" value="Proveedor" />
                         <div class="flex">

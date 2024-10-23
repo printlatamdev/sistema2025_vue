@@ -65,8 +65,8 @@
             <tr>
                 <td class="borderstable">{{ $data['date'] }}</td>
                 <td class="borderstable">{{ $item['provider']['name'] }}</td>
-                <td class="borderstable">requested</td>
-                <td class="borderstable">approved</td>
+                <td class="borderstable">{{ $item['requestedBy'] }}</td>
+                <td class="borderstable">{{ $item['approvedBy'] }}</td>
                 <td class="borderstable">{{ $item['ordertype'] }}</td>
             </tr>
             <tr>

@@ -105,18 +105,18 @@
                 <th class="widthproduct">DESCRIPCIÓN</th>
                 <th class="widthproduct">CANTIDAD</th>
                 <th class="widthproduct">UNITARIO</th>
-                <th class="widthproduct">TOTAL</th>
+                <th class="widthproduct">SUBTOTAL</th>
             </tr>
             @foreach ($item->products as $pr)
             <tr>
-                <td class="borderstable">
+                <td class="borderstable" width="10">
                     <img src="{{ url($pr['pivot']['image']) }}">
                     <p class="">{{ $pr['name'] }}</p>
                 </td>
                 <td class="borderstable">{{ $pr['pivot']['details'] }}</td>
-                <td class="borderstable">{{ $pr['pivot']['quantity'] }}</td>
-                <td class="borderstable">{{ $pr['pivot']['price'] }}</td>
-                <td class="borderstable">${{ $pr['pivot']['total'] }}</td>
+                <td class="borderstable"  width="10">{{ $pr['pivot']['quantity'] }}</td>
+                <td class="borderstable" width="10">${{ $pr['pivot']['price'] }}</td>
+                <td class="borderstable" width="10">${{ $pr['pivot']['subtotal'] }}</td>
             </tr>
             @endforeach
         </table>           
