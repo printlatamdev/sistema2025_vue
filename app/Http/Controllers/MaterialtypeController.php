@@ -8,6 +8,7 @@ use App\Models\Color;
 use App\Models\Materialtype;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
