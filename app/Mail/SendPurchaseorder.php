@@ -48,12 +48,12 @@ class SendPurchaseorder extends Mailable
      *
      * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */
-    public function attachments(): array
+    public function attachments()
     {
-        if (! empty($this->emailData['report'])) {
+       /** if (! empty($this->emailData['report'])) {
             return [
                 Attachment::fromPath($this->emailData['report']),
             ];
-        }
+        } */
     }
 }

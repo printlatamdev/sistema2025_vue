@@ -210,6 +210,8 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             this.edit = data;
             this.form.provider_id = data.provider.id;
             this.form.details = data.details;
+            this.form.approvedBy = data.approvedBy,
+            this.form.requestedBy = data.requestedBy,
             /**data.users.map((el) => {
                 el.roles.map((element) => {
                     if(element.id == 1){

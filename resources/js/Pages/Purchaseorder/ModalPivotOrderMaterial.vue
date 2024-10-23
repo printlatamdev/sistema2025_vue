@@ -48,7 +48,7 @@ defineProps({
                         <div class="w-2/5">
                             <InputLabel for="material_id" value="Material" />
                             <div class="w-full flex">
-                                <v-select v-model="store.formOD.material_id" class="w-full" :options="materials"
+                                <v-select v-model="store.formOD.material_id" class="w-full mr-2" :options="materials"
                                     label="name" :reduce="materials => materials.id">
                                     <template v-slot:no-options="{ search, searching }">
                                         <template v-if="searching">
@@ -57,10 +57,10 @@ defineProps({
                                         <em v-else style="opacity: 0.5">Empieza a escribir para buscar un material</em>
                                     </template>
                                 </v-select>
-                                <AddButton v-tooltip="'Agregar nuevo material'" class="mr-2 self-center"
+                                <!--<AddButton v-tooltip="'Agregar nuevo material'" class="mr-2 self-center"
                                     @click="store_material.showStoreModal()">
                                     <font-awesome-icon :icon="['fas', 'plus']" />
-                                </AddButton>
+                                </AddButton>-->
                                 <InputError class="" :message="store.form.errors.material_id" />
                             </div>
                         </div>
@@ -163,12 +163,13 @@ defineProps({
                                     :config="store.editorConfig" />
                             </div>
                             <div class="flex justify-end mt-7">
-                                <PrimaryButton class="mr-1 w-full" :disabled="store.purchaseorder.report==null" @click.prevent="store.sendPurchaseOrder(store.edit.id)"
+                                <PrimaryButton class="mr-1 w-full" @click.prevent="store.sendPurchaseOrder(store.edit.id)"
                                     v-tooltip="'Debe generar la orden para habilitar el envío de correo electrónico'">
                                     <font-awesome-icon :icon="['fas', 'envelope']" class="mr-1" /> Envíar correo
                                 </PrimaryButton>
                             </div>
                         </form>
+                        <!--<div v-html="store.formMail.body"> </div>-->
                     </div>
                 </div><br>
             </div>

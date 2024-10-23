@@ -87,7 +87,7 @@ defineProps({
                     </a>
                 </template>
                 <template #item-options="options" class="flex justify-center">
-                    <SecondaryButton class="mr-1" @click="store.editData(options)" v-tooltip="'Actualizar orden'">
+                    <SecondaryButton class="mr-1" @click="store.editData(options.purchaseorder)" v-tooltip="'Actualizar orden'">
                         <font-awesome-icon :icon="['fas', 'pen-to-square']" />
                     </SecondaryButton>
                     <DangerButton @click="store.showDeleteModal(options)" v-tooltip="'Eliminar orden'">
