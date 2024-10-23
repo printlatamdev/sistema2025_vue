@@ -18,6 +18,8 @@ return new class extends Migration
                 $table->text('details')->nullable();
                 $table->foreignId('provider_id')->constrained();
                 $table->float('total', 8, 2)->nullable();
+                $table->string('approvedBy')->nullable();
+                $table->string('requestedBy')->nullable();
                 $table->timestamps();
             });
         }

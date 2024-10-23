@@ -75,8 +75,4 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
     
-    public function purchaseorders()
-    {
-        return $this->belongsToMany(Purchaseorder::class, 'purchaseorder_user')->withPivot('approvedBy', 'requestedBy')->orderByPivot('id', 'desc');
-    }
 }

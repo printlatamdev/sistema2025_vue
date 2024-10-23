@@ -53,6 +53,7 @@ defineProps({
         <template #content>
             <div class="">
                 <form>
+                    {{ store.form }}
                     <div class="w-full">
                         <InputLabel for="name" value="Proveedor" />
                         <div class="flex">
@@ -75,8 +76,8 @@ defineProps({
                     <div class="flex">
                         <div class="w-full mt-3 mr-2">
                             <InputLabel for="name" value="Solicitado por" />
-                            <v-select v-model="store.form.requested_by" :options="requestedBy" label="name"
-                                :reduce="user => user.id">
+                            <v-select v-model="store.form.requestedBy" :options="requestedBy" label="name"
+                                :reduce="user => user">
                                 <template v-slot:no-options="{ search, searching }">
                                     <template v-if="searching">
                                         No se ha encontrado resultados para <em>{{ search }}</em>.
@@ -89,8 +90,8 @@ defineProps({
                         </div>
                         <div class="w-full mt-3">
                             <InputLabel for="name" value="Autorizado por" />
-                            <v-select v-model="store.form.approved_by" :options="approvedBy" label="name"
-                                :reduce="user => user.id">
+                            <v-select v-model="store.form.approvedBy" :options="approvedBy" label="name"
+                                :reduce="user => user">
                                 <template v-slot:no-options="{ search, searching }">
                                     <template v-if="searching">
                                         No se ha encontrado resultados para <em>{{ search }}</em>.

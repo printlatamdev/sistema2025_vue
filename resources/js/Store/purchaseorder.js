@@ -63,9 +63,8 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             provider_id: "",
             details: "",
             ordertype: [],
-            approved_by: "",
-            requested_by: "",
-            users: [],
+            approvedBy: "",
+            requestedBy: "",
             processing: false,
         }),
         formOD: useForm({
@@ -139,13 +138,13 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
     },
     actions: {
         storeOrder(id) {
-            this.form.users = [this.form.approved_by,  this.form.requested_by];
             if (!id) {
             axios.post(route("store.purchaseorders"), {
                     provider_id: this.form.provider_id,
                     details: this.form.details,
                     ordertype: this.form.ordertype,
-                    users: this.form.users,
+                    approvedBy: this.form.approvedBy.name,
+                    requestedBy: this.form.requestedBy.name,
                 }).then((response) => {
                     this.edit = response.data;
                     this.closeModal();
@@ -213,7 +212,7 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             this.edit = data;
             this.form.provider_id = data.provider.id;
             this.form.details = data.details;
-            data.users.map((el) => {
+            /**data.users.map((el) => {
                 el.roles.map((element) => {
                     if(element.id == 1){
                         this.form.approved_by = el.id;
@@ -221,7 +220,7 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
                         this.form.requested_by = el.id;
                     }
                 });
-            });
+            }); */
             this.form.ordertype = data.ordertype;
         },
         sendPurchaseOrder(purchaseorder_id){

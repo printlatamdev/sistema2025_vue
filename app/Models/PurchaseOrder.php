@@ -14,12 +14,9 @@ class Purchaseorder extends Model
         'details',
         'ordertype',
         'total',
+        'approvedBy',
+        'requestedBy',
     ];
-
-    public function users()
-    {
-        return $this->belongsToMany(User::class, 'purchaseorder_user')->withPivot('approvedBy', 'requestedBy')->orderByPivot('id', 'desc');
-    }
 
     public function provider()
     {

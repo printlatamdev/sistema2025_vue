@@ -25,7 +25,6 @@ class PurchaseorderController extends Controller
     {
         $data = Purchaseorder::orderBy('id', 'desc')->get();
         $pod = PurchaseorderDetail::orderBy('id', 'desc')->get();
-        $data->load('users');
 
         return Inertia::render('Purchaseorder/Index', [
             'purchaseorders' => PurchaseorderResource::collection($data),
@@ -50,14 +49,16 @@ class PurchaseorderController extends Controller
             'provider_id' => $request->provider_id,
             'details' => $request->details,
             'ordertype' => $request->ordertype,
+            'approvedBy' => $request->approvedBy,
+            'requestedBy' => $request->requestedBy,
         ]);
-        $status = User::whereIn('id', $request->users)->whereHas('roles', function ($query) {
+       /** $status = User::whereIn('id', $request->users)->whereHas('roles', function ($query) {
             return $query->groupBy('id')->orderBy('id', 'desc');
         })->get();
         $data->users()->attach($request->users, [
             'approvedBy' => $status[0]->name,
             'requestedBy' => $status[1]->name,
-        ]);
+        ]); */
         PurchaseorderDetail::create(['purchaseorder_id' => $data->id, 'total_materials' => 0, 'iva' => 0, 'total' => 0]);
 
         return new PurchaseorderResource($data);
@@ -69,6 +70,8 @@ class PurchaseorderController extends Controller
             'provider_id' => $request->provider_id,
             'details' => $request->details,
             'ordertype' => $request->ordertype,
+            'approvedBy' => $request->approvedBy,
+            'requestedBy' => $request->requestedBy,
         ]);
 
         return redirect()->route('purchaseorders');
