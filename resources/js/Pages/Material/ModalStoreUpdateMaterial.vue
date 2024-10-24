@@ -108,7 +108,7 @@ defineProps({
                     <div class="mt-7 bg-gray-100 border rounded-t-xl">
                         <div class="flex items-center cursor-pointer justify-between w-full p-3 font-medium text-gray-700  hover:bg-gray-100"
                             @click="store.showForm(store.isForm)">
-                            <span class="font-semibold">Detalles de {{ categories.name == 'Tintas' ? 'tintas' :
+                            <span class="font-semibold">Detalles de {{ categories.id == 1 ? 'tintas' :
                                 'material'
                                 }}</span>
                             <!--icon-->

@@ -50,10 +50,10 @@ class SendPurchaseorder extends Mailable
      */
     public function attachments()
     {
-       /** if (! empty($this->emailData['report'])) {
-            return [
-                Attachment::fromPath($this->emailData['report']),
-            ];
-        } */
+        /** if (! empty($this->emailData['report'])) {
+             return [
+                 Attachment::fromPath($this->emailData['report']),
+             ];
+         } */
     }
 }

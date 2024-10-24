@@ -52,7 +52,7 @@ class PurchaseorderController extends Controller
             'approvedBy' => $request->approvedBy,
             'requestedBy' => $request->requestedBy,
         ]);
-       /** $status = User::whereIn('id', $request->users)->whereHas('roles', function ($query) {
+        /** $status = User::whereIn('id', $request->users)->whereHas('roles', function ($query) {
             return $query->groupBy('id')->orderBy('id', 'desc');
         })->get();
         $data->users()->attach($request->users, [
@@ -157,7 +157,7 @@ class PurchaseorderController extends Controller
         ];
         $pdf = Pdf::loadView('reports/purchaseorderReport', compact('data'));
 
-        return $pdf->stream('orden-de-compra-' . $pod->id . Carbon::now() . '-' . '.pdf');
+        return $pdf->stream('orden-de-compra-'.$pod->id.Carbon::now().'-'.'.pdf');
     }
 
     public function storeReport($request, $id)

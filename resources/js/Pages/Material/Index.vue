@@ -144,7 +144,7 @@ onMounted(() => {
             <ModalEntryMaterial :show="store.openStockModal" :providers="providers" :categories="cat"
                 :materials="materials" :types="types" :colors="colors" />
             <ModalDownloadMaterial :show="store.openDownModal" :categories="cat" :purchaseorders="purchaseorders"
-                :orderTypes="orderTypes" :localCompanies="localCompanies" />
+                :orderTypes="orderTypes" :localCompanies="localCompanies" :materials="materials" />
             <ModalActivityModal :show="store.openLogModal" :materials="materials" />
         </div>
     </AppLayout>

@@ -1,13 +1,11 @@
 <script setup>
-import { computed, defineProps } from 'vue';
+import {  defineProps } from 'vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import DialogModal from '@/Components/DialogModal.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import Filepond from '@/Components/Filepond.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { useMaterialStore } from '@/Store/material';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
-import WarningButton from '@/Components/WarningButton.vue';
 
 let store = useMaterialStore();
 defineProps({

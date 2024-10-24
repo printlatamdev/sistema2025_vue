@@ -22,8 +22,9 @@ export const useMaterialStore = defineStore("material", {
         openDeleteModal: false,
         openDownModal: false,
         edit: [],
-        search: '',
+        search: "",
         loadingImage: false,
+        loadingFile: false,
         errors: [],
         form: useForm({
             name: "",
@@ -58,13 +59,13 @@ export const useMaterialStore = defineStore("material", {
             processing: false,
         }),
         formInk: useForm({
-            color_id: '',
-            type_id: '',
-            quantity: '',
-            code: '',
-            departure_date: '',
-            use_date: '',
-            expiration_date: '',
+            color_id: "",
+            type_id: "",
+            quantity: "",
+            code: "",
+            departure_date: "",
+            use_date: "",
+            expiration_date: "",
             error: "",
             processing: false,
         }),
@@ -83,6 +84,8 @@ export const useMaterialStore = defineStore("material", {
             quantity: "",
             ordertype: "",
             company: "",
+            image: null,
+            file: null,
             description: "",
             error: "",
             processing: false,
@@ -97,9 +100,7 @@ export const useMaterialStore = defineStore("material", {
         filledInputCat(state) {
             return state.formCat.name == "" || state.formCat.image == "";
         },
-        createInks(state){
-          
-        }
+        createInks(state) {},
     },
     actions: {
         storeMaterial(type, cat_id) {
@@ -140,20 +141,20 @@ export const useMaterialStore = defineStore("material", {
                 this.currentType = data;
             });
         },
-        showType(id){
+        showType(id) {
             axios.get(route("show.types", id)).then((response) => {
                 this.activeTab = id;
                 this.type = response.data;
                 this.showStoreModal();
             });
         },
-        showForm(status){
+        showForm(status) {
             this.isForm = true;
-            if(status == true){
+            if (status == true) {
                 this.hideForm();
             }
         },
-        hideForm(){
+        hideForm() {
             this.isForm = false;
         },
         resetToZero() {
@@ -176,19 +177,33 @@ export const useMaterialStore = defineStore("material", {
                 },
             });
         },
-        storePivotInk(){
-
-        },
-        downloadMaterial(){
-
-        },
-        handleFile(e) {
+        storePivotInk() {},
+        downloadMaterial() {},
+        handleFile(e, num) {
+            if (num == 1) {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    this.loadingFile = false;
+                    this.formDown.file = image;
+                };
+                reader.readAsDataURL(file);
+            } else {
+                const image = e.target.files[0];
+                if (!image) return;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    this.form.image = image;
+                };
+                reader.readAsDataURL(image);
+            }
             const image = e.target.files[0];
             if (!image) return;
             const reader = new FileReader();
             reader.onload = (e) => {
                 this.loadingImage = false;
-                this.formCat.image = image;
+                this.formDown.image = image;
             };
             reader.readAsDataURL(image);
         },
