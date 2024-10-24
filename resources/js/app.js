@@ -42,7 +42,6 @@ createInertiaApp({
             .use(VueSweetalert2)
             .use(FloatingVue,)
             .use(CkeditorPlugin)
-            //.use(vMaska)
             .component('EasyDataTable', Vue3EasyDataTable)
             .component('font-awesome-icon', FontAwesomeIcon)
             .component('VueDatePicker', VueDatePicker)

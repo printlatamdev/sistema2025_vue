@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreMaterialCategoryRequest;
 use App\Http\Resources\MaterialcategoryResource;
 use App\Models\Materialcategory;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class MaterialcategoryController extends Controller
         return MaterialcategoryResource::collection($data);
     }
 
-    public function store(Request $request)
+    public function store(StoreMaterialCategoryRequest $request)
     {
         $image = new ImageController;
         $data = Materialcategory::create([

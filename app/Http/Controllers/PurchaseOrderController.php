@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\OrderEnum;
 use App\Enums\PaymentConditionEnum;
+use App\Http\Requests\StorePurchaseorderRequest;
 use App\Http\Resources\PurchaseorderdetailResource;
 use App\Http\Resources\PurchaseorderResource;
 use App\Mail\SendPurchaseorder;
@@ -43,7 +44,7 @@ class PurchaseorderController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StorePurchaseorderRequest $request)
     {
         $data = Purchaseorder::create([
             'provider_id' => $request->provider_id,

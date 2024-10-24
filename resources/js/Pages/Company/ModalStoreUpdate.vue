@@ -42,19 +42,19 @@ defineProps({
                     <div class="flex mt-3">
                         <div class="w-1/2 mr-2">
                             <InputLabel for="cellphone" value="Celular" />
-                            <TextInput v-model="store.form.cellphone" class="w-full" type="text" />
+                            <TextInput v-model="store.form.cellphone" class="w-full" type="text" v-maska="'####-####'"/>
                             <InputError class="" :message="store.form.errors.cellphone" />
                         </div>
                         <div class="w-1/2">
                             <InputLabel for="telephone" value="Teléfono" />
-                            <TextInput v-model="store.form.telephone" class="w-full" type="text" />
+                            <TextInput v-model="store.form.telephone" class="w-full" type="text" v-maska="'####-####'" />
                         </div>
                     </div>
 
                     <div class="flex mt-3">
                         <div class="w-1/3 mr-2">
                             <InputLabel for="nrc" value="NRC" />
-                            <TextInput v-model="store.form.nrc" class="w-full" type="text" v-maska="'######-#'" />
+                            <TextInput v-model="store.form.nrc" class="w-full" type="text" />
                             <InputError class="" :message="store.form.errors.nrc" />
                         </div>
                         <div class="w-1/3 mr-2">

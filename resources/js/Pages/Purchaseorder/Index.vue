@@ -63,7 +63,7 @@ defineProps({
                     <TextInput v-model="store.search" class="w-full" type="text" />
                 </div>
                     <div class="self-end">
-                        <WarningButton class="mr-2">
+                        <WarningButton class="mr-2" disabled>
                             <font-awesome-icon :icon="['fas', 'filter']" class="mr-1" />Filtrar
                         </WarningButton>
                     </div>

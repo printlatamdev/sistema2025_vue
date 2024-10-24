@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Enums\PaymentConditionEnum;
+use App\Http\Requests\StoreProviderRequest;
 use App\Http\Resources\ProviderResource;
 use App\Models\Provider;
-use Illuminate\Http\Request;
 
 class ProviderController extends Controller
 {
@@ -16,7 +16,7 @@ class ProviderController extends Controller
         return ProviderResource::collection($data);
     }
 
-    public function store(Request $request)
+    public function store(StoreProviderRequest $request)
     {
         Provider::create([
             'name' => $request->name,

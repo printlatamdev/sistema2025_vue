@@ -77,7 +77,7 @@ defineProps({
                         </div>
                         <div class="w-1/4 mr-2">
                             <InputLabel for="cellphone" value="Celular" />
-                            <TextInput v-model="store.form.cellphone" class="w-full" type="text" />
+                            <TextInput v-model="store.form.cellphone" class="w-full" type="text" v-maska="'####-####'" />
                             <InputError class="" :message="store.form.errors.cellphone" />
                         </div>
                         <div class="w-1/4">

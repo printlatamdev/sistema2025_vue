@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePurchaseorderRequest extends FormRequest
+class StoreProviderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,17 +22,15 @@ class StorePurchaseorderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'provider_id' => 'required|numeric',
-            'approvedBy' => 'required',
-            'requestedBy' => 'required',
+            'name' => 'required',
+            'payment_condition' => 'required',
         ];
     }
     public function messages()
     {
         return [
-            'provider_id.required' => 'El proveedor es requerido',
-            'approvedBy.required' => 'Es requerido el nombre de la persona que aprobará la orden',
-            'requestedBy.required' => 'Es requerido el nombre de la persona que solicita la orden',
+            'name.required' => 'El nombre del proveedor es requerido',
+            'name.required' => 'El método de pago es requerido',
         ];
     }
 }

@@ -164,7 +164,7 @@ defineProps({
                             </div>
                             <div class="flex justify-end mt-7">
                                 <PrimaryButton class="mr-1 w-full" @click.prevent="store.sendPurchaseOrder(store.edit.id)"
-                                    v-tooltip="'Debe generar la orden para habilitar el envío de correo electrónico'">
+                                    v-tooltip="'Debe generar la orden para habilitar el envío de correo electrónico'"  :disabled="store.purchaseorder.report==null">
                                     <font-awesome-icon :icon="['fas', 'envelope']" class="mr-1" /> Envíar correo
                                 </PrimaryButton>
                             </div>

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePurchaseorderRequest extends FormRequest
+class StoreCountryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,17 +22,19 @@ class StorePurchaseorderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'provider_id' => 'required|numeric',
-            'approvedBy' => 'required',
-            'requestedBy' => 'required',
+            'name' => 'required|string',
+            'acronym' => 'required|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ];
     }
     public function messages()
     {
         return [
-            'provider_id.required' => 'El proveedor es requerido',
-            'approvedBy.required' => 'Es requerido el nombre de la persona que aprobará la orden',
-            'requestedBy.required' => 'Es requerido el nombre de la persona que solicita la orden',
+            'name.required' => 'El nombre del país es requerido',
+            'acronym.required' => 'El acrónimo del país es requerido',
+            'image.required' => 'La imagen es requerida',
+            'image.image' => 'El archivo subido no es una imagen',
+            'image.mimes' => 'El formato de la imagen es requerida',
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCountryRequest;
 use App\Http\Resources\CountryResource;
 use App\Models\Country;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class CountryController extends Controller
         return CountryResource::collection($data);
     }
 
-    public function store(Request $request)
+    public function store(StoreCountryRequest $request)
     {
         $image = new ImageController;
         $data = Country::create([
