@@ -102,9 +102,8 @@ class MaterialController extends Controller
         ]);
     }
 
-    public function getTypeFromCategories($id)
+    public function getTypeFromCategories($materialcategory)
     {
-        $cat = Materialcategory::find($id);
         $mat = Material::orderBy('id', 'desc')->get();
         $mat->load('activities');
         $data = Materialtype::get();
@@ -112,7 +111,7 @@ class MaterialController extends Controller
         return Inertia::render('Material/Index', [
             'materials' => MaterialResource::collection($mat),
             'types' => MaterialtypeResource::collection($data),
-            'categories' => MaterialcategoryResource::make($cat),
+            'categories' => Materialcategory::where('name', $materialcategory)->get(),
             'brands' => BrandResource::collection(Brand::get()),
             'colors' => ColorResource::collection(Color::get()),
             'providers' => ProviderResource::collection(Provider::get()),

@@ -31,7 +31,7 @@ defineProps({
                     <p>Nueva categoría</p>
                 </div>
                 <div v-for="item in categories" :key="item.id">
-                    <Link :href="route('categories.types', item.id)" >
+                    <Link :href="route('categories.types', item.name.toLowerCase())" >
                         <Card v-tooltip="'Acceder a los tipos de material ' + `${item.name}`">
                             <template #description>
                                 <p class="text-lg font-semibold">{{ item.name }}</p>
