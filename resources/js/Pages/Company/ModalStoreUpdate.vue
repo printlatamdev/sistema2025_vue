@@ -5,6 +5,7 @@ import DialogModal from '@/Components/DialogModal.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
+import { vMaska } from "maska/vue"
 import { useCompanyStore } from '@/Store/company';
 
 let store = useCompanyStore();
@@ -53,12 +54,12 @@ defineProps({
                     <div class="flex mt-3">
                         <div class="w-1/3 mr-2">
                             <InputLabel for="nrc" value="NRC" />
-                            <TextInput v-model="store.form.nrc" class="w-full" type="text" />
+                            <TextInput v-model="store.form.nrc" class="w-full" type="text" v-maska="'######-#'" />
                             <InputError class="" :message="store.form.errors.nrc" />
                         </div>
                         <div class="w-1/3 mr-2">
                             <InputLabel for="nit" value="NIT" />
-                            <TextInput v-model="store.form.nit" class="w-full" type="text" />
+                            <TextInput v-model="store.form.nit" class="w-full" type="text" v-maska="'####-######-###-#'" />
                             <InputError class="" :message="store.form.errors.nit" />
                         </div>
                         <div class="w-1/3">

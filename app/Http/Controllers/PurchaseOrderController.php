@@ -86,8 +86,7 @@ class PurchaseorderController extends Controller
 
     public function getPODetail(Purchaseorder $purchaseorder)
     {
-        $data = PurchaseorderDetail::where('id', $purchaseorder->id)->orderBy('id', 'desc')->get();
-
+        $data = PurchaseorderDetail::where('purchaseorder_id', $purchaseorder->id)->orderBy('id', 'desc')->get();
         return PurchaseorderdetailResource::collection($data);
     }
 

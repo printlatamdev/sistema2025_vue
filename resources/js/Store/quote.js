@@ -159,26 +159,26 @@ export const useQuoteStore = defineStore("quote", {
     actions: {
         storeQuote(id) {
             if (!id) {
-                axios
-                    .post(route("store.quotations"), {
-                        important_note: this.form.important_note,
-                        payment_condition: this.form.payment_condition,
-                        offer_validity: this.form.offer_validity,
-                        currency: this.form.currency,
-                        status: this.form.status,
-                        incoterm: this.form.incoterm,
-                        user_id: this.form.user_id,
-                        company_id: this.form.company_id,
-                        contact_id: this.form.contact_id,
-                    })
-                    .then((response) => {
-                        this.edit = response.data;
-                        this.closeModal();
-                        this.alert.successAlert(this.isMessage + " agregado");
-                    })
-                    .catch((error) => {
-                        this.myErrors = error.response.data.errors;
-                    });
+                axios.post(route("store.quotations"), {
+                    important_note: this.form.important_note,
+                    payment_condition: this.form.payment_condition,
+                    offer_validity: this.form.offer_validity,
+                    currency: this.form.currency,
+                    status: this.form.status,
+                    incoterm: this.form.incoterm,
+                    user_id: this.form.user_id,
+                    company_id: this.form.company_id,
+                    contact_id: this.form.contact_id,
+                })
+                .then((response) => {
+                    this.edit = response.data;
+                    this.closeModal();
+                    this.alert.successAlert(this.isMessage + " agregado");
+                    this.showModalQD();
+                })
+                .catch((error) => {
+                    this.myErrors = error.response.data.errors;
+                });
             } else {
                 this.form.put(route("update.quotations", id), {
                     onSuccess: () => {

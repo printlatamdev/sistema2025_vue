@@ -185,6 +185,7 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
                 onSuccess: () => {
                     this.clearPivotInput();
                     this.refreshData(id);
+                    this.getPurchaseorderDetail(id);
                     this.alert.successAlert(this.isMessage + " agregado");
                 },
                 onError: (error) => {
@@ -240,6 +241,7 @@ export const usePurchaseorderStore = defineStore("purchaseorder", {
             axios.get(route("podetailrefresh", id)).then((response) => {
                 response.data.map((el) => {
                     this.purchaseorder = el;
+                    console.log(this.purchaseorder);
                 });
             });    
         },

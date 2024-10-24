@@ -180,32 +180,22 @@ export const useMaterialStore = defineStore("material", {
         storePivotInk() {},
         downloadMaterial() {},
         handleFile(e, num) {
+            const file = e.target.files[0];
+            const reader = new FileReader();
             if (num == 1) {
-                const file = e.target.files[0];
                 if (!file) return;
-                const reader = new FileReader();
                 reader.onload = (e) => {
                     this.loadingFile = false;
                     this.formDown.file = image;
                 };
-                reader.readAsDataURL(file);
             } else {
-                const image = e.target.files[0];
-                if (!image) return;
-                const reader = new FileReader();
+                if (!file) return;
                 reader.onload = (e) => {
-                    this.form.image = image;
+                    this.loadingImage = false;
+                    this.formDown.image = file;
                 };
-                reader.readAsDataURL(image);
             }
-            const image = e.target.files[0];
-            if (!image) return;
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                this.loadingImage = false;
-                this.formDown.image = image;
-            };
-            reader.readAsDataURL(image);
+            reader.readAsDataURL(file);
         },
         showStoreModal() {
             this.openModal = true;
