@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreMaterialCategoryRequest;
 use App\Http\Resources\MaterialcategoryResource;
 use App\Models\Materialcategory;
-use Illuminate\Http\Request;
 
 class MaterialcategoryController extends Controller
 {

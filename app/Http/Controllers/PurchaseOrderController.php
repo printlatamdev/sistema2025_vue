@@ -88,6 +88,7 @@ class PurchaseorderController extends Controller
     public function getPODetail(Purchaseorder $purchaseorder)
     {
         $data = PurchaseorderDetail::where('purchaseorder_id', $purchaseorder->id)->orderBy('id', 'desc')->get();
+
         return PurchaseorderdetailResource::collection($data);
     }
 
@@ -164,8 +165,12 @@ class PurchaseorderController extends Controller
     {
         $file = new FileController;
         $pod = PurchaseorderDetail::find($id);
+        
+        $pdf = Pdf::loadView('reports/purchaseorderReport');
+        $pdf->download('orden-de-compra-'.$pod->id.Carbon::now().'-'.'.pdf')->getOriginalContent();
 
-        $pdf = $file->store($request->report, PurchaseorderDetail::class, $pod->id);
-        $pod->file()->save($pdf);
+        $saveInTable = $file->store($request->report, PurchaseorderDetail::class, $pod->id);
+        $pod->file()->save($saveInTable);
+
     }
 }

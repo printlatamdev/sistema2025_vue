@@ -26,6 +26,7 @@ class StoreProviderRequest extends FormRequest
             'payment_condition' => 'required',
         ];
     }
+
     public function messages()
     {
         return [

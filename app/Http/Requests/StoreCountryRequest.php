@@ -27,6 +27,7 @@ class StoreCountryRequest extends FormRequest
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ];
     }
+
     public function messages()
     {
         return [
