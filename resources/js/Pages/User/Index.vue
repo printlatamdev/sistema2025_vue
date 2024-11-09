@@ -1,8 +1,10 @@
 <script setup>
+import { onMounted } from 'vue';
 import AppLayout from '@/Layouts/AppLayout.vue';
-import { useUserStore } from '@/Store/user';
 import ModalStoreUpdate from './ModalStoreUpdate.vue';
 import ModalProfile from './ModalProfile.vue';
+import Roles from './Roles.vue';
+import { useUserStore } from '@/Store/user';
 
 let store = useUserStore();
 defineProps({
@@ -19,13 +21,29 @@ defineProps({
         default: ([]),
     },
 });
+onMounted(() => {
+    store.resetToZero();
+});
 
 </script>
 <template>
     <AppLayout title="Usuarios">
-        <div class="w-full">
+        <div class="">
             <h2 class="text-3xl font-bold">Datos de {{ store.isMessage }}</h2>
-            <div class=" mt-7 grid gap-6 grid-cols-2 xl:grid-cols-6 md:grid-cols-3">
+                <!--tabs-->
+                <div class="mt-5 w-full">
+                    <ul class='flex justify-start cursor-pointer'>
+                        <li class='py-2 px-6 rounded-t-lg text-gray-700 bg-gray-100 border'
+                            :class="{ 'bg-gray-700 text-white': store.activeTab == 1 }" @click="store.showRoles()">
+                            Roles
+                        </li>
+                        <li class='py-2 px-6 rounded-t-lg text-gray-700 bg-gray-100 border'
+                            :class="{ 'bg-gray-700 text-white': store.activeTab == 2 }" @click="store.resetToZero()">
+                            Permisos
+                        </li>
+                    </ul>
+                </div>
+            <div class=" mt-7 grid gap-6 grid-cols-2 xl:grid-cols-6 md:grid-cols-3" v-if="store.activeTab==0">
                 <!--Begin card-->
                 <div class="w-full border text-center cursor-pointer p-4 rounded-lg transform hover:scale-105 transition duration-500"
                     @click="store.showStoreModal()">
@@ -61,6 +79,7 @@ defineProps({
                 </div>
             </div>
         </div>
+        <Roles v-if="store.activeTab==1" />
         <ModalStoreUpdate :show="store.openModal" :roles="roles" :countries="countries" />
         <ModalProfile :show="store.openProfileModal" />
     </AppLayout>

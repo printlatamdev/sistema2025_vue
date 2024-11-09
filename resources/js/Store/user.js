@@ -8,8 +8,10 @@ export const useUserStore = defineStore("user", {
         openProfileModal: false,
         profile: [],
         search: '',
+        activeTab: 0,
         alert: useAlertStore(),
         isMessage: 'Usuario',
+        isMessageRol: 'Rol',
         form: useForm({
             name: "",
             email: "",
@@ -35,6 +37,13 @@ export const useUserStore = defineStore("user", {
                     this.resetInputs();
                 },
             });
+        },
+        showRoles(){
+            this.isMessage = 'Roles';
+            this.activeTab = 1;
+        },
+        resetToZero() {
+            this.activeTab = 0;
         },
         resetInputs(){
             this.form.name = "";

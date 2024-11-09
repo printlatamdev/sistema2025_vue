@@ -48,6 +48,7 @@ const submit = () => {
 
         <div class="border rounded-lg p-5">
             <AuthenticationCardLogo />
+            <p class="text-center text-sm font-semibold">Sistema de gestión de datos 2025</p>
             <form @submit.prevent="submit" class="mt-5">
                 <div>
                     <InputLabel for="email" value="Correo electrónico" />

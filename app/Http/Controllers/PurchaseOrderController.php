@@ -161,16 +161,22 @@ class PurchaseorderController extends Controller
         return $pdf->stream('orden-de-compra-'.$pod->id.Carbon::now().'-'.'.pdf');
     }
 
-    public function storeReport($request, $id)
+    public function storeReport($id)
     {
         $file = new FileController;
         $pod = PurchaseorderDetail::find($id);
-        
-        $pdf = Pdf::loadView('reports/purchaseorderReport');
-        $pdf->download('orden-de-compra-'.$pod->id.Carbon::now().'-'.'.pdf')->getOriginalContent();
+        $purchaseorder = Purchaseorder::where('id', $pod->purchaseorder_id)->with(['provider', 'materials'])->get();
+        $data = [
+            'purchaseorderDetail' => $pod,
+            'purchaseorder' => $purchaseorder,
+            'report' => $pod->report,
+            'date' => Carbon::parse($pod->created_at)->format('Y-m-d'),
+        ];
+        $pdf = Pdf::loadView('reports/purchaseorderReport', compact('data'));
+        //Store in polymorphic table
+        $file->store($pdf, PurchaseorderDetail::class, $id);
+        $pod->file()->save($pdf);
 
-        $saveInTable = $file->store($request->report, PurchaseorderDetail::class, $pod->id);
-        $pod->file()->save($saveInTable);
-
+        return $pdf->download('orden-de-compra-'.$pod->id.Carbon::now().'-'.'.pdf', $pdf->output());
     }
 }
