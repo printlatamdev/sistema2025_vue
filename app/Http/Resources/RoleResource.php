@@ -18,6 +18,7 @@ class RoleResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'guard_name' => $this->guard_name,
             'permissions' => PermissionResource::collection($this->permissions),
             'register_date' => Carbon::parse($this->created_at)->format('Y-m-d'),
         ];

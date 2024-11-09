@@ -18,6 +18,8 @@ class PermissionResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'guard_name' => $this->guard_name,
+            'rol' => $this->name,
             'register_date' => Carbon::parse($this->created_at)->format('Y-m-d'),
         ];
     }

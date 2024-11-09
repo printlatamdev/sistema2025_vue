@@ -35,7 +35,7 @@ defineProps({
                     </div>
                     <div class="w-full mt-3">
                         <InputLabel for="image" value="Subir imagen" />
-                        <FilepondImage v-model="store.formCat.image" @change="store.handleFile($event)"
+                        <FilepondImage v-model="store.formCat.image" @change="store.handleFile($event, 1)"
                             @click="store.loadingImage = true" allow-multiple="false" max-files="1" />
                         <div class="flex" v-if="store.loadingImage == true">
                             <flower-spinner :animation-duration="2000" :size="20" color="#0D7C66" />

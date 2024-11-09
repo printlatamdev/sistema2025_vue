@@ -100,7 +100,6 @@ export const useMaterialStore = defineStore("material", {
         filledInputCat(state) {
             return state.formCat.name == "" || state.formCat.image == "";
         },
-        createInks(state) {},
     },
     actions: {
         storeMaterial(type, cat_id) {
@@ -180,22 +179,24 @@ export const useMaterialStore = defineStore("material", {
         storePivotInk() {},
         downloadMaterial() {},
         handleFile(e, num) {
-            const file = e.target.files[0];
             const reader = new FileReader();
-            if (num == 1) {
+            if (num == 0) {
+                const file = e.target.files[0];
                 if (!file) return;
                 reader.onload = (e) => {
-                    this.loadingFile = false;
-                    this.formDown.file = image;
+                    //this.loadingFile = false;
+                    this.formCat.file = file;
                 };
+                reader.readAsDataURL(file);
             } else {
-                if (!file) return;
+                const image = e.target.files[0];
+                if (!image) return;
                 reader.onload = (e) => {
-                    this.loadingImage = false;
-                    this.formDown.image = file;
+                    //this.loadingImage = false;
+                    this.formCat.image = image;
                 };
+                reader.readAsDataURL(image);
             }
-            reader.readAsDataURL(file);
         },
         showStoreModal() {
             this.openModal = true;

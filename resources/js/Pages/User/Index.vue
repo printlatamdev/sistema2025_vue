@@ -5,6 +5,7 @@ import ModalStoreUpdate from './ModalStoreUpdate.vue';
 import ModalProfile from './ModalProfile.vue';
 import Roles from './Roles.vue';
 import { useUserStore } from '@/Store/user';
+import Permission from './Permission.vue';
 
 let store = useUserStore();
 defineProps({
@@ -34,11 +35,15 @@ onMounted(() => {
                 <div class="mt-5 w-full">
                     <ul class='flex justify-start cursor-pointer'>
                         <li class='py-2 px-6 rounded-t-lg text-gray-700 bg-gray-100 border'
+                            :class="{ 'bg-gray-700 text-white': store.activeTab == 0 }" @click="store.showUsers()">
+                            Usuarios
+                        </li>
+                        <li class='py-2 px-6 rounded-t-lg text-gray-700 bg-gray-100 border'
                             :class="{ 'bg-gray-700 text-white': store.activeTab == 1 }" @click="store.showRoles()">
                             Roles
                         </li>
                         <li class='py-2 px-6 rounded-t-lg text-gray-700 bg-gray-100 border'
-                            :class="{ 'bg-gray-700 text-white': store.activeTab == 2 }" @click="store.resetToZero()">
+                            :class="{ 'bg-gray-700 text-white': store.activeTab == 2 }" @click="store.showPermission()">
                             Permisos
                         </li>
                     </ul>
@@ -79,7 +84,8 @@ onMounted(() => {
                 </div>
             </div>
         </div>
-        <Roles v-if="store.activeTab==1" />
+        <Roles v-if="store.activeTab==1" :roles="roles" />
+        <Permission :permissions="permissions" v-if="store.activeTab==2" />
         <ModalStoreUpdate :show="store.openModal" :roles="roles" :countries="countries" />
         <ModalProfile :show="store.openProfileModal" />
     </AppLayout>

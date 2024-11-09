@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Resources\PermissionResource;
+use App\Http\Resources\RoleResource;
 use App\Http\Resources\UserResource;
 use App\Models\Country;
 use App\Models\User;
@@ -10,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -20,7 +23,8 @@ class UserController extends Controller
 
         return Inertia::render('User/Index', [
             'users' => UserResource::collection($data),
-            'roles' => Role::get(),
+            'roles' => RoleResource::collection(Role::get()),
+            'permissions' => PermissionResource::collection(Permission::get()),
             'countries' => Country::get(),
         ]);
     }

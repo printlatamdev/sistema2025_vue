@@ -3,7 +3,7 @@ import { useUserStore } from '@/Store/user';
 
 let store = useUserStore();
 defineProps({
-    roles: {
+    permissions: {
         type: Object,
         default: ([]),
     },
@@ -12,7 +12,7 @@ defineProps({
 </script>
 <template>
     <div class="mt-7">
-        <EasyDataTable :headers="store.headerRoles" :rows-per-page="10" :items="roles" border-cell
+        <EasyDataTable :headers="store.headerPermission" :rows-per-page="10" :items="permissions" border-cell
             buttons-pagination class="mt-2" table-class-name="customize-table" theme-color="#0D7C66"
             header-text-direction="center" body-text-direction="center" :search-value="store.search">
             <template #empty-message>
