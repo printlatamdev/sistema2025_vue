@@ -154,7 +154,7 @@ onMounted(() => {
                         </EasyDataTable>
                     </div>
                     <div class="w-1/3 mt-5">
-                        <form action="">
+                        <form action="" enctype="multipart/form-data">
                             <div class="w-full mt-5">
                                 <InputLabel for="iva" value="Asignar IVA" />
                                 <select v-model="store.formTotal.iva"

@@ -41,7 +41,7 @@ defineProps({
             Descarga de {{ categories.id != 1 ? store.isMessage : 'Tinta' }}
         </template>
         <template #content>
-            <form action="">
+            <form action="" enctype="multipart/form-data">
                 <div class="flex" v-if="categories.id == 1">
                     <div class="w-1/2 mr-2">
                         <InputLabel for="code" value="Código" />
