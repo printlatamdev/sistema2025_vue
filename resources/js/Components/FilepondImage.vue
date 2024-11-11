@@ -17,5 +17,6 @@ const FilePond = vueFilePond(
         label-idle="Seleccionar imagen"
         allow-multiple="false"
         class="cursor-pointer text-xs"
+        :server="{ load: null, }"
     />
 </template>

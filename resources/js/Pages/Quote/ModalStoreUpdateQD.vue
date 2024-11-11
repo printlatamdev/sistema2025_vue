@@ -124,10 +124,10 @@ onMounted(() => {
                             <InputLabel for="image" value="Subir imagen" />
                             <Filepond v-model="store.formQD.image" @change="store.handleFile($event)"
                                 allow-multiple="false" max-files="1" @click="store.loadingImage = true" />
-                            <div class="flex" v-if="store.loadingImage == true">
+                            <!-- <div class="flex" v-if="store.loadingImage == true">
                                 <flower-spinner :animation-duration="2000" :size="20" color="#0D7C66" />
                                 <span class="ml-1">Subiendo imagen</span>
-                            </div>
+                            </div>-->
                             <InputError class="" :message="store.formQD.errors.image" />
                             <div class="flex justify-end mt-1">
                                 <SuccessButton @click.prevent="store.storePivot(store.edit.id)"

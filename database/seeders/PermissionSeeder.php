@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 
@@ -46,7 +45,7 @@ class PermissionSeeder extends Seeder
             'categories.store',
             'categories.update',
             'categories.destroy',
-            'categories.view',
+            'categories.view', 
             'categories.store',
             'categories.update',
             'categories.destroy',
